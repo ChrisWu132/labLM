@@ -14,8 +14,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "VibeCoding Lab - Learn Coding by Watching",
-  description: "Watch an AI expert build real applications step-by-step. Understand full-stack development in 45 minutes.",
+  title: "labLM",
+  description: "Hands-on experiments to understand how AI really works. Designed for elementary and middle school students.",
   generator: "v0.app",
 }
 
