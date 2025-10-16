@@ -49,6 +49,30 @@ const exerciseCriteria: Record<string, SuccessCriteria> = {
       { type: 'minLength', value: 30 }
     ],
     passingScore: 3
+  },
+
+  // Lab 4 Exercises - Chain-of-Thought
+  'lab4-ex1': {
+    exerciseId: 'lab4-ex1',
+    rules: [
+      { type: 'containsKeywords', value: ['step', 'reasoning', 'explain', 'why', 'how'] },
+      { type: 'containsKeywords', value: ['budget', 'cost', 'allocate', 'spend'] },
+      { type: 'containsKeywords', value: ['Tokyo', 'trip', 'plan'] },
+      { type: 'minLength', value: 100 }
+    ],
+    passingScore: 3
+  },
+
+  // Lab 5 Exercises - Comprehensive Challenge
+  'lab5-ex1': {
+    exerciseId: 'lab5-ex1',
+    rules: [
+      { type: 'containsKeywords', value: ['You are', 'Act as', 'role'] }, // Role assignment
+      { type: 'containsKeywords', value: ['step', 'reasoning', 'explain', 'think'] }, // CoT
+      { type: 'containsKeywords', value: ['Requirements:', 'Format:', 'Include:', '-', '1.', '2.'] }, // Specific requirements
+      { type: 'minLength', value: 150 }
+    ],
+    passingScore: 3
   }
 }
 

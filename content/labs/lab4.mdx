@@ -1,17 +1,225 @@
-# Lab 4: Guided Reasoning
+# Lab 4: Guided Reasoning with Chain-of-Thought
 
 ## 📖 Learning Objectives
 
-- Use Chain-of-Thought
-- Have AI reason step-by-step
-- Get more in-depth answers
-
-## 🎯 Core Concepts
-
-**Coming Soon!**
-
-Lab 4 is under development. Please complete Lab 1 and Lab 2, we will add more content soon.
+- Understand what Chain-of-Thought (CoT) prompting is
+- Learn when and why to use step-by-step reasoning
+- Guide AI to show its work and reasoning process
+- Get more accurate and verifiable answers
 
 ---
 
-**Return**: [Lab List](/dashboard/vibecoding)
+## 🎯 What is Chain-of-Thought?
+
+**Chain-of-Thought (CoT)** is a prompting technique where you ask the AI to break down its reasoning into steps, showing its "thought process" before arriving at a conclusion.
+
+### Why Use Chain-of-Thought?
+
+1. **More Accurate Results**: Step-by-step reasoning reduces errors
+2. **Verifiable Logic**: You can see where the AI might go wrong
+3. **Better for Complex Tasks**: Math, analysis, planning, debugging
+4. **Transparency**: Understand how the AI arrived at its answer
+
+---
+
+## 📚 Core Concepts
+
+### 1. Basic CoT Trigger Phrases
+
+Simple phrases that activate step-by-step thinking:
+
+- "Let's think step by step"
+- "Show your work"
+- "Explain your reasoning"
+- "Walk me through the process"
+
+**Example:**
+
+<StaticPromptDemo
+  prompt="Calculate the total cost: 3 books at $12.50 each, with 15% discount and 8% tax. Let's think step by step."
+  output="Let me break this down:
+
+Step 1: Calculate subtotal
+3 books × $12.50 = $37.50
+
+Step 2: Apply 15% discount
+15% of $37.50 = $5.625
+$37.50 - $5.625 = $31.875
+
+Step 3: Calculate 8% tax on discounted price
+8% of $31.875 = $2.55
+$31.875 + $2.55 = $34.425
+
+**Final total: $34.43** (rounded to nearest cent)"
+/>
+
+---
+
+### 2. Structured Reasoning Templates
+
+Guide the AI to follow a specific reasoning structure:
+
+**Problem-Solving Template:**
+```
+1. Understand the problem
+2. Identify key information
+3. Plan the approach
+4. Execute step-by-step
+5. Verify the result
+```
+
+**Example:**
+
+<StaticPromptDemo
+  prompt="I need to fit 47 students into vans that hold 8 people each. How many vans do I need?
+
+Please solve this by:
+1. Identifying the key numbers
+2. Determining the math operation
+3. Calculating the result
+4. Interpreting what the answer means"
+  output="Let me solve this systematically:
+
+**1. Key Information:**
+- Total students: 47
+- Van capacity: 8 students per van
+
+**2. Math Operation:**
+We need division: 47 ÷ 8
+
+**3. Calculation:**
+47 ÷ 8 = 5.875
+
+**4. Interpretation:**
+5.875 vans means we need 5 full vans plus a 6th van for the remaining students.
+- 5 vans × 8 = 40 students
+- Remaining: 47 - 40 = 7 students
+
+**Answer: You need 6 vans** (5 full + 1 with 7 students)"
+/>
+
+---
+
+### 3. Debugging with CoT
+
+Use CoT to debug code or troubleshoot problems:
+
+<StaticPromptDemo
+  prompt="This Python code isn't working:
+
+```python
+total = 0
+for i in range(5):
+    total += i
+print(total)
+```
+
+I expected the result to be 15, but I'm getting 10. Walk me through what's happening step by step."
+  output="Let me trace through this step-by-step:
+
+**Loop iteration breakdown:**
+
+i = 0: total = 0 + 0 = 0
+i = 1: total = 0 + 1 = 1
+i = 2: total = 1 + 2 = 3
+i = 3: total = 3 + 3 = 6
+i = 4: total = 6 + 4 = 10
+
+**Final result: 10**
+
+**Why it's 10, not 15:**
+- range(5) generates: 0, 1, 2, 3, 4 (starts at 0!)
+- Sum: 0+1+2+3+4 = 10
+- You expected: 1+2+3+4+5 = 15
+
+**Solution:** Use `range(1, 6)` to get 1 through 5, or use `range(6)` and sum will be 15 (0+1+2+3+4+5)."
+/>
+
+---
+
+### 4. Decision-Making with CoT
+
+Help AI make better decisions by showing pros/cons analysis:
+
+<StaticPromptDemo
+  prompt="Should I learn React or Vue.js as my first frontend framework?
+
+Please analyze this decision by:
+1. Listing key factors to consider
+2. Comparing React vs Vue on each factor
+3. Providing a recommendation with reasoning"
+  output="Let me analyze this systematically:
+
+**1. Key Factors:**
+- Learning curve
+- Job market demand
+- Community & ecosystem
+- Documentation quality
+- Project requirements
+
+**2. Comparison:**
+
+| Factor | React | Vue.js |
+|--------|-------|--------|
+| Learning Curve | Steeper (JSX, hooks) | Gentler (HTML-like templates) |
+| Job Market | Higher demand | Growing but smaller |
+| Community | Massive (Facebook-backed) | Strong & supportive |
+| Documentation | Good but scattered | Excellent & comprehensive |
+| Use Cases | Large-scale apps | Rapid prototyping, startups |
+
+**3. Recommendation:**
+
+**Choose React if:**
+- You want maximum job opportunities
+- You're willing to invest more upfront learning time
+- You plan to work on large-scale applications
+
+**Choose Vue if:**
+- You want to build projects quickly while learning
+- You prefer clearer, more intuitive syntax
+- You're working on smaller to medium projects
+
+**For a first framework, I recommend React** - the steeper learning curve pays off with better job prospects and transferable skills to other modern frameworks."
+/>
+
+---
+
+## 🎯 Practice Exercise
+
+Now it's your turn! Try using Chain-of-Thought to solve this problem:
+
+**Challenge:** Write a prompt that asks the AI to plan a 3-day trip to Tokyo for two people with a $2000 budget. Make the AI show its reasoning for:
+- How it allocates the budget
+- Why it chose specific activities
+- How it balanced cost and experience
+
+**Success Criteria:**
+- Ask the AI to break down the budget allocation step-by-step
+- Request reasoning for each major decision
+- Include at least 3 cost categories (flights, hotels, food, activities, etc.)
+
+<PromptEditor
+  exerciseId="lab4-ex1"
+  labNumber={4}
+  placeholder="Write your prompt here...
+
+Hint: Start with 'Let's plan this trip step by step' or ask the AI to 'show your budget reasoning'"
+/>
+
+---
+
+## 💡 Key Takeaways
+
+1. **"Let's think step by step"** is your magic phrase for better reasoning
+2. **CoT is essential for**: Math, logic, debugging, planning, analysis
+3. **Structure helps**: Give the AI a template to follow
+4. **Verification**: Step-by-step output lets you catch errors early
+5. **Complex > Simple**: Use CoT when the task has multiple steps
+
+---
+
+## 🚀 Next Steps
+
+Ready for the final challenge? Proceed to **Lab 5** where you'll combine all techniques to tackle real-world scenarios!
+
+[Continue to Lab 5 →](/dashboard/vibecoding/labs/lab5)

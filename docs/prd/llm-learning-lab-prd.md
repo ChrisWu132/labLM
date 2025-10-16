@@ -55,8 +55,11 @@
 | **Lab 3** | 20 min | 角色扮演技巧 | 学习 role prompting → 让AI扮演不同角色 → 对比输出 | 理解上下文对输出的影响 |
 | **Lab 4** | 25 min | 分步思考引导 | 学习 chain-of-thought → 引导AI分步推理 → 获得详细解答 | 掌握引导AI深度思考的技巧 |
 | **Lab 5** | 30 min | 综合应用挑战 | 应用所学技巧 → 完成多个实际场景 → 自由创作 | 综合运用所有技能 |
+| **Lab 6** | 60 min | AI 工作流搭建 ⭐ | 观察工作流 → 修改步骤 → 自由创建 | 学会分解问题，搭建多步骤 AI 系统 |
 
-**总时长**: 约 2 小时完成全部课程
+**总时长**: 约 3 小时完成全部课程（Lab 1-5 基础 + Lab 6 进阶）
+
+**注**: Lab 6 为进阶"毕业项目"，综合运用前5个labs的所有技能
 
 ---
 
@@ -461,12 +464,65 @@ export async function getLabContent(labNumber: number) {
 
 ---
 
+### Lab 6: AI 工作流搭建（60分钟）⭐ 进阶毕业项目
+
+**定位**: 综合应用所有 prompt engineering 技能的"毕业项目"
+
+**学习目标**:
+- 理解"复杂任务 = 简单步骤的组合"
+- 学会分解问题（computational thinking）
+- 掌握 prompt 链接（prompt chaining）
+- 培养系统性思维
+
+**三个递进阶段**:
+
+**阶段1: 观察工作流（15分钟）**
+- 看预设的"故事创作助手"如何运行
+- 理解数据如何从一步传到下一步
+- 观察 prompt 中的变量替换
+
+**阶段2: 修改工作流（20分钟）**
+- 编辑每个步骤的 prompt
+- 看修改如何影响最终输出
+- 练习题：
+  1. 让创意更科幻
+  2. 添加故事转折
+  3. 改变输出语气
+
+**阶段3: 自由创建（25分钟）**
+- 从空白画布搭建自己的工作流
+- 使用积木式拖拽（或点击添加）
+- 挑战任务（3选1）：
+  - 作业助手（分析题目 → 提示思路 → 验证方法）
+  - 翻译润色器（翻译 → 检查 → 改进）
+  - 自由创作（学生自己设计）
+
+**技术实现**:
+- 使用 React Flow 可视化工作流
+- 自定义节点类型（输入、AI步骤、输出）
+- 轻量级执行引擎
+- 完整的详细设计见：`docs/labs/lab6-workflow-builder.md`
+
+**教学价值**:
+- ⭐⭐⭐⭐⭐ 培养"分解问题"的计算思维
+- 理解 AI agent 和自动化的基本原理
+- 为未来学习编程/AI工程打基础
+
+**成本估算**:
+- 每个学生约 37 次 LLM 调用
+- 成本: ~$0.17/学生（Lab 1-5 为 $0.14）
+- 增加 21%，教学价值远超成本
+
+---
+
 ## 9. Success Metrics
 
 ### 学习成果指标
-- **80%+ 完成率**: 学生完成所有5个labs
+- **80%+ 完成率**: 学生完成 Lab 1-5（基础课程）
+- **60%+ 进阶完成率**: 学生完成 Lab 6（进阶项目）
 - **平均时长**: 每个lab在目标时间内完成
 - **练习成功率**: 70%+ 的练习首次或第二次尝试成功
+- **创作率**: 50%+ 学生在 Lab 6 中创建了自己的工作流
 
 ### 技术指标
 - **LLM API 响应时间**: <3秒
@@ -485,24 +541,32 @@ export async function getLabContent(labNumber: number) {
 ### LLM API 成本
 **确定选择**: ✅ **GPT-4o**（用户决策）
 
-**假设**:
+**Lab 1-5 成本（基础课程）**:
 - 5 labs × 平均6次练习 = 30次 API 调用/学生
-- 平均每次调用: 200 tokens input + 400 tokens output = 600 tokens
-- 使用 **GPT-4o**: $2.50/1M input + $10.00/1M output
-
-**计算**:
+- 平均每次调用: 200 tokens input + 400 tokens output
 - Input: 30 × 200 = 6,000 tokens = $0.015
 - Output: 30 × 400 = 12,000 tokens = $0.12
-- **总成本: ~$0.135/student ≈ $0.14/student**
+- **Lab 1-5 成本: ~$0.14/student**
+
+**Lab 6 成本（进阶工作流）**:
+- 观察3次 + 编辑8次 + 创建20次 = 37次 API 调用
+- Input: 37 × 200 = 7,400 tokens = $0.0185
+- Output: 37 × 400 = 14,800 tokens = $0.148
+- **Lab 6 成本: ~$0.17/student**
+
+**总成本（6个labs）**:
+- **完整课程: ~$0.31/student**
 
 **规模成本**:
-- 100学生: ~$14/月
-- 500学生: ~$70/月
-- 1000学生: ~$140/月
+- 100学生: ~$31/月
+- 500学生: ~$155/月
+- 1000学生: ~$310/月
 
-**额外成本**（可选自动检查）:
+**注意**:
 - 如使用 LLM 做成功检查: 每次练习额外 +$0.01
 - 推荐：使用规则检查（零成本）
+- 大部分学生可能只完成 Lab 1-5（80%），Lab 6 是可选进阶（60%）
+- 实际成本可能介于 $14-31/100学生之间
 
 ---
 
@@ -586,14 +650,16 @@ export async function getLabContent(labNumber: number) {
 ### ✅ 已确认的决策
 
 **产品设计**:
-- ✅ **Lab 数量**: 5个 labs（确认）
+- ✅ **Lab 数量**: 5个基础 labs + 1个进阶 lab（Lab 6）
 - ✅ **难度调整**: 不需要难度分级，统一版本
 - ✅ **成功检查**: 必须自动检查，不用学生自评
 - ✅ **组件嵌入**: PromptEditor 和 LLMOutput 必须可嵌入文章内
+- ✅ **Lab 6 定位**: 进阶"毕业项目"，可视化工作流搭建
 
 **技术选型**:
 - ✅ **LLM 选择**: GPT-4o（确认）
 - ✅ **内容组织**: MDX（支持组件嵌入）
+- ✅ **Lab 6 技术栈**: React Flow + 自定义节点 + 轻量级执行引擎
 
 ### ❓ 待确认的问题
 
@@ -654,20 +720,26 @@ A: 所有LLM输出都经过安全过滤，确保适合青少年。
 
 ---
 
-**Document Version**: 1.1 (LLM Learning Lab for Middle School Students)
+**Document Version**: 1.2 (LLM Learning Lab for Middle School Students)
 **Created**: 2025-10-16
-**Last Updated**: 2025-10-16
-**Status**: ✅ Core Decisions Confirmed → Ready for Architecture & Epic Creation
+**Last Updated**: 2025-10-17
+**Status**: ✅ Core Decisions Confirmed + Lab 6 Added → Ready for Architecture & Epic Creation
 
 **Confirmed Decisions**:
-- ✅ 5 labs total
+- ✅ 5 basic labs + 1 advanced lab (Lab 6)
 - ✅ GPT-4o for LLM API
 - ✅ MDX for article + embedded components
 - ✅ Auto-check for exercise success (rule-based)
 - ✅ No difficulty levels (unified experience)
+- ✅ Lab 6: Visual workflow builder using React Flow
+
+**Key Documents**:
+- 📄 Main PRD: This document
+- 📄 Lab 6 Detailed Design: `docs/labs/lab6-workflow-builder.md` (40,000+ words)
 
 **Next Steps**:
-1. ✅ PRD finalized
-2. 🔄 Create Architecture document (if needed)
-3. 🔄 Create Epic with detailed Stories
-4. 🔄 Start Phase 1 implementation (Week 1-2)
+1. ✅ PRD finalized (with Lab 6)
+2. ✅ Lab 6 detailed design completed
+3. 🔄 Create Architecture document (if needed)
+4. 🔄 Create Epic with detailed Stories (Lab 1-6)
+5. 🔄 Start Phase 1 implementation (Week 1-2 for Lab 1-5)

@@ -17,16 +17,24 @@
   /* Primary - Blue #3B82F6 */
   --primary: 59 130 246;
   --primary-foreground: 255 255 255;
+  --color-primary: 59 130 246;
+  --color-primary-foreground: 255 255 255;
 
   /* Accent - Orange #F59E0B */
   --accent: 245 158 11;
   --accent-foreground: 15 23 42;
+  --color-accent: 245 158 11;
+  --color-accent-foreground: 15 23 42;
 
   /* Success/Teal for variety */
   --success: 16 185 129; /* #10B981 */
   --success-foreground: 255 255 255;
   --teal: 16 185 129;
   --teal-foreground: 255 255 255;
+  --color-success: 16 185 129;
+  --color-success-foreground: 255 255 255;
+  --color-teal: 16 185 129;
+  --color-teal-foreground: 255 255 255;
 
   /* Status Colors */
   --info: 59 130 246; /* Primary Blue */
@@ -46,11 +54,18 @@
   --secondary-foreground: 15 23 42;
   --muted: 241 245 249;
   --muted-foreground: 100 116 139; /* #64748B */
+  --color-secondary: 241 245 249;
+  --color-secondary-foreground: 15 23 42;
+  --color-muted: 241 245 249;
+  --color-muted-foreground: 100 116 139;
 
   /* Borders & Inputs */
   --border: 203 213 225; /* #CBD5E1 */
   --input: 203 213 225;
   --ring: 59 130 246; /* Primary */
+  --color-border: 203 213 225;
+  --color-input: 203 213 225;
+  --color-ring: 59 130 246;
 
   /* Border Radius - 16px cards, 12px inputs */
   --radius: 1rem; /* 16px */
@@ -69,6 +84,14 @@
   --sidebar-accent-foreground: 15 23 42;
   --sidebar-border: 203 213 225;
   --sidebar-ring: 59 130 246;
+  --color-sidebar: 241 245 249;
+  --color-sidebar-foreground: 15 23 42;
+  --color-sidebar-primary: 59 130 246;
+  --color-sidebar-primary-foreground: 255 255 255;
+  --color-sidebar-accent: 203 213 225;
+  --color-sidebar-accent-foreground: 15 23 42;
+  --color-sidebar-border: 203 213 225;
+  --color-sidebar-ring: 59 130 246;
 }
 
 .dark {
@@ -83,16 +106,24 @@
   /* Primary - Brighter blue for contrast */
   --primary: 96 165 250; /* Lighter blue */
   --primary-foreground: 255 255 255;
+  --color-primary: 96 165 250;
+  --color-primary-foreground: 255 255 255;
 
   /* Accent - Brighter orange */
   --accent: 251 191 36; /* Brighter orange */
   --accent-foreground: 15 23 42;
+  --color-accent: 251 191 36;
+  --color-accent-foreground: 15 23 42;
 
   /* Success/Teal */
   --success: 52 211 153; /* Brighter green */
   --success-foreground: 15 23 42;
   --teal: 52 211 153;
   --teal-foreground: 15 23 42;
+  --color-success: 52 211 153;
+  --color-success-foreground: 15 23 42;
+  --color-teal: 52 211 153;
+  --color-teal-foreground: 15 23 42;
 
   /* Status Colors */
   --info: 96 165 250;
@@ -112,11 +143,18 @@
   --secondary-foreground: 241 245 249;
   --muted: 30 41 59;
   --muted-foreground: 148 163 184;
+  --color-secondary: 30 41 59;
+  --color-secondary-foreground: 241 245 249;
+  --color-muted: 30 41 59;
+  --color-muted-foreground: 148 163 184;
 
   /* Borders */
   --border: 51 65 85; /* #334155 */
   --input: 51 65 85;
   --ring: 96 165 250;
+  --color-border: 51 65 85;
+  --color-input: 51 65 85;
+  --color-ring: 96 165 250;
 
   /* Sidebar */
   --sidebar: 15 23 42;
@@ -127,6 +165,14 @@
   --sidebar-accent-foreground: 241 245 249;
   --sidebar-border: 51 65 85;
   --sidebar-ring: 96 165 250;
+  --color-sidebar: 15 23 42;
+  --color-sidebar-foreground: 241 245 249;
+  --color-sidebar-primary: 96 165 250;
+  --color-sidebar-primary-foreground: 255 255 255;
+  --color-sidebar-accent: 51 65 85;
+  --color-sidebar-accent-foreground: 241 245 249;
+  --color-sidebar-border: 51 65 85;
+  --color-sidebar-ring: 96 165 250;
 }
 
 @theme {

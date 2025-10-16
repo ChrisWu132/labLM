@@ -2,16 +2,383 @@
 
 ## 📖 Learning Objectives
 
-- Apply all techniques comprehensively
-- Complete real-world scenario challenges
-- Test your Prompt Engineering skills
-
-## 🎯 Core Concepts
-
-**Coming Soon!**
-
-Lab 5 is under development. Please complete Lab 1 and Lab 2, we will add more content soon.
+- Combine all prompt engineering techniques
+- Solve complex, multi-step real-world problems
+- Master the art of crafting powerful prompts
+- Build confidence in communicating with AI
 
 ---
 
-**Return**: [Lab List](/dashboard/vibecoding)
+## 🎯 What You've Learned So Far
+
+Let's recap the powerful techniques from Labs 1-4:
+
+| Lab | Technique | When to Use |
+|-----|-----------|-------------|
+| **Lab 1** | Clear Instructions | Always - foundation of good prompts |
+| **Lab 2** | Specificity & Context | When you need precise, detailed outputs |
+| **Lab 3** | Role Assignment | When you want specific expertise or perspective |
+| **Lab 4** | Chain-of-Thought | For complex reasoning, math, planning, debugging |
+
+**Now it's time to combine them all!**
+
+---
+
+## 🚀 The Power of Combined Techniques
+
+The best prompts use multiple techniques together. Here's how they stack:
+
+### Example: Weak vs Strong Prompt
+
+**❌ Weak Prompt:**
+```
+Write a marketing email for my app.
+```
+
+**✅ Strong Prompt (combining all techniques):**
+```
+You are an experienced SaaS marketing copywriter with expertise in B2B email campaigns.
+
+Write a cold outreach email for "TaskMaster Pro" - a project management tool that helps small teams (5-20 people) reduce meeting time by 40%.
+
+Requirements:
+- Target audience: Startup founders and small business owners
+- Tone: Professional but friendly, not salesy
+- Length: 150-200 words
+- Include: One specific pain point, one clear benefit, one call-to-action
+- Format: Subject line + body
+
+Think step-by-step:
+1. What's the biggest pain point for this audience?
+2. How does our product solve it uniquely?
+3. What's the most compelling call-to-action?
+
+Show your reasoning before writing the email.
+```
+
+See the difference? The strong prompt combines:
+- 🎭 **Role** (SaaS marketing copywriter)
+- 📋 **Specific requirements** (audience, tone, length, structure)
+- 🔗 **Context** (product details, target audience)
+- 🧠 **Chain-of-Thought** (step-by-step reasoning)
+
+---
+
+## 📚 Real-World Scenarios
+
+### Scenario 1: Code Review Assistant
+
+<StaticPromptDemo
+  prompt="You are a senior software engineer conducting a code review.
+
+Review this React component and provide actionable feedback:
+
+```jsx
+function UserProfile({ user }) {
+  const [data, setData] = useState()
+
+  useEffect(() => {
+    fetch('/api/user/' + user.id)
+      .then(res => res.json())
+      .then(setData)
+  })
+
+  return <div>{data.name}</div>
+}
+```
+
+Please analyze:
+1. Potential bugs or errors
+2. Performance issues
+3. Best practice violations
+4. Security concerns
+
+For each issue, explain:
+- What's wrong
+- Why it's a problem
+- How to fix it
+
+Think through this systematically."
+  output="Let me review this code step by step:
+
+**1. CRITICAL BUG - Missing useEffect dependency array**
+- **What's wrong:** useEffect runs on every render
+- **Why it's a problem:** Creates infinite loop (fetch → setState → re-render → fetch...)
+- **Fix:** Add dependency array: `useEffect(() => {...}, [user.id])`
+
+**2. ERROR - Unsafe data access**
+- **What's wrong:** `data.name` called when data is undefined initially
+- **Why it's a problem:** Will crash: 'Cannot read property name of undefined'
+- **Fix:** Add conditional: `{data?.name}` or loading state
+
+**3. PERFORMANCE - Missing error handling**
+- **What's wrong:** No .catch() on fetch promise
+- **Why it's a problem:** Silent failures, poor UX
+- **Fix:** Add error handling and display error state
+
+**4. SECURITY - String concatenation in URL**
+- **What's wrong:** Direct user.id concatenation
+- **Why it's a problem:** Potential injection if ID contains special characters
+- **Fix:** Use template literals and URL encoding
+
+**Corrected version:**
+```jsx
+function UserProfile({ user }) {
+  const [data, setData] = useState(null)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    fetch(`/api/user/${encodeURIComponent(user.id)}`)
+      .then(res => res.json())
+      .then(setData)
+      .catch(setError)
+  }, [user.id])
+
+  if (error) return <div>Error: {error.message}</div>
+  if (!data) return <div>Loading...</div>
+  return <div>{data.name}</div>
+}
+```"
+/>
+
+---
+
+### Scenario 2: Data Analysis & Insights
+
+<StaticPromptDemo
+  prompt="You are a data analyst helping a startup understand their user metrics.
+
+Analyze this data and provide insights:
+
+**Week 1-4 Metrics:**
+- Week 1: 100 signups, 45 active users (45%), 5 paying (5%)
+- Week 2: 150 signups, 60 active users (40%), 8 paying (5.3%)
+- Week 3: 200 signups, 70 active users (35%), 12 paying (6%)
+- Week 4: 250 signups, 75 active users (30%), 15 paying (6%)
+
+Questions:
+1. What trends do you see?
+2. What's concerning?
+3. What should we investigate?
+4. What actions would you recommend?
+
+Please think through each metric systematically and explain your reasoning."
+  output="Let me analyze these metrics step by step:
+
+## 1. Trends Identified
+
+**Positive:**
+- ✅ Signups growing 50% weekly (strong)
+- ✅ Paying conversion improving (5% → 6%)
+- ✅ Absolute active users increasing (45 → 75)
+
+**Negative:**
+- ⚠️ **CRITICAL:** Activation rate dropping (45% → 30%)
+- ⚠️ Active user growth not keeping pace with signups
+
+## 2. Concerning Patterns
+
+**Activation Problem:**
+Week 1: 55 of 100 never activated (55% churn)
+Week 4: 175 of 250 never activated (70% churn)
+
+This is your biggest issue - onboarding is failing at scale.
+
+## 3. What to Investigate
+
+**Priority 1 - Onboarding breakdown:**
+- Where do new users drop off?
+- Did you change onboarding recently?
+- Are new users getting proper guidance?
+
+**Priority 2 - Product quality:**
+- Is the product breaking under load?
+- Are new features confusing users?
+
+**Priority 3 - Traffic sources:**
+- Are new signups lower quality?
+- Different acquisition channels?
+
+## 4. Recommended Actions
+
+**Immediate (This Week):**
+1. Add analytics to onboarding flow - find the drop-off point
+2. Interview 10 users who signed up but never activated
+3. A/B test simplified onboarding
+
+**Short-term (2-4 weeks):**
+1. Improve first-run experience
+2. Add progress indicators
+3. Send activation reminder emails
+
+**Measurement:**
+Target: Get activation back to 40%+ within 4 weeks
+Track: Daily activation rates, onboarding completion steps
+
+**Bottom line:** You're growing signups but losing users before they experience value. Fix activation before scaling further."
+/>
+
+---
+
+## 🎯 Your Comprehensive Challenge
+
+Now it's your turn! Choose one of these **advanced challenges** and craft a comprehensive prompt:
+
+### Challenge A: Personal AI Tutor
+Create a prompt that asks the AI to act as your tutor for learning a new skill (programming, language, instrument, etc.). Your prompt should:
+- Define the AI's role and expertise
+- Specify your current level and learning goals
+- Request a personalized study plan
+- Ask for step-by-step reasoning on how the plan was created
+- Include specific constraints (time, resources, learning style)
+
+### Challenge B: Business Strategy Consultant
+You're launching a small online business. Create a prompt that:
+- Assigns the AI a consultant role
+- Describes your business idea clearly
+- Asks for market analysis, pricing strategy, and marketing plan
+- Requests the AI to show its reasoning process
+- Includes specific constraints (budget, timeline, target audience)
+
+### Challenge C: Creative Writing Coach
+You want to write a short story. Create a prompt that:
+- Makes the AI an experienced fiction writing coach
+- Provides the story premise and genre
+- Asks for character development, plot outline, and first scene
+- Requests explanation of creative choices
+- Specifies tone, length, and target audience
+
+**Success Criteria:**
+- Uses at least 3 of the 4 techniques (role, specificity, context, CoT)
+- Includes clear structure and requirements
+- Asks for reasoning or explanation
+- Provides enough context for quality output
+- Specifies format or constraints
+
+<PromptEditor
+  exerciseId="lab5-ex1"
+  labNumber={5}
+  placeholder="Write your comprehensive prompt here...
+
+Remember to combine techniques:
+- 🎭 Assign a specific role
+- 📋 Be specific about what you want
+- 🔗 Provide necessary context
+- 🧠 Ask for step-by-step reasoning
+
+Take your time to craft a powerful prompt!"
+/>
+
+---
+
+## 💡 Advanced Tips & Tricks
+
+### 1. Iterative Refinement
+Don't expect perfection on the first try. Use this process:
+```
+First prompt → Review output → Refine prompt → Better output
+```
+
+### 2. The "Few-Shot" Technique
+Show examples of what you want:
+```
+Write product descriptions in this style:
+
+Example 1: "Cloud Backup Pro - Never lose a file again.
+Automatic backups every hour, restored in seconds. $5/month."
+
+Example 2: "TaskMaster - Your team's second brain.
+Track projects, assign tasks, hit deadlines. Free for 5 users."
+
+Now write one for: [your product]
+```
+
+### 3. Constraints Drive Creativity
+Tight constraints often produce better results:
+- "Explain quantum computing in 3 sentences for a 10-year-old"
+- "Write a product pitch in exactly 50 words"
+- "Create a logo concept using only circles and triangles"
+
+### 4. Output Format Specification
+Tell the AI exactly how to format the response:
+```
+Provide your answer as:
+1. Executive Summary (2 sentences)
+2. Detailed Analysis (bullet points)
+3. Recommendations (numbered list)
+4. Next Steps (action items)
+```
+
+---
+
+## 🏆 Mastery Checklist
+
+You've mastered prompt engineering when you can:
+
+- [ ] Write clear, unambiguous instructions
+- [ ] Provide the right amount of context
+- [ ] Assign roles that enhance output quality
+- [ ] Use Chain-of-Thought for complex tasks
+- [ ] Combine multiple techniques seamlessly
+- [ ] Iterate and refine prompts effectively
+- [ ] Recognize when AI output is good enough
+- [ ] Understand AI limitations and work around them
+
+---
+
+## 🎓 Congratulations!
+
+You've completed the **LLM Learning Lab - Prompt Engineering Course**!
+
+You now have the skills to:
+- ✅ Communicate effectively with AI systems
+- ✅ Get high-quality, reliable outputs
+- ✅ Solve complex problems using AI assistance
+- ✅ Apply prompt engineering to real-world scenarios
+
+### What's Next?
+
+**Practice, practice, practice!** The best way to improve is to:
+1. Use these techniques in your daily work
+2. Experiment with different combinations
+3. Learn from what works and what doesn't
+4. Share your best prompts with others
+
+**Keep Learning:**
+- Advanced techniques: Few-shot learning, prompt chaining, retrieval-augmented generation
+- Explore different AI models and their strengths
+- Join prompt engineering communities
+- Stay updated on new AI capabilities
+
+---
+
+## 🌟 Final Exercise (Optional)
+
+Want to test your skills? Try this ultimate challenge:
+
+**Create a "Swiss Army Knife" prompt** - a single prompt that can handle multiple types of requests by using role-switching and conditional logic.
+
+Example concept:
+```
+You are a versatile AI assistant that adapts based on the task.
+
+When asked about [code], act as a senior engineer...
+When asked about [writing], act as an editor...
+When asked about [data], act as an analyst...
+
+For each response:
+1. Identify the task type
+2. Assume the appropriate role
+3. Provide expert-level guidance
+4. Show your reasoning
+
+[User's question here]
+```
+
+---
+
+**Thank you for completing the course!** 🎉
+
+Ready to apply your skills? Return to the dashboard and start building with AI!
+
+[Return to Dashboard →](/dashboard/vibecoding)
