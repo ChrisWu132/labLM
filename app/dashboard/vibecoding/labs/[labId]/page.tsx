@@ -29,8 +29,12 @@ export default async function LabPage({
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <MDXRemote source={labContent.mdx} components={components} />
+    <div className="flex flex-col h-full overflow-hidden">
+      <div className="flex-1 overflow-auto">
+        <div className="container mx-auto px-4 py-8 max-w-4xl">
+          <MDXRemote source={labContent.mdx} components={components} />
+        </div>
+      </div>
     </div>
   )
 }

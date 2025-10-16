@@ -23,7 +23,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const { displayName, user } = useUser()
 
   // Check if current page is vibecoding - needs full screen layout
-  const isVibecoding = pathname === "/dashboard/vibecoding"
+  const isVibecoding = pathname.startsWith("/dashboard/vibecoding")
 
   return (
     <div className="flex h-screen overflow-hidden">

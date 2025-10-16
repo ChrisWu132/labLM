@@ -1,89 +1,99 @@
-# Interactive AI Startup Course
+# LLM Learning Lab
 
-A comprehensive learning platform for building AI-powered startups from problem discovery to demo.
+**Hands-on experiments to understand how AI really works** — Designed for elementary and middle school students (grades 5-9).
 
-## 🎯 Project Status (Last Updated: 2025-10-16)
-
-### ✅ Completed Features
-
-- **Database Schema** (Story 000) - Full Supabase schema with RLS policies
-- **Coach Foundation** (Story 001A) - Centralized `askCoach()` with transcript persistence
-- **Landing Page & Auth** (Stories 012/013) - Marketing page + Supabase authentication
-- **Component Architecture** - Organized structure (layout/shared/features)
-- **Module Scaffolding** - All 6 modules with basic UI
-- **AI Coach Integration** - Integrated across all modules with context-specific feedback
-
-### 🚧 In Progress
-
-- **Epic 003** (Vibecoding Sandbox) - 75% complete
-  - ✅ Sandpack integration
-  - ✅ Lab cards and progress tracking
-  - ✅ Inline coach helper
-  - ⏳ Sandpack project content (3 files per lab)
-  - ⏳ Download/copy functionality
-
-### 📋 Pending Implementation
-
-- **Epic 002** (Problem Discovery) - Ready to start
-- **Epic 004** (Go-To-Market) - Scaffolded
-- **Epic 005** (Iterate) - Scaffolded
-- **Epic 006** (Demo & Certificate) - Scaffolded
-- Real AI provider integration (currently mock)
-- Unit tests for core functions
-- Certificate generation
+Discover LLM behaviors through interactive experiments: prompts, hallucinations, biases, reasoning, and ethics. No coding required!
 
 ---
 
-## Features
+## 🎯 What is LLM Learning Lab?
 
-### Core Modules
+An educational platform where students explore how Large Language Models (LLMs) work through **5 hands-on experimental labs**. Instead of just learning to *use* AI, students discover *how AI thinks*, including its limitations, mistakes, and ethical concerns.
 
-- **Module 0: Orientation** - Setup checklist with AI coach troubleshooting
-- **Module 1: Problem Discovery** - Research workspace, bullseye planner, interview kit *(Ready to implement)*
-- **Module 2: Vibecoding** - Live Sandpack labs with inline AI coach *(In progress)*
-- **Module 3: Go-To-Market** - ToB/ToC strategy builder *(Scaffolded)*
-- **Module 4: Iterate** - North Star tracking & retro helper *(Scaffolded)*
-- **Module 5: Demo & Certificate** - Final submission with certificate generation *(Scaffolded)*
+### Key Learning Goals
 
-### Technical Features
-
-- **Centralized AI Coach** - `askCoach()` server action with automatic transcript persistence
-- **Real-time Feedback** - Context-aware AI responses (Orientation, Problem, Sandbox, GTM, Iterate, Demo)
-- **Progress Tracking** - Supabase-backed module progress and checklist system
-- **Global Coach Drawer** - Persistent conversation history across all modules
-- **Responsive Design** - Mobile-first approach with collapsible sections
+- 🔬 **Experiment with AI behaviors** - See what AI can and can't do
+- 🚨 **Discover hallucinations** - Learn when AI makes things up
+- ⚖️ **Explore bias & ethics** - Understand fairness and responsibility
+- 🧠 **Understand reasoning** - See how AI thinks step-by-step
+- ✅ **Critical thinking** - Learn to question and verify AI outputs
 
 ---
 
-## Tech Stack
+## 📚 The 5 Experimental Labs
+
+| Lab | Title | Duration | What You'll Discover |
+|-----|-------|----------|---------------------|
+| **1** | **AI Basics** | 15 min | How prompts and responses work, what makes a good instruction |
+| **2** | **AI Hallucinations** | 20 min | When AI makes things up, how to spot fake information |
+| **3** | **Role & Personality** | 20 min | How roles change AI's behavior and response style |
+| **4** | **AI Reasoning** | 25 min | Step-by-step thinking, how AI solves complex problems |
+| **5** | **Bias & Ethics** | 30 min | AI biases, fairness, what AI should and shouldn't do |
+
+**Total Time**: ~2 hours | **Target**: Grades 5-9 | **Prerequisites**: None!
+
+---
+
+## ✨ Key Features
+
+### 🔬 Hands-On Experiments
+- Interactive prompt editor embedded in lessons
+- Real-time AI responses to see cause and effect
+- Experiment with different inputs and observe outputs
+
+### 🎯 Auto-Success Checking
+- Rule-based validation (keywords, format, length)
+- Instant feedback on exercise completion
+- Learn what "good" looks like
+
+### 📊 Progress Tracking
+- Save your work and continue anytime
+- Track completed experiments
+- Achievement badges (coming soon)
+
+### 🤖 AI Coach Assistant
+- Get help when you're stuck
+- Ask questions about AI concepts
+- Hints and guidance throughout
+
+### 🎓 Educational Focus
+- Age-appropriate content (grades 5-9)
+- Teaches critical thinking about AI
+- Focus on understanding, not just skills
+- Emphasizes responsible AI use
+
+---
+
+## 🛠 Tech Stack
 
 ### Frontend
 - **Framework**: Next.js 15.2.4 (App Router)
 - **Language**: TypeScript 5
 - **Styling**: Tailwind CSS v4
 - **UI Components**: shadcn/ui (Radix UI primitives)
-- **Code Editor**: Sandpack (@codesandbox/sandpack-react)
+- **Content**: MDX for article-based labs with embedded React components
 - **Icons**: Lucide React
 
 ### Backend
 - **Database**: Supabase (PostgreSQL)
-- **Authentication**: Supabase Auth (Email/Password + OAuth)
-- **ORM**: Supabase Client with TypeScript types
+- **Authentication**: Supabase Auth
+- **AI Provider**: GPT-4o (OpenAI API)
 - **Server Actions**: Next.js 15 native server actions
 
 ### Deployment
 - **Platform**: Vercel (optimized for Next.js)
 - **Analytics**: Vercel Analytics
-- **Environment**: Node.js runtime for server actions
+- **CDN**: Vercel Edge Network
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
 - Node.js 18+ installed
 - Supabase account (free tier works)
+- OpenAI API key (for GPT-4o)
 - Git
 
 ### Installation
@@ -103,17 +113,21 @@ npm install
 
 Create a `.env.local` file:
 ```env
+# Supabase
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+# OpenAI (for GPT-4o)
+OPENAI_API_KEY=your_openai_api_key
 ```
 
-Get these from your Supabase project: `Settings > API`
+Get Supabase credentials from: `Settings > API` in your Supabase dashboard
 
 4. **Run database migrations:**
 
-In your Supabase SQL Editor, run:
-```bash
-supabase/migrations/20251013000000_initial_schema.sql
+In your Supabase SQL Editor, run the migration file:
+```sql
+-- See: supabase/migrations/20251016_prompt_lab.sql
 ```
 
 Or use Supabase CLI:
@@ -131,284 +145,335 @@ Navigate to [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 ├── app/
-│   ├── dashboard/              # Protected dashboard routes
-│   │   ├── orientation/        # Module 0 - Setup & intro
-│   │   ├── problem-discovery/  # Module 1 - Problem validation
-│   │   ├── vibecoding/         # Module 2 - Sandpack labs
-│   │   ├── go-to-market/       # Module 3 - GTM strategy
-│   │   ├── iterate/            # Module 4 - Metrics & retros
-│   │   ├── demo/               # Module 5 - Final submission
-│   │   ├── settings/           # User settings
-│   │   ├── support/            # Support page
-│   │   └── layout.tsx          # Dashboard shell with sidebar
-│   ├── auth/                   # Authentication pages & callbacks
-│   ├── page.tsx                # Marketing landing page
-│   └── layout.tsx              # Root layout
+│   ├── dashboard/
+│   │   ├── vibecoding/           # Main labs area (5 experimental labs)
+│   │   │   ├── [labId]/          # Dynamic lab routes (lab1, lab2, etc.)
+│   │   │   └── page.tsx          # Labs list page
+│   │   ├── orientation/          # Quick intro & setup
+│   │   ├── settings/             # User settings
+│   │   └── layout.tsx            # Dashboard shell
+│   ├── auth/                     # Authentication pages
+│   ├── page.tsx                  # Landing page
+│   └── layout.tsx                # Root layout
 ├── components/
-│   ├── ui/                     # shadcn/ui base components
-│   ├── layout/                 # Layout components
-│   │   ├── dashboard-header.tsx
-│   │   ├── module-sidebar.tsx
-│   │   └── theme-provider.tsx
-│   ├── shared/                 # Shared across modules
-│   │   ├── coach-drawer.tsx    # Global AI coach drawer
-│   │   ├── module-header.tsx   # Module page header
-│   │   ├── progress-pill.tsx   # Progress indicator
-│   │   └── video-player.tsx    # Video embeds
-│   └── features/               # Feature-specific components
-│       ├── demo/               # Module 5 components
-│       ├── orientation/        # Module 0 components
-│       ├── vibecoding/         # Module 2 components
-│       └── go-to-market/       # Module 3 components
+│   ├── ui/                       # shadcn/ui base components
+│   ├── features/
+│   │   └── prompt-lab/           # Lab-specific components
+│   │       ├── PromptEditor.tsx  # Interactive prompt editor
+│   │       ├── LLMOutputDisplay.tsx # AI response display
+│   │       ├── LabArticle.tsx    # Article container
+│   │       ├── ExerciseCard.tsx  # Exercise wrapper
+│   │       └── SuccessCriteria.tsx # Auto-check validator
+│   ├── layout/                   # Layout components
+│   └── shared/                   # Shared components
 ├── lib/
 │   ├── actions/
-│   │   └── coach.ts            # Centralized askCoach() server action
-│   ├── types.ts                # TypeScript interfaces
-│   ├── coach.ts                # AI provider wrapper (mock)
-│   ├── supabase-server.ts      # Server-side Supabase client
-│   ├── supabase-client.ts      # Client-side Supabase client
-│   ├── constants.ts            # App constants and content
-│   └── mock-data.ts            # Development fixtures
+│   │   ├── prompt-lab.ts         # runPrompt, checkSuccess actions
+│   │   └── coach.ts              # AI coach helper
+│   ├── supabase-server.ts        # Server-side Supabase
+│   ├── supabase-client.ts        # Client-side Supabase
+│   ├── constants.ts              # App constants (labs config, copy)
+│   └── types.ts                  # TypeScript types
 ├── supabase/
-│   ├── migrations/             # Database migrations
-│   └── config.toml             # Supabase configuration
-├── docs/                       # Project documentation
-│   ├── architecture/           # Technical architecture docs
-│   ├── epics/                  # Epic definitions
-│   ├── stories/                # User stories
-│   └── prd/                    # Product requirements
-└── public/                     # Static assets
+│   └── migrations/               # Database migrations
+│       └── 20251016_prompt_lab.sql
+├── docs/                         # Project documentation
+│   ├── prd/
+│   │   └── llm-learning-lab-prd.md
+│   └── architecture/
+└── public/                       # Static assets
 ```
 
 ---
 
-## Database Schema
+## 🗄 Database Schema
 
 ### Core Tables
 
-| Table | Purpose | Key Features |
-|-------|---------|--------------|
-| `module_progress` | Track user progress through modules 0-5 | Status, timestamps, checklist items (JSONB) |
-| `research_inputs` | Store problem discovery research | Type (deep_research, bullseye, interview_kit), coach feedback |
-| `problem_briefs` | Validated problem statements | Segment, problem, solution, validation status |
-| `sandpack_submissions` | Code sandbox work from Module 2 | Lab number, code snapshot (JSONB), completion flag |
-| `gtm_actions` | Go-to-market content (Module 3) | Track (ToB/ToC), action type, content (JSONB) |
-| `iterate_logs` | Metrics tracking & retrospectives | North star, tracking items, retro notes |
-| `demo_submissions` | Final project submissions | Name, project title, links, certificate URL |
-| `coach_transcripts` | Complete AI coach conversation history | Module, context tag, messages, latency, status |
-| `ai_usage_log` | Rate limiting (optional) | Call counts per user/module |
+| Table | Purpose |
+|-------|---------|
+| `prompt_lab_progress` | Track user progress through 5 labs, exercise completion, attempts |
+| `lab_submissions` | Store student prompts, AI responses, success status per exercise |
+| `module_progress` | Overall course progress (reused from base architecture) |
+| `coach_transcripts` | AI coach conversation history for help/guidance |
 
 ### Security
-
 - **Row Level Security (RLS)** enabled on all tables
-- Users can only access their own data (`user_id = auth.uid()`)
-- Cascade delete on user account removal
-- Storage bucket policies for certificates
+- Users can only access their own data
+- Cascade delete on user removal
 
 ---
 
-## AI Coach Architecture
+## 🧪 How Labs Work
 
-### Centralized Design
+### Lab Structure (MDX-based)
 
-All AI interactions flow through a single server action:
+Each lab is an MDX file with embedded React components:
 
+```mdx
+# Lab 1: AI Basics
+
+## 📖 Learning Goal
+Understand how prompts and responses work.
+
+## 🎯 Core Concepts
+[Article content explaining the concept...]
+
+## 💡 Example
+<PromptEditor readonly initialValue="Tell me about cats" />
+<LLMOutput content="[AI response here]" />
+
+## ✏️ Exercise 1
+Try modifying the prompt to get a specific response.
+
+<PromptEditor
+  editable
+  exerciseId="lab1-ex1"
+  initialValue="Tell me about..."
+/>
+<LLMOutput mode="live" />
+
+**Success Criteria**: Output must mention "whiskers" and be under 100 words.
+```
+
+### Success Checking
+
+Two methods for auto-validation:
+
+1. **Rule-based** (recommended, zero cost):
 ```typescript
-// lib/actions/coach.ts
-export async function askCoach(request: AskCoachRequest): Promise<AskCoachResponse>
+{
+  exerciseId: "lab1-ex2",
+  rules: [
+    { containsKeywords: ["cat", "adventure"] },
+    { minLength: 100 },
+    { sentiment: "positive" }
+  ],
+  passingScore: 3  // All 3 must pass
+}
 ```
 
-**Features:**
-- ✅ Authentication validation
-- ✅ Provider error handling
-- ✅ Automatic transcript persistence
-- ✅ Telemetry logging
-- ✅ Context-specific responses (6 contexts)
-- ✅ Failure/timeout recording
-
-### Context Tags
-
-| Context | Module | Use Case |
-|---------|--------|----------|
-| `Orientation` | 0 | Setup troubleshooting |
-| `Problem` | 1 | Research validation |
-| `Sandbox` | 2 | Coding help |
-| `GTM` | 3 | Strategy feedback |
-| `Iterate` | 4 | Metrics synthesis |
-| `Demo` | 5 | Demo script review |
-
-### Current State
-
-- ✅ **Infrastructure**: Complete and tested
-- ✅ **Integration**: All modules connected
-- ⚠️ **Provider**: Mock implementation (needs real AI API)
-
----
-
-## Development
-
-### Available Scripts
-
-```bash
-npm run dev        # Start development server
-npm run build      # Build for production
-npm run start      # Start production server
-npm run lint       # Run ESLint
+2. **LLM-based** (flexible, minimal cost):
+```typescript
+// Use GPT-4o-mini to judge if output meets exercise goal
+checkWithLLM(exerciseGoal, llmOutput)
+// Returns: { success: boolean, feedback: string }
 ```
 
-### Environment Variables
-
-Required:
-- `NEXT_PUBLIC_SUPABASE_URL` - Your Supabase project URL
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Supabase anonymous key
-
-Optional (for production):
-- `AI_PROVIDER` - AI provider name (e.g., "openai", "anthropic")
-- `AI_API_KEY` - AI provider API key
-- `AI_MODEL` - Model name (e.g., "gpt-4o-mini", "claude-3-haiku")
-
 ---
 
-## Deployment
+## 🎨 Component Architecture
 
-### Vercel Deployment (Recommended)
-
-1. Push code to GitHub
-2. Import repository in Vercel
-3. Add environment variables:
-   - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-   - (Optional) `AI_PROVIDER`, `AI_API_KEY`, `AI_MODEL`
-4. Deploy!
-
-**Important**: Set Node.js runtime for server actions (not Edge runtime for AI endpoints)
-
----
-
-## Integration TODOs
-
-### High Priority
-
-- [ ] **Real AI Provider Integration**
-  - Replace mock in `lib/coach.ts`
-  - Choose: OpenAI (gpt-4o-mini) or Anthropic (claude-3-haiku)
-  - Add API key to environment
-  - Test latency (<5s target)
-
-- [ ] **Complete Epic 003 (Vibecoding)**
-  - Add 3 core files per lab (App.tsx, api/mock.ts, prompts/sample.ts)
-  - Implement download/copy functionality
-  - Add Git primer content
-
-### Medium Priority
-
-- [ ] **Implement Epic 002 (Problem Discovery)**
-  - Already scaffolded, ~3-5 days work
-
-- [ ] **Unit Tests**
-  - `askCoach()` function tests
-  - Server action tests
-  - Component tests
-
-- [ ] **Certificate Generation**
-  - PDF/PNG generation
-  - QR code embedding
-  - Storage upload
-
-### Low Priority
-
-- [ ] Analytics tracking (page views, completions)
-- [ ] Error monitoring (Sentry)
-- [ ] Performance monitoring
-- [ ] Email notifications
-- [ ] Admin dashboard
-
----
-
-## Architecture Highlights
-
-### Component Organization
-
-- **Layout**: Dashboard shell, headers, sidebars
-- **Shared**: Reusable across modules (coach drawer, module header)
-- **Features**: Module-specific components (isolated, easier to maintain)
-- **UI**: Pure presentational components (shadcn/ui)
-
-### Data Flow
-
-```
-User Action → Client Component → Server Action → Supabase
-                                    ↓
-                              askCoach() → AI Provider
-                                    ↓
-                            coach_transcripts
+### PromptEditor Component
+```typescript
+<PromptEditor
+  mode="readonly" | "editable" | "blank"
+  initialValue={string}
+  exerciseId={string}
+  onSubmit={(prompt) => runPrompt(prompt)}
+  showCharCount={boolean}
+  maxLength={number}
+/>
 ```
 
-### Performance Optimizations
-
-- Lazy loading for Sandpack (code splitting)
-- Optimistic UI updates for checklists
-- Server-side rendering for initial load
-- Image optimization (Next.js)
-
----
-
-## Known Issues & Limitations
-
-1. **Mock AI Responses**: Using static responses until real AI provider is connected
-2. **CoachDrawer**: Still uses `callCoach()` instead of `askCoach()` (15min fix)
-3. **No Tests**: Unit/integration tests pending
-4. **Sandpack Content**: Basic starter code needs expansion for each lab
-5. **Module 1 Skipped**: Orientation routes directly to Module 2 (temporary)
+### LLMOutputDisplay Component
+```typescript
+<LLMOutput
+  mode="static" | "live"
+  content={string}
+  loading={boolean}
+  error={string | null}
+  showTokenCount={boolean}
+/>
+```
 
 ---
 
-## Documentation
+## 🔑 Key Server Actions
 
-- **Architecture**: `docs/architecture/`
-- **Epic Definitions**: `docs/epics/`
-- **User Stories**: `docs/stories/`
-- **PRD**: `docs/prd/`
+### runPrompt
+```typescript
+// Executes student prompt against GPT-4o
+export async function runPrompt(request: {
+  prompt: string
+  labNumber: number
+  exerciseId: string
+}) {
+  // 1. Validate auth
+  // 2. Call GPT-4o API
+  // 3. Save to lab_submissions
+  // 4. Return response + metadata
+}
+```
+
+### checkSuccess
+```typescript
+// Validates if exercise criteria are met
+export async function checkSuccess(request: {
+  exerciseId: string
+  llmOutput: string
+}) {
+  // Check against success rules
+  // Return: { success: boolean, feedback: string }
+}
+```
 
 ---
 
-## Language Policy
+## 💰 Cost Estimates
 
-**This project uses English only.** All code, documentation, UI content, and communications must be in English.
+Using **GPT-4o** (as specified in PRD):
 
-📖 See [LANGUAGE_POLICY.md](./LANGUAGE_POLICY.md) for complete guidelines.
+### Per Student
+- 5 labs × 6 exercises avg = 30 API calls
+- ~200 tokens input + 400 tokens output per call
+- Input cost: 30 × 200 × $2.50/1M = $0.015
+- Output cost: 30 × 400 × $10.00/1M = $0.12
+- **Total: ~$0.14 per student**
 
-## Contributing
+### Scale
+- 100 students: ~$14/month
+- 500 students: ~$70/month
+- 1000 students: ~$140/month
 
-This is a course project. For issues or questions, please contact the course team.
+**Note**: Using rule-based success checking (free) instead of LLM validation saves additional costs.
+
+---
+
+## 🎯 Development Roadmap
+
+### Phase 1: Core Components (Week 1-2)
+- [x] Landing page updated
+- [ ] PromptEditor component
+- [ ] LLMOutputDisplay component
+- [ ] runPrompt server action
+- [ ] Database migration
+- **Milestone**: One complete exercise flow works
+
+### Phase 2: Lab Content (Week 2-3)
+- [ ] Lab 1-3 content (articles + exercises)
+- [ ] MDX integration
+- [ ] Progress tracking UI
+- **Milestone**: First 3 labs playable
+
+### Phase 3: Advanced Labs (Week 3-4)
+- [ ] Lab 4-5 content
+- [ ] Success criteria auto-check
+- [ ] AI coach integration
+- **Milestone**: All 5 labs complete
+
+### Phase 4: Testing & Polish (Week 4-5)
+- [ ] Beta testing with 10-20 students
+- [ ] Content adjustments based on feedback
+- [ ] Performance optimization
+- [ ] Error handling
+- **Milestone**: Ready for launch
+
+### Phase 5: Launch (Week 5-6)
+- [ ] Landing page finalized
+- [ ] Teacher/parent resources
+- [ ] Production deployment
+- [ ] Monitoring & analytics
+- **Milestone**: Public release
+
+---
+
+## 🧪 Educational Philosophy
+
+### Why This Approach?
+
+**Traditional AI courses teach**: How to use ChatGPT effectively
+**LLM Learning Lab teaches**: How ChatGPT actually works
+
+Students learn:
+- ✅ What AI can do (capabilities)
+- ✅ What AI can't do (limitations)
+- ✅ When AI makes mistakes (hallucinations)
+- ✅ How AI can be biased (ethics)
+- ✅ How to think critically about AI outputs
+
+### Science Education for the AI Age
+
+This is not a "how to use AI tools" course. It's a **science curriculum** where students:
+1. Form hypotheses about AI behavior
+2. Run experiments with different prompts
+3. Observe and analyze outputs
+4. Draw conclusions about LLM characteristics
+5. Apply critical thinking to real scenarios
+
+---
+
+## 📊 Success Metrics
+
+### Learning Outcomes
+- **80%+ completion rate** - Students finish all 5 labs
+- **70%+ first/second attempt success** - Exercises are appropriately challenging
+- **Average time per lab** - Matches target durations
+
+### Technical Performance
+- **<3s API response time** - Fast, smooth experience
+- **95%+ API success rate** - Reliable interactions
+- **<2s page load time** - Snappy UI
+
+### Engagement
+- **1.5-2 avg attempts per exercise** - Healthy trial-and-error
+- **30%+ use AI coach** - Students seek help when needed
+- **50%+ return within a week** - Content is engaging
+
+---
+
+## 🔐 Safety & Moderation
+
+### Content Safety
+- All AI responses filtered through OpenAI safety layer
+- Age-appropriate content monitoring
+- Exercises designed to avoid inappropriate outputs
+- Teacher/parent dashboard (future feature)
+
+### Privacy
+- COPPA compliant (under-13 with parental consent)
+- Minimal data collection
+- No third-party tracking
+- Student data never shared
+
+---
+
+## 🤝 Contributing
+
+This is an educational project. For suggestions or issues:
+- Open an issue on GitHub
+- Contact: [your-email@example.com]
 
 When contributing:
-- All code must be in English (variables, functions, comments)
-- All content must be in English (UI text, documentation)
-- Follow the language policy strictly
+- All code and content must be in English
+- Follow existing code style
+- Add tests for new features
+- Update documentation
 
 ---
 
-## License
+## 📄 License
 
-All rights reserved.
+All rights reserved. © 2025 LLM Learning Lab
 
 ---
 
-## Recent Updates
+## 🎉 Recent Updates
 
 ### 2025-10-16
-- 🎉 Repository initialized as fresh project
-- 📦 Initial commit to https://github.com/ChrisWu132/labLM
-- ✅ Complete codebase: Next.js 15 + Supabase + AI Coach architecture
-- ✅ All 6 modules scaffolded with basic functionality
-- ✅ Database schema with RLS policies ready
-- ✅ Authentication flow and landing page complete
+- 🔄 **Major pivot**: From startup course to LLM Learning Lab
+- 🎯 **New focus**: Elementary & middle school students (grades 5-9)
+- 🔬 **5 experimental labs**: AI Basics, Hallucinations, Roles, Reasoning, Bias & Ethics
+- 🎨 **Landing page redesigned**: Emphasizes hands-on experiments and understanding AI
+- 📚 **MDX-based curriculum**: Articles with embedded interactive components
+- 🤖 **GPT-4o integration**: Real-time AI responses for experiments
 
 ---
 
-**Built with Next.js 15, Supabase, and shadcn/ui** 🚀
+**Built with Next.js 15, Supabase, GPT-4o, and shadcn/ui** 🚀
+**Designed for curious minds ages 10-15** 🧠
+**Science education for the AI age** 🔬
