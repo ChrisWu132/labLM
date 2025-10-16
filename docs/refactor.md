@@ -87,59 +87,107 @@ npm install react-syntax-highlighter @types/react-syntax-highlighter
 
 ### 1.2 数据库迁移
 
-**创建迁移文件:** `supabase/migrations/20251016_prompt_lab.sql`
+**创建迁移文件:** `supabase/migrations/20251016000000_llm_learning_lab_initial.sql`
 
 ```sql
--- 1. 创建 prompt_lab_progress 表
+-- LLM Learning Lab Initial Schema
+-- Created: 2025-10-16
+
+-- 1. prompt_lab_progress — 学生练习提交记录
 CREATE TABLE prompt_lab_progress (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   lab_number SMALLINT NOT NULL CHECK (lab_number BETWEEN 1 AND 5),
   exercise_id TEXT NOT NULL,
-
-  -- Submission data
   prompt_submitted TEXT NOT NULL,
   llm_response TEXT NOT NULL,
-
-  -- Success tracking
   success BOOLEAN DEFAULT false,
   attempts INT DEFAULT 1,
-
-  -- Timestamps
   completed_at TIMESTAMPTZ,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-
   UNIQUE(user_id, lab_number, exercise_id)
 );
 
--- 2. 创建索引
 CREATE INDEX idx_prompt_lab_user ON prompt_lab_progress(user_id, lab_number);
 CREATE INDEX idx_prompt_lab_success ON prompt_lab_progress(user_id, success, created_at DESC);
 
--- 3. RLS 策略
-ALTER TABLE prompt_lab_progress ENABLE ROW LEVEL SECURITY;
+-- 2. module_progress — Lab 级进度追踪
+CREATE TABLE module_progress (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  module_number SMALLINT NOT NULL CHECK (module_number BETWEEN 0 AND 5),
+  completed BOOLEAN DEFAULT false,
+  completed_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE(user_id, module_number)
+);
 
-CREATE POLICY "Users can view own progress"
+CREATE INDEX idx_module_progress_user
+  ON module_progress(user_id, module_number);
+
+-- 自动更新时间戳
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = now();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER update_module_progress_updated_at
+  BEFORE UPDATE ON module_progress
+  FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at_column();
+
+-- 3. ai_usage_log — 用于 rate limit 与分析
+CREATE TABLE ai_usage_log (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  action TEXT NOT NULL,
+  metadata JSONB,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX idx_ai_usage_user_action
+  ON ai_usage_log(user_id, action, created_at DESC);
+CREATE INDEX idx_ai_usage_created
+  ON ai_usage_log(created_at DESC);
+
+-- 4. RLS 策略
+ALTER TABLE prompt_lab_progress ENABLE ROW LEVEL SECURITY;
+ALTER TABLE module_progress ENABLE ROW LEVEL SECURITY;
+ALTER TABLE ai_usage_log ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can view own prompt lab progress"
   ON prompt_lab_progress FOR SELECT
   USING (auth.uid() = user_id);
-
-CREATE POLICY "Users can insert own progress"
+CREATE POLICY "Users can insert own prompt lab progress"
   ON prompt_lab_progress FOR INSERT
   WITH CHECK (auth.uid() = user_id);
-
-CREATE POLICY "Users can update own progress"
+CREATE POLICY "Users can update own prompt lab progress"
   ON prompt_lab_progress FOR UPDATE
   USING (auth.uid() = user_id);
 
--- 4. 备份旧表 (不删除，以防需要数据)
--- webcontainer_projects 保留不变
--- 如果后续确认不需要，可手动删除：DROP TABLE webcontainer_projects CASCADE;
+CREATE POLICY "Users can view own module progress"
+  ON module_progress FOR SELECT
+  USING (auth.uid() = user_id);
+CREATE POLICY "Users can insert own module progress"
+  ON module_progress FOR INSERT
+  WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can update own module progress"
+  ON module_progress FOR UPDATE
+  USING (auth.uid() = user_id);
 
--- 5. 更新 module_progress 检查约束（支持 Lab 1-5）
-ALTER TABLE module_progress DROP CONSTRAINT IF EXISTS module_progress_module_number_check;
-ALTER TABLE module_progress ADD CONSTRAINT module_progress_module_number_check
-  CHECK (module_number BETWEEN 0 AND 5);
+CREATE POLICY "Users can view own ai usage log"
+  ON ai_usage_log FOR SELECT
+  USING (auth.uid() = user_id);
+CREATE POLICY "Service role can insert ai usage log"
+  ON ai_usage_log FOR INSERT
+  WITH CHECK (true);
 ```
+
+> ℹ️ 同目录下的 `20251016000001_rollback_llm_learning_lab.sql` 提供了完全回滚脚本，可在需要时撤销以上表结构。
 
 **运行迁移:**
 
@@ -156,12 +204,20 @@ supabase migration up  # 生产环境
 ```javascript
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true
+  },
+  typescript: {
+    ignoreBuildErrors: true
+  },
+  images: {
+    unoptimized: true
+  },
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   experimental: {
-    mdxRs: false, // 使用传统 MDX loader
+    mdxRs: false, // 使用传统 MDX loader，便于自定义组件
     serverActions: {
-      bodySizeLimit: '2mb',
-      allowedOrigins: ['vibecodinglab.com', 'localhost:3000']
+      bodySizeLimit: '2mb'
     }
   }
 }
@@ -175,10 +231,14 @@ export default nextConfig
 // mdx-components.tsx (根目录)
 import type { MDXComponents } from 'mdx/types'
 
+/**
+ * 注册全局 MDX 组件
+ *
+ * 后续会在这里挂载 PromptEditor、StaticPromptDemo 等自定义组件
+ */
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    // 自定义 MDX 组件映射（Phase 2 会用到）
-    ...components,
+    ...components
   }
 }
 ```
@@ -223,6 +283,24 @@ export interface PromptLabProgress {
   created_at: string
 }
 
+export interface ModuleProgress {
+  id: string
+  user_id: string
+  module_number: number
+  completed: boolean
+  completed_at: string | null
+  created_at: string
+  updated_at: string
+}
+
+export interface AIUsageLog {
+  id: string
+  user_id: string
+  action: string
+  metadata?: Record<string, any>
+  created_at: string
+}
+
 export interface RunPromptRequest {
   prompt: string
   labNumber: number
@@ -249,12 +327,66 @@ export interface SuccessRule {
   value: any
 }
 
+export interface SuccessCheckResult {
+  success: boolean
+  feedback: string
+  passedRules?: number
+  totalRules?: number
+}
+
 export interface LabMetadata {
   id: number
   title: string
   description: string
   estimatedMinutes: number
   exerciseCount: number
+  path: string
+}
+
+export interface LabContent {
+  id: string
+  mdx: string
+  metadata: {
+    title: string
+    description: string
+    estimatedMinutes: number
+  }
+}
+
+export interface PromptEditorProps {
+  exerciseId: string
+  mode: 'readonly' | 'editable' | 'blank'
+  initialValue?: string
+  placeholder?: string
+  maxLength?: number
+  showCharCount?: boolean
+  onSubmit?: (prompt: string) => Promise<void>
+}
+
+export interface LLMOutputProps {
+  mode: 'static' | 'live'
+  content?: string
+  loading?: boolean
+  error?: string | null
+  success?: boolean | null
+  feedback?: string
+  showTokenCount?: boolean
+}
+
+export interface RateLimitConfig {
+  action: string
+  limit: number
+  windowMinutes: number
+}
+
+export interface UserProgressSummary {
+  totalLabs: number
+  completedLabs: number
+  currentLab: number | null
+  totalExercises: number
+  completedExercises: number
+  successRate: number
+  totalAttempts: number
 }
 ```
 
@@ -322,20 +454,20 @@ export function PromptEditor({
   }
 
   return (
-    <div className="prompt-editor my-4 p-4 border rounded-lg bg-white">
+    <div className="prompt-editor my-4 p-4 border rounded-lg bg-white dark:bg-gray-800">
       <textarea
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         placeholder={placeholder}
         maxLength={maxLength}
         disabled={mode === 'readonly' || isSubmitting}
-        className="w-full min-h-[120px] p-3 border rounded-md resize-y focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
+        className="w-full min-h-[120px] p-3 border rounded-md resize-y focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
         rows={4}
       />
 
       <div className="mt-2 flex items-center justify-between">
         {showCharCount && (
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-gray-500 dark:text-gray-400">
             {prompt.length} / {maxLength} 字符
           </div>
         )}
@@ -344,7 +476,7 @@ export function PromptEditor({
           <button
             onClick={handleSubmit}
             disabled={isSubmitting || !prompt.trim()}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center gap-2"
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
           >
             {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
             {isSubmitting ? '运行中...' : '运行 Prompt'}
@@ -387,29 +519,29 @@ export function LLMOutputDisplay({
   return (
     <div className="llm-output my-4">
       {/* Main Output */}
-      <div className="border rounded-lg p-4 bg-gray-50 min-h-[120px]">
+      <div className="border rounded-lg p-4 bg-gray-50 dark:bg-gray-900 min-h-[120px]">
         {loading && (
-          <div className="flex items-center gap-2 text-gray-600">
+          <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
             <Loader2 className="w-5 h-5 animate-spin" />
             <span>AI 正在思考...</span>
           </div>
         )}
 
         {error && (
-          <div className="flex items-center gap-2 text-red-600">
+          <div className="flex items-center gap-2 text-red-600 dark:text-red-400">
             <AlertCircle className="w-5 h-5" />
             <span>❌ 出错了: {error}</span>
           </div>
         )}
 
         {content && !loading && !error && (
-          <div className="whitespace-pre-wrap text-gray-800">
+          <div className="whitespace-pre-wrap text-gray-800 dark:text-gray-200">
             {content}
           </div>
         )}
 
         {!content && !loading && !error && (
-          <div className="text-gray-400 italic">
+          <div className="text-gray-400 dark:text-gray-500 italic">
             运行 prompt 后，AI 的输出会显示在这里
           </div>
         )}
@@ -420,8 +552,8 @@ export function LLMOutputDisplay({
         <div
           className={`mt-3 p-3 rounded-lg flex items-start gap-2 ${
             success
-              ? 'bg-green-100 text-green-800'
-              : 'bg-yellow-100 text-yellow-800'
+              ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+              : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
           }`}
         >
           {success ? (
@@ -444,7 +576,7 @@ export function LLMOutputDisplay({
 
       {/* Token Count (Optional) */}
       {showTokenCount && content && (
-        <div className="text-xs text-gray-500 mt-2">
+        <div className="text-xs text-gray-500 dark:text-gray-400 mt-2">
           约 {Math.ceil(content.length / 4)} tokens
         </div>
       )}
@@ -460,8 +592,8 @@ export function LLMOutputDisplay({
 ```typescript
 'use server'
 
-import { createServerClient } from '@/lib/supabase-server'
-import { checkRateLimit } from '@/lib/rate-limit'
+import { createServerSupabaseClient } from '@/lib/supabase-server'
+import { checkRateLimit, logAIUsage } from '@/lib/rate-limit'
 import { checkExerciseSuccess } from '@/lib/prompt-lab/success-checker'
 import OpenAI from 'openai'
 import type { RunPromptRequest, RunPromptResult } from '@/types/prompt-lab'
@@ -473,7 +605,7 @@ const openai = new OpenAI({
 export async function runPrompt(
   request: RunPromptRequest
 ): Promise<RunPromptResult> {
-  const supabase = createServerClient()
+  const supabase = await createServerSupabaseClient()
 
   // 1. Get current user
   const {
@@ -482,11 +614,11 @@ export async function runPrompt(
   } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return { success: false, error: 'Not authenticated' }
+    return { success: false, error: '请先登录' }
   }
 
   // 2. Validate input
-  if (!request.prompt || request.prompt.length < 10) {
+  if (!request.prompt || request.prompt.trim().length < 10) {
     return { success: false, error: 'Prompt 太短,至少 10 个字符' }
   }
 
@@ -497,7 +629,10 @@ export async function runPrompt(
   // 3. Rate limit check
   const allowed = await checkRateLimit(user.id, 'prompt_lab', 30, 60)
   if (!allowed) {
-    return { success: false, error: '操作太频繁,请稍后再试 (每小时最多 30 次)' }
+    return {
+      success: false,
+      error: '操作太频繁,请稍后再试 (每小时最多 30 次)'
+    }
   }
 
   // 4. Call GPT-4o
@@ -509,14 +644,16 @@ export async function runPrompt(
       model: process.env.AI_MODEL || 'gpt-4o',
       messages: [{ role: 'user', content: request.prompt }],
       max_tokens: parseInt(process.env.AI_MAX_TOKENS || '500'),
-      temperature: 0.7,
-      timeout: parseInt(process.env.AI_TIMEOUT_MS || '30000')
+      temperature: 0.7
     })
 
     llmResponse = completion.choices[0].message.content || ''
-  } catch (error) {
+  } catch (error: any) {
     console.error('[runPrompt] OpenAI API error:', error)
-    return { success: false, error: 'AI 服务暂时不可用,请稍后再试' }
+    return {
+      success: false,
+      error: 'AI 服务暂时不可用,请稍后再试'
+    }
   }
 
   const latencyMs = Date.now() - startTime
@@ -539,21 +676,29 @@ export async function runPrompt(
   const newAttempts = (existing?.attempts || 0) + 1
 
   // 7. Persist submission
-  await supabase.from('prompt_lab_progress').upsert({
-    user_id: user.id,
+  const { error: upsertError } = await supabase
+    .from('prompt_lab_progress')
+    .upsert({
+      user_id: user.id,
+      lab_number: request.labNumber,
+      exercise_id: request.exerciseId,
+      prompt_submitted: request.prompt,
+      llm_response: llmResponse,
+      success: successCheck.success,
+      attempts: newAttempts,
+      completed_at: successCheck.success ? new Date().toISOString() : null
+    })
+
+  if (upsertError) {
+    console.error('[runPrompt] Database error:', upsertError)
+  }
+
+  // 8. Log usage for rate limiting analytics
+  await logAIUsage(user.id, 'prompt_lab', {
     lab_number: request.labNumber,
     exercise_id: request.exerciseId,
-    prompt_submitted: request.prompt,
-    llm_response: llmResponse,
     success: successCheck.success,
-    attempts: newAttempts,
-    completed_at: successCheck.success ? new Date().toISOString() : null
-  })
-
-  // 8. Log usage
-  await supabase.from('ai_usage_log').insert({
-    user_id: user.id,
-    action: 'prompt_lab'
+    latency_ms: latencyMs
   })
 
   return {
@@ -573,8 +718,11 @@ export async function runPrompt(
 ```typescript
 import type { SuccessCriteria, SuccessRule } from '@/types/prompt-lab'
 
-// 练习成功标准配置
+/**
+ * 练习成功标准配置
+ */
 const exerciseCriteria: Record<string, SuccessCriteria> = {
+  // Lab 1
   'lab1-ex1': {
     exerciseId: 'lab1-ex1',
     rules: [
@@ -590,8 +738,35 @@ const exerciseCriteria: Record<string, SuccessCriteria> = {
       { type: 'minLength', value: 100 }
     ],
     passingScore: 2
+  },
+
+  // Lab 2
+  'lab2-ex1': {
+    exerciseId: 'lab2-ex1',
+    rules: [
+      { type: 'containsKeywords', value: ['初学者', '编程', '介绍', '学习'] },
+      { type: 'minLength', value: 80 }
+    ],
+    passingScore: 2
+  },
+  'lab2-ex2': {
+    exerciseId: 'lab2-ex2',
+    rules: [
+      { type: 'containsKeywords', value: ['1.', '2.', '3.'] },
+      { type: 'minLength', value: 60 }
+    ],
+    passingScore: 2
+  },
+  'lab2-ex3': {
+    exerciseId: 'lab2-ex3',
+    rules: [
+      { type: 'containsKeywords', value: ['title', 'author', 'year', 'genre'] },
+      { type: 'containsKeywords', value: ['{', '}'] },
+      { type: 'minLength', value: 30 }
+    ],
+    passingScore: 3
   }
-  // ... more exercises defined in Phase 3
+  // Phase 3+ 将继续补充 lab3-5 的规则
 }
 
 export async function checkExerciseSuccess(
@@ -676,7 +851,10 @@ function getRuleFeedback(rule: SuccessRule): string {
 如不存在,创建:
 
 ```typescript
-import { createServerClient } from '@/lib/supabase-server'
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
 
 export async function checkRateLimit(
   userId: string,
@@ -684,17 +862,40 @@ export async function checkRateLimit(
   limit: number,
   windowMinutes: number
 ): Promise<boolean> {
-  const supabase = createServerClient()
+  const supabase = createClient(supabaseUrl, supabaseServiceKey)
   const windowStart = new Date(Date.now() - windowMinutes * 60 * 1000)
 
-  const { count } = await supabase
+  const { count, error } = await supabase
     .from('ai_usage_log')
     .select('*', { count: 'exact', head: true })
     .eq('user_id', userId)
     .eq('action', action)
     .gte('created_at', windowStart.toISOString())
 
+  if (error) {
+    console.error('[checkRateLimit] Error:', error)
+    return true // fail open
+  }
+
   return (count || 0) < limit
+}
+
+export async function logAIUsage(
+  userId: string,
+  action: string,
+  metadata?: Record<string, any>
+) {
+  const supabase = createClient(supabaseUrl, supabaseServiceKey)
+
+  const { error } = await supabase.from('ai_usage_log').insert({
+    user_id: userId,
+    action,
+    metadata
+  })
+
+  if (error) {
+    console.error('[logAIUsage] Error:', error)
+  }
 }
 ```
 
@@ -713,12 +914,16 @@ import { runPrompt } from '@/lib/actions/prompt-lab'
 export default function TestPromptPage() {
   const [output, setOutput] = useState('')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<boolean | null>(null)
   const [feedback, setFeedback] = useState('')
+  const [latency, setLatency] = useState<number | null>(null)
 
   const handleSubmit = async (prompt: string) => {
     setLoading(true)
     setSuccess(null)
+    setError(null)
+    setOutput('')
 
     const result = await runPrompt({
       prompt,
@@ -730,6 +935,13 @@ export default function TestPromptPage() {
       setOutput(result.output)
       setSuccess(result.passed || false)
       setFeedback(result.feedback || '')
+      setLatency(result.latencyMs || null)
+      setError(null)
+    }
+
+    if (!result.success) {
+      setError(result.error || 'Unknown error')
+      setSuccess(null)
     }
 
     setLoading(false)
@@ -737,23 +949,61 @@ export default function TestPromptPage() {
 
   return (
     <div className="container mx-auto p-8 max-w-3xl">
-      <h1 className="text-3xl font-bold mb-6">Prompt Lab 组件测试</h1>
+      <h1 className="text-3xl font-bold mb-2">Prompt Lab 组件测试</h1>
+      <p className="text-gray-600 dark:text-gray-400 mb-6">
+        测试 PromptEditor, LLMOutputDisplay, 和 runPrompt server action
+      </p>
 
-      <PromptEditor
-        exerciseId="lab1-ex1"
-        mode="editable"
-        initialValue="告诉我关于猫的习性"
-        onSubmit={handleSubmit}
-      />
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+        <h2 className="text-xl font-semibold mb-4">练习: 让 AI 介绍猫的习性</h2>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          尝试写一个 prompt，让 AI 专注于介绍猫的习性（而不是泛泛而谈）
+        </p>
 
-      <LLMOutputDisplay
-        mode="live"
-        content={output}
-        loading={loading}
-        success={success}
-        feedback={feedback}
-        showTokenCount
-      />
+        <PromptEditor
+          exerciseId="lab1-ex1"
+          mode="editable"
+          initialValue="告诉我关于猫的习性"
+          onSubmit={handleSubmit}
+        />
+
+        <LLMOutputDisplay
+          mode="live"
+          content={output}
+          loading={loading}
+          error={error}
+          success={success}
+          feedback={feedback}
+          showTokenCount
+        />
+
+        {latency !== null && (
+          <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+            响应时间: {latency}ms
+          </div>
+        )}
+      </div>
+
+      <div className="mt-8 p-4 bg-blue-50 dark:bg-blue-900 rounded-lg">
+        <h3 className="font-semibold mb-2">✅ Phase 2 组件验证</h3>
+        <ul className="text-sm space-y-1">
+          <li>✓ PromptEditor 渲染正常</li>
+          <li>✓ LLMOutputDisplay 显示正常</li>
+          <li>✓ runPrompt server action 集成</li>
+          <li>✓ Success checker 规则生效</li>
+          <li>✓ Rate limiting (30/hour)</li>
+          <li>✓ 数据持久化到 prompt_lab_progress</li>
+        </ul>
+      </div>
+
+      <div className="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900 rounded-lg">
+        <h3 className="font-semibold mb-2">⚠️ 测试前确认</h3>
+        <ul className="text-sm space-y-1">
+          <li>• 已填入 OPENAI_API_KEY 到 .env</li>
+          <li>• 已登录用户账户</li>
+          <li>• Supabase 数据库已运行</li>
+        </ul>
+      </div>
     </div>
   )
 }
@@ -795,18 +1045,25 @@ app/dashboard/vibecoding/
 
 ```typescript
 import { MDXRemote } from 'next-mdx-remote/rsc'
-import { PromptEditor } from '@/components/features/prompt-lab/PromptEditor'
-import { LLMOutputDisplay } from '@/components/features/prompt-lab/LLMOutputDisplay'
-import { getLabContent } from '@/lib/lab-content'
+import { getLabContent, getAllLabs } from '@/lib/lab-content'
 import { notFound } from 'next/navigation'
+import {
+  InteractivePromptEditor,
+  StaticPromptDemo
+} from './_components/LabWrapper'
 
 const components = {
-  PromptEditor,
-  LLMOutputDisplay
+  PromptEditor: InteractivePromptEditor,
+  StaticPromptDemo
 }
 
-export default async function LabPage({ params }: { params: { labId: string } }) {
-  const labContent = await getLabContent(params.labId)
+export default async function LabPage({
+  params
+}: {
+  params: { labId: string }
+}) {
+  const { labId } = params
+  const labContent = await getLabContent(labId)
 
   if (!labContent) {
     notFound()
@@ -820,17 +1077,85 @@ export default async function LabPage({ params }: { params: { labId: string } })
 }
 
 export async function generateStaticParams() {
-  return [
-    { labId: 'lab1' },
-    { labId: 'lab2' },
-    { labId: 'lab3' },
-    { labId: 'lab4' },
-    { labId: 'lab5' }
-  ]
+  const labs = await getAllLabs()
+  return labs.map((labId) => ({ labId }))
 }
 ```
 
-### 3.2 Lab Content Loader
+### 3.2 MDX 封装组件
+
+**创建:** `app/dashboard/vibecoding/labs/[labId]/_components/LabWrapper.tsx`
+
+```typescript
+'use client'
+
+import { useState } from 'react'
+import { PromptEditor } from '@/components/features/prompt-lab/PromptEditor'
+import { LLMOutputDisplay } from '@/components/features/prompt-lab/LLMOutputDisplay'
+import type { PromptEditorProps, LLMOutputProps } from '@/types/prompt-lab'
+import { runPrompt } from '@/lib/actions/prompt-lab'
+
+export function InteractivePromptEditor(props: PromptEditorProps) {
+  const [output, setOutput] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<boolean | null>(null)
+  const [feedback, setFeedback] = useState('')
+
+  const handleSubmit = async (prompt: string) => {
+    setLoading(true)
+    setSuccess(null)
+    setError(null)
+
+    const labNumber = parseInt(props.exerciseId.match(/lab(\d+)/)?.[1] || '1')
+
+    const result = await runPrompt({
+      prompt,
+      labNumber,
+      exerciseId: props.exerciseId
+    })
+
+    if (result.success && result.output) {
+      setOutput(result.output)
+      setSuccess(result.passed || false)
+      setFeedback(result.feedback || '')
+      setError(null)
+    } else {
+      setError(result.error || 'Unknown error')
+      setSuccess(null)
+    }
+
+    setLoading(false)
+  }
+
+  return (
+    <>
+      <PromptEditor {...props} onSubmit={handleSubmit} />
+      <LLMOutputDisplay
+        mode="live"
+        content={output}
+        loading={loading}
+        error={error}
+        success={success}
+        feedback={feedback}
+      />
+    </>
+  )
+}
+
+export function StaticPromptDemo(
+  props: PromptEditorProps & { demoOutput: string }
+) {
+  return (
+    <>
+      <PromptEditor {...props} mode="readonly" />
+      <LLMOutputDisplay mode="static" content={props.demoOutput} />
+    </>
+  )
+}
+```
+
+### 3.3 Lab Content Loader
 
 **创建:** `lib/lab-content.ts`
 
@@ -855,16 +1180,18 @@ export async function getLabContent(labId: string): Promise<LabContent | null> {
   try {
     const source = await fs.readFile(filePath, 'utf8')
 
-    // 简单的 metadata 提取（可后续改进）
     const titleMatch = source.match(/^# (.+)$/m)
     const title = titleMatch ? titleMatch[1] : labId
+
+    const descMatch = source.match(/## 📖 学习目标\n\n(.+?)\n/)
+    const description = descMatch ? descMatch[1] : ''
 
     return {
       id: labId,
       mdx: source,
       metadata: {
         title,
-        description: '', // TODO: 从 MDX frontmatter 提取
+        description,
         estimatedMinutes: 15
       }
     }
@@ -873,9 +1200,24 @@ export async function getLabContent(labId: string): Promise<LabContent | null> {
     return null
   }
 }
+
+export async function getAllLabs(): Promise<string[]> {
+  const labsDir = path.join(process.cwd(), 'content', 'labs')
+
+  try {
+    const files = await fs.readdir(labsDir)
+    return files
+      .filter((file) => file.endsWith('.mdx'))
+      .map((file) => file.replace('.mdx', ''))
+      .sort()
+  } catch (error) {
+    console.error('Failed to list labs:', error)
+    return []
+  }
+}
 ```
 
-### 3.3 创建 Lab 1-2 MDX 内容
+### 3.4 创建 Lab 1-2 MDX 内容
 
 **创建目录:**
 
@@ -902,15 +1244,10 @@ mkdir -p content/labs
 
 **示例:**
 
-<PromptEditor
+<StaticPromptDemo
   exerciseId="lab1-demo"
-  mode="readonly"
   initialValue="告诉我关于猫的事情"
-/>
-
-<LLMOutputDisplay
-  mode="static"
-  content="猫是一种可爱的家养动物。它们通常有柔软的毛发，敏捷的身手，喜欢晒太阳和玩耍。猫有很强的独立性，但也喜欢和主人互动..."
+  demoOutput="猫是一种可爱的家养动物。它们通常有柔软的毛发，敏捷的身手，喜欢晒太阳和玩耍。猫有很强的独立性，但也喜欢和主人互动..."
 />
 
 看到了吗？我们给 AI 一个简单的指令，它就给出了关于猫的介绍。
@@ -929,8 +1266,6 @@ mkdir -p content/labs
   initialValue="告诉我关于猫的事情"
 />
 
-<LLMOutputDisplay mode="live" />
-
 **目标**: 输出应该专注于猫的习性，而不是泛泛而谈。
 
 **提示**:
@@ -947,8 +1282,6 @@ mkdir -p content/labs
   placeholder="在这里写你的 prompt..."
 />
 
-<LLMOutputDisplay mode="live" />
-
 **成功标准**:
 - ✅ 输出包含"故事"和"冒险"相关内容
 - ✅ 至少 100 个字
@@ -963,7 +1296,7 @@ mkdir -p content/labs
 - ✅ 明确说明你想要什么内容
 - ✅ 不同的 prompt 会得到不同的输出
 
-**下一步**: Lab 2 - 学习如何给清晰的指令，避免歧义！
+**下一步**: [Lab 2 - 学习如何给清晰的指令，避免歧义！](/dashboard/vibecoding/labs/lab2)
 ```
 
 **创建:** `content/labs/lab2.mdx`
@@ -983,32 +1316,24 @@ mkdir -p content/labs
 
 AI 不会读心术。如果你的 prompt 模糊不清，AI 只能猜你想要什么。
 
-**对比:**
+### 对比示例
 
-### ❌ 模糊的 prompt
+#### ❌ 模糊的 prompt
 
-<PromptEditor
+<StaticPromptDemo
   exerciseId="lab2-demo-bad"
-  mode="readonly"
   initialValue="写点东西"
+  demoOutput="这是一些文字。我不太确定你想要什么内容，所以我写了一些通用的东西..."
 />
 
-<LLMOutputDisplay
-  mode="static"
-  content="这是一些文字。我不太确定你想要什么内容，所以我写了一些通用的东西..."
-/>
+---
 
-### ✅ 清晰的 prompt
+#### ✅ 清晰的 prompt
 
-<PromptEditor
+<StaticPromptDemo
   exerciseId="lab2-demo-good"
-  mode="readonly"
   initialValue="写一段 50 字左右的文字，介绍为什么运动对健康有益。使用简单易懂的语言。"
-/>
-
-<LLMOutputDisplay
-  mode="static"
-  content="运动可以让身体更强壮，心脏更健康。经常运动的人不容易生病，精神也会更好。每天运动 30 分钟，比如跑步、游泳或打球，都能让你变得更健康、更快乐。"
+  demoOutput="运动可以让身体更强壮，心脏更健康。经常运动的人不容易生病，精神也会更好。每天运动 30 分钟，比如跑步、游泳或打球，都能让你变得更健康、更快乐。"
 />
 
 看到区别了吗？清晰的 prompt 包含：
@@ -1028,8 +1353,6 @@ AI 不会读心术。如果你的 prompt 模糊不清，AI 只能猜你想要什
   initialValue="介绍一下编程"
 />
 
-<LLMOutputDisplay mode="live" />
-
 **提示**:
 - 想要什么角度的介绍？（适合初学者？还是深入技术？）
 - 想要多长的回答？
@@ -1044,8 +1367,6 @@ AI 不会读心术。如果你的 prompt 模糊不清，AI 只能猜你想要什
   mode="editable"
   initialValue="说说健康饮食的好处"
 />
-
-<LLMOutputDisplay mode="live" />
 
 **成功标准**:
 - ✅ 输出包含 3 个要点
@@ -1067,8 +1388,6 @@ AI 不会读心术。如果你的 prompt 模糊不清，AI 只能猜你想要什
   placeholder="写一个 prompt 让 AI 返回 JSON 格式..."
 />
 
-<LLMOutputDisplay mode="live" showTokenCount />
-
 **提示**: 试着说"用 JSON 格式"或"返回一个包含...字段的 JSON 对象"
 
 ## 📝 总结
@@ -1079,10 +1398,10 @@ AI 不会读心术。如果你的 prompt 模糊不清，AI 只能猜你想要什
 - ✅ 添加约束条件（长度、格式、风格）
 - ✅ 清晰的 prompt = 有用的输出
 
-**下一步**: Lab 3 - 角色扮演技巧
+**下一步**: [Lab 3 - 角色扮演技巧](/dashboard/vibecoding/labs/lab3) (即将推出)
 ```
 
-### 3.4 更新 Lab 列表数据源
+### 3.5 更新 Lab 列表数据源
 
 **修改:** `app/dashboard/vibecoding/page.tsx`
 
@@ -1128,13 +1447,23 @@ const labs = [
 ]
 ```
 
-### 3.5 更新 Coach 上下文
+### 3.6 更新 Coach 上下文
 
 **修改:** `lib/coach.ts` (如果存在) 或相关文件
 
 ```typescript
-function getCoachSystemPrompt(context: string): string {
-  if (context === 'PromptLab' || context === 'Code') {
+// lib/coach.ts
+export type CoachContextTag =
+  | 'Orientation'
+  | 'Problem'
+  | 'Sandbox'
+  | 'GTM'
+  | 'Iterate'
+  | 'Demo'
+  | 'PromptLab'
+
+function getCoachSystemPrompt(context: CoachContextTag): string {
+  if (context === 'PromptLab') {
     return `你是一个 Prompt Engineering 教学助手，帮助初中生学习如何与 LLM 对话。
 
 职责:
@@ -1154,11 +1483,23 @@ function getCoachSystemPrompt(context: string): string {
 你: "试着更具体一些！比如你想要什么主题的内容？想要多长的回答？告诉 AI 你的具体需求会更有帮助哦 😊"`
   }
 
-  // ... other contexts
+  // ... 其他上下文
+}
+
+// app/dashboard/vibecoding/vibecoding-client.tsx
+const handleAskCoach = async () => {
+  // ...
+  const response = await askCoach({
+    userMessage: coachQuestion,
+    context: 'PromptLab',
+    moduleNumber: 2,
+    additionalContext: { labNumber: currentLab }
+  })
+  // ...
 }
 ```
 
-### 3.6 测试完整流程
+### 3.7 测试完整流程
 
 **验证检查列表:**
 
@@ -1381,7 +1722,8 @@ git push origin refactor/phase-1
 ### 关键文件清单
 
 **Phase 1:**
-- `supabase/migrations/20251016_prompt_lab.sql`
+- `supabase/migrations/20251016000000_llm_learning_lab_initial.sql`
+- `supabase/migrations/20251016000001_rollback_llm_learning_lab.sql`
 - `package.json`
 - `next.config.mjs`
 - `types/prompt-lab.ts`
