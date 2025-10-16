@@ -21,7 +21,8 @@
       "Bash(git branch:*)",
       "Bash(git push:*)",
       "Bash(npm uninstall:*)",
-      "Bash(if not exist \"supabase\\migrations\" mkdir \"supabase\\migrations\")"
+      "Bash(if not exist \"supabase\\migrations\" mkdir \"supabase\\migrations\")",
+      "Bash(node scripts/test-db.js:*)"
     ],
     "deny": [],
     "ask": []

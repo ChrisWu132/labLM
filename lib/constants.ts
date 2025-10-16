@@ -1,56 +1,56 @@
 // App-wide constants and configuration
 
-// Lab Configuration (5 Progressive Prompt Engineering Labs)
+// Lab Configuration (5 Progressive LLM Experiment Labs)
 export const LABS = [
   {
     number: 1,
-    title: "What is a Prompt?",
+    title: "AI Basics",
     path: "/dashboard/vibecoding?lab=1",
-    description: "Learn what prompts are and how to write basic instructions. See how AI understands your input.",
+    description: "Experiment with prompts and responses. Discover how LLMs understand instructions and what makes a good prompt.",
     duration: "15 min",
     icon: "compass",
     difficulty: "Beginner",
-    concepts: ["Prompt Structure", "Basic Instructions", "AI Interaction"],
+    concepts: ["Prompts & Responses", "AI Understanding", "Basic Interaction"],
   },
   {
     number: 2,
-    title: "Clear Instructions",
+    title: "AI Hallucinations",
     path: "/dashboard/vibecoding?lab=2",
-    description: "Master the art of being specific. Learn how to avoid confusion and get exactly what you want from AI.",
+    description: "Discover when AI makes things up! Experiment with hallucinations and learn how to spot fake information.",
     duration: "20 min",
     icon: "code",
     difficulty: "Beginner",
-    concepts: ["Specificity", "Context", "Clear Communication"],
+    concepts: ["Hallucinations", "Fact-Checking", "AI Limitations"],
   },
   {
     number: 3,
-    title: "Role Playing",
+    title: "Role & Personality",
     path: "/dashboard/vibecoding?lab=3",
-    description: "Discover how to make AI act like different characters. See how roles change AI's responses.",
+    description: "Make AI act like different characters. Explore how roles and tone change AI's behavior and responses.",
     duration: "20 min",
     icon: "award",
     difficulty: "Intermediate",
-    concepts: ["System Prompts", "Character Roles", "Output Style"],
+    concepts: ["Roles & Characters", "Personality", "Response Style"],
   },
   {
     number: 4,
-    title: "Guided Thinking",
+    title: "AI Reasoning",
     path: "/dashboard/vibecoding?lab=4",
-    description: "Learn to guide AI through step-by-step reasoning. Get detailed explanations for complex problems.",
+    description: "Guide AI to think step-by-step. Experiment with chain-of-thought and see how AI solves complex problems.",
     duration: "25 min",
     icon: "code",
     difficulty: "Intermediate",
-    concepts: ["Chain-of-Thought", "Step-by-Step", "Deep Analysis"],
+    concepts: ["Step-by-Step Thinking", "Problem Solving", "AI Logic"],
   },
   {
     number: 5,
-    title: "Creative Challenge",
+    title: "Bias & Ethics",
     path: "/dashboard/vibecoding?lab=5",
-    description: "Put all your skills together! Solve real scenarios and create your own AI-powered solutions.",
+    description: "Explore AI biases and ethical concerns. Experiment with fairness and discover what AI should and shouldn't do.",
     duration: "30 min",
     icon: "award",
     difficulty: "Advanced",
-    concepts: ["Real Applications", "Creative Projects", "Problem Solving"],
+    concepts: ["AI Bias", "Ethics", "Responsible AI"],
   },
 ] as const
 
@@ -104,72 +104,72 @@ export const ORIENTATION_CHECKLIST = [
 export const LEARNING_JOURNEY = [
   {
     step: 1,
-    title: "Prompt Basics",
+    title: "AI Basics",
     description:
-      "Learn what prompts are and how AI understands instructions. Start with simple commands.",
+      "Experiment with prompts and responses. Discover how LLMs understand instructions and generate text.",
   },
   {
     step: 2,
-    title: "Clear Communication",
-    description: "Master being specific and clear. Learn to get exactly what you want from AI.",
+    title: "Hallucinations & Limits",
+    description: "Discover when AI makes things up! Learn to spot fake information and understand AI's limitations.",
   },
   {
     step: 3,
-    title: "Advanced Techniques",
-    description: "Discover role-playing and step-by-step reasoning to unlock AI's full potential.",
+    title: "Roles & Reasoning",
+    description: "Explore how AI takes on different personalities and thinks step-by-step through problems.",
   },
   {
     step: 4,
-    title: "Real Applications",
-    description: "Apply your skills to real scenarios like homework help, creative writing, and problem solving.",
+    title: "Bias & Ethics",
+    description: "Investigate AI biases and ethical concerns. Learn what AI should and shouldn't do.",
   },
   {
     step: 5,
-    title: "Create & Share",
-    description: "Complete creative challenges and share your best prompts with the community.",
+    title: "Responsible AI Use",
+    description: "Apply what you've learned to use AI safely and responsibly in real situations.",
   },
 ] as const
 
 // FAQs
 export const FAQS = [
   {
-    question: "Do I need any experience to start?",
+    question: "Who is this for?",
     answer:
-      "Absolutely not! LLM Learning Lab is designed for complete beginners. If you've ever used ChatGPT or similar AI tools, you already have the basics. We'll teach you how to use them like a pro!",
+      "LLM Learning Lab is designed for elementary and middle school students (grades 5-9). If you're curious about how AI works and want to experiment, this is for you! No coding or tech background needed.",
   },
   {
-    question: "How long does it take to complete?",
+    question: "How long does it take?",
     answer:
-      "All 5 labs take about 2 hours total. Lab 1 is 15 minutes, Labs 2-3 are 20 minutes each, Lab 4 is 25 minutes, and Lab 5 is 30 minutes. You can pause anytime and continue later—your progress is saved!",
+      "All 5 experimental labs take about 2 hours total. Each lab is 15-30 minutes. You can pause anytime and continue later—your progress is automatically saved!",
   },
   {
-    question: "What will I actually learn?",
+    question: "What will I learn?",
     answer:
-      "You'll learn prompt engineering—the art of communicating effectively with AI. You'll discover how to write clear instructions, guide AI's thinking, and get exactly the results you want. These are essential skills for the AI age!",
+      "You'll discover how LLMs really work through hands-on experiments! Learn about hallucinations (when AI makes things up), biases, reasoning, and how to spot AI's mistakes. Understand what AI can and can't do.",
   },
   {
-    question: "Is this suitable for middle school students?",
+    question: "Why learn about AI hallucinations?",
     answer:
-      "Yes! The course is specifically designed for 12-15 year olds. The content is age-appropriate, engaging, and uses examples relevant to students. No coding required—just curiosity and creativity!",
+      "Understanding AI's limitations is just as important as knowing its capabilities! You'll learn to spot when AI is guessing or making up information, which is crucial for using AI safely and responsibly.",
   },
   {
-    question: "What if I get stuck?",
+    question: "Is this safe for kids?",
     answer:
-      "Each lab includes hints and examples. You can also ask our AI coach for help anytime. Plus, every exercise shows you what success looks like, so you'll know when you've got it right!",
+      "Yes! All content is age-appropriate and educational. We teach critical thinking about AI, including its limitations and ethical concerns. Students learn to use AI responsibly and question its outputs.",
   },
   {
-    question: "What can I do after completing all labs?",
+    question: "What makes this different from other AI courses?",
     answer:
-      "You'll be able to use AI tools like ChatGPT, Claude, and others much more effectively! You can apply these skills to homework, creative projects, learning new topics, or even helping with everyday tasks. Prompt engineering is a superpower in the AI age!",
+      "We focus on understanding HOW LLMs work, not just HOW TO USE them. Through experiments, students discover AI behaviors like hallucinations, biases, and reasoning patterns. It's science education for the AI age!",
   },
 ] as const
 
 // Proof Points
 export const PROOF_POINTS = [
+  { stat: "5 Experiments", label: "Hands-On Labs" },
+  { stat: "Grades 5-9", label: "Perfect For" },
   { stat: "2 Hours", label: "Complete Course" },
-  { stat: "5 Labs", label: "Hands-On Practice" },
-  { stat: "Ages 12-15", label: "Perfect For" },
-  { stat: "100%", label: "Interactive" },
+  { stat: "Zero Coding", label: "Required" },
 ] as const
 
 // Pricing Configuration
@@ -177,16 +177,16 @@ export const PRICING = {
   price: 0,
   currency: "$",
   period: "free",
-  description: "All 5 labs are completely free. Start learning prompt engineering today!",
+  description: "All 5 experimental labs are completely free. Start exploring AI today!",
   features: [
-    "5 complete labs (2 hours total)",
-    "Interactive prompt exercises",
-    "Real-time AI responses",
-    "Instant success feedback",
-    "Progress tracking",
-    "AI coach assistance",
-    "No coding required",
-    "Perfect for ages 12-15",
+    "5 hands-on experiments (2 hours total)",
+    "Explore AI hallucinations & limitations",
+    "Discover bias & ethical concerns",
+    "Learn how AI reasons & thinks",
+    "Real-time AI interactions",
+    "Progress tracking & achievements",
+    "AI coach for guidance",
+    "Perfect for grades 5-9",
   ],
   guarantee: "100% free. No credit card required.",
 } as const
@@ -194,18 +194,18 @@ export const PRICING = {
 // Sample Learning Outcomes
 export const SAMPLE_PROJECTS = [
   {
-    title: "Master Basic Prompts",
-    description: "Learn the fundamentals of prompt engineering. Discover how to write clear instructions that AI understands perfectly.",
+    title: "Discover AI Behaviors",
+    description: "Experiment with prompts and responses. Learn about hallucinations, when AI makes mistakes, and how to spot fake information.",
     gradient: "from-primary/20 to-teal/20",
   },
   {
-    title: "Unlock AI's Potential",
-    description: "Guide AI to think step-by-step and take on different roles. See how advanced techniques dramatically improve results.",
+    title: "Understand AI Reasoning",
+    description: "See how AI thinks step-by-step. Explore different personalities, roles, and how context changes AI's behavior.",
     gradient: "from-teal/20 to-amber/20",
   },
   {
-    title: "Solve Real Problems",
-    description: "Apply your prompt skills to homework, creative projects, and everyday challenges. Turn AI into your personal assistant!",
+    title: "Explore Ethics & Bias",
+    description: "Investigate AI biases and ethical concerns. Learn what AI should and shouldn't do, and how to use it responsibly.",
     gradient: "from-amber/20 to-primary/20",
   },
 ] as const
@@ -214,14 +214,14 @@ export const SAMPLE_PROJECTS = [
 export const COPY = {
   app: {
     name: "LLM Learning Lab",
-    tagline: "Master AI through hands-on practice",
+    tagline: "Hands-on experiments to understand how AI really works",
   },
   hero: {
-    badge: "Learn by Doing",
-    headline: "Learn to Talk to AI.",
-    subheadline: "Master Prompt Engineering.",
+    badge: "For Elementary & Middle School Students",
+    headline: "Discover How AI Thinks.",
+    subheadline: "Experiment. Learn. Understand.",
     description:
-      "2 hours to master the art of communicating with AI. Interactive labs designed for middle school students. Zero coding required.",
+      "Hands-on experiments to explore LLM behaviors—prompts, responses, hallucinations, and more. Designed for grades 5-9. No coding required.",
   },
   cta: {
     primary: "Start Learning Free",
@@ -231,17 +231,17 @@ export const COPY = {
   },
   sections: {
     modules: {
-      title: "5 Labs. Complete Mastery.",
+      title: "5 Experiments. Real Understanding.",
       description:
-        "Learn prompt engineering step-by-step. From basic instructions to advanced techniques—write better prompts, get better results.",
+        "Discover how LLMs work through hands-on experiments. Explore prompts, hallucinations, biases, and AI reasoning step-by-step.",
     },
     proof: {
-      title: "2 Hours. Zero to Expert.",
-      description: "Middle school students master AI communication through interactive practice. No coding required.",
+      title: "Learn By Experimenting.",
+      description: "Elementary and middle school students explore AI behaviors through interactive experiments. See what AI can and can't do.",
     },
     pricing: {
-      title: "Start Learning Free",
-      description: "All 5 labs are completely free. No hidden costs, no credit card needed.",
+      title: "Free For All Students",
+      description: "All 5 experimental labs are completely free. Educational access for everyone.",
       badge: "100% Free",
     },
     faq: {
@@ -249,33 +249,33 @@ export const COPY = {
       description: "Everything you need to know about LLM Learning Lab",
     },
     finalCta: {
-      title: "Ready to Master AI?",
+      title: "Ready to Explore AI?",
       description:
-        "Join students learning to communicate with AI like pros. Start your free journey today.",
+        "Join students discovering how LLMs really work through hands-on experiments. Start free today.",
     },
   },
   orientation: {
     welcome: {
       title: "Welcome Video",
-      description: "Watch this 3-minute introduction to prompt engineering",
+      description: "Watch this 3-minute introduction to LLM experiments",
       ctaText: "Play Video",
       infoText:
-        "Learn what prompt engineering is, why it matters, and how you'll master it through hands-on practice.",
+        "Discover how you'll explore AI through hands-on experiments. Learn about hallucinations, biases, and how AI really works!",
     },
     checklist: {
       title: "Setup Checklist",
-      description: "Complete these steps to get ready for the labs",
+      description: "Complete these steps to get ready for your experiments",
     },
     journey: {
-      title: "Your Learning Journey",
-      description: "Here's what you'll master in the next 2 hours",
+      title: "Your Experiment Journey",
+      description: "Here's what you'll discover in the next 2 hours",
     },
     nextSteps: {
-      title: "Ready to Start?",
+      title: "Ready to Experiment?",
       descriptionComplete:
-        "Great! You've completed the setup. Let's dive into Lab 1: What is a Prompt?",
-      descriptionIncomplete: "Complete the checklist above to unlock the labs",
-      ctaText: "Start Lab 1",
+        "Great! You've completed the setup. Let's start Experiment 1: AI Basics!",
+      descriptionIncomplete: "Complete the checklist above to unlock the experiments",
+      ctaText: "Start Experiment 1",
     },
   },
   lab: {
