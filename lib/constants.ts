@@ -133,43 +133,43 @@ export const LEARNING_JOURNEY = [
 // FAQs
 export const FAQS = [
   {
-    question: "Do I need any coding experience?",
+    question: "Do I need any experience to start?",
     answer:
-      "Absolutely not! VibeCoding Lab is designed for complete beginners. You watch AI code—you don't write code yourself. If you can watch a video and understand English, you can learn.",
+      "Absolutely not! LLM Learning Lab is designed for complete beginners. If you've ever used ChatGPT or similar AI tools, you already have the basics. We'll teach you how to use them like a pro!",
   },
   {
-    question: "How long does it take?",
+    question: "How long does it take to complete?",
     answer:
-      "All 3 labs take about 45 minutes total. Lab 1 is 10 minutes, Lab 2 is 15 minutes, and Lab 3 is 20 minutes. You can pause anytime and continue later.",
+      "All 5 labs take about 2 hours total. Lab 1 is 15 minutes, Labs 2-3 are 20 minutes each, Lab 4 is 25 minutes, and Lab 5 is 30 minutes. You can pause anytime and continue later—your progress is saved!",
   },
   {
     question: "What will I actually learn?",
     answer:
-      "You'll understand how web applications work: frontend (what users see), JavaScript (interactivity), backend (servers), and APIs (data). You won't be a programmer yet, but you'll understand how programming works.",
+      "You'll learn prompt engineering—the art of communicating effectively with AI. You'll discover how to write clear instructions, guide AI's thinking, and get exactly the results you want. These are essential skills for the AI age!",
   },
   {
-    question: "Will I write any code myself?",
+    question: "Is this suitable for middle school students?",
     answer:
-      "No! In VibeCoding Lab, you only observe. The AI codes while explaining what it's doing. It's like watching a chef cook before you try cooking yourself. This builds understanding without the frustration of syntax errors.",
+      "Yes! The course is specifically designed for 12-15 year olds. The content is age-appropriate, engaging, and uses examples relevant to students. No coding required—just curiosity and creativity!",
   },
   {
-    question: "What if I don't understand something?",
+    question: "What if I get stuck?",
     answer:
-      "Each lab has an 'Explain Code' button that breaks down what the AI built in plain English. Plus, you can replay any lab as many times as you want.",
+      "Each lab includes hints and examples. You can also ask our AI coach for help anytime. Plus, every exercise shows you what success looks like, so you'll know when you've got it right!",
   },
   {
-    question: "What happens after I finish all 3 labs?",
+    question: "What can I do after completing all labs?",
     answer:
-      "You'll have a solid understanding of how web applications work! Many learners continue with traditional coding courses (Codecademy, freeCodeCamp) with much more confidence, or use this knowledge to better communicate with developers.",
+      "You'll be able to use AI tools like ChatGPT, Claude, and others much more effectively! You can apply these skills to homework, creative projects, learning new topics, or even helping with everyday tasks. Prompt engineering is a superpower in the AI age!",
   },
 ] as const
 
 // Proof Points
 export const PROOF_POINTS = [
-  { stat: "45 min", label: "Total Learning Time" },
-  { stat: "0", label: "Coding Required" },
-  { stat: "3 Labs", label: "Complete Curriculum" },
-  { stat: "100%", label: "Browser-Based" },
+  { stat: "2 Hours", label: "Complete Course" },
+  { stat: "5 Labs", label: "Hands-On Practice" },
+  { stat: "Ages 12-15", label: "Perfect For" },
+  { stat: "100%", label: "Interactive" },
 ] as const
 
 // Pricing Configuration
@@ -177,34 +177,35 @@ export const PRICING = {
   price: 0,
   currency: "$",
   period: "free",
-  description: "Lab 1 is completely free. Unlock all 3 labs to complete your learning.",
+  description: "All 5 labs are completely free. Start learning prompt engineering today!",
   features: [
-    "Lab 1: Personal Landing Page (Free)",
-    "Lab 2: Interactive Counter App",
-    "Lab 3: Weather Dashboard (Full-Stack)",
-    "Watch AI code in real-time",
-    "Learn by observation, not typing",
-    "Browser-based (no installation)",
-    "Beginner-friendly explanations",
+    "5 complete labs (2 hours total)",
+    "Interactive prompt exercises",
+    "Real-time AI responses",
+    "Instant success feedback",
+    "Progress tracking",
+    "AI coach assistance",
+    "No coding required",
+    "Perfect for ages 12-15",
   ],
-  guarantee: "Try Lab 1 free. No credit card required.",
+  guarantee: "100% free. No credit card required.",
 } as const
 
-// Sample Learning Outcomes (replacing Sample Projects)
+// Sample Learning Outcomes
 export const SAMPLE_PROJECTS = [
   {
-    title: "Understand Frontend",
-    description: "Learn how HTML and CSS create what users see. Watch AI build a personal landing page from scratch.",
+    title: "Master Basic Prompts",
+    description: "Learn the fundamentals of prompt engineering. Discover how to write clear instructions that AI understands perfectly.",
     gradient: "from-primary/20 to-teal/20",
   },
   {
-    title: "Grasp Interactivity",
-    description: "See how JavaScript makes websites respond to clicks. Observe AI add behavior to static pages.",
+    title: "Unlock AI's Potential",
+    description: "Guide AI to think step-by-step and take on different roles. See how advanced techniques dramatically improve results.",
     gradient: "from-teal/20 to-amber/20",
   },
   {
-    title: "Master Full-Stack",
-    description: "Understand how frontend and backend work together. Watch AI build a complete web application with APIs.",
+    title: "Solve Real Problems",
+    description: "Apply your prompt skills to homework, creative projects, and everyday challenges. Turn AI into your personal assistant!",
     gradient: "from-amber/20 to-primary/20",
   },
 ] as const
@@ -212,79 +213,79 @@ export const SAMPLE_PROJECTS = [
 // Copy Text
 export const COPY = {
   app: {
-    name: "VibeCoding Lab",
-    tagline: "Learn coding by watching, not by typing",
+    name: "LLM Learning Lab",
+    tagline: "Master AI through hands-on practice",
   },
   hero: {
-    badge: "Build by Doing",
-    headline: "Watch AI Code.",
-    subheadline: "Understand Full-Stack.",
+    badge: "Learn by Doing",
+    headline: "Learn to Talk to AI.",
+    subheadline: "Master Prompt Engineering.",
     description:
-      "45 minutes to understand how real apps work. Watch an AI expert build from frontend to backend. Zero experience needed.",
+      "2 hours to master the art of communicating with AI. Interactive labs designed for middle school students. Zero coding required.",
   },
   cta: {
-    primary: "Try it Now",
-    secondary: "Start Lab 1",
+    primary: "Start Learning Free",
+    secondary: "Begin Your Journey",
     view: "View Labs",
-    enroll: "Start Building",
+    enroll: "Start Lab 1",
   },
   sections: {
     modules: {
-      title: "3 Labs. Full Understanding.",
+      title: "5 Labs. Complete Mastery.",
       description:
-        "Watch AI code in real-time. HTML, CSS, JavaScript, backend, APIs—follow the real dev workflow, step by step.",
+        "Learn prompt engineering step-by-step. From basic instructions to advanced techniques—write better prompts, get better results.",
     },
     proof: {
-      title: "45 Minutes. Zero to Understanding.",
-      description: "Complete beginners gain real technical understanding by watching AI build. No typing required.",
+      title: "2 Hours. Zero to Expert.",
+      description: "Middle school students master AI communication through interactive practice. No coding required.",
     },
     pricing: {
       title: "Start Learning Free",
-      description: "Lab 1 is free. Unlock all 3 Labs to complete your journey.",
-      badge: "Free to Try",
+      description: "All 5 labs are completely free. No hidden costs, no credit card needed.",
+      badge: "100% Free",
     },
     faq: {
       title: "Common Questions",
-      description: "Everything you need to know about VibeCoding Lab",
+      description: "Everything you need to know about LLM Learning Lab",
     },
     finalCta: {
-      title: "Ready to Understand Code?",
+      title: "Ready to Master AI?",
       description:
-        "Join beginners learning by watching, not struggling. Start Lab 1 free today.",
+        "Join students learning to communicate with AI like pros. Start your free journey today.",
     },
   },
   orientation: {
     welcome: {
       title: "Welcome Video",
-      description: "Watch this 3-minute introduction to the course",
+      description: "Watch this 3-minute introduction to prompt engineering",
       ctaText: "Play Video",
       infoText:
-        "Learn about the course structure, meet your AI coach, and see what you'll build by the end.",
+        "Learn what prompt engineering is, why it matters, and how you'll master it through hands-on practice.",
     },
     checklist: {
       title: "Setup Checklist",
-      description: "Complete these steps to get ready for the course",
+      description: "Complete these steps to get ready for the labs",
     },
     journey: {
       title: "Your Learning Journey",
-      description: "Here's what you'll accomplish in the next few weeks",
+      description: "Here's what you'll master in the next 2 hours",
     },
     nextSteps: {
       title: "Ready to Start?",
       descriptionComplete:
-        "Great! You've completed the setup. Let's dive into Problem Discovery.",
-      descriptionIncomplete: "Complete the checklist above to unlock the next module",
-      ctaText: "Start Module 1",
+        "Great! You've completed the setup. Let's dive into Lab 1: What is a Prompt?",
+      descriptionIncomplete: "Complete the checklist above to unlock the labs",
+      ctaText: "Start Lab 1",
     },
   },
   lab: {
-    objectiveLabel: "Objective:",
+    objectiveLabel: "Learning Goal:",
     startText: "Start Lab",
     reviewText: "Review",
     completeText: "Mark Complete",
   },
   footer: {
-    copyright: "© 2025 VibeCoding Lab. All rights reserved.",
+    copyright: "© 2025 LLM Learning Lab. All rights reserved.",
   },
 } as const
 
@@ -292,7 +293,7 @@ export const COPY = {
 export const VIDEO_CONFIG = {
   orientation: {
     url: "", // To be configured
-    title: "Welcome to AI Startup Course",
+    title: "Welcome to LLM Learning Lab",
     duration: 180, // seconds
     thumbnail: "", // To be configured
   },
