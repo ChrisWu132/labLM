@@ -1,56 +1,66 @@
 // App-wide constants and configuration
 
-// Lab Configuration (5 Progressive LLM Experiment Labs)
+// Lab Configuration (6 Progressive LLM Learning Labs)
 export const LABS = [
   {
     number: 1,
-    title: "AI Basics",
-    path: "/dashboard/vibecoding?lab=1",
-    description: "Experiment with prompts and responses. Discover how LLMs understand instructions and what makes a good prompt.",
-    duration: "15 min",
+    title: "Meet Your AI Friend",
+    path: "/dashboard/vibecoding/labs/lab1",
+    description: "Understand what LLMs are and how they work. Learn the difference between AI, LLMs, and search engines. Write your first prompts.",
+    duration: "20 min",
     icon: "compass",
     difficulty: "Beginner",
-    concepts: ["Prompts & Responses", "AI Understanding", "Basic Interaction"],
+    concepts: ["What are LLMs", "First Conversation", "Clear Communication"],
   },
   {
     number: 2,
-    title: "AI Hallucinations",
-    path: "/dashboard/vibecoding?lab=2",
-    description: "Discover when AI makes things up! Experiment with hallucinations and learn how to spot fake information.",
-    duration: "20 min",
+    title: "How AI Gets Smart",
+    path: "/dashboard/vibecoding/labs/lab2",
+    description: "Learn how LLMs learn from training data and discover knowledge boundaries. Master clear communication techniques.",
+    duration: "25 min",
     icon: "code",
     difficulty: "Beginner",
-    concepts: ["Hallucinations", "Fact-Checking", "AI Limitations"],
+    concepts: ["Training Process", "Knowledge Cutoff", "Details & Constraints"],
   },
   {
     number: 3,
-    title: "Role & Personality",
-    path: "/dashboard/vibecoding?lab=3",
-    description: "Make AI act like different characters. Explore how roles and tone change AI's behavior and responses.",
-    duration: "20 min",
+    title: "AI's Thinking Process",
+    path: "/dashboard/vibecoding/labs/lab3",
+    description: "Understand word-by-word generation and tokens. Master role-playing techniques to control AI's personality.",
+    duration: "25 min",
     icon: "award",
     difficulty: "Intermediate",
-    concepts: ["Roles & Characters", "Personality", "Response Style"],
+    concepts: ["Token Generation", "Context Role", "Role-Playing"],
   },
   {
     number: 4,
-    title: "AI Reasoning",
-    path: "/dashboard/vibecoding?lab=4",
-    description: "Guide AI to think step-by-step. Experiment with chain-of-thought and see how AI solves complex problems.",
-    duration: "25 min",
+    title: "AI's Capabilities & Limits",
+    path: "/dashboard/vibecoding/labs/lab4",
+    description: "Learn what AI excels at and struggles with. Recognize hallucinations and master Chain-of-Thought reasoning.",
+    duration: "30 min",
     icon: "code",
     difficulty: "Intermediate",
-    concepts: ["Step-by-Step Thinking", "Problem Solving", "AI Logic"],
+    concepts: ["Strengths & Weaknesses", "Hallucinations", "Step-by-Step Thinking"],
   },
   {
     number: 5,
-    title: "Bias & Ethics",
-    path: "/dashboard/vibecoding?lab=5",
-    description: "Explore AI biases and ethical concerns. Experiment with fairness and discover what AI should and shouldn't do.",
+    title: "Responsible AI Use & Mastery",
+    path: "/dashboard/vibecoding/labs/lab5",
+    description: "Learn AI ethics and academic integrity. Apply all techniques in real-world scenarios as a responsible AI user.",
     duration: "30 min",
     icon: "award",
     difficulty: "Advanced",
-    concepts: ["AI Bias", "Ethics", "Responsible AI"],
+    concepts: ["Ethics & Privacy", "Academic Integrity", "Comprehensive Application"],
+  },
+  {
+    number: 6,
+    title: "AI Workflow Builder",
+    path: "/dashboard/vibecoding/labs/lab6",
+    description: "Build complex workflows by chaining AI steps. Learn problem decomposition and systems thinking (Advanced Capstone).",
+    duration: "60 min",
+    icon: "code",
+    difficulty: "Advanced",
+    concepts: ["Workflow Design", "Problem Decomposition", "AI Agents"],
   },
 ] as const
 
@@ -58,9 +68,9 @@ export const LABS = [
 export const MODULES = [
   {
     number: 0,
-    title: "Orientation",
+    title: "Getting Started",
     path: "/dashboard/orientation",
-    description: "Quick introduction to get started with LLM Learning Lab",
+    description: "Welcome! Learn what you'll discover in this AI literacy course",
     duration: "5 min",
     icon: "compass",
   },
@@ -68,8 +78,8 @@ export const MODULES = [
     number: 1,
     title: "LLM Learning Lab",
     path: "/dashboard/vibecoding",
-    description: "Complete 5 progressive labs and master the art of prompt engineering",
-    duration: "2 hours",
+    description: "Complete 6 progressive labs to understand AI and become a responsible AI user",
+    duration: "3.2 hours",
     icon: "code",
   },
 ] as const
@@ -104,29 +114,34 @@ export const ORIENTATION_CHECKLIST = [
 export const LEARNING_JOURNEY = [
   {
     step: 1,
-    title: "AI Basics",
+    title: "Meet Your AI Friend",
     description:
-      "Experiment with prompts and responses. Discover how LLMs understand instructions and generate text.",
+      "Understand what LLMs are, how they work, and learn the importance of clear communication with AI.",
   },
   {
     step: 2,
-    title: "Hallucinations & Limits",
-    description: "Discover when AI makes things up! Learn to spot fake information and understand AI's limitations.",
+    title: "How AI Gets Smart",
+    description: "Discover how LLMs learn from training data, their knowledge boundaries, and master clear prompts.",
   },
   {
     step: 3,
-    title: "Roles & Reasoning",
-    description: "Explore how AI takes on different personalities and thinks step-by-step through problems.",
+    title: "AI's Thinking Process",
+    description: "Learn about token generation and context. Master role-playing to control AI's personality and style.",
   },
   {
     step: 4,
-    title: "Bias & Ethics",
-    description: "Investigate AI biases and ethical concerns. Learn what AI should and shouldn't do.",
+    title: "AI's Capabilities & Limits",
+    description: "Understand what AI can and can't do. Recognize hallucinations and guide AI with Chain-of-Thought.",
   },
   {
     step: 5,
     title: "Responsible AI Use",
-    description: "Apply what you've learned to use AI safely and responsibly in real situations.",
+    description: "Learn AI ethics, academic integrity, and apply all skills in real-world scenarios responsibly.",
+  },
+  {
+    step: 6,
+    title: "AI Workflow Builder (Advanced)",
+    description: "Build complex AI workflows. Master problem decomposition and systems thinking as a capstone project.",
   },
 ] as const
 
@@ -389,26 +404,26 @@ export const COPY = {
   },
   orientation: {
     welcome: {
-      title: "Welcome Video",
-      description: "Watch this 3-minute introduction to LLM experiments",
-      ctaText: "Play Video",
+      title: "Welcome to LLM Learning Lab!",
+      description: "Your journey to understanding AI starts here",
+      ctaText: "Let's Begin",
       infoText:
-        "Discover how you'll explore AI through hands-on experiments. Learn about hallucinations, biases, and how AI really works!",
+        "You'll learn what AI is, how it works, when to trust it, and how to use it responsibly. Through 6 hands-on labs, you'll become an AI-literate learner ready for the future!",
     },
     checklist: {
-      title: "Setup Checklist",
-      description: "Complete these steps to get ready for your experiments",
+      title: "Quick Setup",
+      description: "Everything you need to start learning",
     },
     journey: {
-      title: "Your Experiment Journey",
-      description: "Here's what you'll discover in the next 2 hours",
+      title: "Your Learning Path",
+      description: "Here's what you'll master in the next 3 hours",
     },
     nextSteps: {
-      title: "Ready to Experiment?",
+      title: "Ready to Start?",
       descriptionComplete:
-        "Great! You've completed the setup. Let's start Experiment 1: AI Basics!",
-      descriptionIncomplete: "Complete the checklist above to unlock the experiments",
-      ctaText: "Start Experiment 1",
+        "Perfect! You're all set. Let's dive into Lab 1: Meet Your AI Friend!",
+      descriptionIncomplete: "Review the learning path above to see what's ahead",
+      ctaText: "Start Lab 1",
     },
   },
   lab: {

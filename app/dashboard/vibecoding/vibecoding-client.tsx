@@ -21,7 +21,7 @@ export function VibeCodingClient() {
           <div>
             <h3 className="text-2xl font-bold mb-2">Welcome to the Prompt Engineering Learning Platform!</h3>
             <p className="text-muted-foreground">
-              Through 5 hands-on labs, you will learn how to effectively communicate with AI and write high-quality prompts.
+              Through 6 hands-on labs, you will learn how to effectively communicate with AI and write high-quality prompts.
             </p>
           </div>
 
@@ -33,14 +33,15 @@ export function VibeCodingClient() {
               <li>✓ Master role-playing and context-setting techniques</li>
               <li>✓ Use Chain-of-Thought to guide AI reasoning</li>
               <li>✓ Apply comprehensively to real scenarios</li>
+              <li>✓ Build complex AI workflows by chaining steps together</li>
             </ul>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="p-4 border rounded-lg">
               <h5 className="font-semibold mb-2">⏱️ Duration</h5>
-              <p className="text-2xl font-bold text-primary">~2 hours</p>
-              <p className="text-xs text-muted-foreground mt-1">Average 15-25 minutes per lab</p>
+              <p className="text-2xl font-bold text-primary">~3 hours</p>
+              <p className="text-xs text-muted-foreground mt-1">Average 15-60 minutes per lab</p>
             </div>
             <div className="p-4 border rounded-lg">
               <h5 className="font-semibold mb-2">📊 Difficulty Level</h5>

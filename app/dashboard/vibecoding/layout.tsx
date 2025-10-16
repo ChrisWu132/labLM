@@ -20,33 +20,39 @@ interface Lab {
 const labs: Lab[] = [
   {
     number: 1,
-    title: "Lab 1: What is a Prompt",
-    description: "Understand prompt basics, learn to write basic instructions",
+    title: "Meet Your AI Friend",
+    description: "Understand what LLMs are and how they work",
     path: "/dashboard/vibecoding/labs/lab1",
   },
   {
     number: 2,
-    title: "Lab 2: How to Give Clear Instructions",
-    description: "Learn specific expression, avoid ambiguity",
+    title: "How AI Gets Smart",
+    description: "Learn how LLMs learn and master clear prompts",
     path: "/dashboard/vibecoding/labs/lab2",
   },
   {
     number: 3,
-    title: "Lab 3: Role-Playing Techniques",
-    description: "Have AI play different roles, get different style outputs",
+    title: "AI's Thinking Process",
+    description: "Understand generation and master role-playing",
     path: "/dashboard/vibecoding/labs/lab3",
   },
   {
     number: 4,
-    title: "Lab 4: Guided Reasoning",
-    description: "Use Chain-of-Thought, have AI reason step-by-step",
+    title: "AI's Capabilities & Limits",
+    description: "Learn AI's strengths/weaknesses and Chain-of-Thought",
     path: "/dashboard/vibecoding/labs/lab4",
   },
   {
     number: 5,
-    title: "Lab 5: Comprehensive Application Challenge",
-    description: "Apply all techniques, complete real scenarios",
+    title: "Responsible AI Use",
+    description: "Learn ethics and apply all skills responsibly",
     path: "/dashboard/vibecoding/labs/lab5",
+  },
+  {
+    number: 6,
+    title: "AI Workflow Builder",
+    description: "Build complex workflows (Advanced Capstone)",
+    path: "/dashboard/vibecoding/labs/lab6",
   },
 ]
 
@@ -190,7 +196,7 @@ export default function VibeCodingLayout({ children }: { children: React.ReactNo
         {/* Labs Section */}
         <div className="flex-1 overflow-y-auto p-2">
           {!sidebarCollapsed && (
-            <h2 className="text-xs font-semibold mb-2 text-muted-foreground uppercase tracking-wide px-2">Coding Labs</h2>
+            <h2 className="text-xs font-semibold mb-2 text-muted-foreground uppercase tracking-wide px-2">Learning Labs</h2>
           )}
           <div className="space-y-2">
             {labs.map((lab) => (

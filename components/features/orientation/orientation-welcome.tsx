@@ -1,147 +1,106 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Sparkles, Bot, Rocket, Users } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { Card } from "@/components/ui/card"
+import { Sparkles, Brain, Target, Shield, Rocket } from "lucide-react"
+import { LEARNING_JOURNEY } from "@/lib/constants"
 
 interface OrientationWelcomeProps {
   userName: string
   onComplete?: () => void
 }
 
-const messages = [
-  {
-    id: 1,
-    icon: Sparkles,
-    title: (userName: string) => `Welcome, ${userName}!`,
-    description: "You're joining a community of learners\ndiscovering coding through AI.",
-    duration: 3000,
-  },
-  {
-    id: 2,
-    icon: Bot,
-    title: () => "Your AI Teacher",
-    description:
-      "Watch as your AI teacher guides you step-by-step\nbuilding real apps from scratch.\n\nNo coding experience? Perfect!\nThis is designed for complete beginners.",
-    duration: 3000,
-  },
-  {
-    id: 3,
-    icon: Rocket,
-    title: () => "Zero Configuration Needed",
-    description:
-      "No downloads. No installation. No setup.\nEverything runs directly in your browser.\n\nJust watch, understand, and learn.",
-    duration: 3000,
-  },
-  {
-    id: 4,
-    icon: Users,
-    title: () => "Community Support Always Available",
-    description:
-      "Join our Discord community\nGet help from experienced coaches and peers\nConnect with other learners\n\nYou're not alone on this journey!",
-    duration: 3000,
-  },
-]
-
 export function OrientationWelcome({ userName, onComplete }: OrientationWelcomeProps) {
   const router = useRouter()
-  const [currentMessage, setCurrentMessage] = useState(0)
-  const [isTransitioning, setIsTransitioning] = useState(false)
-  const [isFading, setIsFading] = useState(false)
 
-  useEffect(() => {
-    if (currentMessage >= messages.length) {
-      // Show transition message
-      setIsTransitioning(true)
-      const transitionTimer = setTimeout(() => {
-        onComplete?.()
-        router.push("/dashboard/vibecoding")
-      }, 2000)
-
-      return () => clearTimeout(transitionTimer)
-    }
-
-    // Auto-advance to next message
-    const timer = setTimeout(() => {
-      setIsFading(true)
-      setTimeout(() => {
-        setCurrentMessage((prev) => prev + 1)
-        setIsFading(false)
-      }, 500)
-    }, messages[currentMessage].duration)
-
-    return () => clearTimeout(timer)
-  }, [currentMessage, router, onComplete])
-
-  const handleSkip = () => {
+  const handleStart = () => {
     onComplete?.()
-    router.push("/dashboard/vibecoding")
+    router.push("/dashboard/vibecoding/labs/lab1")
   }
-
-  if (isTransitioning) {
-    return (
-      <div className="fixed inset-0 bg-background flex items-center justify-center z-50">
-        <div className="text-center animate-in fade-in duration-1000">
-          <h2 className="text-3xl font-bold mb-4">Let's start with Lab 1...</h2>
-          <div className="w-16 h-1 bg-primary mx-auto rounded-full animate-pulse" />
-        </div>
-      </div>
-    )
-  }
-
-  if (currentMessage >= messages.length) {
-    return null
-  }
-
-  const message = messages[currentMessage]
-  const Icon = message.icon
 
   return (
-    <div className="fixed inset-0 bg-background flex items-center justify-center z-50 p-4">
-      <div className="max-w-2xl w-full text-center space-y-8">
-        {/* Skip Button */}
-        <div className="absolute top-4 right-4">
-          <Button variant="ghost" onClick={handleSkip}>
-            Skip Intro
-          </Button>
-        </div>
-
-        {/* Message Content */}
-        <div
-          className={cn(
-            "space-y-6 transition-opacity duration-500",
-            isFading ? "opacity-0" : "opacity-100 animate-in fade-in",
-          )}
-        >
-          {/* Icon */}
-          <div className="flex justify-center">
-            <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center">
-              <Icon className="w-12 h-12 text-primary" />
+    <div className="min-h-screen bg-background p-4 md:p-8">
+      <div className="max-w-4xl mx-auto space-y-8">
+        {/* Hero Welcome */}
+        <div className="text-center space-y-4 py-8">
+          <div className="flex justify-center mb-4">
+            <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
+              <Sparkles className="w-10 h-10 text-primary" />
             </div>
           </div>
-
-          {/* Title */}
-          <h1 className="text-4xl md:text-5xl font-bold">{message.title(userName)}</h1>
-
-          {/* Description */}
-          <p className="text-lg md:text-xl text-muted-foreground whitespace-pre-line max-w-xl mx-auto">
-            {message.description}
+          <h1 className="text-4xl md:text-5xl font-bold">
+            Welcome, {userName}!
+          </h1>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+            You're about to embark on a journey to understand AI, learn how it works, and become a responsible AI user.
           </p>
         </div>
 
-        {/* Progress Dots */}
-        <div className="flex justify-center gap-2 pt-8">
-          {messages.map((_, index) => (
-            <div
-              key={index}
-              className={cn(
-                "w-2 h-2 rounded-full transition-all duration-300",
-                index === currentMessage ? "bg-primary w-8" : "bg-muted-foreground/30",
-              )}
-            />
-          ))}
+        {/* What You'll Learn */}
+        <Card className="p-6">
+          <h2 className="text-2xl font-bold mb-4">What You'll Discover</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="flex gap-3">
+              <Brain className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+              <div>
+                <h3 className="font-semibold">How AI Really Works</h3>
+                <p className="text-sm text-muted-foreground">Understand LLMs, training, generation, and why AI makes mistakes</p>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <Target className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+              <div>
+                <h3 className="font-semibold">Master Practical Skills</h3>
+                <p className="text-sm text-muted-foreground">Write effective prompts, use role-playing, and guide AI step-by-step</p>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <Shield className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+              <div>
+                <h3 className="font-semibold">Critical Thinking</h3>
+                <p className="text-sm text-muted-foreground">Question AI outputs, verify facts, and recognize hallucinations</p>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <Rocket className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+              <div>
+                <h3 className="font-semibold">Responsible Use</h3>
+                <p className="text-sm text-muted-foreground">Learn ethics, privacy, and how to use AI for learning (not cheating)</p>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        {/* Learning Path */}
+        <div>
+          <h2 className="text-2xl font-bold mb-4 text-center">Your Learning Path (3.2 Hours)</h2>
+          <div className="space-y-3">
+            {LEARNING_JOURNEY.map((step) => (
+              <Card key={step.step} className="p-4 hover:border-primary/50 transition-colors">
+                <div className="flex gap-4">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center shrink-0">
+                    {step.step}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold mb-1">{step.title}</h3>
+                    <p className="text-sm text-muted-foreground">{step.description}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Call to Action */}
+        <div className="text-center space-y-4 py-8">
+          <h2 className="text-2xl font-bold">Ready to Begin?</h2>
+          <p className="text-muted-foreground mb-6">
+            No prior knowledge needed. Everything runs in your browser. Let's dive in!
+          </p>
+          <Button onClick={handleStart} size="lg" className="px-8">
+            Start Lab 1: Meet Your AI Friend
+          </Button>
         </div>
       </div>
     </div>
