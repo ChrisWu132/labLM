@@ -1,15 +1,26 @@
-// Server-side Supabase helper (stub for now)
-// TODO: Install @supabase/auth-helpers-nextjs and configure with real keys
+/**
+ * Server-side Supabase Client Helper
+ *
+ * Creates authenticated Supabase clients for use in:
+ * - Server Components
+ * - Server Actions
+ * - Route Handlers
+ */
 
 import { createServerClient } from "@supabase/ssr"
 import { cookies } from "next/headers"
 
-export async function getSupabaseServer() {
+/**
+ * Get Supabase server client with user authentication
+ *
+ * Use this in Server Components and Server Actions where you need
+ * to perform operations on behalf of the authenticated user.
+ */
+export async function createServerSupabaseClient() {
   const cookieStore = await cookies()
 
-  // TODO: Replace with actual environment variables
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder.supabase.co"
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "placeholder-key"
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
   return createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
@@ -18,11 +29,18 @@ export async function getSupabaseServer() {
       },
       setAll(cookiesToSet) {
         try {
-          cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options))
+          cookiesToSet.forEach(({ name, value, options }) =>
+            cookieStore.set(name, value, options)
+          )
         } catch {
-          // Server component, ignore
+          // Server component - cookies are read-only
         }
       },
     },
   })
 }
+
+/**
+ * Legacy export for backwards compatibility
+ */
+export const getSupabaseServer = createServerSupabaseClient

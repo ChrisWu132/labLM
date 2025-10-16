@@ -1,0 +1,136 @@
+import type { SuccessCriteria, SuccessRule } from '@/types/prompt-lab'
+
+/**
+ * Success Criteria Configuration for Each Exercise
+ *
+ * Define rules and passing scores for each exercise
+ */
+const exerciseCriteria: Record<string, SuccessCriteria> = {
+  // Lab 1 Exercises
+  'lab1-ex1': {
+    exerciseId: 'lab1-ex1',
+    rules: [
+      { type: 'containsKeywords', value: ['习性', '行为', '特点', '喜欢'] },
+      { type: 'minLength', value: 50 }
+    ],
+    passingScore: 2
+  },
+  'lab1-ex2': {
+    exerciseId: 'lab1-ex2',
+    rules: [
+      { type: 'containsKeywords', value: ['故事', '冒险'] },
+      { type: 'minLength', value: 100 }
+    ],
+    passingScore: 2
+  },
+
+  // Lab 2 Exercises
+  'lab2-ex1': {
+    exerciseId: 'lab2-ex1',
+    rules: [
+      { type: 'containsKeywords', value: ['初学者', '编程', '介绍', '学习'] },
+      { type: 'minLength', value: 80 }
+    ],
+    passingScore: 2
+  },
+  'lab2-ex2': {
+    exerciseId: 'lab2-ex2',
+    rules: [
+      { type: 'containsKeywords', value: ['1.', '2.', '3.'] }, // Should have 3 points
+      { type: 'minLength', value: 60 }
+    ],
+    passingScore: 2
+  },
+  'lab2-ex3': {
+    exerciseId: 'lab2-ex3',
+    rules: [
+      { type: 'containsKeywords', value: ['title', 'author', 'year', 'genre'] },
+      { type: 'containsKeywords', value: ['{', '}'] }, // JSON-like structure
+      { type: 'minLength', value: 30 }
+    ],
+    passingScore: 3
+  }
+}
+
+/**
+ * Check if exercise submission passes success criteria
+ */
+export async function checkExerciseSuccess(
+  exerciseId: string,
+  llmOutput: string
+): Promise<{ success: boolean; feedback: string }> {
+  const criteria = exerciseCriteria[exerciseId]
+
+  // No criteria = always pass (used for demo exercises)
+  if (!criteria) {
+    return { success: true, feedback: '' }
+  }
+
+  let passedRules = 0
+  const failedRules: string[] = []
+
+  for (const rule of criteria.rules) {
+    const passed = checkRule(rule, llmOutput)
+    if (passed) {
+      passedRules++
+    } else {
+      failedRules.push(getRuleFeedback(rule))
+    }
+  }
+
+  const success = passedRules >= criteria.passingScore
+
+  let feedback = ''
+  if (!success) {
+    feedback = failedRules[0] || '输出还不太符合要求。提示: 试着让 AI 更聚焦在具体方面。'
+  }
+
+  return { success, feedback }
+}
+
+/**
+ * Check if a single rule passes
+ */
+function checkRule(rule: SuccessRule, output: string): boolean {
+  switch (rule.type) {
+    case 'containsKeywords':
+      const keywords = rule.value as string[]
+      return keywords.some((kw) => output.includes(kw))
+
+    case 'minLength':
+      return output.length >= (rule.value as number)
+
+    case 'maxLength':
+      return output.length <= (rule.value as number)
+
+    case 'format':
+      // TODO: implement format checking (e.g., JSON, markdown)
+      return true
+
+    case 'sentiment':
+      // TODO: implement sentiment analysis (后期可用 LLM 判断)
+      return true
+
+    default:
+      return false
+  }
+}
+
+/**
+ * Get user-friendly feedback for a failed rule
+ */
+function getRuleFeedback(rule: SuccessRule): string {
+  switch (rule.type) {
+    case 'containsKeywords':
+      return `输出中缺少关键词。试着在 prompt 中要求包含: ${(rule.value as string[]).join('、')}`
+
+    case 'minLength':
+      return `输出太短了。试着让 AI 提供更详细的回答。`
+
+    case 'maxLength':
+      return `输出太长了。试着让 AI 更简洁。`
+
+    default:
+      return '输出不符合要求。'
+  }
+}

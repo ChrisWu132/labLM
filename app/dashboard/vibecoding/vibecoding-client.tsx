@@ -12,33 +12,44 @@ import { Code2, Loader2, MessageSquare, ChevronDown, Send, ChevronRight, Chevron
 import { markLabComplete } from "./actions"
 import { askCoach } from "@/lib/actions/coach"
 import { useToast } from "@/hooks/use-toast"
-import { WebContainerPlatform } from "./components/webcontainer-platform"
 
 interface Lab {
   number: number
   title: string
   description: string
-  objective: string
+  path: string
 }
 
 const labs: Lab[] = [
   {
     number: 1,
-    title: "UI Tweak Lab",
-    description: "Customize the user interface to match your brand",
-    objective: "Modify colors, typography, and layout to create a unique look",
+    title: "Lab 1: 什么是 Prompt",
+    description: "理解 prompt 基础，学会写基本指令",
+    path: "/dashboard/vibecoding/labs/lab1",
   },
   {
     number: 2,
-    title: "Prompt Tweak Lab",
-    description: "Experiment with AI prompts to improve output quality",
-    objective: "Test different prompt structures and see how they affect results",
+    title: "Lab 2: 如何给清晰指令",
+    description: "学习具体表达，避免歧义",
+    path: "/dashboard/vibecoding/labs/lab2",
   },
   {
     number: 3,
-    title: "API Tweak Lab",
-    description: "Connect to external APIs and handle data",
-    objective: "Integrate a third-party API and display the data in your app",
+    title: "Lab 3: 角色扮演技巧",
+    description: "让 AI 扮演不同角色，获得不同风格的输出",
+    path: "/dashboard/vibecoding/labs/lab3",
+  },
+  {
+    number: 4,
+    title: "Lab 4: 引导思考",
+    description: "使用 Chain-of-thought，让 AI 分步推理",
+    path: "/dashboard/vibecoding/labs/lab4",
+  },
+  {
+    number: 5,
+    title: "Lab 5: 综合应用挑战",
+    description: "综合运用所有技巧，完成实际场景",
+    path: "/dashboard/vibecoding/labs/lab5",
   },
 ]
 
@@ -59,8 +70,11 @@ export function VibeCodingClient({ completedLabNumbers }: VibeCodingClientProps)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true) // Default collapsed
 
   const handleStartLab = (labNumber: number) => {
-    setCurrentLab(labNumber)
-    setShowPlatform(true)
+    const lab = labs.find(l => l.number === labNumber)
+    if (lab) {
+      // Navigate to the lab page
+      window.location.href = lab.path
+    }
   }
 
   const handleMarkComplete = async (labNumber: number) => {
@@ -301,23 +315,59 @@ export function VibeCodingClient({ completedLabNumbers }: VibeCodingClientProps)
         )}
       </div>
 
-      {/* Right: Full-Screen Development Environment */}
+      {/* Right: Welcome/Instructions */}
       <div className="flex-1 flex flex-col overflow-hidden">
         <div className="border-b px-4 py-3 bg-muted/30">
           <div className="flex items-center gap-3">
             <Code2 className="w-5 h-5 text-primary" />
             <div>
-              <h2 className="font-semibold">
-                {currentLab ? labs.find(l => l.number === currentLab)?.title || "Development Environment" : "Development Environment"}
-              </h2>
+              <h2 className="font-semibold">LLM Learning Lab - Prompt Engineering</h2>
               <p className="text-xs text-muted-foreground">
-                {currentLab ? labs.find(l => l.number === currentLab)?.description || "Watch your code run in a real Node.js environment" : "Select a lab to start coding"}
+                学习如何与 AI 对话 - 2 小时掌握 Prompt Engineering
               </p>
             </div>
           </div>
         </div>
-        <div className="flex-1 overflow-hidden">
-          <WebContainerPlatform />
+        <div className="flex-1 overflow-auto p-8">
+          <div className="max-w-3xl mx-auto space-y-6">
+            <div>
+              <h3 className="text-2xl font-bold mb-2">欢迎来到 Prompt Engineering 学习平台！</h3>
+              <p className="text-muted-foreground">
+                通过 5 个实践 Lab，你将学会如何有效地与 AI 对话，写出高质量的 prompt。
+              </p>
+            </div>
+
+            <div className="bg-blue-50 dark:bg-blue-950 p-6 rounded-lg border">
+              <h4 className="font-semibold mb-3">🎯 学习目标</h4>
+              <ul className="space-y-2 text-sm">
+                <li>✓ 理解什么是 Prompt 以及它的重要性</li>
+                <li>✓ 学会写清晰、具体的指令</li>
+                <li>✓ 掌握角色扮演和上下文设置技巧</li>
+                <li>✓ 使用 Chain-of-thought 引导 AI 思考</li>
+                <li>✓ 综合应用于实际场景</li>
+              </ul>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-4 border rounded-lg">
+                <h5 className="font-semibold mb-2">⏱️ 学习时长</h5>
+                <p className="text-2xl font-bold text-primary">~2 小时</p>
+                <p className="text-xs text-muted-foreground mt-1">平均每个 Lab 15-25 分钟</p>
+              </div>
+              <div className="p-4 border rounded-lg">
+                <h5 className="font-semibold mb-2">📊 难度级别</h5>
+                <p className="text-2xl font-bold text-primary">初学者</p>
+                <p className="text-xs text-muted-foreground mt-1">适合初中生及以上</p>
+              </div>
+            </div>
+
+            <div className="bg-yellow-50 dark:bg-yellow-950 p-4 rounded-lg border">
+              <h5 className="font-semibold mb-2">💡 开始提示</h5>
+              <p className="text-sm">
+                点击左侧的 <strong>Lab 1</strong> 开始你的 Prompt Engineering 学习之旅！每个 Lab 都包含理论讲解和实践练习。
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
