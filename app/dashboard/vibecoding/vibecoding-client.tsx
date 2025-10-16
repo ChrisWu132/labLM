@@ -23,32 +23,32 @@ interface Lab {
 const labs: Lab[] = [
   {
     number: 1,
-    title: "Lab 1: 什么是 Prompt",
-    description: "理解 prompt 基础，学会写基本指令",
+    title: "Lab 1: What is a Prompt",
+    description: "Understand prompt basics, learn to write basic instructions",
     path: "/dashboard/vibecoding/labs/lab1",
   },
   {
     number: 2,
-    title: "Lab 2: 如何给清晰指令",
-    description: "学习具体表达，避免歧义",
+    title: "Lab 2: How to Give Clear Instructions",
+    description: "Learn specific expression, avoid ambiguity",
     path: "/dashboard/vibecoding/labs/lab2",
   },
   {
     number: 3,
-    title: "Lab 3: 角色扮演技巧",
-    description: "让 AI 扮演不同角色，获得不同风格的输出",
+    title: "Lab 3: Role-Playing Techniques",
+    description: "Have AI play different roles, get different style outputs",
     path: "/dashboard/vibecoding/labs/lab3",
   },
   {
     number: 4,
-    title: "Lab 4: 引导思考",
-    description: "使用 Chain-of-thought，让 AI 分步推理",
+    title: "Lab 4: Guided Reasoning",
+    description: "Use Chain-of-Thought, have AI reason step-by-step",
     path: "/dashboard/vibecoding/labs/lab4",
   },
   {
     number: 5,
-    title: "Lab 5: 综合应用挑战",
-    description: "综合运用所有技巧，完成实际场景",
+    title: "Lab 5: Comprehensive Application Challenge",
+    description: "Apply all techniques, complete real scenarios",
     path: "/dashboard/vibecoding/labs/lab5",
   },
 ]
@@ -323,7 +323,7 @@ export function VibeCodingClient({ completedLabNumbers }: VibeCodingClientProps)
             <div>
               <h2 className="font-semibold">LLM Learning Lab - Prompt Engineering</h2>
               <p className="text-xs text-muted-foreground">
-                学习如何与 AI 对话 - 2 小时掌握 Prompt Engineering
+                Learn how to communicate with AI - Master Prompt Engineering in 2 hours
               </p>
             </div>
           </div>
@@ -331,40 +331,40 @@ export function VibeCodingClient({ completedLabNumbers }: VibeCodingClientProps)
         <div className="flex-1 overflow-auto p-8">
           <div className="max-w-3xl mx-auto space-y-6">
             <div>
-              <h3 className="text-2xl font-bold mb-2">欢迎来到 Prompt Engineering 学习平台！</h3>
+              <h3 className="text-2xl font-bold mb-2">Welcome to the Prompt Engineering Learning Platform!</h3>
               <p className="text-muted-foreground">
-                通过 5 个实践 Lab，你将学会如何有效地与 AI 对话，写出高质量的 prompt。
+                Through 5 hands-on labs, you will learn how to effectively communicate with AI and write high-quality prompts.
               </p>
             </div>
 
             <div className="bg-blue-50 dark:bg-blue-950 p-6 rounded-lg border">
-              <h4 className="font-semibold mb-3">🎯 学习目标</h4>
+              <h4 className="font-semibold mb-3">🎯 Learning Objectives</h4>
               <ul className="space-y-2 text-sm">
-                <li>✓ 理解什么是 Prompt 以及它的重要性</li>
-                <li>✓ 学会写清晰、具体的指令</li>
-                <li>✓ 掌握角色扮演和上下文设置技巧</li>
-                <li>✓ 使用 Chain-of-thought 引导 AI 思考</li>
-                <li>✓ 综合应用于实际场景</li>
+                <li>✓ Understand what a Prompt is and its importance</li>
+                <li>✓ Learn to write clear, specific instructions</li>
+                <li>✓ Master role-playing and context-setting techniques</li>
+                <li>✓ Use Chain-of-Thought to guide AI reasoning</li>
+                <li>✓ Apply comprehensively to real scenarios</li>
               </ul>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="p-4 border rounded-lg">
-                <h5 className="font-semibold mb-2">⏱️ 学习时长</h5>
-                <p className="text-2xl font-bold text-primary">~2 小时</p>
-                <p className="text-xs text-muted-foreground mt-1">平均每个 Lab 15-25 分钟</p>
+                <h5 className="font-semibold mb-2">⏱️ Duration</h5>
+                <p className="text-2xl font-bold text-primary">~2 hours</p>
+                <p className="text-xs text-muted-foreground mt-1">Average 15-25 minutes per lab</p>
               </div>
               <div className="p-4 border rounded-lg">
-                <h5 className="font-semibold mb-2">📊 难度级别</h5>
-                <p className="text-2xl font-bold text-primary">初学者</p>
-                <p className="text-xs text-muted-foreground mt-1">适合初中生及以上</p>
+                <h5 className="font-semibold mb-2">📊 Difficulty Level</h5>
+                <p className="text-2xl font-bold text-primary">Beginner</p>
+                <p className="text-xs text-muted-foreground mt-1">Suitable for middle school and above</p>
               </div>
             </div>
 
             <div className="bg-yellow-50 dark:bg-yellow-950 p-4 rounded-lg border">
-              <h5 className="font-semibold mb-2">💡 开始提示</h5>
+              <h5 className="font-semibold mb-2">💡 Getting Started</h5>
               <p className="text-sm">
-                点击左侧的 <strong>Lab 1</strong> 开始你的 Prompt Engineering 学习之旅！每个 Lab 都包含理论讲解和实践练习。
+                Click <strong>Lab 1</strong> on the left to begin your Prompt Engineering learning journey! Each lab includes theoretical explanations and practical exercises.
               </p>
             </div>
           </div>

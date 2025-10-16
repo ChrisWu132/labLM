@@ -376,9 +376,20 @@ User Action → Client Component → Server Action → Supabase
 
 ---
 
+## Language Policy
+
+**This project uses English only.** All code, documentation, UI content, and communications must be in English.
+
+📖 See [LANGUAGE_POLICY.md](./LANGUAGE_POLICY.md) for complete guidelines.
+
 ## Contributing
 
 This is a course project. For issues or questions, please contact the course team.
+
+When contributing:
+- All code must be in English (variables, functions, comments)
+- All content must be in English (UI text, documentation)
+- Follow the language policy strictly
 
 ---
 

@@ -1,115 +1,115 @@
-# Lab 2: 如何给清晰指令
+# Lab 2: How to Give Clear Instructions
 
-## 📖 学习目标
+## 📖 Learning Objectives
 
-- 理解清晰表达的重要性
-- 学会避免模糊的 prompt
-- 掌握添加约束条件的技巧
+- Understand the importance of clear expression
+- Learn to avoid vague prompts
+- Master the technique of adding constraints
 
-## 🎯 核心概念
+## 🎯 Core Concepts
 
-**清晰 > 模糊**
+**Clear > Vague**
 
-AI 不会读心术。如果你的 prompt 模糊不清，AI 只能猜你想要什么。
+AI can't read minds. If your prompt is vague, the AI can only guess what you want.
 
-### 对比示例
+### Comparison Examples
 
-#### ❌ 模糊的 prompt
+#### ❌ Vague Prompt
 
 <StaticPromptDemo
   exerciseId="lab2-demo-bad"
-  initialValue="写点东西"
-  demoOutput="这是一些文字。我不太确定你想要什么内容，所以我写了一些通用的东西..."
+  initialValue="Write something"
+  demoOutput="Here is some text. I'm not quite sure what you want, so I wrote some generic content..."
 />
 
 ---
 
-#### ✅ 清晰的 prompt
+#### ✅ Clear Prompt
 
 <StaticPromptDemo
   exerciseId="lab2-demo-good"
-  initialValue="写一段 50 字左右的文字，介绍为什么运动对健康有益。使用简单易懂的语言。"
-  demoOutput="运动可以让身体更强壮，心脏更健康。经常运动的人不容易生病，精神也会更好。每天运动 30 分钟，比如跑步、游泳或打球，都能让你变得更健康、更快乐。"
+  initialValue="Write a paragraph of about 50 words explaining why exercise is good for health. Use simple, easy-to-understand language."
+  demoOutput="Exercise makes your body stronger and your heart healthier. People who exercise regularly get sick less often and have better mental health. Exercising 30 minutes daily, such as running, swimming or playing sports, can make you healthier and happier."
 />
 
-看到区别了吗？清晰的 prompt 包含：
-- ✅ 明确的任务（"介绍为什么..."）
-- ✅ 具体的要求（"50 字左右"）
-- ✅ 风格指导（"简单易懂"）
+See the difference? A clear prompt includes:
+- ✅ A specific task ("explain why...")
+- ✅ Specific requirements ("about 50 words")
+- ✅ Style guidance ("simple, easy-to-understand")
 
 ---
 
-## ✏️ 动手练习
+## ✏️ Hands-On Practice
 
-### 练习 1: 改进模糊的 prompt
+### Exercise 1: Improve a Vague Prompt
 
-下面这个 prompt 太模糊了。修改它，让 AI 给出更有用的回答。
+The prompt below is too vague. Modify it to get a more useful response from the AI.
 
 <PromptEditor
   exerciseId="lab2-ex1"
   mode="editable"
-  initialValue="介绍一下编程"
+  initialValue="Introduce programming"
 />
 
-**提示**:
-- 想要什么角度的介绍？（适合初学者？还是深入技术？）
-- 想要多长的回答？
-- 想要什么语气？（正式？轻松？）
+**Hints**:
+- What angle do you want? (For beginners? Or in-depth technical?)
+- How long should the response be?
+- What tone do you want? (Formal? Casual?)
 
 ---
 
-### 练习 2: 添加约束条件
+### Exercise 2: Add Constraints
 
-让 AI 用三个要点列举健康饮食的好处。
+Have the AI list the benefits of healthy eating in three bullet points.
 
 <PromptEditor
   exerciseId="lab2-ex2"
   mode="editable"
-  initialValue="说说健康饮食的好处"
+  initialValue="Talk about the benefits of healthy eating"
 />
 
-**成功标准**:
-- ✅ 输出包含 3 个要点
-- ✅ 格式清晰（使用列表或编号）
+**Success Criteria**:
+- ✅ Output contains 3 bullet points
+- ✅ Clear formatting (using list or numbering)
 
-**提示**: 在 prompt 中明确说"用三个要点"或"列举三个"
+**Hint**: Explicitly state "in three bullet points" or "list three" in your prompt
 
 ---
 
-### 🎓 挑战题: 获得 JSON 格式输出
+### 🎓 Challenge: Get JSON Format Output
 
-这是一个高级练习！写一个 prompt，让 AI 返回 JSON 格式的书籍信息。
+This is an advanced exercise! Write a prompt to make the AI return book information in JSON format.
 
-**要求:**
-- 书名: "西游记"
-- 字段: title, author, year, genre
+**Requirements:**
+- Book title: "Journey to the West"
+- Fields: title, author, year, genre
 
 <PromptEditor
   exerciseId="lab2-ex3"
   mode="blank"
-  placeholder="写一个 prompt 让 AI 返回 JSON 格式..."
+  placeholder="Write a prompt to get AI to return JSON format..."
 />
 
-**提示**: 试着说"用 JSON 格式"或"返回一个包含...字段的 JSON 对象"
+**Hint**: Try saying "in JSON format" or "return a JSON object with the following fields..."
 
 ---
 
-## 📝 总结
+## 📝 Summary
 
-你学会了：
+You learned:
 
-- ✅ 具体明确 > 模糊笼统
-- ✅ 添加约束条件（长度、格式、风格）
-- ✅ 清晰的 prompt = 有用的输出
+- ✅ Specific and clear > vague and general
+- ✅ Add constraints (length, format, style)
+- ✅ Clear prompts = useful outputs
 
-**下一步**: [Lab 3 - 角色扮演技巧](/dashboard/vibecoding/labs/lab3) (即将推出)
+**Next Step**: [Lab 3 - Role-Playing Techniques](/dashboard/vibecoding/labs/lab3) (Coming soon)
 
 ---
 
-**💡 专业提示**:
+**💡 Pro Tip**:
 
-在 prompt 中包含以下要素可以获得更好的结果：
-1. **任务** - 你想让 AI 做什么
-2. **约束** - 长度、格式、风格
-3. **上下文** - 背景信息（如果需要）
-4. **示例** - 期望的输出样式（可选）
+Including the following elements in your prompt can get better results:
+1. **Task** - What you want the AI to do
+2. **Constraints** - Length, format, style
+3. **Context** - Background information (if needed)
+4. **Examples** - Expected output style (optional)

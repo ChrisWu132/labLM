@@ -29,7 +29,7 @@ export async function getLabContent(labId: string): Promise<LabContent | null> {
     const title = titleMatch ? titleMatch[1] : labId
 
     // Extract description from frontmatter or first paragraph
-    const descMatch = source.match(/## 📖 学习目标\n\n(.+?)\n/)
+    const descMatch = source.match(/## 📖 Learning Objectives\n\n(.+?)\n/)
     const description = descMatch ? descMatch[1] : ''
 
     return {
