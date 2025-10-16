@@ -9,24 +9,14 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Headers required for WebContainers (SharedArrayBuffer support)
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'Cross-Origin-Embedder-Policy',
-            value: 'require-corp',
-          },
-          {
-            key: 'Cross-Origin-Opener-Policy',
-            value: 'same-origin',
-          },
-        ],
-      },
-    ]
-  },
+  // MDX support
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  experimental: {
+    mdxRs: false, // Use traditional MDX loader for compatibility
+    serverActions: {
+      bodySizeLimit: '2mb'
+    }
+  }
 }
 
 export default nextConfig
