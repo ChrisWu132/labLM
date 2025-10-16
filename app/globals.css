@@ -129,47 +129,66 @@
   --sidebar-ring: 96 165 250;
 }
 
-@theme inline {
+@theme {
+  /* Fonts */
   --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-success: var(--success);
-  --color-success-foreground: var(--success-foreground);
-  --color-teal: var(--teal);
-  --color-teal-foreground: var(--teal-foreground);
-  --color-info: var(--info);
-  --color-warning: var(--warning);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
+
+  /* Colors - Direct RGB values for Tailwind v4 */
+  --color-background: 241 245 249;
+  --color-foreground: 15 23 42;
+  --color-card: 255 255 255;
+  --color-card-foreground: 15 23 42;
+  --color-popover: 255 255 255;
+  --color-popover-foreground: 15 23 42;
+
+  /* Primary Blue #3B82F6 */
+  --color-primary: 59 130 246;
+  --color-primary-foreground: 255 255 255;
+
+  /* Accent Orange #F59E0B */
+  --color-accent: 245 158 11;
+  --color-accent-foreground: 15 23 42;
+
+  /* Success/Teal Green #10B981 */
+  --color-success: 16 185 129;
+  --color-success-foreground: 255 255 255;
+  --color-teal: 16 185 129;
+  --color-teal-foreground: 255 255 255;
+
+  /* Status Colors */
+  --color-info: 59 130 246;
+  --color-warning: 245 158 11;
+  --color-destructive: 239 68 68;
+  --color-destructive-foreground: 255 255 255;
+
+  /* Secondary & Muted */
+  --color-secondary: 241 245 249;
+  --color-secondary-foreground: 15 23 42;
+  --color-muted: 241 245 249;
+  --color-muted-foreground: 100 116 139;
+
+  /* Borders */
+  --color-border: 203 213 225;
+  --color-input: 203 213 225;
+  --color-ring: 59 130 246;
+
+  /* Border Radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Sidebar */
+  --color-sidebar: 241 245 249;
+  --color-sidebar-foreground: 15 23 42;
+  --color-sidebar-primary: 59 130 246;
+  --color-sidebar-primary-foreground: 255 255 255;
+  --color-sidebar-accent: 203 213 225;
+  --color-sidebar-accent-foreground: 15 23 42;
+  --color-sidebar-border: 203 213 225;
+  --color-sidebar-ring: 59 130 246;
 }
 
 @layer base {

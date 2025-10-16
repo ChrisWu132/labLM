@@ -47,38 +47,42 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b-2 border-border bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between max-w-7xl">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-primary-foreground" />
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center shadow-default">
+              <Sparkles className="w-5 h-5 text-white" />
             </div>
-            <span className="font-semibold text-lg">{COPY.app.name}</span>
+            <span className="font-bold text-lg bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              {COPY.app.name}
+            </span>
           </div>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="#curriculum" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+          <nav className="hidden md:flex items-center gap-8">
+            <Link href="#curriculum" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
               Curriculum
             </Link>
-            <Link href="#educators" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="#educators" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
               For Educators
             </Link>
-            <Link href="#implementation" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="#implementation" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
               Implementation
             </Link>
-            <Link href="#faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="#faq" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
               FAQ
             </Link>
             <Link href={LINKS.auth}>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="border-2">
                 Sign In
               </Button>
             </Link>
             <Link href={LINKS.auth}>
-              <Button size="sm">Request Demo</Button>
+              <Button size="sm" className="shadow-default hover:shadow-hover transition-all">
+                Request Demo
+              </Button>
             </Link>
           </nav>
           <Link href={LINKS.auth} className="md:hidden">
-            <Button size="sm">Demo</Button>
+            <Button size="sm" className="shadow-default">Demo</Button>
           </Link>
         </div>
       </header>
@@ -95,25 +99,9 @@ export default function LandingPage() {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance leading-tight">
                 {COPY.hero.headline}
               </h1>
-              <p className="text-lg text-muted-foreground mb-6 text-pretty leading-relaxed">
+              <p className="text-lg text-muted-foreground mb-8 text-pretty leading-relaxed">
                 {COPY.hero.description}
               </p>
-
-              {/* Trust Badges */}
-              <div className="flex flex-wrap gap-4 mb-8 text-sm text-muted-foreground">
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-success" />
-                  <span>Standards-Aligned</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Shield className="w-4 h-4 text-success" />
-                  <span>COPPA/FERPA Ready</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Users className="w-4 h-4 text-success" />
-                  <span>100+ Schools</span>
-                </div>
-              </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href={LINKS.auth}>
@@ -130,17 +118,35 @@ export default function LandingPage() {
                 No credit card required. District pricing available.
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              {PROOF_POINTS.map((point, i) => (
-                <Card key={i} className="shadow-default hover:shadow-hover transition-shadow border-2">
-                  <CardHeader className="pb-4">
-                    <div className="text-3xl font-bold bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">
-                      {point.stat}
+            <div className="relative">
+              {/* Background decoration */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-success/5 rounded-3xl"></div>
+
+              <div className="relative grid grid-cols-2 gap-6 p-8 rounded-3xl border-2 border-primary/10 bg-white/50 backdrop-blur-sm">
+                {PROOF_POINTS.map((point, i) => {
+                  const icons = [
+                    <Clock key="clock" className="w-8 h-8 text-primary" />,
+                    <GraduationCap key="grad" className="w-8 h-8 text-accent" />,
+                    <Sparkles key="sparkles" className="w-8 h-8 text-success" />,
+                    <Award key="award" className="w-8 h-8 text-primary" />
+                  ]
+                  return (
+                    <div key={i} className="flex flex-col gap-3 group">
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/5 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        {icons[i]}
+                      </div>
+                      <div>
+                        <div className="text-3xl font-bold text-foreground mb-1">
+                          {point.stat}
+                        </div>
+                        <div className="text-sm text-muted-foreground font-medium leading-tight">
+                          {point.label}
+                        </div>
+                      </div>
                     </div>
-                    <CardDescription className="font-medium">{point.label}</CardDescription>
-                  </CardHeader>
-                </Card>
-              ))}
+                  )
+                })}
+              </div>
             </div>
           </div>
         </div>
@@ -329,49 +335,59 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing */}
-      <section className="py-20 px-4 bg-muted/30">
+      <section className="py-24 px-4 bg-white">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
+              {COPY.sections.pricing.badge}
+            </Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">{COPY.sections.pricing.title}</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               {COPY.sections.pricing.description}
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {PRICING.tiers.map((tier, i) => (
               <Card
                 key={i}
-                className={tier.highlighted ? "border-2 border-primary" : ""}
+                className={`shadow-default hover:shadow-hover transition-all duration-300 ${
+                  tier.highlighted
+                    ? "border-2 border-primary scale-105 md:scale-110 shadow-hover"
+                    : "border-2 hover:-translate-y-1"
+                }`}
               >
-                <CardHeader className="text-center">
+                <CardHeader className="text-center space-y-4">
                   {tier.highlighted && (
-                    <Badge className="mb-4 mx-auto bg-primary/10 text-primary border-primary/20">
+                    <Badge className="mb-2 mx-auto bg-gradient-to-r from-primary to-accent text-white border-0">
                       Most Popular
                     </Badge>
                   )}
-                  <CardTitle className="text-2xl mb-2">{tier.name}</CardTitle>
-                  <div className="text-3xl font-bold mb-2">
+                  <CardTitle className="text-2xl">{tier.name}</CardTitle>
+                  <div className="text-4xl font-bold">
                     {tier.price}
                     {tier.period && <span className="text-lg font-normal text-muted-foreground">/{tier.period}</span>}
                   </div>
-                  <CardDescription>{tier.description}</CardDescription>
+                  <CardDescription className="text-base">{tier.description}</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3 mb-6">
+                <CardContent className="space-y-6">
+                  <ul className="space-y-3">
                     {tier.features.map((feature, j) => (
                       <li key={j} className="flex items-start gap-3">
-                        <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                        <span className="text-sm">{feature}</span>
+                        <CheckCircle2 className="w-5 h-5 text-success shrink-0 mt-0.5" />
+                        <span className="text-sm text-foreground/80">{feature}</span>
                       </li>
                     ))}
                   </ul>
                   <Link href={LINKS.auth} className="block">
                     <Button
                       size="lg"
-                      className="w-full"
+                      className={`w-full shadow-default hover:shadow-hover transition-all ${
+                        tier.highlighted ? "" : "border-2"
+                      }`}
                       variant={tier.highlighted ? "default" : "outline"}
                     >
                       {tier.cta}
+                      <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                   </Link>
                 </CardContent>
@@ -382,41 +398,68 @@ export default function LandingPage() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="py-20 px-4">
+      <section id="faq" className="py-24 px-4 bg-muted/30">
         <div className="container mx-auto max-w-3xl">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
+              Common Questions
+            </Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">{COPY.sections.faq.title}</h2>
-            <p className="text-lg text-muted-foreground">{COPY.sections.faq.description}</p>
+            <p className="text-lg text-muted-foreground leading-relaxed">{COPY.sections.faq.description}</p>
           </div>
-          <Accordion type="single" collapsible className="w-full">
-            {FAQS.map((faq, i) => (
-              <AccordionItem key={i} value={`item-${i}`}>
-                <AccordionTrigger className="text-left text-base">{faq.question}</AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed">{faq.answer}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <Card className="shadow-default border-2">
+            <CardContent className="p-0">
+              <Accordion type="single" collapsible className="w-full">
+                {FAQS.map((faq, i) => (
+                  <AccordionItem key={i} value={`item-${i}`} className="border-b last:border-0 px-6">
+                    <AccordionTrigger className="text-left text-base font-semibold hover:text-primary transition-colors py-6">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground leading-relaxed text-base pb-6">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 px-4 bg-primary text-primary-foreground">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">{COPY.sections.finalCta.title}</h2>
-          <p className="text-lg mb-8 opacity-90 max-w-2xl mx-auto">{COPY.sections.finalCta.description}</p>
+      <section className="py-24 px-4 bg-gradient-to-br from-primary via-primary to-accent text-white relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+
+        <div className="container mx-auto max-w-4xl text-center relative z-10">
+          <Sparkles className="w-12 h-12 mx-auto mb-6 opacity-90" />
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">{COPY.sections.finalCta.title}</h2>
+          <p className="text-lg md:text-xl mb-10 opacity-95 max-w-2xl mx-auto leading-relaxed">
+            {COPY.sections.finalCta.description}
+          </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href={LINKS.auth}>
-              <Button size="lg" variant="secondary" className="gap-2">
+              <Button size="lg" variant="secondary" className="gap-2 shadow-hover hover:scale-105 transition-all bg-white text-primary hover:bg-white/90">
                 Request Demo
                 <ArrowRight className="w-4 h-4" />
               </Button>
             </Link>
+            <Link href="#curriculum">
+              <Button size="lg" variant="outline" className="gap-2 bg-transparent border-2 border-white text-white hover:bg-white/10">
+                View Curriculum
+              </Button>
+            </Link>
             <Link href={LINKS.contact}>
-              <Button size="lg" variant="outline" className="gap-2 bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10">
+              <Button size="lg" variant="outline" className="gap-2 bg-transparent border-2 border-white text-white hover:bg-white/10">
                 Contact Sales
               </Button>
             </Link>
           </div>
+          <p className="text-sm mt-8 opacity-80">
+            We respond within one business day.
+          </p>
         </div>
       </section>
 
