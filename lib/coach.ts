@@ -1,7 +1,11 @@
-// AI Coach helper - wraps external AI provider calls
-// TODO: Connect to real AI provider (OpenAI, Anthropic, etc.)
+/**
+ * AI Coach helper - wraps external AI provider calls
+ * Uses unified OpenAI client for consistency
+ */
 
-export type CoachContextTag = "Orientation" | "Problem" | "Sandbox" | "GTM" | "Iterate" | "Demo"
+import { createChatCompletion } from './ai/openai-client'
+
+export type CoachContextTag = "Orientation" | "Problem" | "Sandbox" | "GTM" | "Iterate" | "Demo" | "Prompt Engineering Lab"
 
 export interface CoachRequest {
   context: CoachContextTag
@@ -16,37 +20,144 @@ export interface CoachResponse {
   latencyMs: number
 }
 
-export async function callCoach(request: CoachRequest): Promise<CoachResponse> {
-  // TODO: Replace with actual AI provider integration
-  // This is a mock implementation for scaffolding
+/**
+ * System prompts for different contexts
+ */
+const COACH_SYSTEM_PROMPTS: Record<CoachContextTag, string> = {
+  "Orientation": `You are a friendly AI coach helping new students get oriented with the learning platform.
+Your role is to:
+- Help them understand how the platform works
+- Guide them through setup and account creation
+- Answer questions about course structure and modules
+- Be encouraging and supportive
 
+Keep responses concise (2-3 sentences) and actionable.`,
+
+  "Problem": `You are an AI coach helping entrepreneurs validate their problem statements.
+Your role is to:
+- Ask probing questions about problem frequency and intensity
+- Help them identify the real pain points
+- Guide them toward measurable validation criteria
+- Encourage customer interviews and research
+
+Keep responses concise and focused on next steps.`,
+
+  "Sandbox": `You are a coding mentor helping students debug and improve their code.
+Your role is to:
+- Identify potential bugs or edge cases
+- Suggest best practices and improvements
+- Explain concepts clearly when needed
+- Encourage good coding habits
+
+Keep responses practical and code-focused.`,
+
+  "GTM": `You are a go-to-market strategy advisor.
+Your role is to:
+- Help refine messaging and positioning
+- Suggest customer acquisition strategies
+- Validate marketing approaches
+- Focus on early-stage MVPs
+
+Keep responses actionable and focused on validation.`,
+
+  "Iterate": `You are a product iteration coach analyzing metrics and feedback.
+Your role is to:
+- Help interpret user behavior data
+- Identify drop-off points and friction
+- Suggest A/B test ideas
+- Guide prioritization of improvements
+
+Keep responses data-driven and specific.`,
+
+  "Demo": `You are a pitch coach helping students prepare compelling demos.
+Your role is to:
+- Refine demo structure and flow
+- Ensure they lead with the problem
+- Help them hit the "aha moment" quickly
+- Give presentation tips
+
+Keep responses focused on demo effectiveness.`,
+
+  "Prompt Engineering Lab": `You are an AI prompt engineering tutor helping students learn to write effective prompts.
+Your role is to:
+- Explain prompt engineering concepts clearly
+- Give examples of good vs bad prompts
+- Help debug why their prompts aren't working
+- Encourage experimentation and iteration
+- Relate concepts back to the lab materials
+
+Keep responses educational, supportive, and focused on learning. Use examples when helpful.`
+}
+
+export async function callCoach(request: CoachRequest): Promise<CoachResponse> {
   const startTime = Date.now()
 
-  // Simulate API delay
-  await new Promise((resolve) => setTimeout(resolve, 800))
+  try {
+    // Get the appropriate system prompt for this context
+    const systemPrompt = COACH_SYSTEM_PROMPTS[request.context] || COACH_SYSTEM_PROMPTS["Orientation"]
 
-  const mockResponses: Record<string, string> = {
-    Orientation:
-      "Welcome! Great question about getting started. Make sure you have your Sandpack and Supabase accounts set up - they're essential tools for building your MVP. If you run into any setup issues, check the troubleshooting section or reach out in the community Discord.",
-    Problem:
-      "Great question! When validating your problem, focus on understanding the frequency and intensity of the pain point. Try asking: 'How often does this happen?' and 'What does it cost you when it does?'",
-    Sandbox:
-      "Nice work on the code! Consider adding error handling for edge cases. Also, think about how you might make this more user-friendly with better feedback messages.",
-    GTM: "Your go-to-market approach is solid. I'd recommend testing your messaging with 5-10 potential customers before scaling. Focus on the transformation, not just features.",
-    Iterate:
-      "Looking at your metrics, you're making good progress. The drop in engagement on day 3 is common - consider adding a reminder or value reinforcement at that point.",
-    Demo: "Your demo is coming together nicely! Make sure to lead with the problem and show the 'aha moment' within the first 30 seconds. Practice your delivery to stay under 2 minutes.",
+    // Add additional context to the user message if provided
+    let enhancedMessage = request.userMessage
+    if (request.additionalContext) {
+      const contextStr = Object.entries(request.additionalContext)
+        .map(([key, value]) => `${key}: ${value}`)
+        .join(', ')
+      enhancedMessage = `${request.userMessage}\n\n[Context: ${contextStr}]`
+    }
+
+    // Call OpenAI
+    const response = await createChatCompletion(
+      enhancedMessage,
+      systemPrompt,
+      {
+        maxTokens: 300, // Keep coach responses concise
+        temperature: 0.7
+      }
+    )
+
+    const latencyMs = Date.now() - startTime
+
+    // Extract suggestions if the response contains actionable items
+    // This is a simple heuristic - could be improved
+    const suggestions = extractSuggestions(response)
+
+    return {
+      message: response,
+      suggestions,
+      latencyMs
+    }
+  } catch (error: any) {
+    console.error('[callCoach] Error:', error)
+
+    // If it's a timeout or network error
+    if (error.code === 'ETIMEDOUT' || error.code === 'ECONNREFUSED') {
+      throw new Error('timeout')
+    }
+
+    // Generic error
+    throw new Error(error.message || 'AI provider error')
+  }
+}
+
+/**
+ * Extract actionable suggestions from coach response
+ * Looks for numbered lists, bullet points, or sentences with action verbs
+ */
+function extractSuggestions(response: string): string[] {
+  const suggestions: string[] = []
+
+  // Match numbered lists (1. ..., 2. ...)
+  const numberedMatches = response.match(/\d+\.\s+(.+?)(?=\n|$)/g)
+  if (numberedMatches) {
+    suggestions.push(...numberedMatches.map(s => s.replace(/^\d+\.\s+/, '').trim()))
   }
 
-  const latencyMs = Date.now() - startTime
-
-  return {
-    message: mockResponses[request.context] || "I'm here to help! What specific aspect would you like guidance on?",
-    suggestions: [
-      "Review the module materials",
-      "Check out the example in the resources",
-      "Try breaking this down into smaller steps",
-    ],
-    latencyMs,
+  // Match bullet points (- ..., * ...)
+  const bulletMatches = response.match(/[-*]\s+(.+?)(?=\n|$)/g)
+  if (bulletMatches) {
+    suggestions.push(...bulletMatches.map(s => s.replace(/^[-*]\s+/, '').trim()))
   }
+
+  // Return up to 3 suggestions
+  return suggestions.slice(0, 3)
 }

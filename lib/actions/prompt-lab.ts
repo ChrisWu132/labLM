@@ -3,12 +3,8 @@
 import { createServerSupabaseClient } from '@/lib/supabase-server'
 import { checkRateLimit, logAIUsage } from '@/lib/rate-limit'
 import { checkExerciseSuccess } from '@/lib/prompt-lab/success-checker'
-import OpenAI from 'openai'
+import { getOpenAIClient, AI_CONFIG } from '@/lib/ai/openai-client'
 import type { RunPromptRequest, RunPromptResult } from '@/types/prompt-lab'
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-})
 
 /**
  * Run a user's prompt through the LLM and check success criteria
@@ -55,16 +51,17 @@ export async function runPrompt(
     }
   }
 
-  // 4. Call GPT-4o
+  // 4. Call GPT-4o using unified client
   const startTime = Date.now()
   let llmResponse: string
 
   try {
+    const openai = getOpenAIClient()
     const completion = await openai.chat.completions.create({
-      model: process.env.AI_MODEL || 'gpt-4o',
+      model: AI_CONFIG.model,
       messages: [{ role: 'user', content: request.prompt }],
-      max_tokens: parseInt(process.env.AI_MAX_TOKENS || '500'),
-      temperature: 0.7
+      max_tokens: AI_CONFIG.maxTokens,
+      temperature: AI_CONFIG.temperature
     })
 
     llmResponse = completion.choices[0].message.content || ''

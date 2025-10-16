@@ -4,114 +4,129 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* VibeCoding Lab - 清新、鼓励探索、轻盈有活力 */
+  /* LLM Learning Lab - Civic-Modern with Playful Accents */
 
-  /* 背景与表面 */
-  --background: 247 248 250; /* #F7F8FA */
-  --foreground: 17 24 39; /* #111827 */
+  /* Background & Surfaces */
+  --background: 241 245 249; /* #F1F5F9 */
+  --foreground: 15 23 42; /* #0F172A */
   --card: 255 255 255; /* #FFFFFF */
-  --card-foreground: 17 24 39;
+  --card-foreground: 15 23 42;
   --popover: 255 255 255;
-  --popover-foreground: 17 24 39;
+  --popover-foreground: 15 23 42;
 
-  /* 主色 - 电光蓝 #3A7BFA */
-  --primary: 58 123 250;
+  /* Primary - Blue #3B82F6 */
+  --primary: 59 130 246;
   --primary-foreground: 255 255 255;
 
-  /* 辅色 - 清新绿 #22C55E */
-  --success: 34 197 94;
+  /* Accent - Orange #F59E0B */
+  --accent: 245 158 11;
+  --accent-foreground: 15 23 42;
+
+  /* Success/Teal for variety */
+  --success: 16 185 129; /* #10B981 */
   --success-foreground: 255 255 255;
+  --teal: 16 185 129;
+  --teal-foreground: 255 255 255;
 
-  /* 辅色 - 青蓝 #06B6D4 */
-  --cyan: 6 182 212;
-  --cyan-foreground: 255 255 255;
-
-  /* 辅色 - 琥珀 #F59E0B (少量使用) */
-  --amber: 245 158 11;
-  --amber-foreground: 17 24 39;
-
-  /* 状态色 */
-  --info: 37 99 235; /* #2563EB */
-  --warning: 249 115 22; /* #F97316 */
+  /* Status Colors */
+  --info: 59 130 246; /* Primary Blue */
+  --warning: 245 158 11; /* #F59E0B */
   --destructive: 239 68 68; /* #EF4444 */
   --destructive-foreground: 255 255 255;
 
-  /* 中性色 */
-  --secondary: 229 231 235; /* #E5E7EB */
-  --secondary-foreground: 17 24 39;
-  --muted: 247 248 250; /* #F7F8FA */
-  --muted-foreground: 107 114 128; /* #6B7280 */
-  --accent: 229 231 235;
-  --accent-foreground: 17 24 39;
+  /* Grays from spec */
+  --gray-900: 15 23 42; /* #0F172A */
+  --gray-700: 51 65 85; /* #334155 */
+  --gray-500: 100 116 139; /* #64748B */
+  --gray-300: 203 213 225; /* #CBD5E1 */
+  --gray-100: 241 245 249; /* #F1F5F9 */
 
-  /* 边框与输入框 */
-  --border: 229 231 235; /* #E5E7EB */
-  --input: 229 231 235;
-  --ring: 58 123 250; /* Primary */
+  /* Secondary & Muted */
+  --secondary: 241 245 249; /* #F1F5F9 */
+  --secondary-foreground: 15 23 42;
+  --muted: 241 245 249;
+  --muted-foreground: 100 116 139; /* #64748B */
 
-  /* 圆角 - 更柔和 */
+  /* Borders & Inputs */
+  --border: 203 213 225; /* #CBD5E1 */
+  --input: 203 213 225;
+  --ring: 59 130 246; /* Primary */
+
+  /* Border Radius - 16px cards, 12px inputs */
   --radius: 1rem; /* 16px */
+  --radius-input: 0.75rem; /* 12px */
 
-  /* Sidebar (保留但更新颜色) */
-  --sidebar: 247 248 250;
-  --sidebar-foreground: 17 24 39;
-  --sidebar-primary: 58 123 250;
+  /* Shadows from spec */
+  --shadow-default: 0 6px 16px rgba(15, 23, 42, 0.06);
+  --shadow-hover: 0 10px 24px rgba(15, 23, 42, 0.08);
+
+  /* Sidebar */
+  --sidebar: 241 245 249;
+  --sidebar-foreground: 15 23 42;
+  --sidebar-primary: 59 130 246;
   --sidebar-primary-foreground: 255 255 255;
-  --sidebar-accent: 229 231 235;
-  --sidebar-accent-foreground: 17 24 39;
-  --sidebar-border: 229 231 235;
-  --sidebar-ring: 58 123 250;
+  --sidebar-accent: 203 213 225;
+  --sidebar-accent-foreground: 15 23 42;
+  --sidebar-border: 203 213 225;
+  --sidebar-ring: 59 130 246;
 }
 
 .dark {
-  /* 暗色模式 - 背景更深 */
-  --background: 11 15 20; /* #0B0F14 */
-  --foreground: 229 231 235; /* #E5E7EB */
-  --card: 17 24 39; /* #111827 */
-  --card-foreground: 229 231 235;
-  --popover: 17 24 39;
-  --popover-foreground: 229 231 235;
+  /* Dark Mode - Deep backgrounds */
+  --background: 15 23 42; /* #0F172A */
+  --foreground: 241 245 249; /* #F1F5F9 */
+  --card: 30 41 59; /* Slightly lighter than bg */
+  --card-foreground: 241 245 249;
+  --popover: 30 41 59;
+  --popover-foreground: 241 245 249;
 
-  /* 主色亮度提升 10% */
-  --primary: 78 143 252; /* 更亮的蓝 */
+  /* Primary - Brighter blue for contrast */
+  --primary: 96 165 250; /* Lighter blue */
   --primary-foreground: 255 255 255;
 
-  /* 辅色 */
-  --success: 52 211 153; /* 更亮的绿 */
-  --success-foreground: 11 15 20;
-  --cyan: 34 211 238; /* 更亮的青蓝 */
-  --cyan-foreground: 11 15 20;
-  --amber: 251 191 36; /* 更亮的琥珀 */
-  --amber-foreground: 11 15 20;
+  /* Accent - Brighter orange */
+  --accent: 251 191 36; /* Brighter orange */
+  --accent-foreground: 15 23 42;
 
-  /* 状态色 */
-  --info: 59 130 246;
-  --warning: 251 146 60;
+  /* Success/Teal */
+  --success: 52 211 153; /* Brighter green */
+  --success-foreground: 15 23 42;
+  --teal: 52 211 153;
+  --teal-foreground: 15 23 42;
+
+  /* Status Colors */
+  --info: 96 165 250;
+  --warning: 251 191 36;
   --destructive: 248 113 113;
   --destructive-foreground: 255 255 255;
 
-  /* 中性色 */
-  --secondary: 31 41 55; /* #1F2937 */
-  --secondary-foreground: 229 231 235;
-  --muted: 31 41 55;
-  --muted-foreground: 156 163 175; /* #9CA3AF */
-  --accent: 31 41 55;
-  --accent-foreground: 229 231 235;
+  /* Grays */
+  --gray-900: 241 245 249;
+  --gray-700: 203 213 225;
+  --gray-500: 148 163 184;
+  --gray-300: 71 85 105;
+  --gray-100: 30 41 59;
 
-  /* 边框 */
-  --border: 31 41 55;
-  --input: 31 41 55;
-  --ring: 78 143 252;
+  /* Secondary & Muted */
+  --secondary: 30 41 59;
+  --secondary-foreground: 241 245 249;
+  --muted: 30 41 59;
+  --muted-foreground: 148 163 184;
+
+  /* Borders */
+  --border: 51 65 85; /* #334155 */
+  --input: 51 65 85;
+  --ring: 96 165 250;
 
   /* Sidebar */
-  --sidebar: 11 15 20;
-  --sidebar-foreground: 229 231 235;
-  --sidebar-primary: 78 143 252;
+  --sidebar: 15 23 42;
+  --sidebar-foreground: 241 245 249;
+  --sidebar-primary: 96 165 250;
   --sidebar-primary-foreground: 255 255 255;
-  --sidebar-accent: 31 41 55;
-  --sidebar-accent-foreground: 229 231 235;
-  --sidebar-border: 31 41 55;
-  --sidebar-ring: 78 143 252;
+  --sidebar-accent: 51 65 85;
+  --sidebar-accent-foreground: 241 245 249;
+  --sidebar-border: 51 65 85;
+  --sidebar-ring: 96 165 250;
 }
 
 @theme inline {
@@ -127,10 +142,8 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
-  --color-cyan: var(--cyan);
-  --color-cyan-foreground: var(--cyan-foreground);
-  --color-amber: var(--amber);
-  --color-amber-foreground: var(--amber-foreground);
+  --color-teal: var(--teal);
+  --color-teal-foreground: var(--teal-foreground);
   --color-info: var(--info);
   --color-warning: var(--warning);
   --color-secondary: var(--secondary);
@@ -164,17 +177,56 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-[400];
   }
 
-  /* Typography scale */
+  /* Typography scale - Inter, Headings 600-700, Body 400-500 */
   h1 {
-    @apply text-4xl leading-tight font-semibold;
+    @apply text-4xl leading-tight font-[700];
   }
   h2 {
-    @apply text-2xl leading-8 font-semibold;
+    @apply text-2xl leading-8 font-[600];
   }
   h3 {
-    @apply text-xl leading-7 font-semibold;
+    @apply text-xl leading-7 font-[600];
+  }
+  p {
+    @apply font-[400];
+  }
+}
+
+@layer utilities {
+  /* Shadow utilities from spec */
+  .shadow-default {
+    box-shadow: var(--shadow-default);
+  }
+  .shadow-hover {
+    box-shadow: var(--shadow-hover);
+  }
+  .hover\:shadow-hover:hover {
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* Spacing scale: 4/8/12/16/24/32/48 */
+  .space-y-4 > * + * {
+    margin-top: 1rem;
+  }
+  .space-y-8 > * + * {
+    margin-top: 2rem;
+  }
+  .space-y-12 > * + * {
+    margin-top: 3rem;
+  }
+  .space-y-16 > * + * {
+    margin-top: 4rem;
+  }
+  .space-y-24 > * + * {
+    margin-top: 6rem;
+  }
+  .space-y-32 > * + * {
+    margin-top: 8rem;
+  }
+  .space-y-48 > * + * {
+    margin-top: 12rem;
   }
 }

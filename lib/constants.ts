@@ -130,65 +130,188 @@ export const LEARNING_JOURNEY = [
   },
 ] as const
 
-// FAQs
+// FAQs (For Educators & Administrators)
 export const FAQS = [
   {
-    question: "Who is this for?",
+    question: "How does this fit into our existing curriculum?",
     answer:
-      "LLM Learning Lab is designed for elementary and middle school students (grades 5-9). If you're curious about how AI works and want to experiment, this is for you! No coding or tech background needed.",
+      "LLM Learning Lab integrates seamlessly into STEM, Computer Science, or Digital Literacy courses. The 5-lab curriculum (2 hours total) can be delivered as a standalone unit, integrated across multiple class periods, or offered as an enrichment program. It aligns with ISTE and CSTA standards for K-12 education.",
   },
   {
-    question: "How long does it take?",
+    question: "What teacher training is required?",
     answer:
-      "All 5 experimental labs take about 2 hours total. Each lab is 15-30 minutes. You can pause anytime and continue later—your progress is automatically saved!",
+      "Teachers complete a 2-hour online professional development program covering curriculum objectives, platform features, and teaching strategies. No prior AI knowledge required! We provide detailed lesson plans, answer keys, and ongoing support through our educator community and monthly live Q&A sessions.",
   },
   {
-    question: "What will I learn?",
+    question: "What are the technical requirements?",
     answer:
-      "You'll discover how LLMs really work through hands-on experiments! Learn about hallucinations (when AI makes things up), biases, reasoning, and how to spot AI's mistakes. Understand what AI can and can't do.",
+      "Students need only a web browser and internet connection—no software installation required. The platform works on Chromebooks, tablets, laptops, and desktops. Minimum bandwidth: 1 Mbps per student. We support Chrome, Firefox, Safari, and Edge browsers.",
   },
   {
-    question: "Why learn about AI hallucinations?",
+    question: "How do you ensure age-appropriate content?",
     answer:
-      "Understanding AI's limitations is just as important as knowing its capabilities! You'll learn to spot when AI is guessing or making up information, which is crucial for using AI safely and responsibly.",
+      "All AI responses go through content moderation filters. Exercises are designed to avoid sensitive topics. Teachers have full visibility into student interactions and can review all content. We comply with COPPA and FERPA regulations for student data privacy.",
   },
   {
-    question: "Is this safe for kids?",
+    question: "Can we try it before committing?",
     answer:
-      "Yes! All content is age-appropriate and educational. We teach critical thinking about AI, including its limitations and ethical concerns. Students learn to use AI responsibly and question its outputs.",
+      "Absolutely! Our free Pilot program allows up to 30 students to access the full curriculum with no credit card required. Run a pilot cohort, gather feedback from teachers and students, then decide on scaling. Many schools pilot with one class before district-wide deployment.",
   },
   {
-    question: "What makes this different from other AI courses?",
+    question: "What support do you provide?",
     answer:
-      "We focus on understanding HOW LLMs work, not just HOW TO USE them. Through experiments, students discover AI behaviors like hallucinations, biases, and reasoning patterns. It's science education for the AI age!",
+      "We offer comprehensive support: teacher onboarding, detailed implementation guides, email/chat support, educator community forum, monthly live Q&A sessions, and regular curriculum updates. School and District plans include priority support and dedicated account management.",
   },
 ] as const
 
-// Proof Points
+// Proof Points (ToB Metrics)
 export const PROOF_POINTS = [
-  { stat: "5 Experiments", label: "Hands-On Labs" },
-  { stat: "Grades 5-9", label: "Perfect For" },
-  { stat: "2 Hours", label: "Complete Course" },
-  { stat: "Zero Coding", label: "Required" },
+  { stat: "2 Hours", label: "Implementation Time" },
+  { stat: "Grades 5-9", label: "Target Age Group" },
+  { stat: "5 Labs", label: "Complete Curriculum" },
+  { stat: "Standards-Aligned", label: "Educational Framework" },
 ] as const
 
-// Pricing Configuration
+// Why AI Literacy Matters
+export const WHY_AI_LITERACY = [
+  {
+    title: "Critical Thinking in the AI Age",
+    description: "Students learn to question AI outputs, spot hallucinations, and verify information—essential skills for navigating an AI-powered world.",
+  },
+  {
+    title: "Future-Ready Workforce",
+    description: "Understanding AI fundamentals prepares students for careers in a technology-driven economy, regardless of their chosen field.",
+  },
+  {
+    title: "Responsible Digital Citizens",
+    description: "Students explore AI ethics, bias, and limitations, learning to use technology responsibly and ethically.",
+  },
+] as const
+
+// Educator Benefits
+export const EDUCATOR_BENEFITS = [
+  {
+    title: "Turn-Key Curriculum",
+    description: "Complete lesson plans, activities, and assessments ready to deploy in your classroom.",
+    features: [
+      "5 structured 110-minute labs",
+      "Detailed teacher guides with talking points",
+      "Assessment rubrics and success criteria",
+      "Alignment to educational standards",
+    ],
+  },
+  {
+    title: "Classroom Management Tools",
+    description: "Monitor student progress, track engagement, and provide targeted support.",
+    features: [
+      "Real-time student progress dashboard",
+      "Individual and class-wide analytics",
+      "Identify students needing help",
+      "Export progress reports",
+    ],
+  },
+  {
+    title: "Professional Development",
+    description: "Comprehensive training and ongoing support to teach AI literacy with confidence.",
+    features: [
+      "2-hour teacher onboarding program",
+      "Video tutorials and teaching tips",
+      "Community forum for educators",
+      "Monthly live Q&A sessions",
+    ],
+  },
+  {
+    title: "Flexible Implementation",
+    description: "Adapt the curriculum to your schedule and teaching style.",
+    features: [
+      "Self-paced or instructor-led options",
+      "Integrate into existing STEM/CS courses",
+      "After-school program ready",
+      "Homework or in-class activities",
+    ],
+  },
+] as const
+
+// Implementation Steps
+export const IMPLEMENTATION_STEPS = [
+  {
+    step: 1,
+    title: "Request Demo & Consultation",
+    description: "Schedule a personalized demo to see how LLM Learning Lab fits your school's needs. Our team will help you plan implementation.",
+    duration: "30 minutes",
+  },
+  {
+    step: 2,
+    title: "Teacher Onboarding",
+    description: "Educators complete a 2-hour professional development program covering curriculum, platform features, and best practices.",
+    duration: "2 hours",
+  },
+  {
+    step: 3,
+    title: "Pilot Program (Optional)",
+    description: "Start with a small cohort to test the curriculum, gather feedback, and refine your approach before full rollout.",
+    duration: "2-4 weeks",
+  },
+  {
+    step: 4,
+    title: "Full Deployment",
+    description: "Roll out to all students with ongoing support. Access live support, community forums, and regular updates.",
+    duration: "Ongoing",
+  },
+] as const
+
+// Pricing Tiers
 export const PRICING = {
-  price: 0,
-  currency: "$",
-  period: "free",
-  description: "All 5 experimental labs are completely free. Start exploring AI today!",
-  features: [
-    "5 hands-on experiments (2 hours total)",
-    "Explore AI hallucinations & limitations",
-    "Discover bias & ethical concerns",
-    "Learn how AI reasons & thinks",
-    "Real-time AI interactions",
-    "Progress tracking & achievements",
-    "AI coach for guidance",
-    "Perfect for grades 5-9",
+  tiers: [
+    {
+      name: "Pilot",
+      price: "Free",
+      period: "",
+      description: "Perfect for trying out the curriculum with a small group",
+      features: [
+        "Up to 30 students",
+        "Full curriculum access (5 labs)",
+        "Basic progress tracking",
+        "Email support",
+        "Community access",
+      ],
+      cta: "Start Pilot Program",
+      highlighted: false,
+    },
+    {
+      name: "School",
+      price: "$499",
+      period: "year",
+      description: "Comprehensive solution for individual schools",
+      features: [
+        "Up to 300 students",
+        "Advanced analytics dashboard",
+        "Teacher professional development",
+        "Priority email & chat support",
+        "Customizable progress reports",
+        "Integration with LMS (Canvas, Google Classroom)",
+      ],
+      cta: "Request Quote",
+      highlighted: true,
+    },
+    {
+      name: "District",
+      price: "Custom",
+      period: "",
+      description: "Scalable solution for school districts and educational organizations",
+      features: [
+        "Unlimited students",
+        "District-wide analytics",
+        "On-site teacher training",
+        "Dedicated account manager",
+        "Custom integrations",
+        "White-label options available",
+        "SLA with 24/7 support",
+      ],
+      cta: "Contact Sales",
+      highlighted: false,
+    },
   ],
-  guarantee: "100% free. No credit card required.",
 } as const
 
 // Sample Learning Outcomes
@@ -214,44 +337,54 @@ export const SAMPLE_PROJECTS = [
 export const COPY = {
   app: {
     name: "LLM Learning Lab",
-    tagline: "Hands-on experiments to understand how AI really works",
+    tagline: "AI literacy curriculum for K-12 education",
   },
   hero: {
-    badge: "For Elementary & Middle School Students",
-    headline: "Discover How AI Thinks.",
-    subheadline: "Experiment. Learn. Understand.",
+    badge: "Turn-Key AI Literacy Curriculum",
+    headline: "Prepare Students for an AI-Powered Future",
     description:
-      "Hands-on experiments to explore LLM behaviors—prompts, responses, hallucinations, and more. Designed for grades 5-9. No coding required.",
+      "A comprehensive, standards-aligned curriculum teaching grades 5-9 students to understand, question, and responsibly use AI through hands-on experiments. Explore hallucinations, biases, ethics, and critical thinking.",
   },
   cta: {
-    primary: "Start Learning Free",
-    secondary: "Begin Your Journey",
+    primary: "Request Demo",
+    secondary: "View Curriculum",
     view: "View Labs",
-    enroll: "Start Lab 1",
+    enroll: "Get Started",
   },
   sections: {
-    modules: {
-      title: "5 Experiments. Real Understanding.",
+    why: {
+      title: "Why AI Literacy Matters Now",
       description:
-        "Discover how LLMs work through hands-on experiments. Explore prompts, hallucinations, biases, and AI reasoning step-by-step.",
+        "AI is transforming every industry and aspect of life. Students need to understand how it works, where it fails, and how to use it responsibly. Our curriculum builds critical thinking skills for the AI age.",
     },
-    proof: {
-      title: "Learn By Experimenting.",
-      description: "Elementary and middle school students explore AI behaviors through interactive experiments. See what AI can and can't do.",
+    curriculum: {
+      title: "5-Lab Experimental Curriculum",
+      description:
+        "Students discover how LLMs work through interactive experiments—exploring prompts, hallucinations, biases, reasoning, and ethics. Each lab builds on the last for comprehensive understanding.",
+    },
+    educators: {
+      title: "Built for Educators, By Educators",
+      description:
+        "Everything you need to successfully teach AI literacy in your classroom. From lesson plans to professional development, we support you every step of the way.",
+    },
+    implementation: {
+      title: "Simple Implementation Process",
+      description:
+        "Get started in days, not months. Our streamlined onboarding ensures teachers are confident and students are engaged from day one.",
     },
     pricing: {
-      title: "Free For All Students",
-      description: "All 5 experimental labs are completely free. Educational access for everyone.",
-      badge: "100% Free",
+      title: "Flexible Pricing for Every School",
+      description: "From pilot programs to district-wide deployments, we have a plan that fits your needs and budget.",
+      badge: "Free Pilot Available",
     },
     faq: {
-      title: "Common Questions",
-      description: "Everything you need to know about LLM Learning Lab",
+      title: "Frequently Asked Questions",
+      description: "Common questions from educators and administrators",
     },
     finalCta: {
-      title: "Ready to Explore AI?",
+      title: "Ready to Bring AI Literacy to Your School?",
       description:
-        "Join students discovering how LLMs really work through hands-on experiments. Start free today.",
+        "Join forward-thinking educators preparing students for an AI-powered future. Schedule a demo to see LLM Learning Lab in action.",
     },
   },
   orientation: {

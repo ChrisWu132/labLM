@@ -3,8 +3,31 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle2, Sparkles, Code2, Award, ArrowRight, Zap } from "lucide-react"
-import { LABS, FAQS, PROOF_POINTS, PRICING, SAMPLE_PROJECTS, COPY, LINKS } from "@/lib/constants"
+import {
+  CheckCircle2,
+  Sparkles,
+  Code2,
+  Award,
+  ArrowRight,
+  Zap,
+  Users,
+  BookOpen,
+  GraduationCap,
+  Shield,
+  BarChart,
+  Clock
+} from "lucide-react"
+import {
+  LABS,
+  FAQS,
+  PROOF_POINTS,
+  PRICING,
+  EDUCATOR_BENEFITS,
+  WHY_AI_LITERACY,
+  IMPLEMENTATION_STEPS,
+  COPY,
+  LINKS
+} from "@/lib/constants"
 
 const iconMap = {
   compass: Sparkles,
@@ -16,6 +39,8 @@ const colorMap = {
   1: "text-primary",
   2: "text-teal",
   3: "text-amber",
+  4: "text-primary",
+  5: "text-teal",
 } as const
 
 export default function LandingPage() {
@@ -31,11 +56,14 @@ export default function LandingPage() {
             <span className="font-semibold text-lg">{COPY.app.name}</span>
           </div>
           <nav className="hidden md:flex items-center gap-6">
-            <Link href="#modules" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Labs
+            <Link href="#curriculum" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Curriculum
             </Link>
-            <Link href="#proof" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              How It Works
+            <Link href="#educators" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              For Educators
+            </Link>
+            <Link href="#implementation" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Implementation
             </Link>
             <Link href="#faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               FAQ
@@ -46,87 +74,155 @@ export default function LandingPage() {
               </Button>
             </Link>
             <Link href={LINKS.auth}>
-              <Button size="sm">Start Free</Button>
+              <Button size="sm">Request Demo</Button>
             </Link>
           </nav>
           <Link href={LINKS.auth} className="md:hidden">
-            <Button size="sm">Start</Button>
+            <Button size="sm">Demo</Button>
           </Link>
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="py-20 md:py-32 px-4">
-        <div className="container mx-auto max-w-5xl text-center">
-          <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 hover:bg-primary/20">
-            {COPY.hero.badge}
-          </Badge>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance">
-            {COPY.hero.headline}
-            <br />
-            <span className="text-primary">{COPY.hero.subheadline}</span>
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto text-pretty">
-            {COPY.hero.description}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link href={LINKS.auth}>
-              <Button size="lg" className="gap-2">
-                {COPY.cta.primary}
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-            </Link>
-            <Button size="lg" variant="outline" asChild>
-              <Link href="#modules">{COPY.cta.view}</Link>
-            </Button>
-          </div>
-          <div className="mt-12 flex flex-wrap justify-center gap-8 text-sm text-muted-foreground">
-            {PROOF_POINTS.map((point, i) => (
-              <div key={i} className="text-center">
-                <div className="text-2xl font-bold text-foreground">{point.stat}</div>
-                <div>{point.label}</div>
+      {/* Hero Section - Civic-Modern with Playful Accents */}
+      <section className="py-20 md:py-32 px-4 bg-gradient-to-b from-background to-muted/30">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 hover:bg-primary/15 transition-colors">
+                <Sparkles className="w-3 h-3 mr-1.5" />
+                {COPY.hero.badge}
+              </Badge>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance leading-tight">
+                {COPY.hero.headline}
+              </h1>
+              <p className="text-lg text-muted-foreground mb-6 text-pretty leading-relaxed">
+                {COPY.hero.description}
+              </p>
+
+              {/* Trust Badges */}
+              <div className="flex flex-wrap gap-4 mb-8 text-sm text-muted-foreground">
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-success" />
+                  <span>Standards-Aligned</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Shield className="w-4 h-4 text-success" />
+                  <span>COPPA/FERPA Ready</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Users className="w-4 h-4 text-success" />
+                  <span>100+ Schools</span>
+                </div>
               </div>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href={LINKS.auth}>
+                  <Button size="lg" className="gap-2 shadow-default hover:shadow-hover transition-all">
+                    {COPY.cta.primary}
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </Link>
+                <Button size="lg" variant="outline" asChild className="border-2">
+                  <Link href="#curriculum">{COPY.cta.secondary}</Link>
+                </Button>
+              </div>
+              <p className="text-sm text-muted-foreground mt-4">
+                No credit card required. District pricing available.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              {PROOF_POINTS.map((point, i) => (
+                <Card key={i} className="shadow-default hover:shadow-hover transition-shadow border-2">
+                  <CardHeader className="pb-4">
+                    <div className="text-3xl font-bold bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">
+                      {point.stat}
+                    </div>
+                    <CardDescription className="font-medium">{point.label}</CardDescription>
+                  </CardHeader>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why AI Literacy Matters - Value Pillars */}
+      <section className="py-24 px-4 bg-white">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">
+              Why This Matters
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{COPY.sections.why.title}</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              {COPY.sections.why.description}
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {WHY_AI_LITERACY.map((item, i) => (
+              <Card key={i} className="shadow-default hover:shadow-hover transition-all duration-300 hover:-translate-y-1 border-2">
+                <CardHeader className="space-y-4">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
+                    {i === 0 && <Shield className="w-7 h-7 text-primary" />}
+                    {i === 1 && <Zap className="w-7 h-7 text-accent" />}
+                    {i === 2 && <GraduationCap className="w-7 h-7 text-success" />}
+                  </div>
+                  <CardTitle className="text-xl">{item.title}</CardTitle>
+                  <CardDescription className="text-base leading-relaxed">{item.description}</CardDescription>
+                </CardHeader>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Labs Overview */}
-      <section id="modules" className="py-20 px-4 bg-muted/30">
+      {/* Curriculum Overview */}
+      <section id="curriculum" className="py-24 px-4 bg-gradient-to-b from-muted/20 to-background">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">{COPY.sections.modules.title}</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              {COPY.sections.modules.description}
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
+              Project-Based Learning
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{COPY.sections.curriculum.title}</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              {COPY.sections.curriculum.description}
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {LABS.map((lab) => {
-              const Icon = iconMap[lab.icon as keyof typeof iconMap]
-              const color = colorMap[lab.number as keyof typeof colorMap]
+              const Icon = iconMap[lab.icon as keyof typeof iconMap] || Sparkles
+              const gradients = [
+                "from-primary/10 to-accent/5",
+                "from-accent/10 to-success/5",
+                "from-success/10 to-primary/5",
+                "from-primary/10 to-success/5",
+                "from-accent/10 to-primary/5"
+              ]
               return (
-                <Card key={lab.number} className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="flex items-start justify-between mb-2">
-                      <div className={`w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center ${color}`}>
-                        <Icon className="w-6 h-6" />
+                <Card
+                  key={lab.number}
+                  className="shadow-default hover:shadow-hover transition-all duration-300 hover:-translate-y-1 border-2 group"
+                >
+                  <CardHeader className="space-y-4">
+                    <div className="flex items-start justify-between">
+                      <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${gradients[lab.number - 1]} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                        <Icon className="w-7 h-7 text-primary" />
                       </div>
-                      <div className="flex flex-col gap-1 items-end">
-                        <Badge variant="secondary" className="text-xs">
-                          {lab.duration}
-                        </Badge>
-                        <Badge variant="outline" className="text-xs">
-                          {lab.difficulty}
-                        </Badge>
-                      </div>
+                      <Badge variant="secondary" className="text-xs font-medium px-3">
+                        <Clock className="w-3 h-3 mr-1 inline" />
+                        {lab.duration}
+                      </Badge>
                     </div>
-                    <CardTitle className="text-xl">
-                      Lab {lab.number}: {lab.title}
-                    </CardTitle>
-                    <CardDescription className="text-sm leading-relaxed mb-3">{lab.description}</CardDescription>
-                    <div className="flex flex-wrap gap-1">
+                    <div>
+                      <div className="text-xs font-semibold text-accent mb-1">LAB {lab.number}</div>
+                      <CardTitle className="text-xl mb-2">
+                        {lab.title}
+                      </CardTitle>
+                    </div>
+                    <CardDescription className="text-base leading-relaxed">{lab.description}</CardDescription>
+                    <div className="flex flex-wrap gap-2 pt-2">
                       {lab.concepts.map((concept) => (
-                        <Badge key={concept} variant="secondary" className="text-xs font-normal">
+                        <Badge key={concept} variant="outline" className="text-xs font-normal border-muted-foreground/20">
                           {concept}
                         </Badge>
                       ))}
@@ -139,27 +235,52 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Proof Section - Learning Outcomes */}
-      <section id="proof" className="py-20 px-4">
+      {/* For Educators */}
+      <section id="educators" className="py-24 px-4 bg-white">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">{COPY.sections.proof.title}</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{COPY.sections.proof.description}</p>
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-success/10 text-success border-success/20">
+              Teacher-Ready
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{COPY.sections.educators.title}</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              {COPY.sections.educators.description}
+            </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {SAMPLE_PROJECTS.map((project, i) => {
-              const icons = [Sparkles, Code2, Zap]
-              const Icon = icons[i]
+          <div className="grid md:grid-cols-2 gap-8">
+            {EDUCATOR_BENEFITS.map((benefit, i) => {
+              const iconColors = ["text-primary", "text-accent", "text-success", "text-primary"]
+              const iconBgs = [
+                "from-primary/10 to-primary/5",
+                "from-accent/10 to-accent/5",
+                "from-success/10 to-success/5",
+                "from-primary/10 to-accent/5"
+              ]
               return (
-                <Card key={i} className="hover:shadow-lg transition-shadow">
+                <Card key={i} className="shadow-default hover:shadow-hover transition-all duration-300 border-2">
                   <CardHeader>
-                    <div
-                      className={`w-full h-48 bg-gradient-to-br ${project.gradient} rounded-lg mb-4 flex items-center justify-center`}
-                    >
-                      <Icon className={`w-16 h-16 ${i === 0 ? "text-primary" : i === 1 ? "text-teal" : "text-amber"}`} />
+                    <div className="flex items-start gap-4">
+                      <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${iconBgs[i]} flex items-center justify-center shrink-0`}>
+                        {i === 0 && <BookOpen className={`w-7 h-7 ${iconColors[i]}`} />}
+                        {i === 1 && <Users className={`w-7 h-7 ${iconColors[i]}`} />}
+                        {i === 2 && <BarChart className={`w-7 h-7 ${iconColors[i]}`} />}
+                        {i === 3 && <Clock className={`w-7 h-7 ${iconColors[i]}`} />}
+                      </div>
+                      <div className="flex-1">
+                        <CardTitle className="text-xl mb-2">{benefit.title}</CardTitle>
+                        <CardDescription className="text-base leading-relaxed mb-4">
+                          {benefit.description}
+                        </CardDescription>
+                        <ul className="space-y-2.5">
+                          {benefit.features.map((feature, j) => (
+                            <li key={j} className="flex items-start gap-2.5 text-sm">
+                              <CheckCircle2 className="w-4 h-4 text-success shrink-0 mt-0.5" />
+                              <span className="text-foreground/80">{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-                    <CardTitle className="text-lg">{project.title}</CardTitle>
-                    <CardDescription>{project.description}</CardDescription>
                   </CardHeader>
                 </Card>
               )
@@ -168,42 +289,95 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Implementation & Support */}
+      <section id="implementation" className="py-24 px-4 bg-gradient-to-b from-muted/20 to-background">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">
+              8-Week Timeline
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{COPY.sections.implementation.title}</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              {COPY.sections.implementation.description}
+            </p>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            {IMPLEMENTATION_STEPS.map((step, i) => (
+              <div key={i} className="flex gap-6 mb-10 last:mb-0 group">
+                <div className="flex-shrink-0 relative">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center font-bold text-lg shadow-default group-hover:shadow-hover transition-all group-hover:scale-110">
+                    {step.step}
+                  </div>
+                  {i < IMPLEMENTATION_STEPS.length - 1 && (
+                    <div className="absolute top-14 left-7 w-0.5 h-10 bg-gradient-to-b from-primary/30 to-accent/10"></div>
+                  )}
+                </div>
+                <div className="flex-1 pt-1">
+                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed mb-3">{step.description}</p>
+                  {step.duration && (
+                    <Badge variant="secondary" className="text-xs font-medium px-3">
+                      <Clock className="w-3 h-3 mr-1 inline" />
+                      {step.duration}
+                    </Badge>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Pricing */}
       <section className="py-20 px-4 bg-muted/30">
-        <div className="container mx-auto max-w-4xl">
+        <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">{COPY.sections.pricing.title}</h2>
-            <p className="text-lg text-muted-foreground">{COPY.sections.pricing.description}</p>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              {COPY.sections.pricing.description}
+            </p>
           </div>
-          <Card className="max-w-lg mx-auto border-2 border-primary">
-            <CardHeader className="text-center pb-8">
-              <Badge className="mb-4 mx-auto bg-primary/10 text-primary border-primary/20">
-                {COPY.sections.pricing.badge}
-              </Badge>
-              <CardTitle className="text-3xl mb-2">Start Learning</CardTitle>
-              <div className="text-4xl font-bold mb-2">
-                Free
-                <span className="text-lg font-normal text-muted-foreground"> to start</span>
-              </div>
-              <CardDescription>{PRICING.description}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-3 mb-8">
-                {PRICING.features.map((feature, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-sm">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link href={LINKS.auth} className="block">
-                <Button size="lg" className="w-full">
-                  {COPY.cta.enroll}
-                </Button>
-              </Link>
-              <p className="text-xs text-center text-muted-foreground mt-4">{PRICING.guarantee}</p>
-            </CardContent>
-          </Card>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {PRICING.tiers.map((tier, i) => (
+              <Card
+                key={i}
+                className={tier.highlighted ? "border-2 border-primary" : ""}
+              >
+                <CardHeader className="text-center">
+                  {tier.highlighted && (
+                    <Badge className="mb-4 mx-auto bg-primary/10 text-primary border-primary/20">
+                      Most Popular
+                    </Badge>
+                  )}
+                  <CardTitle className="text-2xl mb-2">{tier.name}</CardTitle>
+                  <div className="text-3xl font-bold mb-2">
+                    {tier.price}
+                    {tier.period && <span className="text-lg font-normal text-muted-foreground">/{tier.period}</span>}
+                  </div>
+                  <CardDescription>{tier.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3 mb-6">
+                    {tier.features.map((feature, j) => (
+                      <li key={j} className="flex items-start gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href={LINKS.auth} className="block">
+                    <Button
+                      size="lg"
+                      className="w-full"
+                      variant={tier.highlighted ? "default" : "outline"}
+                    >
+                      {tier.cta}
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -230,12 +404,19 @@ export default function LandingPage() {
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">{COPY.sections.finalCta.title}</h2>
           <p className="text-lg mb-8 opacity-90 max-w-2xl mx-auto">{COPY.sections.finalCta.description}</p>
-          <Link href={LINKS.auth}>
-            <Button size="lg" variant="secondary" className="gap-2">
-              {COPY.cta.secondary}
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href={LINKS.auth}>
+              <Button size="lg" variant="secondary" className="gap-2">
+                Request Demo
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
+            <Link href={LINKS.contact}>
+              <Button size="lg" variant="outline" className="gap-2 bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10">
+                Contact Sales
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -253,16 +434,36 @@ export default function LandingPage() {
               <p className="text-sm text-muted-foreground">{COPY.app.tagline}</p>
             </div>
             <div>
-              <h4 className="font-semibold mb-3">Learning</h4>
+              <h4 className="font-semibold mb-3">Product</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <Link href="#modules" className="hover:text-foreground transition-colors">
-                    View Labs
+                  <Link href="#curriculum" className="hover:text-foreground transition-colors">
+                    Curriculum
                   </Link>
                 </li>
                 <li>
-                  <Link href="#proof" className="hover:text-foreground transition-colors">
-                    How It Works
+                  <Link href="#educators" className="hover:text-foreground transition-colors">
+                    For Educators
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#implementation" className="hover:text-foreground transition-colors">
+                    Implementation
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-3">Resources</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>
+                  <Link href={LINKS.helpCenter} className="hover:text-foreground transition-colors">
+                    Help Center
+                  </Link>
+                </li>
+                <li>
+                  <Link href={LINKS.community} className="hover:text-foreground transition-colors">
+                    Teacher Community
                   </Link>
                 </li>
                 <li>
@@ -273,28 +474,13 @@ export default function LandingPage() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-3">Support</h4>
+              <h4 className="font-semibold mb-3">Company</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href={LINKS.helpCenter} className="hover:text-foreground transition-colors">
-                    Help Center
-                  </Link>
-                </li>
-                <li>
-                  <Link href={LINKS.community} className="hover:text-foreground transition-colors">
-                    Community
-                  </Link>
-                </li>
                 <li>
                   <Link href={LINKS.contact} className="hover:text-foreground transition-colors">
-                    Contact
+                    Contact Us
                   </Link>
                 </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-3">Legal</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
                   <Link href={LINKS.privacy} className="hover:text-foreground transition-colors">
                     Privacy Policy
@@ -303,11 +489,6 @@ export default function LandingPage() {
                 <li>
                   <Link href={LINKS.terms} className="hover:text-foreground transition-colors">
                     Terms of Service
-                  </Link>
-                </li>
-                <li>
-                  <Link href={LINKS.refund} className="hover:text-foreground transition-colors">
-                    Refund Policy
                   </Link>
                 </li>
               </ul>
