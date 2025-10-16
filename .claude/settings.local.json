@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build)",
+      "Bash(npx tsc:*)",
+      "Bash(npx:*)",
+      "Bash(where supabase)",
+      "Bash(if not exist \"docs\\qa\\gates\" mkdir \"docs\\qa\\gates\")",
+      "Bash(mkdir:*)",
+      "Bash(dir:*)",
+      "Bash(findstr:*)",
+      "Bash(npm install:*)",
+      "Bash(rm:*)",
+      "Bash(find:*)",
+      "mcp__playwright__browser_navigate",
+      "Bash(mv:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

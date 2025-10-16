@@ -1,0 +1,23 @@
+# Supabase local development
+.branches
+.temp
+
+# Local Supabase Docker volumes
+volumes/
+
+# Supabase CLI generated files
+.env.local
+.env.*.local
+seed.sql
+
+# Database dumps
+*.dump
+*.sql.gz
+
+# Logs
+*.log
+
+.playwright-mcp/
+
+*.png
+
