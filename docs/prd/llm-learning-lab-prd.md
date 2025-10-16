@@ -1,65 +1,74 @@
-# LLM Learning Lab PRD (初中生 Prompt Engineering 教学平台)
+# LLM Learning Lab PRD (AI Literacy Education Platform)
 
 ## 1. Purpose & Vision
 
-**将现有平台转型为面向初中生的 LLM 教学实验室，通过文章式课程 + 交互式 prompt 练习帮助学生理解和掌握 Prompt Engineering。**
+**Transform the existing platform into an LLM learning laboratory that combines theoretical understanding with hands-on practice, helping students understand LLM principles and master practical skills.**
 
-学生通过阅读课程文章学习概念，然后在嵌入式编辑器中修改示例 prompt，实时看到 LLM 输出的变化，从而直观理解 prompt 对结果的影响。
+Students first learn what LLMs are and how they work, then practice prompt techniques through embedded editors, seeing LLM outputs change in real-time, thereby building correct AI understanding and critical thinking.
 
-**Vision**: "让初中生通过实践理解 AI，掌握与 LLM 对话的技能"
+**Vision**: "Through theory + practice, enable learners to understand AI principles, master practical skills, and become responsible AI users"
 
 ---
 
 ## 2. Target Learners
 
-### Primary: 初中生（12-15岁）
-- **Background**: 对 AI 感兴趣，有基本的阅读理解能力
-- **Goal**: 理解 LLM 如何工作，学会写有效的 prompt
-- **Pain**: "AI 很神秘，我不知道怎么让它给我想要的答案"
-- **Success**: 能够写出清晰的 prompt，理解如何引导 LLM 生成特定输出
+### Primary: Middle School Students (Ages 12-15)
+- **Background**: Beginners curious about AI but with no prior knowledge
+- **Goal**: Understand what LLMs are, how they work, what they can and cannot do
+- **Pain**: "What is ChatGPT? Is it really thinking? Can I trust it?"
+- **Success**:
+  - ✅ Understand LLM fundamentals (training, generation, limitations)
+  - ✅ Use LLMs effectively (clear communication, role-setting, guided reasoning)
+  - ✅ Develop critical thinking (knowing when to trust, when to question)
+  - ✅ Use AI responsibly (academic integrity, privacy protection)
 
-### Secondary: 青少年编程爱好者（15-18岁）
-- **Background**: 有一定编程基础，想了解 AI
-- **Goal**: 学习如何在项目中使用 LLM
-- **Success**: 理解 prompt engineering 的核心概念，能应用到实际项目
+### Secondary: Teen Programming Enthusiasts (Ages 15-18)
+- **Background**: Some programming experience, wanting to dive deeper into AI
+- **Goal**: Understand AI principles and apply them to real projects
+- **Success**:
+  - ✅ Master AI literacy fundamentals
+  - ✅ Design complex prompts and workflows
+  - ✅ Build foundation for further AI/ML learning
 
 ---
 
-## 3. Core Product Changes (从现有平台转型)
+## 3. Core Product Changes (Platform Transformation)
 
-### 保持不变 ✅
-- **整体页面布局**: Dashboard, sidebar navigation
-- **Lab 列表 UI**: 左侧lab卡片列表，完成状态追踪
-- **进度系统**: Supabase-based progress tracking
-- **用户认证**: Supabase auth
-- **AI基础设施**: askCoach() server action（可复用）
-- **UI组件库**: shadcn/ui, Tailwind CSS
+### Unchanged ✅
+- **Overall page layout**: Dashboard, sidebar navigation
+- **Lab list UI**: Left sidebar lab cards, completion tracking
+- **Progress system**: Supabase-based progress tracking
+- **User authentication**: Supabase auth
+- **AI infrastructure**: askCoach() server action (reusable)
+- **UI component library**: shadcn/ui, Tailwind CSS
 
-### 核心改动 🔄
+### Core Changes 🔄
 
-| 原有功能 | 新功能 | 原因 |
-|---------|-------|------|
-| **Sandpack 代码编辑器** | **文章式课程 + 嵌入式 Prompt 编辑器** | 不需要写代码，专注于 prompt 学习 |
-| **WebContainer Node.js环境** | **LLM API 调用展示区** | 直接展示 LLM 输出，无需运行环境 |
-| **文件树 + 终端面板** | **文章内容 + Prompt/Output 卡片** | 简化界面，适合阅读和练习 |
-| **观察 AI 编程** | **修改 Prompt 看输出变化** | 学习目标从编程转向 prompt engineering |
+| Previous Feature | New Feature | Reason |
+|-----------------|-------------|---------|
+| **Sandpack code editor** | **Article-based lessons + Embedded Prompt Editor** | No coding needed, focus on AI understanding and usage |
+| **WebContainer Node.js environment** | **LLM API response display** | Direct LLM output display, no runtime needed |
+| **File tree + terminal** | **Article content + Interactive experiments** | Simplified UI for theory learning + practice |
+| **Observe AI coding** | **Understand AI principles + Practice prompt techniques** | Shift from coding to AI literacy education |
 
 ---
 
 ## 4. Product Journey Snapshot
 
-| Lab | 时长 | 主题 | 学生体验 | 输出理解 |
-|-----|------|------|---------|----------|
-| **Lab 1** | 15 min | 什么是 Prompt | 阅读文章 → 修改示例prompt → 看输出变化 | 理解 prompt 的基本结构 |
-| **Lab 2** | 20 min | 如何给清晰指令 | 学习具体性 → 练习改进模糊prompt → 达到目标输出 | 掌握清晰表达的重要性 |
-| **Lab 3** | 20 min | 角色扮演技巧 | 学习 role prompting → 让AI扮演不同角色 → 对比输出 | 理解上下文对输出的影响 |
-| **Lab 4** | 25 min | 分步思考引导 | 学习 chain-of-thought → 引导AI分步推理 → 获得详细解答 | 掌握引导AI深度思考的技巧 |
-| **Lab 5** | 30 min | 综合应用挑战 | 应用所学技巧 → 完成多个实际场景 → 自由创作 | 综合运用所有技能 |
-| **Lab 6** | 60 min | AI 工作流搭建 ⭐ | 观察工作流 → 修改步骤 → 自由创建 | 学会分解问题，搭建多步骤 AI 系统 |
+| Lab | Duration | Topic | Theory | Practice | Learning Outcomes |
+|-----|----------|-------|--------|----------|-------------------|
+| **Lab 1** | 20 min | Meet Your AI Friend | What LLMs are, how they work | First conversation, refining questions | Understand LLMs + Ask questions |
+| **Lab 2** | 25 min | How AI Gets Smart | Training process, knowledge sources | Clear communication practice | Understand training + Write specific prompts |
+| **Lab 3** | 25 min | AI's "Thinking" Process | Generation mechanism, context role | Role-playing practice | Understand generation + Set roles |
+| **Lab 4** | 30 min | AI's Capabilities & Limits | Superpowers vs weaknesses, hallucinations | Guide deep reasoning | Critical thinking + Advanced techniques |
+| **Lab 5** | 30 min | Responsible AI Use | Ethics, academic integrity | Comprehensive scenarios | Ethical awareness + Integrated application |
+| **Lab 6** | 60 min | AI Workflow Builder ⭐ | Problem decomposition, systems thinking | Observe→Modify→Create workflows | Computational thinking + Workflow design |
 
-**总时长**: 约 3 小时完成全部课程（Lab 1-5 基础 + Lab 6 进阶）
+**Total Duration**: ~3.2 hours for complete course
 
-**注**: Lab 6 为进阶"毕业项目"，综合运用前5个labs的所有技能
+**Course Structure**: 40% theory + 60% practice - each lab follows "understand principles first, then practice"
+
+**Note**: Lab 6 is an advanced "capstone project" integrating all knowledge and skills from Labs 1-5
 
 ---
 
@@ -404,135 +413,220 @@ export async function getLabContent(labNumber: number) {
 
 ---
 
-## 8. Lab 课程大纲（初步）
+## 8. Lab Course Outline (Theory + Practice Integration)
 
-### Lab 1: Prompt 基础（15分钟）
-**学习目标**:
-- 理解什么是 prompt
-- 学会写基本的指令
-- 了解LLM如何理解输入
+### Lab 1: Meet Your AI Friend — What are LLMs + First Conversation (20 min)
 
-**练习**:
-1. 修改简单prompt看输出变化
-2. 让AI写一个故事（添加细节要求）
-3. 挑战：写prompt让AI生成特定格式的回复
+**Part A: Understanding LLMs** (10 min)
+- What is AI, what is an LLM
+- LLM vs Search Engine vs Calculator
+- How LLMs work (predicting the next word)
+- AI is not a person, it's an intelligent tool
+- Interactive experiments:
+  - Ask simple questions, observe AI responses
+  - Ask the same question 3 times, notice slight variations (understanding randomness)
 
-### Lab 2: 清晰表达（20分钟）
-**学习目标**:
-- 具体性的重要性
-- 如何避免歧义
-- 提供充分上下文
+**Part B: First Conversation** (10 min)
+- 💡 Concept: A prompt is an instruction to AI
+- ✏️ Exercise 1: Improve your question (vague → clear)
+- ✏️ Exercise 2: Have AI write a story (adding details)
+- 🎯 Discovery: The clearer you communicate, the better AI responds
 
-**练习**:
-1. 改进模糊prompt
-2. 添加约束条件
-3. 挑战：写prompt获得JSON格式输出
-
-### Lab 3: 角色扮演（20分钟）
-**学习目标**:
-- System prompt 的作用
-- 如何设定AI的角色
-- 不同角色的输出差异
-
-**练习**:
-1. 让AI扮演老师解释概念
-2. 让AI扮演诗人写诗
-3. 挑战：设计自定义角色
-
-### Lab 4: 引导思考（25分钟）
-**学习目标**:
-- Chain-of-thought prompting
-- 分步推理
-- 获得详细解释
-
-**练习**:
-1. 让AI展示解题步骤
-2. 引导AI分析问题
-3. 挑战：复杂问题的多步引导
-
-### Lab 5: 综合应用（30分钟）
-**学习目标**:
-- 综合运用所有技巧
-- 解决实际问题
-- 创意应用
-
-**练习**:
-1. 场景1：学习助手
-2. 场景2：创意写作
-3. 场景3：数据分析助手
-4. 开放挑战：自由创作
+**Learning Outcomes**:
+- ✅ Know what LLMs are and how they work
+- ✅ Ask your first question
+- ✅ Understand the importance of clear communication
 
 ---
 
-### Lab 6: AI 工作流搭建（60分钟）⭐ 进阶毕业项目
+### Lab 2: How AI Gets Smart + Learning Clear Communication (25 min)
 
-**定位**: 综合应用所有 prompt engineering 技能的"毕业项目"
+**Part A: LLM's Learning Process** (12 min)
+- How LLMs learn (training data, pattern recognition)
+- What LLMs have "read" (internet text, books, code)
+- Why some questions are answered well, others poorly
+- Understanding knowledge cutoff dates
+- Interactive experiments:
+  - Ask about 2020 vs 2024 events → Discover knowledge boundaries
+  - Ask obscure vs common knowledge → Understand data influence
 
-**学习目标**:
-- 理解"复杂任务 = 简单步骤的组合"
-- 学会分解问题（computational thinking）
-- 掌握 prompt 链接（prompt chaining）
-- 培养系统性思维
+**Part B: Clear Communication Techniques** (13 min)
+- Why specificity matters (based on how LLMs work)
+- Three elements: Details, Constraints, Context
+- ✏️ Exercise 1: Have AI write a story (vague → specific)
+  - Vague: "Write a story"
+  - Specific: "Write a 200-word sci-fi story featuring a cat on an adventure"
+- ✏️ Exercise 2: Add format requirements
+- 🎯 Challenge: Get JSON format output
 
-**三个递进阶段**:
+**Learning Outcomes**:
+- ✅ Understand LLM learning sources and limitations
+- ✅ Master clear communication methods
+- ✅ Write effective detailed instructions
 
-**阶段1: 观察工作流（15分钟）**
-- 看预设的"故事创作助手"如何运行
-- 理解数据如何从一步传到下一步
-- 观察 prompt 中的变量替换
+---
 
-**阶段2: 修改工作流（20分钟）**
-- 编辑每个步骤的 prompt
-- 看修改如何影响最终输出
-- 练习题：
-  1. 让创意更科幻
-  2. 添加故事转折
-  3. 改变输出语气
+### Lab 3: AI's "Thinking" Process + Role-Playing Magic (25 min)
 
-**阶段3: 自由创建（25分钟）**
-- 从空白画布搭建自己的工作流
-- 使用积木式拖拽（或点击添加）
-- 挑战任务（3选1）：
-  - 作业助手（分析题目 → 提示思路 → 验证方法）
-  - 翻译润色器（翻译 → 检查 → 改进）
-  - 自由创作（学生自己设计）
+**Part A: How LLMs Generate Responses** (12 min)
+- Token concept (how AI understands text)
+- Word-by-word generation process
+- Role of context (previous text determines what follows)
+- Why responses vary slightly each time (probabilistic selection)
+- Interactive experiments:
+  - Ask same question multiple times → Observe differences
+  - Gradually add context → See improved responses
 
-**技术实现**:
-- 使用 React Flow 可视化工作流
-- 自定义节点类型（输入、AI步骤、输出）
-- 轻量级执行引擎
-- 完整的详细设计见：`docs/labs/lab6-workflow-builder.md`
+**Part B: Role-Playing Techniques** (13 min)
+- Why role-setting works (based on context understanding)
+- System prompts / Role-setting function
+- ✏️ Exercise 1: Have AI play teacher explaining concepts
+- ✏️ Exercise 2: Have AI play poet writing poetry
+- ✏️ Exercise 3: Compare outputs from different roles
+- 🎯 Challenge: Design your custom AI assistant persona
 
-**教学价值**:
-- ⭐⭐⭐⭐⭐ 培养"分解问题"的计算思维
-- 理解 AI agent 和自动化的基本原理
-- 为未来学习编程/AI工程打基础
+**Learning Outcomes**:
+- ✅ Understand LLM generation mechanisms
+- ✅ Use role-setting to change output style
+- ✅ Understand context's impact on responses
 
-**成本估算**:
-- 每个学生约 37 次 LLM 调用
-- 成本: ~$0.17/学生（Lab 1-5 为 $0.14）
-- 增加 21%，教学价值远超成本
+---
+
+### Lab 4: AI's Capabilities & Limits + Guiding Deep Reasoning (30 min)
+
+**Part A: LLM's Superpowers and Weaknesses** (15 min)
+- ✅ Great at: Writing, summarizing, translating, explaining
+- ⚠️ Use caution: Math, facts, recent information
+- ❌ Weaknesses: Complex reasoning, making up information
+- Understanding "hallucinations" (AI inventing plausible-sounding but false information)
+- Interactive experiments:
+  - Math problem test → Discover calculation errors
+  - Fact-checking challenge → Find outdated knowledge
+  - Identify AI fabrications → Learn to question
+
+**Part B: Chain-of-Thought (Step-by-Step Reasoning)** (15 min)
+- Why guide AI's "thinking" (compensating for reasoning weaknesses)
+- How to make AI show reasoning steps
+- ✏️ Exercise 1: Have AI show problem-solving process
+  - "Please explain your reasoning step by step"
+- ✏️ Exercise 2: Guide AI through complex problem analysis
+- 🎯 Challenge: Design multi-step guidance for real problems
+
+**Learning Outcomes**:
+- ✅ Clearly know what AI can and cannot do
+- ✅ Develop critical thinking and fact-checking skills
+- ✅ Master techniques for guiding AI's deep reasoning
+
+---
+
+### Lab 5: Responsible AI Use + Comprehensive Application (30 min)
+
+**Part A: AI Ethics and Responsible Use** (12 min)
+- Academic integrity: AI-assisted learning vs plagiarism
+  - ✅ Good: Using AI to explain concepts, brainstorm ideas
+  - ❌ Bad: Copying homework answers directly
+- Privacy protection: What NOT to tell AI
+  - ❌ Personal information, passwords, home addresses
+- Case discussions and voting
+- Create your personal "AI Usage Principles"
+
+**Part B: Comprehensive Practice** (18 min)
+Apply all techniques (clear communication, role-setting, step-by-step guidance)
+
+- ✏️ **Scenario 1: Learning Assistant**
+  - Task: Have AI explain a difficult concept (e.g., "photosynthesis")
+  - Requirement: Don't want direct answers, want to understand the reasoning
+  - Techniques: Clear communication + Role-setting (teacher) + Guided reasoning
+
+- ✏️ **Scenario 2: Creative Writing Partner**
+  - Task: Use AI to help write a short essay
+  - Process: Brainstorm → AI suggestions → Your creation
+  - Techniques: Role-setting (creative consultant) + Multi-turn dialogue
+
+- ✏️ **Scenario 3: Research Assistant**
+  - Task: Research a topic (e.g., "dinosaur extinction")
+  - Process: Information gathering → Fact-checking → Organize & summarize
+  - Techniques: Clear communication + Critical thinking (verify information)
+
+- 🎯 **Open Challenge**: Solve your own real problem
+  - Choose your own topic, apply all skills comprehensively
+
+**Learning Outcomes**:
+- ✅ Establish responsible AI usage mindset
+- ✅ Flexibly apply all techniques in real scenarios
+- ✅ Understand AI is a tool, you are the leader
+
+---
+
+### Lab 6: AI Workflow Builder (60 min) ⭐ Advanced Capstone Project
+
+**Purpose**: Comprehensive application of all prompt engineering skills as a "capstone project"
+
+**Learning Objectives**:
+- Understand "complex tasks = combination of simple steps"
+- Learn problem decomposition (computational thinking)
+- Master prompt chaining
+- Develop systems thinking
+
+**Three Progressive Stages**:
+
+**Stage 1: Observe Workflows (15 min)**
+- See how preset "Story Creator" workflow runs
+- Understand how data flows from step to step
+- Observe variable substitution in prompts
+
+**Stage 2: Modify Workflows (20 min)**
+- Edit prompts for each step
+- See how modifications affect final output
+- Practice exercises:
+  1. Make ideas more sci-fi
+  2. Add story twists
+  3. Change output tone
+
+**Stage 3: Free Creation (25 min)**
+- Build your own workflow from blank canvas
+- Use block-style drag-and-drop (or click-to-add)
+- Challenge tasks (choose 1 of 3):
+  - Homework Helper (analyze problem → hint reasoning → verify method)
+  - Translation Polisher (translate → check → improve)
+  - Free Creation (design your own)
+
+**Technical Implementation**:
+- Visual workflows using React Flow
+- Custom node types (Input, AI Step, Output)
+- Lightweight execution engine
+- Full detailed design: `docs/labs/lab6-workflow-builder.md`
+
+**Educational Value**:
+- ⭐⭐⭐⭐⭐ Cultivate "problem decomposition" computational thinking
+- Understand AI agent and automation fundamentals
+- Build foundation for future programming/AI engineering learning
+
+**Cost Estimate**:
+- ~37 LLM calls per student
+- Cost: ~$0.17/student (Labs 1-5: $0.16)
+- 6% increase, educational value far exceeds cost
 
 ---
 
 ## 9. Success Metrics
 
-### 学习成果指标
-- **80%+ 完成率**: 学生完成 Lab 1-5（基础课程）
-- **60%+ 进阶完成率**: 学生完成 Lab 6（进阶项目）
-- **平均时长**: 每个lab在目标时间内完成
-- **练习成功率**: 70%+ 的练习首次或第二次尝试成功
-- **创作率**: 50%+ 学生在 Lab 6 中创建了自己的工作流
+### Learning Outcome Metrics
+- **80%+ completion rate**: Students complete Labs 1-5 (foundation course)
+- **60%+ advanced completion**: Students complete Lab 6 (advanced project)
+- **Average duration**: Each lab completed within target time
+- **Exercise success rate**: 70%+ of exercises succeed on first or second attempt
+- **Creation rate**: 50%+ of students create their own workflow in Lab 6
 
-### 技术指标
-- **LLM API 响应时间**: <3秒
-- **API 成功率**: 95%+
-- **页面加载时间**: <2秒
+### Technical Metrics
+- **LLM API response time**: <3 seconds
+- **API success rate**: 95%+
+- **Page load time**: <2 seconds
 
-### 参与度指标
-- **重试次数**: 平均每题 1.5-2 次尝试
-- **辅导请求**: 30%+ 学生使用askCoach寻求帮助
-- **完成后留存**: 50%+ 学生一周内返回复习
+### Engagement Metrics
+- **Retry attempts**: Average 1.5-2 attempts per exercise
+- **Coaching requests**: 30%+ students use askCoach for help
+- **Post-completion retention**: 50%+ students return within a week for review
 
 ---
 
@@ -542,11 +636,11 @@ export async function getLabContent(labNumber: number) {
 **确定选择**: ✅ **GPT-4o**（用户决策）
 
 **Lab 1-5 成本（基础课程）**:
-- 5 labs × 平均6次练习 = 30次 API 调用/学生
+- 5 labs × 平均7次练习/实验 = 35次 API 调用/学生
 - 平均每次调用: 200 tokens input + 400 tokens output
-- Input: 30 × 200 = 6,000 tokens = $0.015
-- Output: 30 × 400 = 12,000 tokens = $0.12
-- **Lab 1-5 成本: ~$0.14/student**
+- Input: 35 × 200 = 7,000 tokens = $0.0175
+- Output: 35 × 400 = 14,000 tokens = $0.14
+- **Lab 1-5 成本: ~$0.16/student**（比原计划增加$0.02，因为增加了理论实验）
 
 **Lab 6 成本（进阶工作流）**:
 - 观察3次 + 编辑8次 + 创建20次 = 37次 API 调用
@@ -555,18 +649,19 @@ export async function getLabContent(labNumber: number) {
 - **Lab 6 成本: ~$0.17/student**
 
 **总成本（6个labs）**:
-- **完整课程: ~$0.31/student**
+- **完整课程: ~$0.33/student** (Lab 1-5: $0.16 + Lab 6: $0.17)
 
 **规模成本**:
-- 100学生: ~$31/月
-- 500学生: ~$155/月
-- 1000学生: ~$310/月
+- 100学生: ~$33/月
+- 500学生: ~$165/月
+- 1000学生: ~$330/月
 
-**注意**:
+**实际成本预估**:
 - 如使用 LLM 做成功检查: 每次练习额外 +$0.01
 - 推荐：使用规则检查（零成本）
-- 大部分学生可能只完成 Lab 1-5（80%），Lab 6 是可选进阶（60%）
-- 实际成本可能介于 $14-31/100学生之间
+- 预计80%学生完成 Lab 1-5，60%学生完成 Lab 6
+- **实际平均成本: ~$0.26/student** ($0.16 × 80% + $0.17 × 60%)
+- **100学生实际成本: ~$26/月**
 
 ---
 
@@ -686,60 +781,83 @@ export async function getLabContent(labNumber: number) {
 
 ## 15. Competitive Positioning
 
-| Feature | LLM Learning Lab | Anthropic课程 | 其他编程平台 |
-|---------|-----------------|--------------|-------------|
-| **目标受众** | 初中生（12-15岁） | 成人开发者 | 青少年编程学习者 |
-| **学习时长** | 2小时 | 4-6小时 | 数月 |
-| **互动性** | 实时LLM调用 | 静态示例 | 代码练习 |
-| **门槛** | 零基础 | 有技术背景 | 需要编程基础 |
-| **中文支持** | ✅ 完整中文 | ❌ 英文 | 部分中文 |
-| **价格** | 免费（MVP） | 免费 | $10-50/月 |
+| Feature | LLM Learning Lab | Anthropic Course | Other Coding Platforms |
+|---------|-----------------|------------------|----------------------|
+| **Target Audience** | Middle school students (12-15) | Adult developers | Teen programmers |
+| **Teaching Focus** | AI Literacy (theory+practice) | Prompt engineering skills | Coding skills |
+| **Duration** | 3.2 hours | 4-6 hours | Months |
+| **Theory vs Practice** | 40% theory + 60% practice | 10% theory + 90% practice | 5% theory + 95% practice |
+| **Critical Thinking** | ✅ Emphasized | ⚠️ Limited | ❌ None |
+| **Ethics Education** | ✅ Comprehensive | ⚠️ Briefly mentioned | ❌ None |
+| **Interactivity** | Real-time LLM calls | Static examples | Code exercises |
+| **Barrier to Entry** | Zero prerequisites | Technical background needed | Programming required |
+| **Language** | ✅ English | ✅ English | Mixed |
+| **Price** | Free (MVP) | Free | $10-50/month |
 
-**独特价值**: "首个为中文初中生设计的 Prompt Engineering 实验室"
-
----
-
-## 16. Marketing Messages（面向家长/学校）
-
-### 核心卖点
-🎯 **AI时代必备技能**: 让孩子学会与AI有效沟通
-⚡ **2小时快速入门**: 周末就能完成，不占用课业时间
-🧒 **适合初中生**: 无需编程基础，从零开始
-💡 **实践导向**: 不是理论课，是动手实验室
-🌐 **完全中文**: 无语言障碍
-
-### 家长关心的问题
-**Q: 我的孩子没有编程基础，能学吗？**
-A: 完全可以！课程专为零基础设计，通过实践学习。
-
-**Q: 学完能做什么？**
-A: 孩子将学会如何有效使用ChatGPT等AI工具，这是未来学习和工作的必备技能。
-
-**Q: 内容安全吗？**
-A: 所有LLM输出都经过安全过滤，确保适合青少年。
+**Unique Value**: "First AI literacy education platform for middle schoolers — teaching not just how to use AI, but what it is, why it works, and when to trust it"
 
 ---
 
-**Document Version**: 1.2 (LLM Learning Lab for Middle School Students)
+## 16. Marketing Messages (For Parents/Schools)
+
+### Core Value Propositions
+🧠 **AI Literacy Education**: Teaching not just how to use AI, but what it is, why it works, and when to question it
+🎯 **Theory + Practice**: 40% understanding principles + 60% hands-on practice
+⚡ **Learn in 3 Hours**: Complete on a weekend, build proper AI understanding
+🔍 **Critical Thinking**: Learn to question AI, verify information, avoid blind trust
+⚖️ **Responsible Use**: Comprehensive ethics education and academic integrity training
+🧒 **Beginner-Friendly**: No coding required, suitable for all middle schoolers
+🌐 **Fully in English**: Clear, accessible educational content
+
+### Parent FAQs
+**Q: My child has no programming background. Can they learn this?**
+A: Absolutely! The course starts with "What is AI?" — complete beginners welcome.
+
+**Q: How is this different from typical AI tutorials?**
+A: We don't just teach how to use AI. More importantly, we teach students to understand AI's principles, limitations, and proper usage. We cultivate AI literacy, not just operational skills.
+
+**Q: What will my child gain from this?**
+A: Students will:
+- ✅ Understand how AI works and develop proper AI understanding
+- ✅ Effectively use ChatGPT and similar tools to assist learning
+- ✅ Develop critical thinking — knowing when to trust AI
+- ✅ Use AI responsibly while maintaining academic integrity
+
+**Q: Won't this make my child overly dependent on AI?**
+A: Quite the opposite! The course specifically emphasizes AI's limitations and responsible use. We teach students to treat AI as an assistant tool, not an answer machine.
+
+**Q: Is the content safe?**
+A: All LLM outputs are filtered for safety. The course includes comprehensive privacy protection and safe usage education.
+
+---
+
+**Document Version**: 2.0 EN (AI Literacy Education Platform for Middle School Students)
 **Created**: 2025-10-16
-**Last Updated**: 2025-10-17
-**Status**: ✅ Core Decisions Confirmed + Lab 6 Added → Ready for Architecture & Epic Creation
+**Last Updated**: 2025-10-16
+**Status**: ✅ Major Update: Transformed to AI Literacy Education (Theory + Practice) + Full English Localization
+
+**Major Updates (v2.0 EN)**:
+- ✅ **Teaching Focus Shift**: From pure skill training → AI Literacy Education (40% theory + 60% practice)
+- ✅ **Labs 1-5 Redesigned**: Each lab includes "Understanding Principles" + "Practice Techniques"
+- ✅ **New Content**: Critical thinking, hallucination recognition, ethics education, responsible use
+- ✅ **Lab 6 Retained**: Workflow builder as advanced "capstone project"
+- ✅ **Full English Localization**: All content, UI, and documentation in English
 
 **Confirmed Decisions**:
-- ✅ 5 basic labs + 1 advanced lab (Lab 6)
+- ✅ 5 foundation labs (theory+practice) + 1 advanced lab (Lab 6 workflow)
 - ✅ GPT-4o for LLM API
-- ✅ MDX for article + embedded components
-- ✅ Auto-check for exercise success (rule-based)
-- ✅ No difficulty levels (unified experience)
-- ✅ Lab 6: Visual workflow builder using React Flow
+- ✅ MDX for articles + embedded components
+- ✅ Rule-based checking (auto success validation)
+- ✅ Unified difficulty (no leveling)
+- ✅ Lab 6: React Flow visual workflow editor
 
 **Key Documents**:
 - 📄 Main PRD: This document
-- 📄 Lab 6 Detailed Design: `docs/labs/lab6-workflow-builder.md` (40,000+ words)
+- 📄 Lab 6 Detailed Design: `docs/labs/lab6-workflow-builder.md`
 
 **Next Steps**:
-1. ✅ PRD finalized (with Lab 6)
+1. ✅ PRD v2.0 EN Complete (AI Literacy Education + English)
 2. ✅ Lab 6 detailed design completed
-3. 🔄 Create Architecture document (if needed)
-4. 🔄 Create Epic with detailed Stories (Lab 1-6)
-5. 🔄 Start Phase 1 implementation (Week 1-2 for Lab 1-5)
+3. 🔄 Create or update Architecture document
+4. 🔄 Create Epic and detailed Stories (Labs 1-6)
+5. 🔄 Begin Phase 1 implementation (Week 1-2)

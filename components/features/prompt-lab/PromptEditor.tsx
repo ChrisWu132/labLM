@@ -17,7 +17,7 @@ export function PromptEditor({
   exerciseId,
   mode,
   initialValue = '',
-  placeholder = '在这里输入你的 prompt...',
+  placeholder = 'Enter your prompt here...',
   maxLength = 1000,
   showCharCount = true,
   onSubmit
@@ -51,7 +51,7 @@ export function PromptEditor({
       <div className="mt-2 flex items-center justify-between">
         {showCharCount && (
           <div className="text-sm text-gray-500 dark:text-gray-400">
-            {prompt.length} / {maxLength} 字符
+            {prompt.length} / {maxLength} characters
           </div>
         )}
 
@@ -62,7 +62,7 @@ export function PromptEditor({
             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
           >
             {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
-            {isSubmitting ? '运行中...' : '运行 Prompt'}
+            {isSubmitting ? 'Running...' : 'Run Prompt'}
           </button>
         )}
       </div>

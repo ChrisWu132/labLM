@@ -1,384 +1,479 @@
-# Lab 5: Comprehensive Application Challenge
+# Lab 5: Responsible AI Use & Mastery
 
 ## 📖 Learning Objectives
 
-- Combine all prompt engineering techniques
-- Solve complex, multi-step real-world problems
-- Master the art of crafting powerful prompts
-- Build confidence in communicating with AI
+By the end of this lab, you will:
+- Understand how to use AI ethically and responsibly
+- Know the difference between AI-assisted learning and plagiarism
+- Protect your privacy when using AI tools
+- Apply ALL prompt techniques in real-world scenarios
+- Become a confident, responsible AI user
+
+**Duration**: ~30 minutes
 
 ---
 
-## 🎯 What You've Learned So Far
+## Part A: AI Ethics & Responsible Use (12 minutes)
 
-Let's recap the powerful techniques from Labs 1-4:
+Now that you know HOW to use AI effectively, let's talk about WHEN and HOW you should use it responsibly.
 
-| Lab | Technique | When to Use |
-|-----|-----------|-------------|
-| **Lab 1** | Clear Instructions | Always - foundation of good prompts |
-| **Lab 2** | Specificity & Context | When you need precise, detailed outputs |
-| **Lab 3** | Role Assignment | When you want specific expertise or perspective |
-| **Lab 4** | Chain-of-Thought | For complex reasoning, math, planning, debugging |
+### Academic Integrity: The Right Way to Use AI
 
-**Now it's time to combine them all!**
+Using AI for schoolwork is like using a calculator—it's a tool that can help you learn, but you need to use it correctly.
 
 ---
 
-## 🚀 The Power of Combined Techniques
+### ✅ GOOD: AI-Assisted Learning
 
-The best prompts use multiple techniques together. Here's how they stack:
+**These uses help you LEARN:**
 
-### Example: Weak vs Strong Prompt
-
-**❌ Weak Prompt:**
+**1. Understanding Concepts**
 ```
-Write a marketing email for my app.
-```
-
-**✅ Strong Prompt (combining all techniques):**
-```
-You are an experienced SaaS marketing copywriter with expertise in B2B email campaigns.
-
-Write a cold outreach email for "TaskMaster Pro" - a project management tool that helps small teams (5-20 people) reduce meeting time by 40%.
-
-Requirements:
-- Target audience: Startup founders and small business owners
-- Tone: Professional but friendly, not salesy
-- Length: 150-200 words
-- Include: One specific pain point, one clear benefit, one call-to-action
-- Format: Subject line + body
-
-Think step-by-step:
-1. What's the biggest pain point for this audience?
-2. How does our product solve it uniquely?
-3. What's the most compelling call-to-action?
-
-Show your reasoning before writing the email.
+❌ BAD: "What's the answer to question 5 on my worksheet?"
+✅ GOOD: "I don't understand photosynthesis. Can you explain it using a simple analogy?"
 ```
 
-See the difference? The strong prompt combines:
-- 🎭 **Role** (SaaS marketing copywriter)
-- 📋 **Specific requirements** (audience, tone, length, structure)
-- 🔗 **Context** (product details, target audience)
-- 🧠 **Chain-of-Thought** (step-by-step reasoning)
+**2. Getting Unstuck**
+```
+❌ BAD: "Write my essay about Romeo and Juliet."
+✅ GOOD: "I'm writing about themes in Romeo and Juliet. Can you help me brainstorm 3 possible themes to explore?"
+```
+
+**3. Checking Your Work**
+```
+❌ BAD: "Solve this math problem for me."
+✅ GOOD: "I solved this problem and got X. Can you check my steps and tell me if I made a mistake?"
+```
+
+**4. Learning New Skills**
+```
+❌ BAD: "Write my code for me."
+✅ GOOD: "I'm trying to create a loop in Python but I'm stuck. Can you explain how loops work with an example?"
+```
 
 ---
 
-## 📚 Real-World Scenarios
+### ❌ BAD: Plagiarism & Cheating
 
-### Scenario 1: Code Review Assistant
+**These uses hurt your learning:**
 
-<StaticPromptDemo
-  prompt="You are a senior software engineer conducting a code review.
+**1. Direct Copying**
+- Asking AI to write your essay and submitting it as yours
+- Copying answers from AI without understanding
+- Using AI to do your homework entirely
 
-Review this React component and provide actionable feedback:
+**2. Avoiding Learning**
+- Never attempting problems yourself first
+- Using AI as a shortcut instead of a learning tool
+- Not understanding what the AI produces
 
-```jsx
-function UserProfile({ user }) {
-  const [data, setData] = useState()
-
-  useEffect(() => {
-    fetch('/api/user/' + user.id)
-      .then(res => res.json())
-      .then(setData)
-  })
-
-  return <div>{data.name}</div>
-}
-```
-
-Please analyze:
-1. Potential bugs or errors
-2. Performance issues
-3. Best practice violations
-4. Security concerns
-
-For each issue, explain:
-- What's wrong
-- Why it's a problem
-- How to fix it
-
-Think through this systematically."
-  output="Let me review this code step by step:
-
-**1. CRITICAL BUG - Missing useEffect dependency array**
-- **What's wrong:** useEffect runs on every render
-- **Why it's a problem:** Creates infinite loop (fetch → setState → re-render → fetch...)
-- **Fix:** Add dependency array: `useEffect(() => {...}, [user.id])`
-
-**2. ERROR - Unsafe data access**
-- **What's wrong:** `data.name` called when data is undefined initially
-- **Why it's a problem:** Will crash: 'Cannot read property name of undefined'
-- **Fix:** Add conditional: `{data?.name}` or loading state
-
-**3. PERFORMANCE - Missing error handling**
-- **What's wrong:** No .catch() on fetch promise
-- **Why it's a problem:** Silent failures, poor UX
-- **Fix:** Add error handling and display error state
-
-**4. SECURITY - String concatenation in URL**
-- **What's wrong:** Direct user.id concatenation
-- **Why it's a problem:** Potential injection if ID contains special characters
-- **Fix:** Use template literals and URL encoding
-
-**Corrected version:**
-```jsx
-function UserProfile({ user }) {
-  const [data, setData] = useState(null)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    fetch(`/api/user/${encodeURIComponent(user.id)}`)
-      .then(res => res.json())
-      .then(setData)
-      .catch(setError)
-  }, [user.id])
-
-  if (error) return <div>Error: {error.message}</div>
-  if (!data) return <div>Loading...</div>
-  return <div>{data.name}</div>
-}
-```"
-/>
+**3. Academic Dishonesty**
+- Submitting AI-generated work as your own original work
+- Using AI during tests when it's not allowed
+- Not citing AI when you're required to
 
 ---
 
-### Scenario 2: Data Analysis & Insights
+### The Golden Rule of AI for School
 
-<StaticPromptDemo
-  prompt="You are a data analyst helping a startup understand their user metrics.
+**Use AI to help you LEARN, not to AVOID learning.**
 
-Analyze this data and provide insights:
+**Ask yourself:**
+- "Am I learning from this, or just getting an answer?"
+- "Could I explain this to someone else after using AI?"
+- "Am I using AI to understand better, or to skip the work?"
 
-**Week 1-4 Metrics:**
-- Week 1: 100 signups, 45 active users (45%), 5 paying (5%)
-- Week 2: 150 signups, 60 active users (40%), 8 paying (5.3%)
-- Week 3: 200 signups, 70 active users (35%), 12 paying (6%)
-- Week 4: 250 signups, 75 active users (30%), 15 paying (6%)
-
-Questions:
-1. What trends do you see?
-2. What's concerning?
-3. What should we investigate?
-4. What actions would you recommend?
-
-Please think through each metric systematically and explain your reasoning."
-  output="Let me analyze these metrics step by step:
-
-## 1. Trends Identified
-
-**Positive:**
-- ✅ Signups growing 50% weekly (strong)
-- ✅ Paying conversion improving (5% → 6%)
-- ✅ Absolute active users increasing (45 → 75)
-
-**Negative:**
-- ⚠️ **CRITICAL:** Activation rate dropping (45% → 30%)
-- ⚠️ Active user growth not keeping pace with signups
-
-## 2. Concerning Patterns
-
-**Activation Problem:**
-Week 1: 55 of 100 never activated (55% churn)
-Week 4: 175 of 250 never activated (70% churn)
-
-This is your biggest issue - onboarding is failing at scale.
-
-## 3. What to Investigate
-
-**Priority 1 - Onboarding breakdown:**
-- Where do new users drop off?
-- Did you change onboarding recently?
-- Are new users getting proper guidance?
-
-**Priority 2 - Product quality:**
-- Is the product breaking under load?
-- Are new features confusing users?
-
-**Priority 3 - Traffic sources:**
-- Are new signups lower quality?
-- Different acquisition channels?
-
-## 4. Recommended Actions
-
-**Immediate (This Week):**
-1. Add analytics to onboarding flow - find the drop-off point
-2. Interview 10 users who signed up but never activated
-3. A/B test simplified onboarding
-
-**Short-term (2-4 weeks):**
-1. Improve first-run experience
-2. Add progress indicators
-3. Send activation reminder emails
-
-**Measurement:**
-Target: Get activation back to 40%+ within 4 weeks
-Track: Daily activation rates, onboarding completion steps
-
-**Bottom line:** You're growing signups but losing users before they experience value. Fix activation before scaling further."
-/>
+If you're not learning, you're using it wrong!
 
 ---
 
-## 🎯 Your Comprehensive Challenge
+### Privacy & Safety: What NOT to Tell AI
 
-Now it's your turn! Choose one of these **advanced challenges** and craft a comprehensive prompt:
+**Rule**: Treat AI like a stranger on the internet—don't share personal information!
 
-### Challenge A: Personal AI Tutor
-Create a prompt that asks the AI to act as your tutor for learning a new skill (programming, language, instrument, etc.). Your prompt should:
-- Define the AI's role and expertise
-- Specify your current level and learning goals
-- Request a personalized study plan
-- Ask for step-by-step reasoning on how the plan was created
-- Include specific constraints (time, resources, learning style)
+---
 
-### Challenge B: Business Strategy Consultant
-You're launching a small online business. Create a prompt that:
-- Assigns the AI a consultant role
-- Describes your business idea clearly
-- Asks for market analysis, pricing strategy, and marketing plan
-- Requests the AI to show its reasoning process
-- Includes specific constraints (budget, timeline, target audience)
+### ❌ NEVER Share With AI:
 
-### Challenge C: Creative Writing Coach
-You want to write a short story. Create a prompt that:
-- Makes the AI an experienced fiction writing coach
-- Provides the story premise and genre
-- Asks for character development, plot outline, and first scene
-- Requests explanation of creative choices
-- Specifies tone, length, and target audience
+**1. Personal Information**
+- Your full name, address, phone number
+- Your school's name or exact location
+- Your age, birthday, or identifying details
 
-**Success Criteria:**
-- Uses at least 3 of the 4 techniques (role, specificity, context, CoT)
-- Includes clear structure and requirements
-- Asks for reasoning or explanation
-- Provides enough context for quality output
-- Specifies format or constraints
+**2. Passwords & Security**
+- Any passwords
+- Security questions/answers
+- Banking or financial information
+
+**3. Private Content**
+- Family photos or personal photos
+- Private conversations
+- Confidential information about others
+
+**4. Plans & Location**
+- Where you'll be and when
+- Your daily schedule
+- Travel plans
+
+---
+
+### ✅ Safe to Share:
+
+**General information that doesn't identify you:**
+- "I'm a middle school student learning about..."
+- "I'm working on a science project about..."
+- "I'm interested in learning programming..."
+
+---
+
+### 🎯 Interactive Exercise: Ethics Quiz
+
+Let's test your judgment! For each scenario, decide if it's ethical AI use:
 
 <PromptEditor
-  exerciseId="lab5-ex1"
+  exerciseId="lab5-ethics"
   labNumber={5}
-  placeholder="Write your comprehensive prompt here...
+  placeholder="Analyze these scenarios. Which ones are ethical?
 
-Remember to combine techniques:
-- 🎭 Assign a specific role
-- 📋 Be specific about what you want
-- 🔗 Provide necessary context
-- 🧠 Ask for step-by-step reasoning
+Scenario 1: Sarah is stuck on a math problem. She asks AI to explain the concept, then solves the problem herself.
 
-Take your time to craft a powerful prompt!"
+Scenario 2: Tom asks AI to write his entire history essay, then copies it word-for-word and submits it.
+
+Scenario 3: Maya uses AI to brainstorm ideas for her science fair project, then researches and develops her favorite idea on her own.
+
+Scenario 4: Alex is taking a test and secretly uses AI on his phone to answer questions.
+
+Which scenarios show responsible AI use? Explain why or why not."
+/>
+
+**Think about:**
+- Is the student learning?
+- Is it honest?
+- Would a teacher approve?
+
+---
+
+### Creating Your Personal AI Usage Principles
+
+Let's create YOUR rules for using AI responsibly!
+
+**My AI Usage Principles:**
+
+1. **Learning First**: I will use AI to help me understand, not to avoid thinking
+2. **Honesty**: I will be honest about when I use AI and never claim AI's work as my own
+3. **Privacy**: I will never share personal information with AI
+4. **Critical Thinking**: I will always verify important facts and not blindly trust AI
+5. **Effort**: I will try problems myself first before asking AI for help
+
+**Add your own:**
+<PromptEditor
+  exerciseId="lab5-principles"
+  labNumber={5}
+  placeholder="Write your personal AI usage principles. What rules will you follow?
+
+Example:
+- I will use AI to learn, not to cheat
+- I will always try problems myself first
+- I will check AI's facts before trusting them
+- I will not share personal information
+- I will be honest about using AI
+
+Write at least 3 principles that matter to you!"
 />
 
 ---
 
-## 💡 Advanced Tips & Tricks
+## Part B: Comprehensive Application (18 minutes)
 
-### 1. Iterative Refinement
-Don't expect perfection on the first try. Use this process:
-```
-First prompt → Review output → Refine prompt → Better output
-```
+Time to put EVERYTHING together! You'll apply all the techniques you've learned in real-world scenarios.
 
-### 2. The "Few-Shot" Technique
-Show examples of what you want:
-```
-Write product descriptions in this style:
+### Skills Recap
 
-Example 1: "Cloud Backup Pro - Never lose a file again.
-Automatic backups every hour, restored in seconds. $5/month."
+You've mastered these techniques:
 
-Example 2: "TaskMaster - Your team's second brain.
-Track projects, assign tasks, hit deadlines. Free for 5 users."
+| Lab | Technique | Key Skill |
+|-----|-----------|-----------|
+| Lab 1 | Clear Instructions | Ask specific questions |
+| Lab 2 | Context & Constraints | Provide details, set limits |
+| Lab 3 | Role-Playing | "You are a..." |
+| Lab 4 | Chain-of-Thought | "Let's think step by step" |
 
-Now write one for: [your product]
-```
-
-### 3. Constraints Drive Creativity
-Tight constraints often produce better results:
-- "Explain quantum computing in 3 sentences for a 10-year-old"
-- "Write a product pitch in exactly 50 words"
-- "Create a logo concept using only circles and triangles"
-
-### 4. Output Format Specification
-Tell the AI exactly how to format the response:
-```
-Provide your answer as:
-1. Executive Summary (2 sentences)
-2. Detailed Analysis (bullet points)
-3. Recommendations (numbered list)
-4. Next Steps (action items)
-```
+**Now combine them ALL!**
 
 ---
 
-## 🏆 Mastery Checklist
+### ✏️ Scenario 1: Learning Assistant
 
-You've mastered prompt engineering when you can:
+**Situation**: You're studying a difficult topic for school and need help understanding it.
 
-- [ ] Write clear, unambiguous instructions
-- [ ] Provide the right amount of context
-- [ ] Assign roles that enhance output quality
-- [ ] Use Chain-of-Thought for complex tasks
+**Task**: Use AI to help you learn about a concept WITHOUT just getting the answer.
+
+**Your Challenge**: Pick a topic you're currently studying (or choose "photosynthesis" / "fractions" / "the water cycle") and create a prompt that:
+- Sets AI's role as a patient teacher
+- Asks for explanation with examples
+- Requests step-by-step reasoning
+- Asks for practice questions to test your understanding
+
+<PromptEditor
+  exerciseId="lab5-scenario1"
+  labNumber={5}
+  placeholder="Example approach:
+
+You are a patient and encouraging science teacher who loves using real-world analogies.
+
+I'm struggling to understand photosynthesis. Please:
+1. Explain what photosynthesis is using a simple analogy
+2. Walk me through the process step-by-step
+3. Explain why it's important for life on Earth
+4. Give me 2 practice questions to test if I understand
+
+Keep your explanation clear and suitable for a 13-year-old.
+
+Now write YOUR prompt for a topic YOU need help with!"
+/>
+
+**Success Criteria:**
+- Uses role-setting
+- Asks for step-by-step explanation
+- Requests practice (not just answers)
+- Shows you want to LEARN, not just get answers
+
+---
+
+### ✏️ Scenario 2: Creative Writing Partner
+
+**Situation**: You need to write a short creative story for English class.
+
+**Task**: Use AI as a brainstorming partner, but YOU write the actual story.
+
+**Your Challenge**: Create a prompt that:
+- Sets AI's role as a creative writing consultant
+- Asks for story ideas or plot suggestions
+- Gets feedback on YOUR ideas
+- Helps you develop characters or settings
+- Reminds AI you'll write it yourself
+
+<PromptEditor
+  exerciseId="lab5-scenario2"
+  labNumber={5}
+  placeholder="Example approach:
+
+You are a creative writing coach helping a student develop their own story ideas. Don't write the story for me - just help me brainstorm and develop my ideas.
+
+I need to write a 500-word adventure story. Here's my rough idea: [describe your idea]
+
+Please:
+1. Give me 3 possible plot twists I could add
+2. Suggest interesting character traits for my main character
+3. Help me think of a compelling opening sentence
+4. Ask me questions to help me develop the story further
+
+Write your own version with YOUR story idea!"
+/>
+
+**Success Criteria:**
+- AI helps brainstorm, doesn't write the story
+- Asks for guidance, not complete work
+- Shows you'll create the final product yourself
+- Uses clear communication
+
+---
+
+### ✏️ Scenario 3: Research Assistant (with Critical Thinking!)
+
+**Situation**: You're researching a topic for a presentation.
+
+**Task**: Use AI to gather information, but VERIFY and organize it yourself.
+
+**Your Challenge**: Research a topic and:
+- Ask AI for information using clear prompts
+- Request sources or reasoning
+- Ask follow-up questions
+- Note that you'll verify the information
+- Organize findings yourself
+
+<PromptEditor
+  exerciseId="lab5-scenario3"
+  labNumber={5}
+  placeholder="Example approach:
+
+You are a knowledgeable research assistant helping a student gather information for a school presentation.
+
+Topic: Why did the dinosaurs go extinct?
+
+Please provide:
+1. The main theory about dinosaur extinction
+2. Key evidence supporting this theory
+3. Any alternative theories scientists have considered
+4. Important dates or time periods involved
+
+For each point, note if you're very confident or if there's scientific debate. I'll verify this information with other sources before using it in my presentation.
+
+Write your own research prompt about a topic YOU're curious about!"
+/>
+
+**Success Criteria:**
+- Clear research questions
+- Asks for reasoning or evidence
+- Shows critical thinking (will verify)
+- Well-structured prompt
+
+---
+
+### 🎓 Final Challenge: Your Real Problem
+
+Now it's YOUR turn to use ALL your skills!
+
+**Your Task**: Think of a REAL problem you have right now—homework help, learning a skill, planning something, creative project, etc.
+
+**Requirements**: Your prompt must use AT LEAST 3 of these:
+1. Role-setting ("You are...")
+2. Clear details and context
+3. Specific constraints (format, length, style)
+4. Chain-of-Thought ("Let's think step by step")
+5. Responsible use (learning-focused, not cheating)
+
+<PromptEditor
+  exerciseId="lab5-final"
+  labNumber={5}
+  placeholder="This is your moment! Craft a comprehensive prompt for a REAL problem you have.
+
+Think about:
+- What role would help AI assist you best?
+- What specific details does AI need to know?
+- What constraints or format do you need?
+- Should AI show step-by-step reasoning?
+- Are you using AI to learn (not to cheat)?
+
+Make this YOUR masterpiece prompt!
+
+Here's a complex example:
+
+You are an experienced study coach who helps students develop effective learning strategies.
+
+I have a biology test in 3 days covering cell structure, photosynthesis, and the cell cycle. I struggle with memorizing parts of the cell.
+
+Please help me by:
+1. Suggesting 2-3 effective memorization techniques for biology terms
+2. Creating a 3-day study plan that balances all three topics
+3. Recommending how to test myself to ensure I actually understand (not just memorize)
+4. Providing ONE practice question for each topic so I can gauge my readiness
+
+Let's think step by step about the best approach for someone who learns better with visual aids and real-world connections.
+
+Now write YOURS!"
+/>
+
+**Success Criteria:**
+- Addresses a real problem
+- Uses 3+ advanced techniques
+- Shows mastery of all labs
+- Demonstrates responsible use
+
+---
+
+## 🏆 Congratulations!
+
+You've completed the **LLM Learning Lab** course!
+
+### What You've Mastered
+
+✅ **Understanding AI**
+- How LLMs work (word prediction, training, tokens)
+- AI's strengths and weaknesses
+- Knowledge boundaries and hallucinations
+
+✅ **Practical Skills**
+- Writing clear, specific prompts
+- Adding context and constraints
+- Role-playing techniques
+- Chain-of-Thought reasoning
+
+✅ **Responsible Use**
+- Academic integrity with AI
+- Privacy and safety
+- Critical thinking and fact-checking
+- Ethical AI usage principles
+
+---
+
+## 🎯 Your AI Mastery Checklist
+
+You're ready when you can:
+
+- [ ] Explain how an LLM generates responses
+- [ ] Write clear prompts with details and constraints
+- [ ] Use role-playing to control AI's personality
+- [ ] Apply Chain-of-Thought for complex problems
+- [ ] Recognize AI hallucinations and verify facts
+- [ ] Use AI ethically for learning (not cheating)
+- [ ] Protect your privacy when using AI
 - [ ] Combine multiple techniques seamlessly
-- [ ] Iterate and refine prompts effectively
-- [ ] Recognize when AI output is good enough
-- [ ] Understand AI limitations and work around them
+- [ ] Think critically about AI outputs
 
 ---
 
-## 🎓 Congratulations!
+## 🌟 What's Next?
 
-You've completed the **LLM Learning Lab - Prompt Engineering Course**!
+**Practice in Real Life:**
+- Use AI to help with your schoolwork (responsibly!)
+- Experiment with different prompting techniques
+- Share what you learned with friends
+- Keep refining your skills
 
-You now have the skills to:
-- ✅ Communicate effectively with AI systems
-- ✅ Get high-quality, reliable outputs
-- ✅ Solve complex problems using AI assistance
-- ✅ Apply prompt engineering to real-world scenarios
+**Advanced Learning:**
+- Explore different AI models (ChatGPT, Claude, Gemini)
+- Learn about AI safety and ethics
+- Try more advanced techniques (few-shot learning, prompt chaining)
+- Consider studying computer science or AI in the future!
 
-### What's Next?
-
-**Practice, practice, practice!** The best way to improve is to:
-1. Use these techniques in your daily work
-2. Experiment with different combinations
-3. Learn from what works and what doesn't
-4. Share your best prompts with others
-
-**Keep Learning:**
-- Advanced techniques: Few-shot learning, prompt chaining, retrieval-augmented generation
-- Explore different AI models and their strengths
-- Join prompt engineering communities
-- Stay updated on new AI capabilities
+**Stay Responsible:**
+- Always ask: "Am I learning from this?"
+- Verify important information
+- Protect your privacy
+- Use AI as a tool, not a crutch
 
 ---
 
-## 🌟 Final Exercise (Optional)
+## 🎓 You Are Now an AI-Literate Learner!
 
-Want to test your skills? Try this ultimate challenge:
+You don't just know how to USE AI—you understand:
+- **What it is** and how it works
+- **When to trust it** and when to question it
+- **How to use it** effectively and responsibly
+- **Why it matters** to be a critical thinker
 
-**Create a "Swiss Army Knife" prompt** - a single prompt that can handle multiple types of requests by using role-switching and conditional logic.
-
-Example concept:
-```
-You are a versatile AI assistant that adapts based on the task.
-
-When asked about [code], act as a senior engineer...
-When asked about [writing], act as an editor...
-When asked about [data], act as an analyst...
-
-For each response:
-1. Identify the task type
-2. Assume the appropriate role
-3. Provide expert-level guidance
-4. Show your reasoning
-
-[User's question here]
-```
+**This knowledge will serve you for years to come** as AI becomes more integrated into education, work, and daily life.
 
 ---
 
-**Thank you for completing the course!** 🎉
+## 📝 Final Reflection (Optional)
 
-Ready to apply your skills? Return to the dashboard and start building with AI!
+Take a moment to reflect:
+
+<PromptEditor
+  exerciseId="lab5-reflection"
+  labNumber={5}
+  placeholder="Optional Reflection:
+
+1. What surprised you most about how AI works?
+2. Which prompting technique do you find most useful?
+3. How will you use AI responsibly in your learning?
+4. What's one thing you'll do differently now that you understand AI better?
+
+Write your thoughts here—this is for YOU, not graded!"
+/>
+
+---
+
+**Thank you for completing the LLM Learning Lab!**
+
+You're now equipped to use AI as a powerful learning tool while staying ethical, safe, and critical.
+
+Remember: **AI is a tool. YOU are the thinker.**
 
 [Return to Dashboard →](/dashboard/vibecoding)
+
+---
+
+**Want more advanced challenges?** Stay tuned for **Lab 6: AI Workflow Builder** (coming soon) - where you'll learn to chain multiple AI steps together for complex projects!

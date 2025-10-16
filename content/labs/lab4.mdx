@@ -1,225 +1,431 @@
-# Lab 4: Guided Reasoning with Chain-of-Thought
+# Lab 4: AI's Capabilities & Limits
 
 ## 📖 Learning Objectives
 
-- Understand what Chain-of-Thought (CoT) prompting is
-- Learn when and why to use step-by-step reasoning
-- Guide AI to show its work and reasoning process
-- Get more accurate and verifiable answers
+By the end of this lab, you will:
+- Clearly understand what AI excels at and what it struggles with
+- Recognize when AI might "hallucinate" (make things up)
+- Develop critical thinking skills for evaluating AI responses
+- Master Chain-of-Thought prompting for better reasoning
+- Learn to guide AI through complex, multi-step problems
+
+**Duration**: ~30 minutes
 
 ---
 
-## 🎯 What is Chain-of-Thought?
+## Part A: LLM's Superpowers and Weaknesses (15 minutes)
 
-**Chain-of-Thought (CoT)** is a prompting technique where you ask the AI to break down its reasoning into steps, showing its "thought process" before arriving at a conclusion.
+Not all tasks are equal for AI! Let's discover what LLMs are amazing at—and where they fall short.
 
-### Why Use Chain-of-Thought?
+### ✅ AI's Superpowers
 
-1. **More Accurate Results**: Step-by-step reasoning reduces errors
-2. **Verifiable Logic**: You can see where the AI might go wrong
-3. **Better for Complex Tasks**: Math, analysis, planning, debugging
-4. **Transparency**: Understand how the AI arrived at its answer
+LLMs are **exceptional** at these tasks:
+
+**1. Writing & Creative Content**
+- Essays, stories, poems
+- Product descriptions
+- Email drafts
+- Blog posts
+
+**2. Explanation & Teaching**
+- Breaking down complex concepts
+- Using analogies
+- Adapting to different audiences
+- Answering "how" and "why" questions
+
+**3. Summarization**
+- Condensing long texts
+- Extracting key points
+- Creating executive summaries
+
+**4. Translation & Language**
+- Translating between languages
+- Rephrasing for different tones
+- Grammar and style improvements
+
+**5. Brainstorming**
+- Generating ideas
+- Exploring possibilities
+- Creative problem-solving
 
 ---
 
-## 📚 Core Concepts
+### ⚠️ Use AI Carefully For...
 
-### 1. Basic CoT Trigger Phrases
+These tasks work **sometimes**, but verify the results:
 
-Simple phrases that activate step-by-step thinking:
+**1. Math & Calculations**
+- Simple math usually works
+- Complex calculations can have errors
+- Multi-step math problems are risky
 
-- "Let's think step by step"
-- "Show your work"
-- "Explain your reasoning"
-- "Walk me through the process"
+**2. Current Events & Facts**
+- Knowledge cutoff means outdated info
+- Can't access real-time data
+- Dates and recent events may be wrong
+
+**3. Specific Facts & Statistics**
+- May confuse similar facts
+- Numbers might be approximations
+- Always verify important data
+
+---
+
+### ❌ AI's Weaknesses
+
+LLMs genuinely **struggle** with:
+
+**1. Complex Reasoning**
+- Deep logical chains
+- Multi-step problem solving (without guidance)
+- Abstract mathematical proofs
+
+**2. Real-Time Information**
+- Can't browse the internet (most models)
+- No access to current news
+- Doesn't know what happened after training
+
+**3. Personal Knowledge**
+- Doesn't know you or your life
+- Can't remember previous conversations (in different sessions)
+- No access to private information
+
+**4. Hallucinations** ⚠️
+- Sometimes invents plausible-sounding but false information
+- Fills gaps in knowledge with "reasonable guesses"
+- Can state incorrect things confidently
+
+---
+
+### 🔬 Interactive Experiment 1: Testing Math Skills
+
+Let's see where AI shines and where it stumbles!
+
+**Try these math problems and observe:**
+
+<PromptEditor
+  exerciseId="lab4-demo1"
+  labNumber={4}
+  placeholder="Try these and see which ones work well:
+
+1. What is 47 + 89?
+2. What is 15% of $240?
+3. If I buy 3 items at $12.47 each, with 8% sales tax, what's the total?
+
+Notice: Simple math works great, but complex multi-step calculations may have errors!"
+/>
+
+**What did you discover?**
+- ✅ Basic arithmetic → Usually correct
+- ⚠️ Percentages & simple calculations → Mostly correct
+- ❌ Multi-step calculations → May have mistakes
+
+**Key lesson**: For important math, always verify or use a calculator!
+
+---
+
+### 🔬 Interactive Experiment 2: Fact-Checking Challenge
+
+Let's test AI's knowledge accuracy:
+
+<PromptEditor
+  exerciseId="lab4-demo2"
+  labNumber={4}
+  placeholder="Ask the AI:
+
+1. Who won the FIFA World Cup in 2018?
+2. What is the current population of Tokyo?
+3. What major AI breakthroughs happened in 2024?
+
+Compare answers to what you can verify online. Are they accurate?"
+/>
+
+**What to watch for:**
+- Historical facts (2018 World Cup) → Likely accurate
+- Current statistics (population) → Might be outdated
+- Recent events (2024) → May be past the knowledge cutoff
+
+---
+
+### Understanding "Hallucinations" ⚠️
+
+**Hallucination** = When AI makes up information that sounds plausible but is **completely false**
+
+**Why does this happen?**
+
+Remember: AI is a pattern predictor. When it doesn't know something, it sometimes:
+1. Recognizes the pattern of how answers should sound
+2. Generates a "reasonable-sounding" response
+3. States it confidently (even though it's wrong!)
+
+**Example of a hallucination:**
+
+**Bad Prompt:**
+<StaticPromptDemo
+  prompt="Tell me about the book 'The Adventures of Captain Whiskers' by Jane Smith."
+  output="'The Adventures of Captain Whiskers' by Jane Smith is a beloved children's novel published in 2015. It follows the journey of Captain Whiskers, a brave ship captain, as he explores magical islands. The book won the Children's Literature Award in 2016 and has been translated into 15 languages."
+/>
+
+**The problem**: This book **doesn't exist!** The AI invented all those details because they "sound right" for a children's book.
+
+---
+
+### 🔬 Interactive Experiment 3: Catching Hallucinations
+
+Try to make the AI hallucinate by asking about something fake:
+
+<PromptEditor
+  exerciseId="lab4-demo3"
+  labNumber={4}
+  placeholder="Ask about a completely made-up topic:
+
+'Tell me about the scientific theory of Quantum Biscuits discovered by Dr. Martin Crumbsworth in 1987.'
+
+See if the AI catches that this is fake, or if it plays along!"
+/>
+
+**What happened?**
+- If the AI is cautious → Good! It might say "I don't have information about this"
+- If the AI generates details → Hallucination! It's making things up
+
+**Key lesson**: Don't blindly trust AI. Verify important information!
+
+---
+
+### How to Avoid Hallucinations
+
+**1. Ask for sources** (though AI can't provide real links)
+```
+"Explain photosynthesis and note if you're uncertain about any details."
+```
+
+**2. Break down complex questions**
+```
+Instead of: "Tell me everything about quantum computing"
+Try: "What is quantum computing?" then "How does a qubit work?"
+```
+
+**3. Cross-reference important facts**
+- Use search engines for verification
+- Check multiple sources
+- Don't rely on AI alone for critical decisions
+
+**4. Watch for confidence without evidence**
+- Be skeptical of very specific numbers/dates
+- Question claims that seem too perfect
+- Verify anything that matters
+
+---
+
+## Part B: Chain-of-Thought Reasoning (15 minutes)
+
+Now that you know AI's limitations, let's learn to **compensate** for them with a powerful technique!
+
+### What is Chain-of-Thought (CoT)?
+
+**Chain-of-Thought** = Asking the AI to show its reasoning step-by-step before giving an answer
+
+**Why this helps:**
+- Reduces errors in complex problems
+- Makes reasoning visible (so you can check it)
+- Forces the AI to "think" more carefully
+- Catches mistakes early
+
+---
+
+### The Magic Phrase
+
+**"Let's think step by step"**
+
+That's it! This simple phrase dramatically improves AI reasoning.
 
 **Example:**
 
+**Without CoT:**
 <StaticPromptDemo
-  prompt="Calculate the total cost: 3 books at $12.50 each, with 15% discount and 8% tax. Let's think step by step."
-  output="Let me break this down:
-
-Step 1: Calculate subtotal
-3 books × $12.50 = $37.50
-
-Step 2: Apply 15% discount
-15% of $37.50 = $5.625
-$37.50 - $5.625 = $31.875
-
-Step 3: Calculate 8% tax on discounted price
-8% of $31.875 = $2.55
-$31.875 + $2.55 = $34.425
-
-**Final total: $34.43** (rounded to nearest cent)"
+  prompt="If a train leaves Chicago at 2 PM traveling at 60 mph, and another train leaves St. Louis at 3 PM traveling at 75 mph, and they're 300 miles apart, when do they meet?"
+  output="They will meet at approximately 5:24 PM."
 />
+
+**With CoT:**
+<StaticPromptDemo
+  prompt="If a train leaves Chicago at 2 PM traveling at 60 mph, and another train leaves St. Louis at 3 PM traveling at 75 mph, and they're 300 miles apart, when do they meet?
+
+Let's think step by step."
+  output="Let me solve this step by step:
+
+**Step 1**: Determine the first train's head start
+- Train 1 leaves at 2 PM
+- Train 2 leaves at 3 PM
+- Head start: 1 hour
+
+**Step 2**: Calculate distance covered by Train 1 in the head start
+- Speed: 60 mph × 1 hour = 60 miles
+- Remaining distance: 300 - 60 = 240 miles
+
+**Step 3**: Calculate combined approach speed
+- Train 1: 60 mph
+- Train 2: 75 mph
+- Combined: 60 + 75 = 135 mph (approaching each other)
+
+**Step 4**: Calculate time to meet
+- Distance: 240 miles
+- Speed: 135 mph
+- Time: 240 ÷ 135 = 1.78 hours ≈ 1 hour 47 minutes
+
+**Step 5**: Add to Train 2's departure time
+- Train 2 leaves: 3:00 PM
+- Plus: 1 hour 47 minutes
+- Meet time: **4:47 PM**"
+/>
+
+**See the difference?** You can follow the logic and verify each step!
 
 ---
 
-### 2. Structured Reasoning Templates
+### ✏️ Exercise 1: Using "Let's Think Step by Step"
 
-Guide the AI to follow a specific reasoning structure:
-
-**Problem-Solving Template:**
-```
-1. Understand the problem
-2. Identify key information
-3. Plan the approach
-4. Execute step-by-step
-5. Verify the result
-```
-
-**Example:**
-
-<StaticPromptDemo
-  prompt="I need to fit 47 students into vans that hold 8 people each. How many vans do I need?
-
-Please solve this by:
-1. Identifying the key numbers
-2. Determining the math operation
-3. Calculating the result
-4. Interpreting what the answer means"
-  output="Let me solve this systematically:
-
-**1. Key Information:**
-- Total students: 47
-- Van capacity: 8 students per van
-
-**2. Math Operation:**
-We need division: 47 ÷ 8
-
-**3. Calculation:**
-47 ÷ 8 = 5.875
-
-**4. Interpretation:**
-5.875 vans means we need 5 full vans plus a 6th van for the remaining students.
-- 5 vans × 8 = 40 students
-- Remaining: 47 - 40 = 7 students
-
-**Answer: You need 6 vans** (5 full + 1 with 7 students)"
-/>
-
----
-
-### 3. Debugging with CoT
-
-Use CoT to debug code or troubleshoot problems:
-
-<StaticPromptDemo
-  prompt="This Python code isn't working:
-
-```python
-total = 0
-for i in range(5):
-    total += i
-print(total)
-```
-
-I expected the result to be 15, but I'm getting 10. Walk me through what's happening step by step."
-  output="Let me trace through this step-by-step:
-
-**Loop iteration breakdown:**
-
-i = 0: total = 0 + 0 = 0
-i = 1: total = 0 + 1 = 1
-i = 2: total = 1 + 2 = 3
-i = 3: total = 3 + 3 = 6
-i = 4: total = 6 + 4 = 10
-
-**Final result: 10**
-
-**Why it's 10, not 15:**
-- range(5) generates: 0, 1, 2, 3, 4 (starts at 0!)
-- Sum: 0+1+2+3+4 = 10
-- You expected: 1+2+3+4+5 = 15
-
-**Solution:** Use `range(1, 6)` to get 1 through 5, or use `range(6)` and sum will be 15 (0+1+2+3+4+5)."
-/>
-
----
-
-### 4. Decision-Making with CoT
-
-Help AI make better decisions by showing pros/cons analysis:
-
-<StaticPromptDemo
-  prompt="Should I learn React or Vue.js as my first frontend framework?
-
-Please analyze this decision by:
-1. Listing key factors to consider
-2. Comparing React vs Vue on each factor
-3. Providing a recommendation with reasoning"
-  output="Let me analyze this systematically:
-
-**1. Key Factors:**
-- Learning curve
-- Job market demand
-- Community & ecosystem
-- Documentation quality
-- Project requirements
-
-**2. Comparison:**
-
-| Factor | React | Vue.js |
-|--------|-------|--------|
-| Learning Curve | Steeper (JSX, hooks) | Gentler (HTML-like templates) |
-| Job Market | Higher demand | Growing but smaller |
-| Community | Massive (Facebook-backed) | Strong & supportive |
-| Documentation | Good but scattered | Excellent & comprehensive |
-| Use Cases | Large-scale apps | Rapid prototyping, startups |
-
-**3. Recommendation:**
-
-**Choose React if:**
-- You want maximum job opportunities
-- You're willing to invest more upfront learning time
-- You plan to work on large-scale applications
-
-**Choose Vue if:**
-- You want to build projects quickly while learning
-- You prefer clearer, more intuitive syntax
-- You're working on smaller to medium projects
-
-**For a first framework, I recommend React** - the steeper learning curve pays off with better job prospects and transferable skills to other modern frameworks."
-/>
-
----
-
-## 🎯 Practice Exercise
-
-Now it's your turn! Try using Chain-of-Thought to solve this problem:
-
-**Challenge:** Write a prompt that asks the AI to plan a 3-day trip to Tokyo for two people with a $2000 budget. Make the AI show its reasoning for:
-- How it allocates the budget
-- Why it chose specific activities
-- How it balanced cost and experience
-
-**Success Criteria:**
-- Ask the AI to break down the budget allocation step-by-step
-- Request reasoning for each major decision
-- Include at least 3 cost categories (flights, hotels, food, activities, etc.)
+Try Chain-of-Thought on a problem:
 
 <PromptEditor
   exerciseId="lab4-ex1"
   labNumber={4}
-  placeholder="Write your prompt here...
+  placeholder="I have a rectangular garden that's 12 feet long and 8 feet wide. I want to put a fence around it, and fencing costs $15 per foot. How much will the fence cost?
 
-Hint: Start with 'Let's plan this trip step by step' or ask the AI to 'show your budget reasoning'"
+Let's think step by step."
 />
+
+**Success Criteria:**
+- AI breaks down the problem into steps
+- Shows calculation for perimeter
+- Shows calculation for total cost
+- Gives a clear final answer
 
 ---
 
-## 💡 Key Takeaways
+### ✏️ Exercise 2: Structured Reasoning Template
 
-1. **"Let's think step by step"** is your magic phrase for better reasoning
-2. **CoT is essential for**: Math, logic, debugging, planning, analysis
-3. **Structure helps**: Give the AI a template to follow
-4. **Verification**: Step-by-step output lets you catch errors early
-5. **Complex > Simple**: Use CoT when the task has multiple steps
+You can guide the AI's thinking with a template:
+
+<PromptEditor
+  exerciseId="lab4-ex2"
+  labNumber={4}
+  placeholder="I need to decide: Should I learn Python or JavaScript first for web development?
+
+Please analyze this by:
+1. Listing the key factors to consider
+2. Comparing Python vs JavaScript on each factor
+3. Providing a recommendation with clear reasoning"
+/>
+
+**What to notice:**
+- The structure ensures thorough analysis
+- Each factor gets considered
+- The reasoning is transparent
+
+---
+
+### ✏️ Exercise 3: Debugging with CoT
+
+Chain-of-Thought is excellent for finding errors:
+
+<PromptEditor
+  exerciseId="lab4-ex3"
+  labNumber={4}
+  placeholder="This code should count from 1 to 10, but it's not working correctly:
+
+```python
+for i in range(10):
+    print(i)
+```
+
+Walk me through what this code does step-by-step, and explain why it's not giving the expected output."
+/>
+
+**Expected output:**
+- Step-by-step trace of the code
+- Explanation of what `range(10)` does
+- Identification of the problem (starts at 0, not 1)
+- Solution suggestion
+
+---
+
+### 🎓 Challenge: Multi-Step Problem Solving
+
+Combine everything you've learned! Solve this complex problem:
+
+<PromptEditor
+  exerciseId="lab4-challenge"
+  labNumber={4}
+  placeholder="Challenge: Plan a school bake sale
+
+Constraints:
+- Budget: $100 for ingredients
+- Goal: Raise $300 profit
+- 3 different items to sell
+- Each item must have different pricing strategy (low/medium/high)
+
+Please solve this step-by-step:
+1. Suggest 3 items to bake
+2. Calculate ingredient costs for each
+3. Determine pricing for each item
+4. Calculate how many of each to make
+5. Show profit calculation
+
+Be specific with numbers!"
+/>
+
+**Success Criteria:**
+- Clear step-by-step breakdown
+- Realistic numbers
+- All constraints addressed
+- Verifiable math
+
+---
+
+## 💡 Key Discoveries
+
+### What You Learned Today
+
+1. **AI's Strengths** - Writing, explaining, summarizing, translating, brainstorming
+
+2. **AI's Weaknesses** - Complex reasoning, math, current events, and can hallucinate
+
+3. **Critical Thinking** - Always verify important facts, don't blindly trust AI
+
+4. **Hallucinations** - AI sometimes invents plausible-sounding but false information
+
+5. **Chain-of-Thought** - "Let's think step by step" dramatically improves reasoning
+
+6. **Structured Prompts** - Giving AI a template to follow ensures thorough answers
+
+---
+
+## 🎯 Quick Quiz
+
+Before moving on, make sure you understand:
+
+- [ ] Name 3 things AI is great at
+- [ ] Name 3 things AI struggles with
+- [ ] What is a "hallucination"?
+- [ ] Why should you verify important facts from AI?
+- [ ] What's the magic phrase for Chain-of-Thought?
+- [ ] When should you use CoT prompting?
 
 ---
 
 ## 🚀 Next Steps
 
-Ready for the final challenge? Proceed to **Lab 5** where you'll combine all techniques to tackle real-world scenarios!
+Excellent work! You now understand AI's limits AND how to work around them!
 
-[Continue to Lab 5 →](/dashboard/vibecoding/labs/lab5)
+**In Lab 5**, you'll learn:
+- How to use AI responsibly and ethically
+- Academic integrity when using AI for schoolwork
+- Privacy and safety when interacting with AI
+- Putting ALL your skills together in real-world scenarios
+
+Ready for the final lab? [Start Lab 5 →](/dashboard/vibecoding/labs/lab5)
+
+---
+
+**Pro Tip**: For anything important (homework answers, medical advice, legal info, financial decisions), ALWAYS verify AI outputs with reliable sources. AI is a powerful assistant, not an authority!

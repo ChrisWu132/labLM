@@ -30,16 +30,16 @@ export async function runPrompt(
   } = await supabase.auth.getUser()
 
   if (authError || !user) {
-    return { success: false, error: '请先登录' }
+    return { success: false, error: 'Please log in first' }
   }
 
   // 2. Validate input
   if (!request.prompt || request.prompt.trim().length < 10) {
-    return { success: false, error: 'Prompt 太短,至少 10 个字符' }
+    return { success: false, error: 'Prompt too short - minimum 10 characters' }
   }
 
   if (request.prompt.length > 1000) {
-    return { success: false, error: 'Prompt 太长,最多 1000 个字符' }
+    return { success: false, error: 'Prompt too long - maximum 1000 characters' }
   }
 
   // 3. Rate limit check (30 per hour)
@@ -47,7 +47,7 @@ export async function runPrompt(
   if (!allowed) {
     return {
       success: false,
-      error: '操作太频繁,请稍后再试 (每小时最多 30 次)'
+      error: 'Rate limit exceeded. Please try again later (max 30 per hour)'
     }
   }
 
@@ -69,7 +69,7 @@ export async function runPrompt(
     console.error('[runPrompt] OpenAI API error:', error)
     return {
       success: false,
-      error: 'AI 服务暂时不可用,请稍后再试'
+      error: 'AI service temporarily unavailable, please try again later'
     }
   }
 

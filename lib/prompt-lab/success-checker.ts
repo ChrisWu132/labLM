@@ -10,7 +10,7 @@ const exerciseCriteria: Record<string, SuccessCriteria> = {
   'lab1-ex1': {
     exerciseId: 'lab1-ex1',
     rules: [
-      { type: 'containsKeywords', value: ['习性', '行为', '特点', '喜欢'] },
+      { type: 'containsKeywords', value: ['habit', 'behavior', 'characteristic', 'like', 'love', 'prefer'] },
       { type: 'minLength', value: 50 }
     ],
     passingScore: 2
@@ -18,7 +18,7 @@ const exerciseCriteria: Record<string, SuccessCriteria> = {
   'lab1-ex2': {
     exerciseId: 'lab1-ex2',
     rules: [
-      { type: 'containsKeywords', value: ['故事', '冒险'] },
+      { type: 'containsKeywords', value: ['story', 'adventure', 'journey'] },
       { type: 'minLength', value: 100 }
     ],
     passingScore: 2
@@ -28,7 +28,7 @@ const exerciseCriteria: Record<string, SuccessCriteria> = {
   'lab2-ex1': {
     exerciseId: 'lab2-ex1',
     rules: [
-      { type: 'containsKeywords', value: ['初学者', '编程', '介绍', '学习'] },
+      { type: 'containsKeywords', value: ['beginner', 'programming', 'introduction', 'learn', 'start'] },
       { type: 'minLength', value: 80 }
     ],
     passingScore: 2
@@ -106,7 +106,7 @@ export async function checkExerciseSuccess(
 
   let feedback = ''
   if (!success) {
-    feedback = failedRules[0] || '输出还不太符合要求。提示: 试着让 AI 更聚焦在具体方面。'
+    feedback = failedRules[0] || 'Output doesn\'t quite meet the requirements. Tip: Try making your prompt more specific.'
   }
 
   return { success, feedback }
@@ -146,15 +146,15 @@ function checkRule(rule: SuccessRule, output: string): boolean {
 function getRuleFeedback(rule: SuccessRule): string {
   switch (rule.type) {
     case 'containsKeywords':
-      return `输出中缺少关键词。试着在 prompt 中要求包含: ${(rule.value as string[]).join('、')}`
+      return `Missing keywords in output. Try requesting: ${(rule.value as string[]).join(', ')}`
 
     case 'minLength':
-      return `输出太短了。试着让 AI 提供更详细的回答。`
+      return `Output is too short. Try asking the AI for more detailed answers.`
 
     case 'maxLength':
-      return `输出太长了。试着让 AI 更简洁。`
+      return `Output is too long. Try asking the AI to be more concise.`
 
     default:
-      return '输出不符合要求。'
+      return 'Output does not meet requirements.'
   }
 }
