@@ -32,11 +32,11 @@ export function DashboardHeader({
     .slice(0, 2)
 
   return (
-    <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-40">
+    <header className="border-b border-muted-foreground/20 bg-card/60 backdrop-blur-md sticky top-0 z-40">
       <div className="flex items-center justify-between px-4 py-3 gap-4">
         {/* Left: Logo */}
         <Link href="/dashboard/vibecoding" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shrink-0">
             <Sparkles className="w-5 h-5 text-primary-foreground" />
           </div>
           <span className="font-semibold text-foreground hidden sm:inline">lab LM</span>
