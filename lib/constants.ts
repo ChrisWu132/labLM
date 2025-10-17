@@ -373,7 +373,7 @@ export const COPY = {
         "AI is transforming every industry and aspect of life. Students need to understand how it works, where it fails, and how to use it responsibly. Our curriculum builds critical thinking skills for the AI age.",
     },
     curriculum: {
-      title: "5-Lab Experimental Curriculum",
+      title: "6-Lab Experimental Curriculum",
       description:
         "Students discover how LLMs work through interactive experiments—exploring prompts, hallucinations, biases, reasoning, and ethics. Each lab builds on the last for comprehensive understanding.",
     },
