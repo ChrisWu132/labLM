@@ -35,12 +35,17 @@ export function DashboardHeader({
     <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-40">
       <div className="flex items-center justify-between px-4 py-3 gap-4">
         {/* Left: Logo */}
-        <Link href="/dashboard/vibecoding" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-            <Sparkles className="w-5 h-5 text-primary-foreground" />
-          </div>
-          <span className="font-semibold text-foreground hidden sm:inline">lab LM</span>
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link href="/dashboard/vibecoding" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-primary-foreground" />
+            </div>
+            <span className="font-semibold text-foreground hidden sm:inline">lab LM</span>
+          </Link>
+          <span className="text-xs text-muted-foreground hidden md:inline border-l pl-3">
+            ✨ Check Lab 6 for the AI Workflow Builder!
+          </span>
+        </div>
 
         {/* Right: Settings + Help + User menu */}
         <div className="flex items-center gap-2">
