@@ -26,7 +26,8 @@
       "Bash(npm run dev:*)",
       "Bash(node scripts/run-migration.js:*)",
       "WebSearch",
-      "Bash(if not exist \"lib\\workflow\" mkdir \"lib\\workflow\")"
+      "Bash(if not exist \"lib\\workflow\" mkdir \"lib\\workflow\")",
+      "Bash(if not exist \"archive\\coach-components\" mkdir \"archive\\coach-components\")"
     ],
     "deny": [],
     "ask": []

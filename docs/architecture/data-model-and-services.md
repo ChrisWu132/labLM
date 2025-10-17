@@ -19,7 +19,7 @@
 CREATE TABLE prompt_lab_progress (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-  lab_number SMALLINT NOT NULL CHECK (lab_number BETWEEN 1 AND 5),
+  lab_number SMALLINT NOT NULL CHECK (lab_number BETWEEN 1 AND 6),
   exercise_id TEXT NOT NULL, -- e.g., "lab1-ex1", "lab2-ex2"
 
   -- Submission data
@@ -119,11 +119,13 @@ CREATE INDEX idx_transcripts_user_module ON coach_transcripts(user_id, module_nu
 CREATE TABLE module_progress (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-  module_number SMALLINT CHECK (module_number BETWEEN 0 AND 5), -- Updated constraint
+  module_number SMALLINT CHECK (module_number BETWEEN 0 AND 5),
 
-  status TEXT CHECK (status IN ('not_started', 'in_progress', 'completed')) DEFAULT 'not_started',
+  status TEXT NOT NULL DEFAULT 'not_started' CHECK (status IN ('not_started', 'in_progress', 'completed')),
   started_at TIMESTAMPTZ,
   completed_at TIMESTAMPTZ,
+  checklist_items JSONB DEFAULT '{}'::jsonb,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
 
   UNIQUE(user_id, module_number)
@@ -134,6 +136,7 @@ CREATE INDEX idx_progress_user ON module_progress(user_id, updated_at DESC);
 
 **Changes**:
 - Updated constraint to support `module_number BETWEEN 0 AND 5`
+- Added `status`, `started_at`, and `checklist_items` columns to match orientation/vibecoding flows
 
 ---
 
@@ -157,7 +160,259 @@ CREATE INDEX idx_usage_user_action_time ON ai_usage_log(user_id, action, created
 
 ---
 
-### 2.5 Removed Tables ❌
+### 2.5 workflows ✨ NEW (Lab 6)
+
+**Purpose**: Store AI workflow definitions for visual workflow builder
+
+```sql
+CREATE TABLE workflows (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+
+  -- Basic info
+  name TEXT NOT NULL,
+  description TEXT,
+  lab_number INT DEFAULT 6,
+
+  -- Workflow configuration (JSON)
+  config JSONB NOT NULL,
+  /* config structure:
+  {
+    "nodes": [
+      {
+        "id": "node-1",
+        "type": "input" | "aiStep" | "output",
+        "data": { "label": string, "prompt"?: string, ... },
+        "position": { "x": number, "y": number }
+      }
+    ],
+    "edges": [
+      { "id": "edge-1", "source": "node-1", "target": "node-2" }
+    ]
+  }
+  */
+
+  -- Classification
+  is_template BOOLEAN DEFAULT false,
+  is_public BOOLEAN DEFAULT false,
+  template_category TEXT,
+
+  -- Statistics
+  execution_count INT DEFAULT 0,
+  success_rate FLOAT DEFAULT 0,
+
+  -- Timestamps
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Indexes
+CREATE INDEX idx_workflows_user ON workflows(user_id);
+CREATE INDEX idx_workflows_template ON workflows(is_template, is_public);
+CREATE INDEX idx_workflows_category ON workflows(template_category) WHERE is_template = true;
+```
+
+**RLS Policies:**
+
+```sql
+ALTER TABLE workflows ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can view own and public workflows"
+  ON workflows FOR SELECT
+  USING (user_id = auth.uid() OR (is_public = true AND is_template = true));
+
+CREATE POLICY "Users can create own workflows"
+  ON workflows FOR INSERT
+  WITH CHECK (user_id = auth.uid());
+
+CREATE POLICY "Users can update own workflows"
+  ON workflows FOR UPDATE
+  USING (user_id = auth.uid())
+  WITH CHECK (user_id = auth.uid());
+
+CREATE POLICY "Users can delete own workflows"
+  ON workflows FOR DELETE
+  USING (user_id = auth.uid());
+```
+
+---
+
+### 2.6 workflow_executions ✨ NEW (Lab 6)
+
+**Purpose**: Track workflow execution history and results
+
+```sql
+CREATE TABLE workflow_executions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  workflow_id UUID REFERENCES workflows(id) ON DELETE CASCADE NOT NULL,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+
+  -- Execution data
+  input_data TEXT NOT NULL,
+  final_output TEXT,
+
+  -- Execution log (JSON)
+  execution_log JSONB,
+  /* execution_log structure:
+  {
+    "steps": [
+      {
+        "stepId": "node-2",
+        "timestamp": "ISO timestamp",
+        "input": "prompt text",
+        "output": "LLM response",
+        "durationMs": 1200,
+        "status": "success" | "error"
+      }
+    ],
+    "totalDurationMs": 3600
+  }
+  */
+
+  -- Status
+  status TEXT CHECK (status IN ('running', 'completed', 'failed')) NOT NULL,
+  error_message TEXT,
+
+  -- Cost tracking
+  tokens_used INT,
+  api_calls INT,
+
+  -- Timestamps
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  completed_at TIMESTAMPTZ
+);
+
+-- Indexes
+CREATE INDEX idx_executions_workflow ON workflow_executions(workflow_id);
+CREATE INDEX idx_executions_user ON workflow_executions(user_id);
+CREATE INDEX idx_executions_status ON workflow_executions(status);
+CREATE INDEX idx_executions_created ON workflow_executions(created_at DESC);
+```
+
+**RLS Policies:**
+
+```sql
+ALTER TABLE workflow_executions ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can view own executions"
+  ON workflow_executions FOR SELECT
+  USING (user_id = auth.uid());
+
+CREATE POLICY "Users can create own executions"
+  ON workflow_executions FOR INSERT
+  WITH CHECK (user_id = auth.uid());
+```
+
+---
+
+### 2.7 student_reports ✨ NEW (Floating Coach)
+
+**Purpose**: Cache AI-generated learning reports for students
+
+```sql
+CREATE TABLE student_reports (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+
+  generated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  date_range_start TIMESTAMPTZ,
+  date_range_end TIMESTAMPTZ,
+
+  -- Report content
+  report_data JSONB NOT NULL,
+  /* report_data structure:
+  {
+    "totalQuestions": number,
+    "topicsExplored": string[],
+    "mostActiveLabNumber": number,
+    "labDistribution": { [labNumber]: number },
+    "strugglingTopics": string[],
+    "masteredTopics": string[]
+  }
+  */
+
+  ai_insights TEXT, -- AI-generated narrative
+
+  -- Metadata
+  metadata JSONB, -- stats like engagement_score, etc.
+  version INT DEFAULT 1, -- for schema versioning
+
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Indexes
+CREATE INDEX idx_reports_user ON student_reports(user_id);
+CREATE INDEX idx_reports_generated ON student_reports(generated_at DESC);
+```
+
+**RLS Policies:**
+
+```sql
+ALTER TABLE student_reports ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Students can view own reports"
+  ON student_reports FOR SELECT
+  USING (auth.uid() = user_id);
+
+-- Teachers can view their students' reports (requires join with teacher_assignments)
+CREATE POLICY "Teachers can view assigned students' reports"
+  ON student_reports FOR SELECT
+  USING (
+    EXISTS (
+      SELECT 1 FROM teacher_assignments
+      WHERE teacher_assignments.student_id = student_reports.user_id
+        AND teacher_assignments.teacher_id = auth.uid()
+    )
+  );
+```
+
+---
+
+### 2.8 teacher_assignments ✨ NEW (Floating Coach)
+
+**Purpose**: Define which teachers are assigned to which students
+
+```sql
+CREATE TABLE teacher_assignments (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  teacher_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+  student_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+
+  assigned_at TIMESTAMPTZ DEFAULT NOW(),
+  assigned_by UUID REFERENCES auth.users(id), -- admin who created assignment
+
+  UNIQUE(teacher_id, student_id)
+);
+
+-- Indexes
+CREATE INDEX idx_assignments_teacher ON teacher_assignments(teacher_id);
+CREATE INDEX idx_assignments_student ON teacher_assignments(student_id);
+```
+
+**RLS Policies:**
+
+```sql
+ALTER TABLE teacher_assignments ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Teachers can view own assignments"
+  ON teacher_assignments FOR SELECT
+  USING (auth.uid() = teacher_id);
+
+CREATE POLICY "Admins can manage all assignments"
+  ON teacher_assignments FOR ALL
+  USING (
+    EXISTS (
+      SELECT 1 FROM auth.users
+      WHERE auth.users.id = auth.uid()
+        AND auth.users.raw_user_meta_data->>'role' = 'admin'
+    )
+  );
+```
+
+---
+
+### 2.9 Removed Tables ❌
 
 **After refactor, these tables are no longer used:**
 
@@ -279,6 +534,127 @@ export async function getLabProgress(labNumber: number): Promise<{
 
 ---
 
+### 3.5 saveWorkflow() ✨ NEW (Lab 6)
+
+**File**: `lib/actions/workflow.ts`
+
+**Purpose**: Save or update a workflow definition
+
+**Signature:**
+```typescript
+export async function saveWorkflow(workflow: {
+  name: string
+  description?: string
+  config: any // nodes and edges
+}): Promise<{
+  success: boolean
+  error?: string
+  data?: Workflow
+}>
+```
+
+---
+
+### 3.6 executeWorkflow() ✨ NEW (Lab 6)
+
+**File**: `lib/actions/workflow.ts`
+
+**Purpose**: Execute a workflow with provided input
+
+**Signature:**
+```typescript
+export async function executeWorkflow(
+  workflowId: string,
+  inputData: string
+): Promise<{
+  success: boolean
+  error?: string
+  data?: {
+    executionId: string
+    finalOutput: string
+    log: ExecutionLog[]
+  }
+}>
+```
+
+**Flow:**
+1. Load workflow configuration
+2. Create execution record (status: 'running')
+3. Execute workflow engine (topological sort + sequential execution)
+4. Update execution record with results
+5. Return execution data
+
+---
+
+### 3.7 generateStudentReport() ✨ NEW (Floating Coach)
+
+**File**: `lib/actions/reports.ts`
+
+**Purpose**: Generate AI-powered learning report for a student
+
+**Signature:**
+```typescript
+export async function generateStudentReport(
+  studentId: string,
+  options?: {
+    dateRange?: { start: Date; end: Date }
+    forceRegenerate?: boolean
+  }
+): Promise<{
+  success: boolean
+  error?: string
+  report?: StudentReport
+}>
+```
+
+**Flow:**
+1. Check authentication and authorization (teacher/admin only)
+2. Check cache (return if recent report exists and not force regenerate)
+3. Fetch coach transcripts for date range
+4. Analyze transcripts (extract patterns, topics, struggles)
+5. Generate AI insights (using GPT-4)
+6. Store report in database
+7. Return report
+
+**Rate Limit**: None (teacher-initiated, not student)
+
+---
+
+### 3.8 getMyStudents() ✨ NEW (Floating Coach)
+
+**File**: `lib/actions/teacher.ts`
+
+**Purpose**: Get list of students assigned to current teacher
+
+**Signature:**
+```typescript
+export async function getMyStudents(): Promise<{
+  success: boolean
+  error?: string
+  data?: StudentSummary[]
+}>
+
+interface StudentSummary {
+  id: string
+  name: string
+  email: string
+  avatar_url?: string
+  labs_completed: number
+  current_lab: number
+  total_questions: number
+  last_question_date?: string
+  engagement_score: number
+}
+```
+
+**Flow:**
+1. Get teacher assignments for current user
+2. Fetch student progress and coach stats
+3. Calculate engagement scores
+4. Return student summaries
+
+---
+
 ## 4. Data Access Patterns
 
 ### 4.1 Getting User's Lab Progress
@@ -388,15 +764,19 @@ GROUP BY context_tag;
 
 ## 6. Data Volume Estimates
 
-### Expected Data (1000 students, 5 labs, avg 6 exercises/lab)
+### Expected Data (1000 students, 6 labs, avg 6 exercises/lab)
 
 | Table | Rows | Avg Size/Row | Total Size |
 |-------|------|--------------|------------|
-| `prompt_lab_progress` | 30,000 | 1 KB | 30 MB |
-| `coach_transcripts` | 20,000 | 2 KB | 40 MB |
+| `prompt_lab_progress` | 36,000 | 1 KB | 36 MB |
+| `coach_transcripts` | 25,000 | 2 KB | 50 MB |
 | `module_progress` | 5,000 | 0.5 KB | 2.5 MB |
-| `ai_usage_log` | 50,000 | 0.2 KB | 10 MB |
-| **Total** | | | **~83 MB** |
+| `ai_usage_log` | 60,000 | 0.2 KB | 12 MB |
+| `workflows` (Lab 6) | 3,000 | 3 KB | 9 MB |
+| `workflow_executions` (Lab 6) | 15,000 | 2 KB | 30 MB |
+| `student_reports` (Coach) | 1,000 | 5 KB | 5 MB |
+| `teacher_assignments` (Coach) | 1,000 | 0.2 KB | 0.2 MB |
+| **Total** | | | **~145 MB** |
 
 **Conclusion**: Well within Supabase free tier (500 MB)
 
@@ -459,5 +839,5 @@ supabase migration up --project-ref <prod-ref>
 
 ---
 
-**Last Updated**: 2025-10-16
-**Status**: Active (Post-refactor)
+**Last Updated**: 2025-10-17
+**Status**: Active (Includes Lab 6 and Floating Coach features)

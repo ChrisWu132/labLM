@@ -17,14 +17,12 @@ interface DashboardHeaderProps {
   userName?: string
   userAvatar?: string
   currentModule: number
-  onCoachClick?: () => void
 }
 
 export function DashboardHeader({
   userName = "Learner",
   userAvatar,
   currentModule,
-  onCoachClick,
 }: DashboardHeaderProps) {
   const initials = userName
     .split(" ")
@@ -41,16 +39,11 @@ export function DashboardHeader({
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
             <Sparkles className="w-5 h-5 text-primary-foreground" />
           </div>
-          <span className="font-semibold text-foreground hidden sm:inline">VibeCoding Lab</span>
+          <span className="font-semibold text-foreground hidden sm:inline">lab LM</span>
         </Link>
 
-        {/* Right: Coach + Settings + Help + User menu */}
+        {/* Right: Settings + Help + User menu */}
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="gap-2 bg-transparent" onClick={onCoachClick}>
-            <MessageSquare className="w-4 h-4" />
-            <span className="hidden sm:inline">Ask Coach</span>
-          </Button>
-
           {/* Settings Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

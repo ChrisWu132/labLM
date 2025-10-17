@@ -25,23 +25,23 @@ This directory contains the complete technical architecture documentation for th
 
 ## 🎯 What is LLM Learning Lab?
 
-A web-based learning platform designed to teach **middle school students (12-15 years old)** the fundamentals of **Prompt Engineering** through interactive, article-based labs.
+A web-based learning platform designed to teach **middle school students (12-15 years old)** and **higher education students (18-35 years old)** the fundamentals of **Prompt Engineering** and **AI Workflow Building** through interactive, article-based labs.
 
 ### Core Concept
 
 - **Not a coding platform** - Focus on learning to communicate with AI
 - **Article + Practice** - Students read concepts, then practice with embedded prompt editors
 - **Instant Feedback** - See LLM outputs in real-time and get automatic success checks
-- **5 Progressive Labs** - From basics to advanced prompt techniques
+- **6 Progressive Labs** - From basics to advanced workflow building
 
 ### Target Outcome
 
-Students complete **5 labs in ~2 hours** and learn:
-- ✅ What prompts are and how they work
-- ✅ How to write clear, specific instructions
-- ✅ Role-playing and context-setting techniques
-- ✅ Chain-of-thought prompting
-- ✅ Real-world application of prompt skills
+Students complete **6 labs in ~3 hours** and learn:
+- ✅ What prompts are and how they work (Labs 1-2)
+- ✅ How to write clear, specific instructions (Lab 3)
+- ✅ Role-playing and context-setting techniques (Lab 4)
+- ✅ Chain-of-thought prompting (Lab 5)
+- ✅ AI workflow building and task decomposition (Lab 6)
 
 ---
 
@@ -137,24 +137,39 @@ Students complete **5 labs in ~2 hours** and learn:
 ## 🚀 Key Features
 
 ### 1. MDX-based Lab Content
-- Labs written in MDX (Markdown + JSX)
+- Labs 1-5: Written in MDX (Markdown + JSX)
+- Lab 6: React Flow workflow builder
 - Components embedded directly in articles
 - Static generation for performance
 
-### 2. Interactive Prompt Practice
+### 2. Interactive Prompt Practice (Labs 1-5)
 - Simple textarea-based editor
 - Real-time LLM API calls
 - Automatic success checking
 
-### 3. Progress Tracking
-- Exercise-level completion tracking
-- Lab-level progress
-- Module-level completion
+### 3. Visual Workflow Builder (Lab 6) ✨ NEW
+- React Flow canvas for node-based workflows
+- Drag-and-drop interface for AI agents
+- Real-time workflow execution
+- Save/load workflow templates
 
-### 4. AI Coach (Repurposed)
-- Context updated for prompt learning
-- On-demand help
+### 4. Progress Tracking
+- Exercise-level completion tracking
+- Lab-level progress (6 labs total)
+- Module-level completion
+- Workflow execution history
+
+### 5. Floating AI Coach ✨ NEW
+- Persistent floating avatar button
+- Context-aware chat interface
+- On-demand help across all labs
 - Rate-limited to prevent abuse
+
+### 6. Teacher Dashboard ✨ NEW
+- Student learning reports
+- AI-generated insights
+- Progress monitoring
+- Intervention recommendations
 
 ---
 
@@ -164,19 +179,35 @@ Students complete **5 labs in ~2 hours** and learn:
 
 1. **prompt_lab_progress** ✨ NEW
    - Purpose: Track exercise submissions and success
+   - Size: ~36 MB (1000 students, 6 labs)
+
+2. **workflows** ✨ NEW (Lab 6)
+   - Purpose: Store workflow definitions
+   - Size: ~9 MB (1000 students)
+
+3. **workflow_executions** ✨ NEW (Lab 6)
+   - Purpose: Track workflow execution history
    - Size: ~30 MB (1000 students)
 
-2. **coach_transcripts** (Reused)
+4. **student_reports** ✨ NEW (Floating Coach)
+   - Purpose: Cache AI-generated learning reports
+   - Size: ~5 MB (1000 students)
+
+5. **teacher_assignments** ✨ NEW (Floating Coach)
+   - Purpose: Teacher-student relationships
+   - Size: ~0.2 MB (1000 students)
+
+6. **coach_transcripts** (Reused)
    - Purpose: AI coach conversations
    - Updated: New context 'PromptLab'
 
-3. **module_progress** (Reused)
+7. **module_progress** (Reused)
    - Purpose: Module-level tracking
-   - Updated: Support 5 labs
+   - Updated: Support 6 labs
 
-4. **ai_usage_log** (Reused)
+8. **ai_usage_log** (Reused)
    - Purpose: Rate limiting
-   - Updated: New action 'prompt_lab'
+   - Updated: New actions 'prompt_lab', 'workflow'
 
 ### Removed Tables
 - ❌ `webcontainer_projects` - No longer needed
@@ -221,14 +252,20 @@ Students complete **5 labs in ~2 hours** and learn:
 ### MVP (1000 students)
 - Vercel: $0 (Hobby tier)
 - Supabase: $0 (Free tier)
-- OpenAI GPT-4o: ~$140/month
-- **Total**: ~$140-150/month
+- OpenAI GPT-4o:
+  - Labs 1-5: ~$140/month
+  - Lab 6 Workflows: ~$50/month
+  - Coach Reporting: ~$20/month
+- **Total**: ~$210/month
 
 ### Scale (10,000 students)
 - Vercel Pro: $20/month
 - Supabase Pro: $25/month
-- OpenAI API: ~$1,400/month
-- **Total**: ~$1,450/month
+- OpenAI API:
+  - Labs 1-5: ~$1,400/month
+  - Lab 6 Workflows: ~$500/month
+  - Coach Reporting: ~$200/month
+- **Total**: ~$2,145/month
 
 ---
 
@@ -298,11 +335,16 @@ Before implementing, ensure:
 | **Phase 2** | Week 2 | Core components (PromptEditor, LLMOutput) |
 | **Phase 3** | Week 3 | Lab 1-2 content integration |
 | **Phase 4** | Week 4 | Lab 3-5, testing, deployment |
+| **Lab 6** | Week 5-8 | Workflow builder (React Flow integration) |
+| **Floating Coach** | Week 9-11 | Floating avatar, teacher dashboard, reports |
 
-**Total**: 4 weeks + 1 week buffer
+**Total**: 11 weeks (Phases 1-4: 4 weeks, Lab 6: 4 weeks, Coach: 3 weeks)
 
 ---
 
-**Architecture Status**: ✅ Complete
-**Implementation Status**: ⏳ Ready to Start
-**Next Action**: Begin [Refactor Phase 1](../refactor.md#-phase-1-基础设施迁移-week-1)
+**Architecture Status**: ✅ Complete (Updated with Lab 6 and Floating Coach)
+**Implementation Status**: ⏳ Labs 1-5 Complete, Lab 6 and Coach In Progress
+**Last Updated**: 2025-10-17
+**Next Actions**:
+- Lab 6: Implement React Flow workflow builder
+- Floating Coach: Build avatar UI and teacher dashboard
