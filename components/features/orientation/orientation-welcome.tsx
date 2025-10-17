@@ -32,7 +32,7 @@ export function OrientationWelcome({ userName, onComplete }: OrientationWelcomeP
     <div className="h-full w-full flex flex-col overflow-hidden bg-background">
       {/* Page 1: Benefits & What You'll Gain */}
       {currentPage === 1 && (
-        <div className="flex-1 flex flex-col items-center justify-center p-8 overflow-y-auto animate-in fade-in duration-500">
+        <div className="flex-1 flex flex-col items-center justify-center p-8 pt-16 overflow-y-auto animate-in fade-in duration-500">
           <div className="max-w-4xl w-full space-y-10 pb-10">
             {/* Hero */}
             <div className="text-center space-y-3">
@@ -130,7 +130,7 @@ export function OrientationWelcome({ userName, onComplete }: OrientationWelcomeP
 
       {/* Page 2: Course Schedule & Time Estimates */}
       {currentPage === 2 && (
-        <div className="flex-1 flex flex-col items-center justify-center p-8 overflow-y-auto animate-in fade-in duration-500">
+        <div className="flex-1 flex flex-col items-center justify-center p-8 pt-16 overflow-y-auto animate-in fade-in duration-500">
           <div className="max-w-4xl w-full space-y-10 pb-10">
             {/* Header */}
             <div className="text-center space-y-4">
