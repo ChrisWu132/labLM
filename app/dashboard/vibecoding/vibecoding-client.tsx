@@ -5,15 +5,22 @@ import { Code2 } from "lucide-react"
 export function VibeCodingClient() {
   return (
     <div className="flex flex-col h-full overflow-hidden">
-      <div className="border-b px-4 py-3 bg-muted/30">
-        <div className="flex items-center gap-3">
-          <Code2 className="w-5 h-5 text-primary" />
-          <div>
-            <h2 className="font-semibold">LLM Learning Lab - Prompt Engineering</h2>
-            <p className="text-xs text-muted-foreground">
-              Learn how to communicate with AI - Master Prompt Engineering in 2 hours
-            </p>
+      <div className="border-b bg-muted/30">
+        <div className="px-4 py-3">
+          <div className="flex items-center gap-3">
+            <Code2 className="w-5 h-5 text-primary" />
+            <div>
+              <h2 className="font-semibold">LLM Learning Lab - Prompt Engineering</h2>
+              <p className="text-xs text-muted-foreground">
+                Learn how to communicate with AI - Master Prompt Engineering in 2 hours
+              </p>
+            </div>
           </div>
+        </div>
+        <div className="px-4 py-2 bg-gradient-to-r from-primary/10 to-accent/10 border-t">
+          <p className="text-sm font-medium text-center">
+            ✨ Check Lab 6 for the AI Workflow Builder!
+          </p>
         </div>
       </div>
       <div className="flex-1 overflow-auto p-8">
