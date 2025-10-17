@@ -33,62 +33,62 @@ export function OrientationWelcome({ userName, onComplete }: OrientationWelcomeP
       {/* Page 1: Benefits & What You'll Gain */}
       {currentPage === 1 && (
         <div className="flex-1 flex flex-col items-center justify-center p-8 overflow-y-auto animate-in fade-in duration-500">
-          <div className="max-w-3xl w-full space-y-8 pb-8">
+          <div className="max-w-4xl w-full space-y-10 pb-10">
             {/* Hero */}
-            <div className="text-center space-y-4">
+            <div className="text-center space-y-3">
               <div className="flex justify-center mb-6">
-                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
                   <Sparkles className="w-10 h-10 text-primary" />
                 </div>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold">
+              <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
                 Welcome, {userName}!
               </h1>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                 Embark on a journey to understand AI and become a responsible AI user
               </p>
             </div>
 
             {/* What You'll Gain */}
             <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-center">What You'll Gain</h2>
+              <h2 className="text-2xl font-semibold text-center tracking-tight">What You'll Gain</h2>
 
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="flex gap-4 p-4 rounded-lg border bg-card hover:border-primary/50 transition-colors">
+              <div className="grid md:grid-cols-2 gap-5 items-stretch">
+                <div className="flex gap-4 p-5 rounded-xl border border-muted-foreground/20 bg-card hover:bg-muted/30 transition-colors">
                   <Brain className="w-6 h-6 text-primary shrink-0 mt-1" />
                   <div>
-                    <h3 className="font-semibold mb-2">Understand How AI Works</h3>
-                    <p className="text-sm text-muted-foreground">
+                    <h3 className="font-medium mb-1 leading-snug">Understand How AI Works</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                       Learn about LLMs, training, generation, and why AI makes mistakes
                     </p>
                   </div>
                 </div>
 
-                <div className="flex gap-4 p-4 rounded-lg border bg-card hover:border-primary/50 transition-colors">
+                <div className="flex gap-4 p-5 rounded-xl border border-muted-foreground/20 bg-card hover:bg-muted/30 transition-colors">
                   <Target className="w-6 h-6 text-primary shrink-0 mt-1" />
                   <div>
-                    <h3 className="font-semibold mb-2">Master Practical Skills</h3>
-                    <p className="text-sm text-muted-foreground">
+                    <h3 className="font-medium mb-1 leading-snug">Master Practical Skills</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                       Write effective prompts, use role-playing, and guide AI step-by-step
                     </p>
                   </div>
                 </div>
 
-                <div className="flex gap-4 p-4 rounded-lg border bg-card hover:border-primary/50 transition-colors">
+                <div className="flex gap-4 p-5 rounded-xl border border-muted-foreground/20 bg-card hover:bg-muted/30 transition-colors">
                   <Shield className="w-6 h-6 text-primary shrink-0 mt-1" />
                   <div>
-                    <h3 className="font-semibold mb-2">Develop Critical Thinking</h3>
-                    <p className="text-sm text-muted-foreground">
+                    <h3 className="font-medium mb-1 leading-snug">Develop Critical Thinking</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                       Question AI outputs, verify facts, and recognize hallucinations
                     </p>
                   </div>
                 </div>
 
-                <div className="flex gap-4 p-4 rounded-lg border bg-card hover:border-primary/50 transition-colors">
+                <div className="flex gap-4 p-5 rounded-xl border border-muted-foreground/20 bg-card hover:bg-muted/30 transition-colors">
                   <Rocket className="w-6 h-6 text-primary shrink-0 mt-1" />
                   <div>
-                    <h3 className="font-semibold mb-2">Use AI Responsibly</h3>
-                    <p className="text-sm text-muted-foreground">
+                    <h3 className="font-medium mb-1 leading-snug">Use AI Responsibly</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                       Learn ethics, privacy, and how to use AI for learning (not cheating)
                     </p>
                   </div>
@@ -97,12 +97,12 @@ export function OrientationWelcome({ userName, onComplete }: OrientationWelcomeP
             </div>
 
             {/* Hands-On Experience Highlight */}
-            <div className="p-6 rounded-lg bg-primary/5 border border-primary/20">
+            <div className="p-6 rounded-xl bg-primary/5 border border-muted-foreground/20">
               <div className="flex items-start gap-4">
                 <BookOpen className="w-8 h-8 text-primary shrink-0" />
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">Hands-On Learning Labs</h3>
-                  <p className="text-muted-foreground">
+                  <h3 className="font-medium text-lg mb-2 leading-snug">Hands-On Learning Labs</h3>
+                  <p className="text-muted-foreground leading-relaxed">
                     Learn by doing! Each lab includes interactive exercises where you'll experiment with AI,
                     discover its capabilities and limits, and apply what you learn in real scenarios.
                     No prior knowledge needed—everything runs in your browser.
@@ -112,8 +112,8 @@ export function OrientationWelcome({ userName, onComplete }: OrientationWelcomeP
             </div>
 
             {/* Navigation */}
-            <div className="flex justify-center pt-8">
-              <Button onClick={() => setCurrentPage(2)} size="lg" className="gap-2 text-lg px-8 py-6">
+            <div className="flex justify-center pt-6">
+              <Button onClick={() => setCurrentPage(2)} size="lg" variant="outline" className="gap-2 text-base h-12 rounded-full px-6">
                 See Course Schedule
                 <ArrowRight className="w-5 h-5" />
               </Button>
@@ -131,14 +131,14 @@ export function OrientationWelcome({ userName, onComplete }: OrientationWelcomeP
       {/* Page 2: Course Schedule & Time Estimates */}
       {currentPage === 2 && (
         <div className="flex-1 flex flex-col items-center justify-center p-8 overflow-y-auto animate-in fade-in duration-500">
-          <div className="max-w-3xl w-full space-y-8 pb-8">
+          <div className="max-w-4xl w-full space-y-10 pb-10">
             {/* Header */}
             <div className="text-center space-y-4">
-              <div className="flex justify-center items-center gap-2 mb-4">
+              <div className="flex justify-center items-center gap-2 mb-2">
                 <Clock className="w-8 h-8 text-primary" />
-                <h1 className="text-4xl font-bold">Your Learning Path</h1>
+                <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Your Learning Path</h1>
               </div>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
                 Complete all {LABS.length} labs in approximately {totalHours} hours {remainingMinutes > 0 && `${remainingMinutes} minutes`}
               </p>
             </div>
@@ -148,21 +148,21 @@ export function OrientationWelcome({ userName, onComplete }: OrientationWelcomeP
               {LABS.map((lab) => (
                 <div
                   key={lab.number}
-                  className="p-4 rounded-lg border bg-card hover:border-primary/50 transition-colors"
+                  className="p-5 rounded-xl border border-muted-foreground/20 bg-card hover:bg-muted/30 transition-colors"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 text-primary font-bold flex items-center justify-center shrink-0 text-lg">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 text-primary font-semibold flex items-center justify-center shrink-0 text-base">
                       {lab.number}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-4 mb-2">
-                        <h3 className="font-semibold text-lg">{lab.title}</h3>
+                        <h3 className="font-medium text-lg leading-snug">{lab.title}</h3>
                         <div className="flex items-center gap-2 shrink-0">
                           <Clock className="w-4 h-4 text-muted-foreground" />
                           <span className="text-sm font-medium text-muted-foreground">{lab.duration}</span>
                         </div>
                       </div>
-                      <p className="text-sm text-muted-foreground mb-2">{lab.description}</p>
+                      <p className="text-sm text-muted-foreground mb-2 leading-relaxed">{lab.description}</p>
                       <div className="flex flex-wrap gap-2">
                         {lab.concepts.map((concept) => (
                           <span
@@ -181,18 +181,18 @@ export function OrientationWelcome({ userName, onComplete }: OrientationWelcomeP
 
             {/* Call to Action */}
             <div className="pt-4 space-y-4">
-              <div className="flex items-center justify-center gap-3 p-4 rounded-lg bg-primary/5 border border-primary/20">
+              <div className="flex items-center justify-center gap-3 p-4 rounded-xl bg-primary/5 border border-muted-foreground/20">
                 <Award className="w-6 h-6 text-primary" />
-                <p className="text-sm font-medium">
+                <p className="text-sm font-medium leading-relaxed">
                   Complete all labs to master AI and become a responsible AI user
                 </p>
               </div>
 
               <div className="flex items-center justify-center gap-4">
-                <Button onClick={() => setCurrentPage(1)} variant="outline" size="lg" className="text-lg px-8 py-6">
+                <Button onClick={() => setCurrentPage(1)} variant="outline" size="lg" className="h-12 rounded-full px-6">
                   Back
                 </Button>
-                <Button onClick={handleStart} size="lg" className="gap-2 text-lg px-8 py-6">
+                <Button onClick={handleStart} size="lg" className="gap-2 h-12 rounded-full px-6">
                   Start Lab 1
                   <ArrowRight className="w-5 h-5" />
                 </Button>
