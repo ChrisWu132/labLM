@@ -17,12 +17,12 @@ export default function Lab6Page() {
   const [selectedTemplate, setSelectedTemplate] = useState(STORY_CREATOR_TEMPLATE)
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-full flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="bg-white border-b p-6">
-        <h1 className="text-3xl font-bold mb-2">Lab 6: AI 工作流搭建</h1>
+      <div className="bg-white border-b p-6 shrink-0">
+        <h1 className="text-3xl font-bold mb-2">Lab 6: AI Workflow Builder</h1>
         <p className="text-gray-600">
-          学习如何将复杂任务分解为简单步骤，构建自己的 AI 工作流
+          Learn how to break down complex tasks into simple steps and build your own AI workflows
         </p>
       </div>
 
@@ -30,30 +30,30 @@ export default function Lab6Page() {
       <Tabs
         value={activeStage}
         onValueChange={value => setActiveStage(value as '1' | '2' | '3')}
-        className="flex-1 flex flex-col"
+        className="flex-1 flex flex-col overflow-hidden"
       >
-        <div className="bg-white border-b px-6">
+        <div className="bg-white border-b px-6 shrink-0">
           <TabsList className="w-full justify-start">
             <TabsTrigger value="1" className="flex-1 max-w-xs">
-              阶段 1: 观察工作流
+              Stage 1: Observe Workflows
             </TabsTrigger>
             <TabsTrigger value="2" className="flex-1 max-w-xs">
-              阶段 2: 修改工作流
+              Stage 2: Edit Workflows
             </TabsTrigger>
             <TabsTrigger value="3" className="flex-1 max-w-xs">
-              阶段 3: 创建工作流
+              Stage 3: Create Workflows
             </TabsTrigger>
           </TabsList>
         </div>
 
-        <div className="flex-1 overflow-hidden">
+        <div className="flex-1 overflow-auto">
           {/* Stage 1: Observe */}
           <TabsContent value="1" className="h-full m-0 p-0">
             <div className="h-full flex flex-col">
               {/* Template Selector */}
-              <div className="bg-white border-b p-4">
+              <div className="bg-white border-b p-4 shrink-0">
                 <label className="text-sm font-medium mb-2 block">
-                  选择预设工作流：
+                  Select a preset workflow:
                 </label>
                 <div className="flex gap-2">
                   <button
@@ -64,9 +64,9 @@ export default function Lab6Page() {
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
-                    <div className="font-medium">📖 故事创作助手</div>
+                    <div className="font-medium">📖 Story Creator</div>
                     <div className="text-xs text-gray-600">
-                      把主题变成完整故事
+                      Turn a topic into a full story
                     </div>
                   </button>
                   <button
@@ -77,9 +77,9 @@ export default function Lab6Page() {
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
-                    <div className="font-medium">📐 作业助手</div>
+                    <div className="font-medium">📐 Homework Helper</div>
                     <div className="text-xs text-gray-600">
-                      分析数学题思路
+                      Analyze math problems
                     </div>
                   </button>
                   <button
@@ -90,9 +90,9 @@ export default function Lab6Page() {
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
-                    <div className="font-medium">🌐 翻译润色器</div>
+                    <div className="font-medium">🌐 Translator</div>
                     <div className="text-xs text-gray-600">
-                      中文翻译并优化
+                      Translate and polish text
                     </div>
                   </button>
                 </div>
@@ -108,12 +108,12 @@ export default function Lab6Page() {
               </div>
 
               {/* Instructions */}
-              <Card className="m-4 p-4 bg-blue-50 border-blue-200">
-                <h3 className="font-semibold mb-2">📝 练习任务：</h3>
+              <Card className="m-4 p-4 bg-blue-50 border-blue-200 shrink-0">
+                <h3 className="font-semibold mb-2">📝 Practice Tasks:</h3>
                 <ol className="text-sm space-y-1 list-decimal list-inside">
-                  <li>用不同的主题运行工作流，观察每一步的输出</li>
-                  <li>思考：步骤2从哪里获得输入？数据如何流动？</li>
-                  <li>尝试理解每个步骤的作用</li>
+                  <li>Run the workflow with different topics and observe each step's output</li>
+                  <li>Think: Where does Step 2 get its input? How does data flow?</li>
+                  <li>Try to understand the role of each step</li>
                 </ol>
               </Card>
             </div>
@@ -123,9 +123,9 @@ export default function Lab6Page() {
           <TabsContent value="2" className="h-full m-0 p-0">
             <div className="h-full flex flex-col">
               {/* Template Selector */}
-              <div className="bg-white border-b p-4">
+              <div className="bg-white border-b p-4 shrink-0">
                 <label className="text-sm font-medium mb-2 block">
-                  选择要编辑的工作流：
+                  Select a workflow to edit:
                 </label>
                 <div className="flex gap-2">
                   <button
@@ -136,8 +136,8 @@ export default function Lab6Page() {
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
-                    <div className="font-medium">📖 故事创作助手</div>
-                    <div className="text-xs text-gray-600">可编辑 Prompt</div>
+                    <div className="font-medium">📖 Story Creator</div>
+                    <div className="text-xs text-gray-600">Editable Prompts</div>
                   </button>
                   <button
                     onClick={() => setSelectedTemplate(HOMEWORK_HELPER_TEMPLATE)}
@@ -147,8 +147,8 @@ export default function Lab6Page() {
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
-                    <div className="font-medium">📐 作业助手</div>
-                    <div className="text-xs text-gray-600">可编辑 Prompt</div>
+                    <div className="font-medium">📐 Homework Helper</div>
+                    <div className="text-xs text-gray-600">Editable Prompts</div>
                   </button>
                   <button
                     onClick={() => setSelectedTemplate(TRANSLATOR_TEMPLATE)}
@@ -158,8 +158,8 @@ export default function Lab6Page() {
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
-                    <div className="font-medium">🌐 翻译润色器</div>
-                    <div className="text-xs text-gray-600">可编辑 Prompt</div>
+                    <div className="font-medium">🌐 Translator</div>
+                    <div className="text-xs text-gray-600">Editable Prompts</div>
                   </button>
                 </div>
               </div>
@@ -174,16 +174,16 @@ export default function Lab6Page() {
               </div>
 
               {/* Instructions */}
-              <Card className="m-4 p-4 bg-purple-50 border-purple-200">
-                <h3 className="font-semibold mb-2">🎨 练习任务：</h3>
+              <Card className="m-4 p-4 bg-purple-50 border-purple-200 shrink-0">
+                <h3 className="font-semibold mb-2">🎨 Practice Tasks:</h3>
                 <ol className="text-sm space-y-1 list-decimal list-inside">
                   <li>
-                    修改步骤1的 prompt，让创意更有科幻感（提示：加入"科幻"、"未来"等关键词）
+                    Modify Step 1's prompt to make ideas more sci-fi (Hint: add "sci-fi", "future" keywords)
                   </li>
                   <li>
-                    修改步骤3的 prompt，让故事结尾有意外转折
+                    Modify Step 3's prompt to add a plot twist at the end
                   </li>
-                  <li>尝试修改语气：让整个故事变成诗歌形式</li>
+                  <li>Try changing the tone: transform the story into a poem</li>
                 </ol>
               </Card>
             </div>
@@ -193,18 +193,18 @@ export default function Lab6Page() {
           <TabsContent value="3" className="h-full m-0 p-0">
             <div className="h-full flex flex-col">
               {/* Instructions Banner */}
-              <Card className="m-4 mb-0 p-4 bg-green-50 border-green-200">
-                <h3 className="font-semibold mb-2">🚀 挑战任务：</h3>
+              <Card className="m-4 mb-0 p-4 bg-green-50 border-green-200 shrink-0">
+                <h3 className="font-semibold mb-2">🚀 Challenge Tasks:</h3>
                 <p className="text-sm mb-2">
-                  从零开始搭建你自己的工作流！可以选择：
+                  Build your own workflow from scratch! You can choose:
                 </p>
                 <ul className="text-sm space-y-1 list-disc list-inside">
-                  <li>作业助手 - 帮助分析题目并提供解题思路</li>
-                  <li>翻译润色器 - 中文翻译成英文并逐步改进</li>
-                  <li>自由创作 - 设计你自己的创意工作流！</li>
+                  <li>Homework Helper - Analyze problems and provide solution steps</li>
+                  <li>Translator - Translate and progressively improve text</li>
+                  <li>Free Creation - Design your own creative workflow!</li>
                 </ul>
                 <p className="text-sm mt-2 text-gray-700">
-                  💡 记得至少包含：1个输入节点 + 至少1个AI步骤 + 1个输出节点
+                  💡 Remember to include at least: 1 input node + 1 AI step + 1 output node
                 </p>
               </Card>
 

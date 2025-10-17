@@ -35,11 +35,11 @@ export function WorkflowBuilder() {
   const addNode = (type: 'input' | 'aiStep' | 'output') => {
     // Check if input/output already exists
     if (type === 'input' && nodes.some(n => n.type === 'input')) {
-      toast.error('只能有一个输入节点')
+      toast.error('Can only have one input node')
       return
     }
     if (type === 'output' && nodes.some(n => n.type === 'output')) {
-      toast.error('只能有一个输出节点')
+      toast.error('Can only have one output node')
       return
     }
 
@@ -50,27 +50,27 @@ export function WorkflowBuilder() {
       position: { x: 250, y: nodes.length * 150 },
       data:
         type === 'input'
-          ? { label: '输入', placeholder: '输入内容' }
+          ? { label: 'Input', placeholder: 'Enter content' }
           : type === 'output'
-            ? { label: '输出' }
-            : { label: `AI步骤${nodes.filter(n => n.type === 'aiStep').length + 1}`, prompt: '在此输入 prompt...' }
+            ? { label: 'Output' }
+            : { label: `AI Step ${nodes.filter(n => n.type === 'aiStep').length + 1}`, prompt: 'Enter prompt here...' }
     }
 
     setNodes(nds => [...nds, newNode])
-    toast.success('节点已添加')
+    toast.success('Node added')
   }
 
   // Delete selected node
   const deleteSelectedNode = () => {
     if (!selectedNode) {
-      toast.error('请先选择一个节点')
+      toast.error('Please select a node first')
       return
     }
 
     setNodes(nds => nds.filter(n => n.id !== selectedNode.id))
     setEdges(eds => eds.filter(e => e.source !== selectedNode.id && e.target !== selectedNode.id))
     setSelectedNode(null)
-    toast.success('节点已删除')
+    toast.success('Node deleted')
   }
 
   // Connect nodes
@@ -103,22 +103,22 @@ export function WorkflowBuilder() {
   // Save workflow
   const handleSave = async () => {
     if (!workflowName.trim()) {
-      toast.error('请输入工作流名称')
+      toast.error('Please enter workflow name')
       return
     }
 
     if (nodes.length < 3) {
-      toast.error('工作流至少需要3个节点（输入、AI步骤、输出）')
+      toast.error('Workflow needs at least 3 nodes (input, AI step, output)')
       return
     }
 
     if (!nodes.some(n => n.type === 'input')) {
-      toast.error('工作流必须包含输入节点')
+      toast.error('Workflow must include an input node')
       return
     }
 
     if (!nodes.some(n => n.type === 'output')) {
-      toast.error('工作流必须包含输出节点')
+      toast.error('Workflow must include an output node')
       return
     }
 
@@ -132,12 +132,12 @@ export function WorkflowBuilder() {
       })
 
       if (result.success) {
-        toast.success('工作流保存成功！')
+        toast.success('Workflow saved successfully!')
       } else {
-        toast.error(result.error || '保存失败')
+        toast.error(result.error || 'Save failed')
       }
     } catch (error) {
-      toast.error('保存过程中出现错误')
+      toast.error('Error occurred while saving')
     } finally {
       setIsSaving(false)
     }
@@ -146,17 +146,17 @@ export function WorkflowBuilder() {
   // Test run
   const handleTestRun = async () => {
     if (!testInput.trim()) {
-      toast.error('请输入测试数据')
+      toast.error('Please enter test data')
       return
     }
 
     if (nodes.length < 3) {
-      toast.error('请先构建完整的工作流')
+      toast.error('Please build a complete workflow first')
       return
     }
 
     try {
-      toast.loading('正在执行...')
+      toast.loading('Running...')
 
       const result = await executeWorkflowDirect(
         { nodes, edges },
@@ -166,7 +166,7 @@ export function WorkflowBuilder() {
       toast.dismiss()
 
       if (result.success) {
-        toast.success('测试运行成功！')
+        toast.success('Test run successful!')
         // Show result in output node
         if (result.data?.finalOutput) {
           setNodes(nds =>
@@ -182,11 +182,11 @@ export function WorkflowBuilder() {
           )
         }
       } else {
-        toast.error(result.error || '执行失败')
+        toast.error(result.error || 'Execution failed')
       }
     } catch (error) {
       toast.dismiss()
-      toast.error('执行过程中出现错误')
+      toast.error('Error occurred during execution')
     }
   }
 
@@ -195,7 +195,7 @@ export function WorkflowBuilder() {
       {/* Left Toolbox */}
       <Card className="w-64 p-4 border-r rounded-none space-y-4">
         <div>
-          <h3 className="font-semibold mb-3">📦 工具箱</h3>
+          <h3 className="font-semibold mb-3">📦 Toolbox</h3>
           <div className="space-y-2">
             <Button
               variant="outline"
@@ -203,7 +203,7 @@ export function WorkflowBuilder() {
               onClick={() => addNode('input')}
             >
               <span className="text-xl mr-2">📝</span>
-              输入节点
+              Input Node
             </Button>
             <Button
               variant="outline"
@@ -211,7 +211,7 @@ export function WorkflowBuilder() {
               onClick={() => addNode('aiStep')}
             >
               <span className="text-xl mr-2">🤖</span>
-              AI步骤
+              AI Step
             </Button>
             <Button
               variant="outline"
@@ -219,7 +219,7 @@ export function WorkflowBuilder() {
               onClick={() => addNode('output')}
             >
               <span className="text-xl mr-2">✅</span>
-              输出节点
+              Output Node
             </Button>
           </div>
         </div>
@@ -232,22 +232,22 @@ export function WorkflowBuilder() {
             disabled={!selectedNode}
           >
             <Trash2 className="w-4 h-4 mr-2" />
-            删除节点
+            Delete Node
           </Button>
         </div>
 
         <div className="pt-4 border-t">
-          <h4 className="font-medium text-sm mb-2">💡 提示</h4>
+          <h4 className="font-medium text-sm mb-2">💡 Tips</h4>
           <p className="text-xs text-gray-600">
-            1. 添加输入、AI步骤和输出节点
+            1. Add input, AI step, and output nodes
             <br />
-            2. 连接节点（从节点底部拖到另一个节点顶部）
+            2. Connect nodes (drag from bottom to top of another node)
             <br />
-            3. 点击节点配置属性
+            3. Click nodes to configure properties
             <br />
-            4. 测试运行
+            4. Test run
             <br />
-            5. 保存工作流
+            5. Save workflow
           </p>
         </div>
       </Card>
@@ -255,36 +255,36 @@ export function WorkflowBuilder() {
       {/* Center Canvas */}
       <div className="flex-1 flex flex-col">
         {/* Top Bar */}
-        <div className="p-4 border-b bg-white space-y-3">
+        <div className="p-4 border-b bg-white space-y-3 shrink-0">
           <div className="flex gap-3">
             <Input
-              placeholder="工作流名称..."
+              placeholder="Workflow name..."
               value={workflowName}
               onChange={e => setWorkflowName(e.target.value)}
               className="max-w-xs"
             />
             <Input
-              placeholder="描述（可选）"
+              placeholder="Description (optional)"
               value={workflowDescription}
               onChange={e => setWorkflowDescription(e.target.value)}
               className="max-w-md"
             />
             <Button onClick={handleSave} disabled={isSaving}>
               <Save className="w-4 h-4 mr-2" />
-              {isSaving ? '保存中...' : '保存'}
+              {isSaving ? 'Saving...' : 'Save'}
             </Button>
           </div>
 
           <div className="flex gap-3">
             <Input
-              placeholder="输入测试数据..."
+              placeholder="Enter test data..."
               value={testInput}
               onChange={e => setTestInput(e.target.value)}
               className="max-w-md"
             />
             <Button variant="outline" onClick={handleTestRun}>
               <PlayCircle className="w-4 h-4 mr-2" />
-              测试运行
+              Test Run
             </Button>
           </div>
         </div>
@@ -310,22 +310,22 @@ export function WorkflowBuilder() {
       </div>
 
       {/* Right Config Panel */}
-      <Card className="w-80 p-4 border-l rounded-none space-y-4 overflow-y-auto">
-        <h3 className="font-semibold">⚙️ 配置面板</h3>
+      <Card className="w-80 p-4 border-l rounded-none space-y-4 overflow-y-auto shrink-0">
+        <h3 className="font-semibold">⚙️ Configuration Panel</h3>
 
         {selectedNode ? (
           <div className="space-y-4">
             <div>
-              <label className="text-sm font-medium mb-1 block">节点类型</label>
+              <label className="text-sm font-medium mb-1 block">Node Type</label>
               <div className="px-3 py-2 bg-gray-100 rounded text-sm">
-                {selectedNode.type === 'input' && '📝 输入节点'}
-                {selectedNode.type === 'aiStep' && '🤖 AI步骤'}
-                {selectedNode.type === 'output' && '✅ 输出节点'}
+                {selectedNode.type === 'input' && '📝 Input Node'}
+                {selectedNode.type === 'aiStep' && '🤖 AI Step'}
+                {selectedNode.type === 'output' && '✅ Output Node'}
               </div>
             </div>
 
             <div>
-              <label className="text-sm font-medium mb-1 block">节点名称</label>
+              <label className="text-sm font-medium mb-1 block">Node Name</label>
               <Input
                 value={selectedNode.data.label || ''}
                 onChange={e => updateNodeData('label', e.target.value)}
@@ -335,12 +335,12 @@ export function WorkflowBuilder() {
             {selectedNode.type === 'input' && (
               <div>
                 <label className="text-sm font-medium mb-1 block">
-                  输入提示
+                  Input Placeholder
                 </label>
                 <Input
                   value={selectedNode.data.placeholder || ''}
                   onChange={e => updateNodeData('placeholder', e.target.value)}
-                  placeholder="如：输入一个主题..."
+                  placeholder="e.g.: Enter a topic..."
                 />
               </div>
             )}
@@ -352,18 +352,18 @@ export function WorkflowBuilder() {
                   value={selectedNode.data.prompt || ''}
                   onChange={e => updateNodeData('prompt', e.target.value)}
                   rows={8}
-                  placeholder="输入 AI prompt...&#10;&#10;可以使用变量：&#10;{输入} - 工作流输入&#10;{步骤名} - 引用其他步骤"
+                  placeholder="Enter AI prompt...&#10;&#10;Available variables:&#10;{Input} - Workflow input&#10;{StepName} - Reference other steps"
                   className="font-mono text-sm"
                 />
                 <p className="text-xs text-gray-500 mt-1">
-                  💡 使用 {'{输入}'} 引用初始输入
+                  💡 Use {'{Input}'} to reference initial input
                 </p>
               </div>
             )}
           </div>
         ) : (
           <div className="text-sm text-gray-500 text-center py-8">
-            点击节点进行配置
+            Click a node to configure
           </div>
         )}
       </Card>

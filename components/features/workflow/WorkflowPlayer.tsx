@@ -157,16 +157,16 @@ export function WorkflowPlayer({
   return (
     <div className="flex flex-col h-full">
       {/* Control Panel */}
-      <Card className="p-4 border-b rounded-none">
+      <Card className="p-4 border-b rounded-none shrink-0">
         <div className="flex gap-3 items-center">
           <div className="flex-1">
             <label className="text-sm text-gray-600 mb-1 block">
-              📝 输入主题:
+              📝 Input Topic:
             </label>
             <Input
               value={input}
               onChange={e => setInput(e.target.value)}
-              placeholder="输入一个主题，如：太空猫"
+              placeholder="Enter a topic, e.g.: space cat"
               disabled={isRunning}
               className="w-full"
               onKeyDown={e => {
@@ -181,12 +181,12 @@ export function WorkflowPlayer({
               {isRunning ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  运行中...
+                  Running...
                 </>
               ) : (
                 <>
                   <PlayCircle className="w-4 h-4 mr-2" />
-                  运行
+                  Run
                 </>
               )}
             </Button>
@@ -196,14 +196,14 @@ export function WorkflowPlayer({
               disabled={isRunning}
             >
               <RotateCcw className="w-4 h-4 mr-2" />
-              重置
+              Reset
             </Button>
           </div>
         </div>
 
         {editable && (
           <div className="mt-3 text-sm text-gray-600 bg-blue-50 p-2 rounded">
-            💡 提示：点击步骤上的 🔧 按钮可以编辑 Prompt
+            💡 Tip: Click the 🔧 button on steps to edit prompts
           </div>
         )}
       </Card>
