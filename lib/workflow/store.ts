@@ -207,22 +207,111 @@ function getDefaultNodeData(type: NodeType): any {
 }
 
 // ============================================================================
+// Initial Demo Workflow - Multi-Step Content Creator
+// ============================================================================
+
+const initialDemoWorkflow = {
+  nodes: [
+    {
+      id: 'start-init',
+      type: 'start' as NodeType,
+      position: { x: 50, y: 250 },
+      data: { label: 'Start', status: 'idle' as NodeExecutionStatus }
+    },
+    {
+      id: 'analyzer-init',
+      type: 'llmAgent' as NodeType,
+      position: { x: 250, y: 250 },
+      data: {
+        label: 'Topic Analyzer',
+        agentName: 'Topic Analyzer',
+        systemPrompt: 'Analyze the given topic and identify 3-5 key points that should be covered. Return only the key points as a bullet list.',
+        model: 'gpt-4',
+        temperature: 0.5,
+        maxTokens: 300,
+        status: 'idle' as NodeExecutionStatus
+      }
+    },
+    {
+      id: 'writer-init',
+      type: 'llmAgent' as NodeType,
+      position: { x: 500, y: 250 },
+      data: {
+        label: 'Content Writer',
+        agentName: 'Content Writer',
+        systemPrompt: 'Based on the key points provided, write a clear and engaging explanation. Use simple language and concrete examples.',
+        model: 'gpt-4',
+        temperature: 0.7,
+        maxTokens: 500,
+        status: 'idle' as NodeExecutionStatus
+      }
+    },
+    {
+      id: 'polisher-init',
+      type: 'llmAgent' as NodeType,
+      position: { x: 750, y: 250 },
+      data: {
+        label: 'Content Polisher',
+        agentName: 'Content Polisher',
+        systemPrompt: 'Review and improve the content for clarity and readability. Fix any grammar issues and make it more engaging. Keep the same length.',
+        model: 'gpt-4',
+        temperature: 0.4,
+        maxTokens: 500,
+        status: 'idle' as NodeExecutionStatus
+      }
+    },
+    {
+      id: 'end-init',
+      type: 'end' as NodeType,
+      position: { x: 1000, y: 250 },
+      data: { label: 'End', outputFormat: 'text', status: 'idle' as NodeExecutionStatus }
+    }
+  ] as WorkflowNode[],
+  edges: [
+    {
+      id: 'e-start-analyzer',
+      source: 'start-init',
+      target: 'analyzer-init',
+      type: 'smoothstep'
+    },
+    {
+      id: 'e-analyzer-writer',
+      source: 'analyzer-init',
+      target: 'writer-init',
+      type: 'smoothstep'
+    },
+    {
+      id: 'e-writer-polisher',
+      source: 'writer-init',
+      target: 'polisher-init',
+      type: 'smoothstep'
+    },
+    {
+      id: 'e-polisher-end',
+      source: 'polisher-init',
+      target: 'end-init',
+      type: 'smoothstep'
+    }
+  ] as WorkflowEdge[]
+}
+
+// ============================================================================
 // Zustand Store
 // ============================================================================
 
 export const useWorkflowStore = create<WorkflowStore>()(
   devtools(
     (set, get) => ({
-      // Initial State
-      nodes: [],
-      edges: [],
+      // Initial State with demo workflow
+      nodes: initialDemoWorkflow.nodes,
+      edges: initialDemoWorkflow.edges,
       selectedNode: null,
       executionState: 'idle',
       executionLog: [],
       validationErrors: [],
       isSaving: false,
-      workflowName: '',
-      workflowDescription: '',
+      workflowName: 'Content Creator Pipeline',
+      workflowDescription: 'A multi-step workflow that analyzes a topic, writes content, and polishes it for publication',
 
       // Node Actions
       setNodes: (nodes) => set({ nodes }),
