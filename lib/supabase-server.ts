@@ -19,8 +19,23 @@ import { cookies } from "next/headers"
 export async function createServerSupabaseClient() {
   const cookieStore = await cookies()
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  // Gracefully bypass when env not configured (local preview)
+  if (!supabaseUrl || !supabaseAnonKey) {
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn('[supabase-server] Env not set - returning no-op client')
+    }
+    // Return a minimal stub with auth.getUser() resolving to null to avoid crashes
+    return {
+      auth: {
+        async getUser() {
+          return { data: { user: null }, error: null }
+        },
+      },
+    } as unknown as ReturnType<typeof createServerClient>
+  }
 
   return createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
