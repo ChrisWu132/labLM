@@ -124,15 +124,16 @@ export class WorkflowEngine {
 
       // 1. Get input data from previous steps
       const inputs = this.getInputsForStep(stepId)
-      console.log(`[WorkflowEngine] Node ${stepId} inputs:`, Object.fromEntries(inputs))
 
       // 2. Build prompt using node template + inputs
-      const resolvedPrompt = this.buildPrompt(node, inputs)
-      console.log(`[WorkflowEngine] Node ${stepId} resolved prompt:`, resolvedPrompt.substring(0, 200) + '...')
+      const prompt = this.buildPrompt(node, inputs)
 
       // 3. Call LLM
-      const output = await this.callLLM(resolvedPrompt)
-      console.log(`[WorkflowEngine] Node ${stepId} LLM output:`, output.substring(0, 150) + '...')
+      const output = await this.callLLM(
+        prompt.userPrompt,
+        prompt.systemPrompt,
+        prompt.options
+      )
 
       // 4. Save result
       this.results.set(stepId, output)
@@ -141,7 +142,7 @@ export class WorkflowEngine {
       const logEntry: ExecutionLog = {
         stepId,
         timestamp: new Date().toISOString(),
-        input: resolvedPrompt,
+        input: prompt.userPrompt,
         output,
         durationMs: Date.now() - startTime,
         status: 'success'
@@ -154,10 +155,12 @@ export class WorkflowEngine {
       const errorMsg = error instanceof Error ? error.message : 'Execution failed'
       console.error(`[WorkflowEngine] Node ${stepId} error:`, errorMsg)
 
+      const prompt = this.buildPrompt(node, this.getInputsForStep(stepId))
+
       log.push({
         stepId,
         timestamp: new Date().toISOString(),
-        input: node.data.prompt || '',
+        input: prompt.userPrompt,
         output: errorMsg,
         durationMs: Date.now() - startTime,
         status: 'error',
@@ -172,9 +175,17 @@ export class WorkflowEngine {
   /**
    * Call LLM API
    */
-  private async callLLM(prompt: string): Promise<string> {
+  private async callLLM(
+    prompt: string,
+    systemPrompt?: string,
+    options?: {
+      model?: string
+      temperature?: number
+      maxTokens?: number
+    }
+  ): Promise<string> {
     try {
-      const output = await createChatCompletion(prompt)
+      const output = await createChatCompletion(prompt, systemPrompt, options)
       return output
     } catch (error) {
       throw new Error('LLM call failed: ' + (error instanceof Error ? error.message : 'Unknown error'))
@@ -348,25 +359,129 @@ export class WorkflowEngine {
   private buildPrompt(
     node: WorkflowNode,
     inputs: Map<string, string>
-  ): string {
-    const template = this.getPromptTemplate(node)
-    let resolved = this.resolvePromptVariables(template, inputs)
-
-    const inputText = Array.from(inputs.values())
-      .filter(Boolean)
+  ): {
+    systemPrompt?: string
+    userPrompt: string
+    options?: {
+      model?: string
+      temperature?: number
+      maxTokens?: number
+    }
+  } {
+    const inputPairs = Array.from(inputs.entries()).filter(([, value]) => Boolean(value?.trim()))
+    const formattedContext = inputPairs
+      .map(([key, value]) => `${key}::\n${value}`)
       .join('\n\n')
+    const inputOnly = inputPairs.map(([, value]) => value).join('\n\n')
 
-    if (!resolved.trim()) {
-      if (inputText.trim()) {
-        resolved = `${template || 'Process the following input and respond helpfully:'}\n\n${inputText}`
-      } else {
-        resolved = template || 'Provide a helpful response for the given task.'
-      }
-    } else if (inputText.trim()) {
-      resolved = `${resolved.trim()}\n\nInput:\n${inputText}`
+    const commonOptions = {
+      model: node.data.model,
+      temperature: node.data.temperature,
+      maxTokens: node.data.maxTokens
     }
 
-    return resolved
+    switch (node.type) {
+      case 'llmAgent':
+      case 'aiStep': {
+        const template = node.data.prompt || 'Based on the provided context, respond helpfully.'
+        const resolved = this.resolvePromptVariables(template, inputs)
+        const userPrompt = formattedContext
+          ? `${resolved}\n\nContext:\n${formattedContext}`
+          : resolved
+
+        return {
+          systemPrompt: node.data.systemPrompt,
+          userPrompt: userPrompt || 'Provide a helpful response for the task.',
+          options: commonOptions
+        }
+      }
+
+      case 'summarizer': {
+        const summaryLength = node.data.summaryLength || 'medium'
+        const summaryStyle = node.data.summaryStyle || 'paragraph'
+        const systemPrompt =
+          node.data.systemPrompt ||
+          `You are an expert summarizer. Produce a ${summaryLength} summary using ${summaryStyle} style. Focus on the most important points and stay concise.`
+
+        const userPrompt = inputOnly
+          ? `Summarize the following content:\n\n${inputOnly}`
+          : 'No content was supplied to summarize. Provide a brief note about summarization best practices.'
+
+        return {
+          systemPrompt,
+          userPrompt,
+          options: commonOptions
+        }
+      }
+
+      case 'translator': {
+        const source = node.data.sourceLanguage || 'English'
+        const target = node.data.targetLanguage || 'Chinese'
+        const preserve = node.data.preserveFormatting ? 'Yes' : 'No'
+        const systemPrompt =
+          node.data.systemPrompt ||
+          `You are a professional translator. Translate from ${source} to ${target}. Preserve formatting: ${preserve}.`
+
+        const userPrompt = inputOnly
+          ? `Translate this text accurately:\n\n${inputOnly}`
+          : 'No text provided to translate. Explain how you usually approach translations.'
+
+        return {
+          systemPrompt,
+          userPrompt,
+          options: commonOptions
+        }
+      }
+
+      case 'extractor': {
+        const schemaFields = Object.keys(node.data.outputSchema || {})
+        const fieldList = schemaFields.length ? schemaFields.join(', ') : 'the relevant fields'
+        const systemPrompt =
+          node.data.systemPrompt ||
+          `Extract the following fields from the input and respond in JSON: ${fieldList}.`
+
+        const userPrompt = inputOnly
+          ? `Extract structured data from:\n\n${inputOnly}`
+          : 'No content provided to extract data from. Describe what you would need.'
+
+        return {
+          systemPrompt,
+          userPrompt,
+          options: commonOptions
+        }
+      }
+
+      case 'classifier': {
+        const categories = (node.data.categories || []).map((cat: any) => cat.name).join(', ')
+        const systemPrompt =
+          node.data.systemPrompt ||
+          `You are a precise classifier. Choose the best matching category from: ${categories || 'the provided list'}.`
+
+        const userPrompt = inputOnly
+          ? `Classify the following text:\n\n${inputOnly}`
+          : 'No text provided to classify. Explain how classification works.'
+
+        return {
+          systemPrompt,
+          userPrompt,
+          options: commonOptions
+        }
+      }
+
+      default: {
+        const template = this.getPromptTemplate(node)
+        const resolved = this.resolvePromptVariables(template, inputs)
+        const userPrompt = formattedContext
+          ? `${resolved}\n\nContext:\n${formattedContext}`
+          : resolved || 'Provide a helpful response based on the task description.'
+
+        return {
+          systemPrompt: node.data.systemPrompt,
+          userPrompt,
+          options: commonOptions
+        }
+      }
+    }
   }
 
   /**
