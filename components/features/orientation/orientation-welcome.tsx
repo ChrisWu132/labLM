@@ -29,11 +29,11 @@ export function OrientationWelcome({ userName, onComplete }: OrientationWelcomeP
   const remainingMinutes = totalDuration % 60
 
   return (
-    <div className="h-full w-full flex flex-col overflow-hidden bg-background">
+    <div className="h-full w-full flex flex-col bg-background">
       {/* Page 1: Benefits & What You'll Gain */}
       {currentPage === 1 && (
-        <div className="flex-1 flex flex-col items-center justify-center p-8 overflow-y-auto animate-in fade-in duration-500">
-          <div className="max-w-3xl w-full space-y-8 pb-8">
+        <div className="flex-1 flex flex-col items-center justify-center p-12 overflow-y-auto animate-in fade-in duration-500">
+          <div className="max-w-3xl w-full space-y-8 pb-12">
             {/* Hero */}
             <div className="text-center space-y-4">
               <div className="flex justify-center mb-6">
@@ -105,7 +105,7 @@ export function OrientationWelcome({ userName, onComplete }: OrientationWelcomeP
                   <p className="text-muted-foreground">
                     Learn by doing! Each lab includes interactive exercises where you'll experiment with AI,
                     discover its capabilities and limits, and apply what you learn in real scenarios.
-                    No prior knowledge neededâ€”everything runs in your browser.
+                    No prior knowledge needed¡ªeverything runs in your browser.
                   </p>
                 </div>
               </div>
@@ -130,8 +130,8 @@ export function OrientationWelcome({ userName, onComplete }: OrientationWelcomeP
 
       {/* Page 2: Course Schedule & Time Estimates */}
       {currentPage === 2 && (
-        <div className="flex-1 flex flex-col items-center justify-center p-8 overflow-y-auto animate-in fade-in duration-500">
-          <div className="max-w-3xl w-full space-y-8 pb-8">
+        <div className="flex-1 flex flex-col items-center justify-center p-12 overflow-y-auto animate-in fade-in duration-500">
+          <div className="max-w-3xl w-full space-y-8 pb-12">
             {/* Header */}
             <div className="text-center space-y-4">
               <div className="flex justify-center items-center gap-2 mb-4">
@@ -210,3 +210,4 @@ export function OrientationWelcome({ userName, onComplete }: OrientationWelcomeP
     </div>
   )
 }
+
