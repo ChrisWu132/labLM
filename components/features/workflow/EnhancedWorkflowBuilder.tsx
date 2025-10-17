@@ -20,8 +20,6 @@ import { toast } from 'sonner'
 import {
   Save,
   PlayCircle,
-  Download,
-  Upload,
   Trash2,
   CheckCircle,
   AlertCircle,
@@ -40,7 +38,7 @@ import type { NodeType } from '@/lib/workflow/types'
 export function EnhancedWorkflowBuilder() {
   const reactFlowWrapper = useRef<HTMLDivElement>(null)
   const [reactFlowInstance, setReactFlowInstance] = useState<ReactFlowInstance | null>(null)
-  const [testInput, setTestInput] = useState('')
+  const [testInput, setTestInput] = useState('artificial intelligence')
 
   // Zustand store
   const nodes = useWorkflowStore((state) => state.nodes)
@@ -57,8 +55,6 @@ export function EnhancedWorkflowBuilder() {
   const saveCurrentWorkflow = useWorkflowStore((state) => state.saveCurrentWorkflow)
   const executeWorkflow = useWorkflowStore((state) => state.executeWorkflow)
   const validateWorkflow = useWorkflowStore((state) => state.validateWorkflow)
-  const exportWorkflow = useWorkflowStore((state) => state.exportWorkflow)
-  const importWorkflow = useWorkflowStore((state) => state.importWorkflow)
   const clearWorkflow = useWorkflowStore((state) => state.clearWorkflow)
   const isSaving = useWorkflowStore((state) => state.isSaving)
   const executionState = useWorkflowStore((state) => state.executionState)
@@ -159,50 +155,6 @@ export function EnhancedWorkflowBuilder() {
     }
   }
 
-  // Export workflow
-  const handleExport = () => {
-    if (nodes.length === 0) {
-      toast.error('No workflow to export')
-      return
-    }
-
-    const jsonString = exportWorkflow()
-    const blob = new Blob([jsonString], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.href = url
-    link.download = `${workflowName || 'workflow'}.json`
-    link.click()
-    URL.revokeObjectURL(url)
-
-    toast.success('Workflow exported!')
-  }
-
-  // Import workflow
-  const handleImport = () => {
-    const input = document.createElement('input')
-    input.type = 'file'
-    input.accept = '.json'
-    input.onchange = async (e) => {
-      const file = (e.target as HTMLInputElement).files?.[0]
-      if (!file) return
-
-      const reader = new FileReader()
-      reader.onload = async (event) => {
-        const jsonString = event.target?.result as string
-        const result = await importWorkflow(jsonString)
-
-        if (result.success) {
-          toast.success('Workflow imported successfully!')
-        } else {
-          toast.error(result.error || 'Failed to import workflow')
-        }
-      }
-      reader.readAsText(file)
-    }
-    input.click()
-  }
-
   // Validate workflow
   const handleValidate = () => {
     const validation = validateWorkflow()
@@ -275,10 +227,10 @@ export function EnhancedWorkflowBuilder() {
             <div className="h-4 w-px bg-gray-300" />
 
             <Input
-              placeholder="Test input..."
+              placeholder="Enter a topic (e.g., 'quantum computing', 'healthy eating')..."
               value={testInput}
               onChange={(e) => setTestInput(e.target.value)}
-              className="max-w-sm h-9"
+              className="flex-1 h-9"
             />
 
             <Button
@@ -301,16 +253,6 @@ export function EnhancedWorkflowBuilder() {
             </Button>
 
             <div className="h-4 w-px bg-gray-300" />
-
-            <Button size="sm" variant="outline" onClick={handleExport}>
-              <Download className="w-4 h-4 mr-2" />
-              Export
-            </Button>
-
-            <Button size="sm" variant="outline" onClick={handleImport}>
-              <Upload className="w-4 h-4 mr-2" />
-              Import
-            </Button>
 
             <Button size="sm" variant="outline" onClick={handleClear}>
               <Trash2 className="w-4 h-4 mr-2" />

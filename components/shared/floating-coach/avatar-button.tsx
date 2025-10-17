@@ -14,7 +14,7 @@ export function AvatarButton({ onClick, state, hasNotification }: AvatarButtonPr
   return (
     <motion.button
       onClick={onClick}
-      className="relative w-12 h-12 md:w-14 md:h-14 rounded-full shadow-lg hover:shadow-xl transition-shadow focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 overflow-hidden bg-white"
+      className="relative w-16 h-16 md:w-20 md:h-20 rounded-full shadow-lg hover:shadow-xl transition-shadow focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 overflow-hidden bg-white"
       aria-label="Open AI Learning Coach"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
@@ -33,7 +33,7 @@ export function AvatarButton({ onClick, state, hasNotification }: AvatarButtonPr
         alt="AI Coach"
         fill
         className="object-cover"
-        sizes="(max-width: 768px) 48px, 56px"
+        sizes="(max-width: 768px) 64px, 80px"
         priority
       />
 

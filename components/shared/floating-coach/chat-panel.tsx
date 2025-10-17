@@ -88,7 +88,7 @@ export function ChatPanel({ open, onOpenChange, currentModule, currentLab, curre
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side="bottom"
-        className="h-[85vh] md:h-[600px] md:max-w-[360px] md:right-4 md:bottom-4 md:left-auto md:top-auto md:rounded-lg flex flex-col"
+        className="h-[85vh] md:h-[600px] md:max-w-[360px] md:right-4 md:bottom-4 md:left-auto md:top-auto md:rounded-lg flex flex-col bg-white"
       >
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2">
