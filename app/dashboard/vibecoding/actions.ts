@@ -30,17 +30,34 @@ export async function startVibecoding() {
     return { success: true, data: existingProgress }
   }
 
-  // Create new module 2 progress record
-  const { data, error } = await supabase
+  // Create new module 2 progress record (handle schema differences)
+  const insertPayload: Record<string, any> = {
+    user_id: user.id,
+    module_number: 2,
+    status: "in_progress",
+    started_at: new Date().toISOString(),
+  }
+
+  let { data, error } = await supabase
     .from("module_progress")
-    .insert({
-      user_id: user.id,
-      module_number: 2,
-      status: "in_progress",
-      started_at: new Date().toISOString(),
-    })
+    .insert(insertPayload)
     .select()
     .single()
+
+  if (error?.code === "PGRST204") {
+    const fallback = await supabase
+      .from("module_progress")
+      .insert({
+        user_id: user.id,
+        module_number: 2,
+        completed: false,
+      })
+      .select()
+      .single()
+
+    data = fallback.data
+    error = fallback.error || null
+  }
 
   if (error) {
     console.error("Error starting vibecoding:", error)
@@ -100,48 +117,15 @@ export async function saveSandpackSubmission(
     return { success: false, error: "Not authenticated" }
   }
 
-  // Check if submission already exists
-  const { data: existing } = await supabase
-    .from("sandpack_submissions")
-    .select("*")
-    .eq("user_id", user.id)
-    .eq("lab_number", labNumber)
-    .single()
-
-  if (existing) {
-    // Update existing submission
-    const { error } = await supabase
-      .from("sandpack_submissions")
-      .update({
-        code_snapshot: codeSnapshot,
-        experiment_notes: experimentNotes,
-        completed: true,
-      })
-      .eq("user_id", user.id)
-      .eq("lab_number", labNumber)
-
-    if (error) {
-      console.error("Error updating sandpack submission:", error)
-      return { success: false, error: error.message }
-    }
-  } else {
-    // Create new submission
-    const { error } = await supabase.from("sandpack_submissions").insert({
-      user_id: user.id,
-      lab_number: labNumber,
-      code_snapshot: codeSnapshot,
-      experiment_notes: experimentNotes,
-      completed: true,
-    })
-
-    if (error) {
-      console.error("Error creating sandpack submission:", error)
-      return { success: false, error: error.message }
-    }
-  }
+  // Sandpack submissions have been deprecated in favor of prompt-based labs.
+  // Keep the handler to maintain API compatibility, but simply return success.
+  console.warn("saveSandpackSubmission is deprecated and no longer persists data.")
 
   revalidatePath("/dashboard/vibecoding")
-  return { success: true, message: "Lab progress saved!" }
+  return {
+    success: true,
+    message: "Sandpack submissions are no longer required. Your progress is tracked automatically.",
+  }
 }
 
 /**
@@ -159,39 +143,30 @@ export async function markLabComplete(labNumber: number) {
     return { success: false, error: "Not authenticated" }
   }
 
-  // Check if submission exists
-  const { data: existing } = await supabase
-    .from("sandpack_submissions")
-    .select("*")
-    .eq("user_id", user.id)
-    .eq("lab_number", labNumber)
-    .single()
+  const now = new Date().toISOString()
+  const manualExerciseId = `lab${labNumber}-manual-complete`
 
-  if (existing) {
-    // Update existing
-    const { error } = await supabase
-      .from("sandpack_submissions")
-      .update({ completed: true })
-      .eq("user_id", user.id)
-      .eq("lab_number", labNumber)
+  const { error: upsertError } = await supabase
+    .from("prompt_lab_progress")
+    .upsert(
+      {
+        user_id: user.id,
+        lab_number: labNumber,
+        exercise_id: manualExerciseId,
+        prompt_submitted: "[manual completion]",
+        llm_response: "Manual completion recorded",
+        success: true,
+        attempts: 1,
+        completed_at: now,
+      },
+      {
+        onConflict: "user_id,lab_number,exercise_id",
+      },
+    )
 
-    if (error) {
-      console.error("Error marking lab complete:", error)
-      return { success: false, error: error.message }
-    }
-  } else {
-    // Create new entry
-    const { error } = await supabase.from("sandpack_submissions").insert({
-      user_id: user.id,
-      lab_number: labNumber,
-      code_snapshot: {},
-      completed: true,
-    })
-
-    if (error) {
-      console.error("Error marking lab complete:", error)
-      return { success: false, error: error.message }
-    }
+  if (upsertError) {
+    console.error("Error marking lab complete:", upsertError)
+    return { success: false, error: upsertError.message }
   }
 
   revalidatePath("/dashboard/vibecoding")
@@ -214,15 +189,39 @@ export async function getLabSubmissions() {
   }
 
   const { data, error } = await supabase
-    .from("sandpack_submissions")
-    .select("*")
+    .from("prompt_lab_progress")
+    .select("lab_number, success, completed_at")
     .eq("user_id", user.id)
-    .order("created_at", { ascending: false })
 
   if (error) {
+    if (error.code === "PGRST205") {
+      // Table not found (older schema) – treat as no submissions yet
+      return { success: true, data: [] }
+    }
+
     console.error("Error fetching lab submissions:", error)
     return { success: false, error: error.message, data: [] }
   }
 
-  return { success: true, data: data || [] }
+  const summary = new Map<number, { lab_number: number; completed: boolean; completed_at?: string | null }>()
+
+  for (const row of data || []) {
+    if (!row) continue
+    const labNumber = (row as any).lab_number as number
+    if (!summary.has(labNumber)) {
+      summary.set(labNumber, {
+        lab_number: labNumber,
+        completed: false,
+        completed_at: null,
+      })
+    }
+
+    if ((row as any).success) {
+      const entry = summary.get(labNumber)!
+      entry.completed = true
+      entry.completed_at = (row as any).completed_at ?? entry.completed_at
+    }
+  }
+
+  return { success: true, data: Array.from(summary.values()) }
 }

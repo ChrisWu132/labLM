@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import { createServerSupabaseClient } from '@/lib/supabase-server'
 
 /**
  * Rate Limiting Helper
@@ -8,7 +9,16 @@ import { createClient } from '@supabase/supabase-js'
  */
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+async function getSupabase() {
+  // Prefer service role key if available (bypasses RLS for admin-style ops)
+  if (supabaseServiceKey) {
+    return createClient(supabaseUrl, supabaseServiceKey)
+  }
+  // Fallback to authenticated server client (uses anon key + RLS)
+  return await createServerSupabaseClient()
+}
 
 /**
  * Check if user is within rate limit
@@ -26,7 +36,7 @@ export async function checkRateLimit(
   windowMinutes: number
 ): Promise<boolean> {
   // Create service role client (bypasses RLS)
-  const supabase = createClient(supabaseUrl, supabaseServiceKey)
+  const supabase = await getSupabase()
 
   const windowStart = new Date(Date.now() - windowMinutes * 60 * 1000)
 
@@ -58,7 +68,7 @@ export async function logAIUsage(
   action: string,
   metadata?: Record<string, any>
 ): Promise<void> {
-  const supabase = createClient(supabaseUrl, supabaseServiceKey)
+  const supabase = await getSupabase()
 
   const { error } = await supabase.from('ai_usage_log').insert({
     user_id: userId,

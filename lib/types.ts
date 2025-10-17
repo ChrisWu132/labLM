@@ -4,12 +4,13 @@ export interface ModuleProgress {
   id: string
   user_id: string
   module_number: number
-  status: "not_started" | "in_progress" | "completed"
-  started_at?: string
-  completed_at?: string
+  status?: "not_started" | "in_progress" | "completed"
+  completed?: boolean
+  started_at?: string | null
+  completed_at?: string | null
   checklist_items?: Record<string, boolean>
-  created_at: string
-  updated_at: string
+  created_at?: string
+  updated_at?: string
 }
 
 export interface ResearchInput {
@@ -35,15 +36,10 @@ export interface ProblemBrief {
   updated_at: string
 }
 
-export interface SandpackSubmission {
-  id: string
-  user_id: string
+export interface LabCompletionSummary {
   lab_number: number
-  code_snapshot: Record<string, string>
-  experiment_notes?: string
   completed: boolean
-  created_at: string
-  updated_at: string
+  completed_at?: string | null
 }
 
 export interface GtmAction {

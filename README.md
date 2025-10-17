@@ -477,3 +477,44 @@ All rights reserved. © 2025 LLM Learning Lab
 **Built with Next.js 15, Supabase, GPT-4o, and shadcn/ui** 🚀
 **Designed for curious minds ages 10-15** 🧠
 **Science education for the AI age** 🔬
+
+---
+
+## 🛠 Troubleshooting
+
+### ENOENT: .next/server/app-paths-manifest.json not found
+
+If you see an error like:
+
+```
+Error: ENOENT: no such file or directory, open '.next/server/app-paths-manifest.json'
+```
+
+It means the production build artifacts are missing. Fixes:
+
+1) Build first, then start:
+
+```powershell
+npm run build; npm start
+```
+
+2) Use the built-in guard. We added a prestart hook that auto-builds if artifacts are missing. Simply run:
+
+```powershell
+npm start
+```
+
+This will execute `scripts/ensure-build.js` to create the `.next` artifacts if needed, then boot the server.
+
+3) For development, prefer:
+
+```powershell
+npm run dev
+```
+
+If issues persist, try clearing the build output and rebuilding:
+
+```powershell
+Remove-Item -Recurse -Force .next
+npm run build
+```
