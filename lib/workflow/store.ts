@@ -535,11 +535,11 @@ export const useWorkflowStore = create<WorkflowStore>()(
         const state = get()
         const errors: ValidationError[] = []
 
-        // Check for start node
-        if (!state.nodes.some((n) => n.type === 'start')) {
+        // Check for start/input node
+        if (!state.nodes.some((n) => n.type === 'start' || n.type === 'input')) {
           errors.push({
             type: 'error',
-            message: 'Workflow must have at least one Start node'
+            message: 'Workflow must have at least one Start or Input node'
           })
         }
 

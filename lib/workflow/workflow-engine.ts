@@ -44,9 +44,9 @@ export class WorkflowEngine {
       const executionOrder = this.topologicalSort()
 
       // 2. Set initial input
-      const inputStepId = this.findNodeByType('input')
+      const inputStepId = this.findPrimaryInputNode()
       if (!inputStepId) {
-        throw new Error('Workflow must have an input node')
+        throw new Error('Workflow must have an input/start node')
       }
       this.results.set(inputStepId, initialInput)
 
@@ -67,7 +67,7 @@ export class WorkflowEngine {
       }
 
       // 4. Get final output
-      const outputStepId = this.findNodeByType('output')
+      const outputStepId = this.findPrimaryOutputNode()
       const finalOutput = outputStepId
         ? this.results.get(this.getInputSourceForStep(outputStepId) || '')
         : undefined
@@ -176,7 +176,7 @@ export class WorkflowEngine {
     }
 
     // Special variable: {输入} - points to initial workflow input
-    const inputStepId = this.findNodeByType('input')
+    const inputStepId = this.findPrimaryInputNode()
     if (inputStepId) {
       const inputValue = this.results.get(inputStepId) || ''
       resolved = resolved.replace(/\{输入\}/g, inputValue)
@@ -233,7 +233,7 @@ export class WorkflowEngine {
     }
 
     // Start DFS from input node
-    const inputStepId = this.findNodeByType('input')
+    const inputStepId = this.findPrimaryInputNode()
     if (inputStepId) {
       visit(inputStepId)
     }
@@ -254,6 +254,20 @@ export class WorkflowEngine {
     }
 
     return adjacency
+  }
+
+  /**
+   * Find primary input node (supports both legacy 'input' and new 'start' nodes)
+   */
+  private findPrimaryInputNode(): string | undefined {
+    return this.findNodeByType('input') ?? this.findNodeByType('start')
+  }
+
+  /**
+   * Find primary output node (supports both 'output' and 'end')
+   */
+  private findPrimaryOutputNode(): string | undefined {
+    return this.findNodeByType('output') ?? this.findNodeByType('end')
   }
 
   /**

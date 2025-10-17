@@ -102,7 +102,7 @@ Before execution, the system must validate:
 - All nodes have required inputs connected
 - No circular dependencies exist
 - All node configurations are complete
-- At least one Start node and one End node exist
+- At least one Start (or Input) node and one End (or Output) node exist
 
 ### Non-Functional Requirements
 
