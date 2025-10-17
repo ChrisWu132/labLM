@@ -213,10 +213,17 @@ function getDefaultNodeData(type: NodeType): any {
 const initialDemoWorkflow = {
   nodes: [
     {
-      id: 'start-init',
-      type: 'start' as NodeType,
+      id: 'input-init',
+      type: 'input' as NodeType,
       position: { x: 50, y: 250 },
-      data: { label: 'Start', status: 'idle' as NodeExecutionStatus }
+      data: {
+        label: 'Topic Input',
+        parameterName: 'topic',
+        parameterType: 'text',
+        placeholder: 'e.g. Quantum Computing',
+        required: true,
+        status: 'idle' as NodeExecutionStatus
+      }
     },
     {
       id: 'analyzer-init',
@@ -261,16 +268,20 @@ const initialDemoWorkflow = {
       }
     },
     {
-      id: 'end-init',
-      type: 'end' as NodeType,
+      id: 'output-init',
+      type: 'output' as NodeType,
       position: { x: 1000, y: 250 },
-      data: { label: 'End', outputFormat: 'text', status: 'idle' as NodeExecutionStatus }
+      data: {
+        label: 'Final Output',
+        outputFormat: 'markdown',
+        status: 'idle' as NodeExecutionStatus
+      }
     }
   ] as WorkflowNode[],
   edges: [
     {
-      id: 'e-start-analyzer',
-      source: 'start-init',
+      id: 'e-input-analyzer',
+      source: 'input-init',
       target: 'analyzer-init',
       type: 'smoothstep'
     },
@@ -287,9 +298,9 @@ const initialDemoWorkflow = {
       type: 'smoothstep'
     },
     {
-      id: 'e-polisher-end',
+      id: 'e-polisher-output',
       source: 'polisher-init',
-      target: 'end-init',
+      target: 'output-init',
       type: 'smoothstep'
     }
   ] as WorkflowEdge[]
