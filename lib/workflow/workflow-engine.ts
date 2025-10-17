@@ -69,7 +69,7 @@ export class WorkflowEngine {
       // 4. Get final output
       const outputStepId = this.findPrimaryOutputNode()
       const finalOutput = outputStepId
-        ? this.results.get(this.getInputSourceForStep(outputStepId) || '')
+        ? this.collectWorkflowOutput(outputStepId)
         : undefined
 
       const totalDurationMs = Date.now() - startTime
@@ -286,5 +286,24 @@ export class WorkflowEngine {
   private getInputSourceForStep(stepId: string): string | undefined {
     const incomingEdge = this.edges.find(e => e.target === stepId)
     return incomingEdge?.source
+  }
+
+  /**
+   * Collect final output by tracing upstream from the output node
+   */
+  private collectWorkflowOutput(outputNodeId: string): string | undefined {
+    const intoOutputEdge = this.edges.find(e => e.target === outputNodeId)
+    if (!intoOutputEdge) return undefined
+
+    const upstreamId = intoOutputEdge.source
+
+    // Prefer stored result on upstream node
+    const upstreamResult = this.results.get(upstreamId)
+    if (upstreamResult) {
+      return upstreamResult
+    }
+
+    // Fall back to stored result on the output node itself
+    return this.results.get(outputNodeId)
   }
 }
