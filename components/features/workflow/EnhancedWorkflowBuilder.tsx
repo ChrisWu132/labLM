@@ -18,7 +18,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { toast } from 'sonner'
 import {
-  Save,
   PlayCircle,
   Trash2,
   CheckCircle,
@@ -39,6 +38,7 @@ export function EnhancedWorkflowBuilder() {
   const reactFlowWrapper = useRef<HTMLDivElement>(null)
   const [reactFlowInstance, setReactFlowInstance] = useState<ReactFlowInstance | null>(null)
   const [testInput, setTestInput] = useState('artificial intelligence')
+  const [lastOutput, setLastOutput] = useState<string>('')
 
   // Zustand store
   const nodes = useWorkflowStore((state) => state.nodes)
@@ -48,15 +48,9 @@ export function EnhancedWorkflowBuilder() {
   const onConnect = useWorkflowStore((state) => state.onConnect)
   const selectNode = useWorkflowStore((state) => state.selectNode)
   const addNode = useWorkflowStore((state) => state.addNode)
-  const workflowName = useWorkflowStore((state) => state.workflowName)
-  const workflowDescription = useWorkflowStore((state) => state.workflowDescription)
-  const setWorkflowName = useWorkflowStore((state) => state.setWorkflowName)
-  const setWorkflowDescription = useWorkflowStore((state) => state.setWorkflowDescription)
-  const saveCurrentWorkflow = useWorkflowStore((state) => state.saveCurrentWorkflow)
   const executeWorkflow = useWorkflowStore((state) => state.executeWorkflow)
   const validateWorkflow = useWorkflowStore((state) => state.validateWorkflow)
   const clearWorkflow = useWorkflowStore((state) => state.clearWorkflow)
-  const isSaving = useWorkflowStore((state) => state.isSaving)
   const executionState = useWorkflowStore((state) => state.executionState)
   const validationErrors = useWorkflowStore((state) => state.validationErrors)
 
@@ -100,32 +94,6 @@ export function EnhancedWorkflowBuilder() {
     selectNode(null)
   }, [selectNode])
 
-  // Save workflow
-  const handleSave = async () => {
-    if (!workflowName.trim()) {
-      toast.error('Please enter a workflow name')
-      return
-    }
-
-    const validation = validateWorkflow()
-    if (!validation.valid) {
-      toast.error('Workflow has validation errors. Please fix them first.')
-      return
-    }
-
-    toast.loading('Saving workflow...')
-
-    const result = await saveCurrentWorkflow()
-
-    toast.dismiss()
-
-    if (result.success) {
-      toast.success('Workflow saved successfully!')
-    } else {
-      toast.error(result.error || 'Failed to save workflow')
-    }
-  }
-
   // Execute workflow
   const handleExecute = async () => {
     if (!testInput.trim()) {
@@ -139,6 +107,7 @@ export function EnhancedWorkflowBuilder() {
       return
     }
 
+    setLastOutput('')
     toast.loading('Executing workflow...')
 
     const result = await executeWorkflow(testInput)
@@ -147,24 +116,10 @@ export function EnhancedWorkflowBuilder() {
 
     if (result.success) {
       toast.success('Workflow executed successfully!')
-      if (result.output) {
-        toast.info(`Output: ${result.output.substring(0, 100)}...`, { duration: 5000 })
-      }
+      setLastOutput(result.output || 'No output generated')
     } else {
       toast.error(result.error || 'Execution failed')
-    }
-  }
-
-  // Validate workflow
-  const handleValidate = () => {
-    const validation = validateWorkflow()
-
-    if (validation.valid) {
-      toast.success('Workflow is valid!')
-    } else {
-      const errorCount = validation.errors.filter((e) => e.type === 'error').length
-      const warningCount = validation.errors.filter((e) => e.type === 'warning').length
-      toast.error(`Validation failed: ${errorCount} errors, ${warningCount} warnings`)
+      setLastOutput(`Error: ${result.error || 'Execution failed'}`)
     }
   }
 
@@ -186,51 +141,13 @@ export function EnhancedWorkflowBuilder() {
       {/* Center: Canvas */}
       <div className="flex-1 flex flex-col">
         {/* Top Toolbar */}
-        <div className="bg-white border-b p-3 space-y-2 shrink-0">
-          {/* Workflow Info */}
-          <div className="flex gap-2">
-            <Input
-              placeholder="Workflow name..."
-              value={workflowName}
-              onChange={(e) => setWorkflowName(e.target.value)}
-              className="max-w-xs h-9"
-            />
-            <Input
-              placeholder="Description (optional)"
-              value={workflowDescription}
-              onChange={(e) => setWorkflowDescription(e.target.value)}
-              className="max-w-md h-9"
-            />
-          </div>
-
-          {/* Actions */}
+        <div className="bg-white border-b p-3 shrink-0">
           <div className="flex items-center gap-2">
-            <Button size="sm" onClick={handleSave} disabled={isSaving}>
-              {isSaving ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Saving...
-                </>
-              ) : (
-                <>
-                  <Save className="w-4 h-4 mr-2" />
-                  Save
-                </>
-              )}
-            </Button>
-
-            <Button size="sm" variant="outline" onClick={handleValidate}>
-              <CheckCircle className="w-4 h-4 mr-2" />
-              Validate
-            </Button>
-
-            <div className="h-4 w-px bg-gray-300" />
-
             <Input
               placeholder="Enter a topic (e.g., 'quantum computing', 'healthy eating')..."
               value={testInput}
               onChange={(e) => setTestInput(e.target.value)}
-              className="flex-1 h-9"
+              className="flex-1 h-9 min-w-[400px]"
             />
 
             <Button
@@ -293,6 +210,29 @@ export function EnhancedWorkflowBuilder() {
             />
           </ReactFlow>
         </div>
+
+        {/* Output Display */}
+        {lastOutput && (
+          <div className="bg-white border-t p-4 shrink-0 max-h-64 overflow-auto">
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="font-semibold text-sm flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-green-500" />
+                Workflow Output
+              </h3>
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => setLastOutput('')}
+                className="h-6 px-2 text-xs"
+              >
+                Clear
+              </Button>
+            </div>
+            <div className="bg-gray-50 rounded-lg p-3 text-sm whitespace-pre-wrap">
+              {lastOutput}
+            </div>
+          </div>
+        )}
 
         {/* Status Bar */}
         {validationErrors.length > 0 && (
