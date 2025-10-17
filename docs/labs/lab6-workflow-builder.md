@@ -1589,54 +1589,70 @@ CREATE POLICY "Users can create own executions"
   ON workflow_executions FOR INSERT
   WITH CHECK (user_id = auth.uid());
 
--- 7. 扩展现有的 prompt_lab_progress 表
+-- 7. 扩展 prompt_lab_progress 表
 ALTER TABLE prompt_lab_progress
   ADD COLUMN IF NOT EXISTS workflow_id UUID REFERENCES workflows(id),
   ADD COLUMN IF NOT EXISTS stage INT CHECK (stage IN (1, 2, 3));
 
--- 8. 创建预设模板工作流
-INSERT INTO workflows (
-  user_id,
-  name,
-  description,
-  config,
-  is_template,
-  is_public,
-  template_category
-) VALUES
--- 模板1: 故事创作助手
-(
-  (SELECT id FROM auth.users LIMIT 1),  -- 使用系统用户
-  '故事创作助手',
-  '把一个简单主题变成有趣的完整故事',
-  '{"nodes":[{"id":"input-1","type":"input","data":{"label":"输入主题","placeholder":"输入一个主题，如：太空猫"},"position":{"x":250,"y":0}},{"id":"step-1","type":"aiStep","data":{"label":"生成创意","prompt":"根据主题''{输入}''，生成3个有趣的故事创意，每个用一句话描述","editable":true},"position":{"x":250,"y":100}},{"id":"step-2","type":"aiStep","data":{"label":"扩展大纲","prompt":"选择第一个创意，扩展成200字的故事大纲","editable":true},"position":{"x":250,"y":200}},{"id":"step-3","type":"aiStep","data":{"label":"添加细节","prompt":"根据大纲，添加生动的对话和细节描写，写成完整故事","editable":true},"position":{"x":250,"y":300}},{"id":"output-1","type":"output","data":{"label":"完整故事"},"position":{"x":250,"y":400}}],"edges":[{"id":"e1","source":"input-1","target":"step-1"},{"id":"e2","source":"step-1","target":"step-2"},{"id":"e3","source":"step-2","target":"step-3"},{"id":"e4","source":"step-3","target":"output-1"}]}'::jsonb,
-  true,
-  true,
-  'story'
-),
--- 模板2: 作业助手
-(
-  (SELECT id FROM auth.users LIMIT 1),
-  '作业助手',
-  '帮助分析数学题，提供解题思路',
-  '{"nodes":[{"id":"input-1","type":"input","data":{"label":"输入数学题","placeholder":"输入你的数学题"},"position":{"x":250,"y":0}},{"id":"step-1","type":"aiStep","data":{"label":"分析题目","prompt":"分析这道题: ''{输入}''，识别题目类型和考查的知识点"},"position":{"x":250,"y":100}},{"id":"step-2","type":"aiStep","data":{"label":"提供思路","prompt":"根据分析结果，给出解题思路（不直接给答案），引导学生思考"},"position":{"x":250,"y":200}},{"id":"step-3","type":"aiStep","data":{"label":"验证方法","prompt":"说明如何验证答案的正确性"},"position":{"x":250,"y":300}},{"id":"output-1","type":"output","data":{"label":"完整思路"},"position":{"x":250,"y":400}}],"edges":[{"id":"e1","source":"input-1","target":"step-1"},{"id":"e2","source":"step-1","target":"step-2"},{"id":"e3","source":"step-2","target":"step-3"},{"id":"e4","source":"step-3","target":"output-1"}]}'::jsonb,
-  true,
-  true,
-  'homework'
-),
--- 模板3: 翻译润色器
-(
-  (SELECT id FROM auth.users LIMIT 1),
-  '翻译润色器',
-  '中文翻译成英文，并逐步改进表达',
-  '{"nodes":[{"id":"input-1","type":"input","data":{"label":"输入中文","placeholder":"输入一段中文"},"position":{"x":250,"y":0}},{"id":"step-1","type":"aiStep","data":{"label":"翻译","prompt":"将这段中文翻译成英文: ''{输入}''"},"position":{"x":250,"y":100}},{"id":"step-2","type":"aiStep","data":{"label":"检查语法","prompt":"检查这段英文的语法错误，并修正"},"position":{"x":250,"y":200}},{"id":"step-3","type":"aiStep","data":{"label":"提升表达","prompt":"让这段英文更地道、更流畅"},"position":{"x":250,"y":300}},{"id":"output-1","type":"output","data":{"label":"最终英文"},"position":{"x":250,"y":400}}],"edges":[{"id":"e1","source":"input-1","target":"step-1"},{"id":"e2","source":"step-1","target":"step-2"},{"id":"e3","source":"step-2","target":"step-3"},{"id":"e4","source":"step-3","target":"output-1"}]}'::jsonb,
-  true,
-  true,
-  'translate'
-);
+ALTER TABLE prompt_lab_progress
+  DROP CONSTRAINT IF EXISTS prompt_lab_progress_lab_number_check;
+
+ALTER TABLE prompt_lab_progress
+  ADD CONSTRAINT prompt_lab_progress_lab_number_check
+  CHECK (lab_number BETWEEN 1 AND 6);
 
 COMMIT;
 ```
+
+---
+
+### 模板种子脚本（避免 NULL 用户）
+
+> ⚠️ 不能在迁移里直接 `SELECT id FROM auth.users LIMIT 1`。全新项目还没有任何用户时会得到 `NULL`，导致 `workflows.user_id` 违反 `NOT NULL` 约束、整条迁移回滚。
+
+- 使用 Supabase Admin API（service-role key）创建/获取一个“系统模板用户”，在 `.env` 中保存 `WORKFLOW_TEMPLATE_USER_ID`。
+- 编写脚本 `scripts/seed-workflow-templates.ts`，用 service role 调用 `supabase.auth.admin.createUser`（若不存在）并向 `workflows` 表 `insert` 模板。
+- 在 CI/CD 或本地执行 `pnpm tsx scripts/seed-workflow-templates.ts`；脚本里从环境变量读取用户 ID，确保每次都由同一个系统用户拥有模板。
+
+```typescript
+// scripts/seed-workflow-templates.ts
+import { createClient } from '@supabase/supabase-js'
+
+const service = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+)
+
+async function main() {
+  const templateUserId = process.env.WORKFLOW_TEMPLATE_USER_ID
+  if (!templateUserId) throw new Error('Missing WORKFLOW_TEMPLATE_USER_ID')
+
+  const templates = [
+    /* story, homework, translate ... */
+  ]
+
+  for (const template of templates) {
+    await service
+      .from('workflows')
+      .upsert({
+        user_id: templateUserId,
+        lab_number: 6,
+        is_template: true,
+        is_public: true,
+        ...template,
+      }, { onConflict: 'name' })
+  }
+
+  console.log('✅ Workflow templates seeded')
+}
+
+main().catch((err) => {
+  console.error(err)
+  process.exit(1)
+})
+```
+
+这样不会再依赖 `auth.users LIMIT 1`，任何新环境都能稳定落地模板数据。
 
 ---
 
@@ -1649,7 +1665,7 @@ COMMIT;
 
 'use server'
 
-import { createClient } from '@/lib/supabase-server'
+import { createServerSupabaseClient } from '@/lib/supabase-server'
 import { WorkflowEngine } from '@/lib/workflow/workflow-engine'
 
 /**
@@ -1660,7 +1676,7 @@ export async function saveWorkflow(workflow: {
   description?: string
   config: any
 }) {
-  const supabase = createClient()
+  const supabase = await createServerSupabaseClient()
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {
@@ -1690,7 +1706,7 @@ export async function saveWorkflow(workflow: {
  * 获取用户的工作流列表
  */
 export async function getUserWorkflows() {
-  const supabase = createClient()
+  const supabase = await createServerSupabaseClient()
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {
@@ -1714,7 +1730,7 @@ export async function getUserWorkflows() {
  * 获取工作流模板
  */
 export async function getWorkflowTemplates() {
-  const supabase = createClient()
+  const supabase = await createServerSupabaseClient()
 
   const { data, error } = await supabase
     .from('workflows')
@@ -1734,7 +1750,7 @@ export async function getWorkflowTemplates() {
  * 加载工作流
  */
 export async function loadWorkflow(workflowId: string) {
-  const supabase = createClient()
+  const supabase = await createServerSupabaseClient()
   const { data: { user } } = await supabase.auth.getUser()
 
   const { data, error } = await supabase
@@ -1762,7 +1778,7 @@ export async function executeWorkflow(
   workflowId: string,
   inputData: string
 ) {
-  const supabase = createClient()
+  const supabase = await createServerSupabaseClient()
   const { data: { user }, error: authError } = await supabase.auth.getUser()
 
   if (authError || !user) {
@@ -1870,7 +1886,7 @@ function estimateTokens(log: any[]): number {
  * 删除工作流
  */
 export async function deleteWorkflow(workflowId: string) {
-  const supabase = createClient()
+  const supabase = await createServerSupabaseClient()
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {
@@ -1894,7 +1910,7 @@ export async function deleteWorkflow(workflowId: string) {
  * 复制模板到用户工作流
  */
 export async function cloneTemplate(templateId: string) {
-  const supabase = createClient()
+  const supabase = await createServerSupabaseClient()
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {

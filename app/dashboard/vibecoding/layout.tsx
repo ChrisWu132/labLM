@@ -3,12 +3,11 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { Textarea } from "@/components/ui/textarea"
-import { ChevronDown, ChevronRight, ChevronLeft, MessageSquare, Send, Loader2 } from "lucide-react"
+import { ChevronDown, ChevronRight, ChevronLeft } from "lucide-react"
 import { usePathname, useRouter } from "next/navigation"
 import { markLabComplete, getLabSubmissions } from "./actions"
-import { askCoach } from "@/lib/actions/coach"
 import { useToast } from "@/hooks/use-toast"
+import { FloatingCoach } from "@/components/shared/floating-coach"
 
 interface Lab {
   number: number
@@ -63,12 +62,9 @@ export default function VibeCodingLayout({ children }: { children: React.ReactNo
 
   const [completedLabs, setCompletedLabs] = useState<number[]>([])
   const [isMarkingComplete, setIsMarkingComplete] = useState(false)
-  const [coachOpen, setCoachOpen] = useState(false)
-  const [coachQuestion, setCoachQuestion] = useState("")
-  const [coachResponse, setCoachResponse] = useState("")
-  const [isAskingCoach, setIsAskingCoach] = useState(false)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true)
   const [isLoading, setIsLoading] = useState(true)
+  const [expandedLab, setExpandedLab] = useState<number | null>(null)
 
   // Determine current lab from pathname
   const currentLab = pathname.match(/\/labs\/lab(\d+)/)
@@ -137,43 +133,6 @@ export default function VibeCodingLayout({ children }: { children: React.ReactNo
     }
   }
 
-  const handleAskCoach = async () => {
-    if (!coachQuestion.trim()) return
-
-    setIsAskingCoach(true)
-    setCoachResponse("")
-
-    try {
-      const response = await askCoach({
-        userMessage: coachQuestion,
-        context: "Prompt Engineering Lab",
-        moduleNumber: 2,
-        additionalContext: { labNumber: currentLab },
-      })
-
-      if (response.success && response.message) {
-        setCoachResponse(response.message)
-        toast({
-          title: "Coach responded",
-          description: `Response time: ${response.latencyMs}ms`,
-        })
-      } else {
-        toast({
-          title: "Error",
-          description: response.error || "Failed to get coach response",
-          variant: "destructive",
-        })
-      }
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "An unexpected error occurred",
-        variant: "destructive",
-      })
-    } finally {
-      setIsAskingCoach(false)
-    }
-  }
 
   return (
     <div className="flex h-full overflow-hidden">
@@ -224,7 +183,10 @@ export default function VibeCodingLayout({ children }: { children: React.ReactNo
                   </Button>
                 ) : (
                   // Expanded view
-                  <Collapsible defaultOpen={false}>
+                  <Collapsible
+                    open={expandedLab === lab.number}
+                    onOpenChange={(isOpen) => setExpandedLab(isOpen ? lab.number : null)}
+                  >
                     <div className={`border rounded-lg overflow-hidden transition-colors ${
                       currentLab === lab.number ? 'border-primary bg-primary/5' : 'hover:border-muted-foreground/30'
                     }`}>
@@ -242,7 +204,9 @@ export default function VibeCodingLayout({ children }: { children: React.ReactNo
                             </div>
                             <h3 className="font-medium text-xs truncate">{lab.title}</h3>
                           </div>
-                          <ChevronDown className="w-3 h-3 text-muted-foreground shrink-0" />
+                          <ChevronDown className={`w-3 h-3 text-muted-foreground shrink-0 transition-transform ${
+                            expandedLab === lab.number ? 'rotate-180' : ''
+                          }`} />
                         </div>
                       </CollapsibleTrigger>
                       <CollapsibleContent>
@@ -277,72 +241,15 @@ export default function VibeCodingLayout({ children }: { children: React.ReactNo
             ))}
           </div>
         </div>
-
-        {/* AI Coach Helper - Fixed at bottom */}
-        {!sidebarCollapsed && (
-          <div className="border-t">
-            <Collapsible open={coachOpen} onOpenChange={setCoachOpen}>
-              <CollapsibleTrigger asChild>
-                <div className="cursor-pointer hover:bg-muted/50 transition-colors p-3">
-                  <div className="flex items-center justify-between mb-1">
-                    <div className="flex items-center gap-2">
-                      <MessageSquare className="w-4 h-4 text-primary" />
-                      <span className="font-semibold text-xs">Need Help?</span>
-                    </div>
-                    <ChevronDown
-                      className={`w-3 h-3 text-muted-foreground transition-transform ${coachOpen ? "rotate-180" : ""}`}
-                    />
-                  </div>
-                  <p className="text-xs text-muted-foreground">Ask AI coach</p>
-                </div>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <div className="p-3 pt-0 space-y-2">
-                  <Textarea
-                    id="coach-question"
-                    placeholder="e.g., How do I fix this error?"
-                    value={coachQuestion}
-                    onChange={(e) => setCoachQuestion(e.target.value)}
-                    rows={3}
-                    disabled={isAskingCoach}
-                    className="text-xs"
-                  />
-                  <Button
-                    onClick={handleAskCoach}
-                    disabled={!coachQuestion.trim() || isAskingCoach}
-                    className="w-full gap-2"
-                    size="sm"
-                  >
-                    {isAskingCoach ? (
-                      <>
-                        <Loader2 className="w-3 h-3 animate-spin" />
-                        Asking...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-3 h-3" />
-                        Ask
-                      </>
-                    )}
-                  </Button>
-
-                  {coachResponse && (
-                    <div className="p-2 bg-primary/5 border border-primary/10 rounded-lg">
-                      <p className="text-xs font-medium text-primary mb-1">Coach:</p>
-                      <p className="text-xs leading-relaxed">{coachResponse}</p>
-                    </div>
-                  )}
-                </div>
-              </CollapsibleContent>
-            </Collapsible>
-          </div>
-        )}
       </div>
 
       {/* Right: Main Content Area (children) */}
       <div className="flex-1 overflow-hidden">
         {children}
       </div>
+
+      {/* Floating AI Coach - Always accessible */}
+      <FloatingCoach currentModule={2} />
     </div>
   )
 }

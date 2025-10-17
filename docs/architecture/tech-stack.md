@@ -29,14 +29,23 @@ Prompt Editor: Simple <textarea>
 - No Monaco: ❌ (removed)
 - No CodeMirror: ❌ (not needed)
 - Syntax Highlighting: Optional (react-syntax-highlighter)
+
+Workflow Canvas (Lab 6): React Flow v11+
+- Usage: Visual node-based workflow builder
+- Features: Drag-and-drop nodes, connections, zoom/pan
+- Performance: Handles 50+ nodes smoothly
+- Docs: https://reactflow.dev/
 ```
 
 ### State Management
 ```yaml
 Client State: React hooks (useState, useEffect)
 Server State: Server Components + Server Actions
+Workflow State (Lab 6 only): Zustand
+- Usage: Manage workflow builder canvas state (nodes, edges)
+- Lightweight alternative to Redux
+- Integrates well with React Flow
 No Redux: ❌
-No Zustand: ❌
 ```
 
 ### Removed Dependencies ❌
@@ -155,9 +164,13 @@ Error Tracking: Vercel (built-in)
   "next-mdx-remote": "latest",
   "lucide-react": "latest",
   "tailwindcss": "^4",
-  "zod": "^3.22.0"
+  "zod": "^3.22.0",
+  "reactflow": "^11.10.0",
+  "zustand": "^4.5.0"
 }
 ```
+
+**Note**: `reactflow` and `zustand` are only used in Lab 6 (Workflow Builder)
 
 ### Dev Dependencies
 ```json
@@ -182,6 +195,8 @@ Error Tracking: Vercel (built-in)
 | Next.js | 15.2.4 | 15.2.4 |
 | TypeScript | 5.0.0 | 5.x |
 | Supabase | N/A (BaaS) | Latest |
+| React Flow | 11.10.0 | 11.x (Lab 6) |
+| Zustand | 4.5.0 | 4.x (Lab 6) |
 
 ---
 
@@ -217,5 +232,5 @@ git push origin main
 
 ---
 
-**Last Updated**: 2025-10-16
-**Status**: Active (Post-refactor)
+**Last Updated**: 2025-10-17
+**Status**: Active (Includes Lab 6 React Flow and Zustand)

@@ -106,6 +106,7 @@ export interface CoachTranscript {
   latency_ms?: number
   tone?: "coach" | "warning" | "celebration"
   status?: "success" | "failure" | "timeout"
+  additionalContext?: Record<string, any>
   created_at: string
 }
 
