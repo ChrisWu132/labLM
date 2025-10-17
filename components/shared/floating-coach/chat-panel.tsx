@@ -5,7 +5,6 @@ import { X, Send, Loader2, MessageSquare } from "lucide-react"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { useFloatingCoach } from "@/lib/contexts/floating-coach-context"
 import { Message } from "./message"
 import { ContextBadge } from "./context-badge"
@@ -90,7 +89,7 @@ export function ChatPanel({ open, onOpenChange, currentModule, currentLab, curre
         )}
 
         {/* Messages */}
-        <ScrollArea className="flex-1 mt-4 pr-4" ref={scrollRef}>
+        <div className="flex-1 mt-4 overflow-y-auto pr-4" ref={scrollRef}>
           <div className="space-y-4">
             {messages.length === 0 && (
               <div className="text-center text-muted-foreground text-sm py-8">
@@ -109,7 +108,7 @@ export function ChatPanel({ open, onOpenChange, currentModule, currentLab, curre
               </div>
             )}
           </div>
-        </ScrollArea>
+        </div>
 
         {/* Input */}
         <form onSubmit={handleSubmit} className="mt-4 pt-4 border-t space-y-2">
