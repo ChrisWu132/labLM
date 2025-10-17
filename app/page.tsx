@@ -47,7 +47,7 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b-2 border-border bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+      <header className="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between max-w-7xl">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center shadow-default">
@@ -57,29 +57,25 @@ export default function LandingPage() {
               {COPY.app.name}
             </span>
           </div>
-          <nav className="hidden md:flex items-center gap-8">
-            <Link href="#curriculum" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-              Curriculum
-            </Link>
-            <Link href="#educators" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-              For Educators
-            </Link>
-            <Link href="#implementation" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-              Implementation
-            </Link>
-            <Link href="#faq" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-              FAQ
-            </Link>
+          <nav className="hidden md:flex items-center gap-3">
+            <Button variant="ghost" size="sm" asChild className="rounded-full bg-muted/30 hover:bg-muted/40 text-foreground shadow-sm">
+              <Link href="#curriculum">Curriculum</Link>
+            </Button>
+            <Button variant="ghost" size="sm" asChild className="rounded-full bg-muted/30 hover:bg-muted/40 text-foreground shadow-sm">
+              <Link href="#educators">For Educators</Link>
+            </Button>
+            <Button variant="ghost" size="sm" asChild className="rounded-full bg-muted/30 hover:bg-muted/40 text-foreground shadow-sm">
+              <Link href="#implementation">Implementation</Link>
+            </Button>
+            <Button variant="ghost" size="sm" asChild className="rounded-full bg-muted/30 hover:bg-muted/40 text-foreground shadow-sm">
+              <Link href="#faq">FAQ</Link>
+            </Button>
             <Link href={LINKS.auth}>
-              <Button variant="outline" size="sm" className="border-2">
+              <Button variant="ghost" size="sm" className="rounded-full bg-muted/30 hover:bg-muted/40 text-foreground shadow-sm">
                 Sign In
               </Button>
             </Link>
-            <Link href={LINKS.auth}>
-              <Button size="sm" className="shadow-default hover:shadow-hover transition-all">
-                Request Demo
-              </Button>
-            </Link>
+            
           </nav>
           <Link href={LINKS.auth} className="md:hidden">
             <Button size="sm" className="shadow-default">Demo</Button>
@@ -92,10 +88,6 @@ export default function LandingPage() {
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 hover:bg-primary/15 transition-colors">
-                <Sparkles className="w-3 h-3 mr-1.5" />
-                {COPY.hero.badge}
-              </Badge>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance leading-tight">
                 {COPY.hero.headline}
               </h1>
@@ -105,18 +97,17 @@ export default function LandingPage() {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href={LINKS.auth}>
-                  <Button size="lg" className="gap-2 shadow-default hover:shadow-hover transition-all">
+                  <Button size="lg" className="gap-2 transition-all rounded-full h-12 px-6 text-base font-semibold bg-gradient-to-r from-primary to-accent text-foreground hover:brightness-[1.06] ring-4 ring-primary/30 shadow-[0_10px_30px_rgba(0,0,0,.12)] hover:-translate-y-0.5 active:translate-y-0 border-2 border-foreground">
+                    <Sparkles className="w-4 h-4" />
                     {COPY.cta.primary}
                     <ArrowRight className="w-4 h-4" />
                   </Button>
                 </Link>
-                <Button size="lg" variant="outline" asChild className="border-2">
+                <Button size="lg" variant="outline" asChild className="border-2 rounded-full h-12 px-6 text-base"
+                >
                   <Link href="#curriculum">{COPY.cta.secondary}</Link>
                 </Button>
               </div>
-              <p className="text-sm text-muted-foreground mt-4">
-                No credit card required. District pricing available.
-              </p>
             </div>
             <div className="relative">
               {/* Background decoration */}
@@ -308,10 +299,10 @@ export default function LandingPage() {
             </p>
           </div>
           <div className="max-w-4xl mx-auto">
-            {IMPLEMENTATION_STEPS.map((step, i) => (
+              {IMPLEMENTATION_STEPS.map((step, i) => (
               <div key={i} className="flex gap-6 mb-10 last:mb-0 group">
                 <div className="flex-shrink-0 relative">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center font-bold text-lg shadow-default group-hover:shadow-hover transition-all group-hover:scale-110">
+                  <div className="w-14 h-14 rounded-full bg-white text-foreground border-2 border-foreground flex items-center justify-center font-bold text-lg shadow-default group-hover:shadow-hover transition-all group-hover:scale-110">
                     {step.step}
                   </div>
                   {i < IMPLEMENTATION_STEPS.length - 1 && (
@@ -346,30 +337,30 @@ export default function LandingPage() {
               {COPY.sections.pricing.description}
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto items-stretch">
             {PRICING.tiers.map((tier, i) => (
               <Card
                 key={i}
-                className={`shadow-default hover:shadow-hover transition-all duration-300 ${
-                  tier.highlighted
-                    ? "border-2 border-primary scale-105 md:scale-110 shadow-hover"
-                    : "border-2 hover:-translate-y-1"
-                }`}
+                className={`shadow-default hover:shadow-hover transition-all duration-300 border-2 rounded-2xl h-full flex flex-col`}
               >
-                <CardHeader className="text-center space-y-4">
+                <CardHeader className="text-center space-y-4 pt-6">
                   {tier.highlighted && (
                     <Badge className="mb-2 mx-auto bg-gradient-to-r from-primary to-accent text-white border-0">
                       Most Popular
                     </Badge>
                   )}
-                  <CardTitle className="text-2xl">{tier.name}</CardTitle>
+                  {i === 1 ? (
+                    <CardTitle className="text-2xl">{tier.name}</CardTitle>
+                  ) : (
+                    <div className="h-6" />
+                  )}
                   <div className="text-4xl font-bold">
                     {tier.price}
                     {tier.period && <span className="text-lg font-normal text-muted-foreground">/{tier.period}</span>}
                   </div>
                   <CardDescription className="text-base">{tier.description}</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-6 flex-1 flex flex-col justify-between pb-10">
                   <ul className="space-y-3">
                     {tier.features.map((feature, j) => (
                       <li key={j} className="flex items-start gap-3">
@@ -381,8 +372,8 @@ export default function LandingPage() {
                   <Link href={LINKS.auth} className="block">
                     <Button
                       size="lg"
-                      className={`w-full shadow-default hover:shadow-hover transition-all ${
-                        tier.highlighted ? "" : "border-2"
+                      className={`w-full shadow-default hover:shadow-hover transition-all border-2 ${
+                        tier.highlighted ? "border-foreground" : ""
                       }`}
                       variant={tier.highlighted ? "default" : "outline"}
                     >
@@ -426,42 +417,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="py-24 px-4 bg-gradient-to-br from-primary via-primary to-accent text-white relative overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
-        <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
-
-        <div className="container mx-auto max-w-4xl text-center relative z-10">
-          <Sparkles className="w-12 h-12 mx-auto mb-6 opacity-90" />
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">{COPY.sections.finalCta.title}</h2>
-          <p className="text-lg md:text-xl mb-10 opacity-95 max-w-2xl mx-auto leading-relaxed">
-            {COPY.sections.finalCta.description}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href={LINKS.auth}>
-              <Button size="lg" variant="secondary" className="gap-2 shadow-hover hover:scale-105 transition-all bg-white text-primary hover:bg-white/90">
-                Request Demo
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-            </Link>
-            <Link href="#curriculum">
-              <Button size="lg" variant="outline" className="gap-2 bg-transparent border-2 border-white text-white hover:bg-white/10">
-                View Curriculum
-              </Button>
-            </Link>
-            <Link href={LINKS.contact}>
-              <Button size="lg" variant="outline" className="gap-2 bg-transparent border-2 border-white text-white hover:bg-white/10">
-                Contact Sales
-              </Button>
-            </Link>
-          </div>
-          <p className="text-sm mt-8 opacity-80">
-            We respond within one business day.
-          </p>
-        </div>
-      </section>
+      {/* Final CTA removed to eliminate extra whitespace at the bottom */}
 
       {/* Footer */}
       <footer className="border-t border-border py-12 px-4">
