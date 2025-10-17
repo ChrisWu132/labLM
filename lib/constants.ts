@@ -76,7 +76,7 @@ export const MODULES = [
   },
   {
     number: 1,
-    title: "LLM Learning Lab",
+    title: "labLM",
     path: "/dashboard/vibecoding",
     description: "Complete 6 progressive labs to understand AI and become a responsible AI user",
     duration: "3.2 hours",
@@ -150,7 +150,7 @@ export const FAQS = [
   {
     question: "How does this fit into our existing curriculum?",
     answer:
-      "LLM Learning Lab integrates seamlessly into STEM, Computer Science, or Digital Literacy courses. The 5-lab curriculum (2 hours total) can be delivered as a standalone unit, integrated across multiple class periods, or offered as an enrichment program. It aligns with ISTE and CSTA standards for K-12 education.",
+      "labLM integrates seamlessly into STEM, Computer Science, or Digital Literacy courses. The 5-lab curriculum (2 hours total) can be delivered as a standalone unit, integrated across multiple class periods, or offered as an enrichment program. It aligns with ISTE and CSTA standards for K-12 education.",
   },
   {
     question: "What teacher training is required?",
@@ -351,7 +351,7 @@ export const SAMPLE_PROJECTS = [
 // Copy Text
 export const COPY = {
   app: {
-    name: "LLM Learning Lab",
+    name: "labLM",
     tagline: "AI literacy curriculum for K-12 education",
   },
   hero: {
@@ -399,12 +399,12 @@ export const COPY = {
     finalCta: {
       title: "Ready to Bring AI Literacy to Your School?",
       description:
-        "Join forward-thinking educators preparing students for an AI-powered future. Schedule a demo to see LLM Learning Lab in action.",
+        "Join forward-thinking educators preparing students for an AI-powered future. Schedule a demo to see labLM in action.",
     },
   },
   orientation: {
     welcome: {
-      title: "Welcome to LLM Learning Lab!",
+      title: "Welcome to labLM!",
       description: "Your journey to understanding AI starts here",
       ctaText: "Let's Begin",
       infoText:
@@ -433,7 +433,7 @@ export const COPY = {
     completeText: "Mark Complete",
   },
   footer: {
-    copyright: "© 2025 LLM Learning Lab. All rights reserved.",
+    copyright: "© 2025 labLM. All rights reserved.",
   },
 } as const
 
@@ -441,7 +441,7 @@ export const COPY = {
 export const VIDEO_CONFIG = {
   orientation: {
     url: "", // To be configured
-    title: "Welcome to LLM Learning Lab",
+    title: "Welcome to labLM",
     duration: 180, // seconds
     thumbnail: "", // To be configured
   },
