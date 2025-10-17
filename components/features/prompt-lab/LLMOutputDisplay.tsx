@@ -24,7 +24,7 @@ export function LLMOutputDisplay({
   return (
     <div className="llm-output my-4">
       {/* Main Output */}
-      <div className="border rounded-lg p-4 bg-gray-50 dark:bg-gray-900 min-h-[120px]">
+      <div className="border rounded-2xl p-4 bg-gray-50 dark:bg-gray-900 min-h-[120px] shadow-sm">
         {loading && (
           <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
             <Loader2 className="w-5 h-5 animate-spin" />
@@ -55,7 +55,7 @@ export function LLMOutputDisplay({
       {/* Success Feedback */}
       {success !== null && (
         <div
-          className={`mt-3 p-3 rounded-lg flex items-start gap-2 ${
+          className={`mt-3 p-3 rounded-2xl flex items-start gap-2 ${
             success
               ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
               : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
@@ -81,7 +81,7 @@ export function LLMOutputDisplay({
 
       {/* Token Count (Optional) */}
       {showTokenCount && content && (
-        <div className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+        <div className="text-xs text-slate-500 dark:text-gray-400 mt-2">
           ~{Math.ceil(content.length / 4)} tokens
         </div>
       )}

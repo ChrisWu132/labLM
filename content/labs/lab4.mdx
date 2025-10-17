@@ -105,7 +105,7 @@ Let's see where AI shines and where it stumbles!
 
 <PromptEditor
   exerciseId="lab4-demo1"
-  labNumber={4}
+  mode="editable"
   placeholder="Try these and see which ones work well:
 
 1. What is 47 + 89?
@@ -130,7 +130,7 @@ Let's test AI's knowledge accuracy:
 
 <PromptEditor
   exerciseId="lab4-demo2"
-  labNumber={4}
+  mode="editable"
   placeholder="Ask the AI:
 
 1. Who won the FIFA World Cup in 2018?
@@ -162,8 +162,8 @@ Remember: AI is a pattern predictor. When it doesn't know something, it sometime
 
 **Bad Prompt:**
 <StaticPromptDemo
-  prompt="Tell me about the book 'The Adventures of Captain Whiskers' by Jane Smith."
-  output="'The Adventures of Captain Whiskers' by Jane Smith is a beloved children's novel published in 2015. It follows the journey of Captain Whiskers, a brave ship captain, as he explores magical islands. The book won the Children's Literature Award in 2016 and has been translated into 15 languages."
+  initialValue="Tell me about the book 'The Adventures of Captain Whiskers' by Jane Smith."
+  demoOutput="'The Adventures of Captain Whiskers' by Jane Smith is a beloved children's novel published in 2015. It follows the journey of Captain Whiskers, a brave ship captain, as he explores magical islands. The book won the Children's Literature Award in 2016 and has been translated into 15 languages."
 />
 
 **The problem**: This book **doesn't exist!** The AI invented all those details because they "sound right" for a children's book.
@@ -176,7 +176,7 @@ Try to make the AI hallucinate by asking about something fake:
 
 <PromptEditor
   exerciseId="lab4-demo3"
-  labNumber={4}
+  mode="editable"
   placeholder="Ask about a completely made-up topic:
 
 'Tell me about the scientific theory of Quantum Biscuits discovered by Dr. Martin Crumbsworth in 1987.'
@@ -243,16 +243,16 @@ That's it! This simple phrase dramatically improves AI reasoning.
 
 **Without CoT:**
 <StaticPromptDemo
-  prompt="If a train leaves Chicago at 2 PM traveling at 60 mph, and another train leaves St. Louis at 3 PM traveling at 75 mph, and they're 300 miles apart, when do they meet?"
-  output="They will meet at approximately 5:24 PM."
+  initialValue="If a train leaves Chicago at 2 PM traveling at 60 mph, and another train leaves St. Louis at 3 PM traveling at 75 mph, and they're 300 miles apart, when do they meet?"
+  demoOutput="They will meet at approximately 5:24 PM."
 />
 
 **With CoT:**
 <StaticPromptDemo
-  prompt="If a train leaves Chicago at 2 PM traveling at 60 mph, and another train leaves St. Louis at 3 PM traveling at 75 mph, and they're 300 miles apart, when do they meet?
+  initialValue="If a train leaves Chicago at 2 PM traveling at 60 mph, and another train leaves St. Louis at 3 PM traveling at 75 mph, and they're 300 miles apart, when do they meet?
 
 Let's think step by step."
-  output="Let me solve this step by step:
+  demoOutput="Let me solve this step by step:
 
 **Step 1**: Determine the first train's head start
 - Train 1 leaves at 2 PM
@@ -289,7 +289,7 @@ Try Chain-of-Thought on a problem:
 
 <PromptEditor
   exerciseId="lab4-ex1"
-  labNumber={4}
+  mode="editable"
   placeholder="I have a rectangular garden that's 12 feet long and 8 feet wide. I want to put a fence around it, and fencing costs $15 per foot. How much will the fence cost?
 
 Let's think step by step."
@@ -309,7 +309,7 @@ You can guide the AI's thinking with a template:
 
 <PromptEditor
   exerciseId="lab4-ex2"
-  labNumber={4}
+  mode="editable"
   placeholder="I need to decide: Should I learn Python or JavaScript first for web development?
 
 Please analyze this by:
@@ -331,7 +331,7 @@ Chain-of-Thought is excellent for finding errors:
 
 <PromptEditor
   exerciseId="lab4-ex3"
-  labNumber={4}
+  mode="editable"
   placeholder="This code should count from 1 to 10, but it's not working correctly:
 
 ```python
@@ -356,7 +356,7 @@ Combine everything you've learned! Solve this complex problem:
 
 <PromptEditor
   exerciseId="lab4-challenge"
-  labNumber={4}
+  mode="editable"
   placeholder="Challenge: Plan a school bake sale
 
 Constraints:

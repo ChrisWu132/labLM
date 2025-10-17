@@ -68,7 +68,7 @@ Let's test the AI's knowledge boundaries!
 
 <PromptEditor
   exerciseId="lab2-demo1"
-  labNumber={2}
+  mode="editable"
   placeholder="Try these questions and compare:
 1. What happened in the 2020 Olympics?
 2. What are the latest AI developments in 2024?
@@ -105,7 +105,7 @@ Not all knowledge is equal! Let's see how the AI performs with common vs. obscur
 
 <PromptEditor
   exerciseId="lab2-demo2"
-  labNumber={2}
+  mode="editable"
   placeholder="Compare these questions:
 1. Explain how photosynthesis works
 2. Explain the plot of Harry Potter
@@ -166,14 +166,14 @@ Compare these two prompts:
 
 **Vague:**
 <StaticPromptDemo
-  prompt="Tell me about programming."
-  output="Programming is the process of creating computer software using programming languages. It involves writing code, debugging, and testing to create applications, websites, and systems. Common programming languages include Python, JavaScript, Java, and C++. Programming is used in many industries and is an important skill in the modern world."
+  initialValue="Tell me about programming."
+  demoOutput="Programming is the process of creating computer software using programming languages. It involves writing code, debugging, and testing to create applications, websites, and systems. Common programming languages include Python, JavaScript, Java, and C++. Programming is used in many industries and is an important skill in the modern world."
 />
 
 **Specific (with details):**
 <StaticPromptDemo
-  prompt="Explain to a 12-year-old beginner what programming is and why it's useful. Include 2 simple examples of things they could build."
-  output="Programming is like giving instructions to a computer to make it do what you want! Just like you follow a recipe to bake cookies, computers follow your code to perform tasks.
+  initialValue="Explain to a 12-year-old beginner what programming is and why it's useful. Include 2 simple examples of things they could build."
+  demoOutput="Programming is like giving instructions to a computer to make it do what you want! Just like you follow a recipe to bake cookies, computers follow your code to perform tasks.
 
 **Why is it useful?**
 Programming lets you create things that millions of people can use. You're basically teaching computers to solve problems!
@@ -191,7 +191,7 @@ The best part? Once you learn the basics, you can build almost anything you can 
 
 <PromptEditor
   exerciseId="lab2-ex1"
-  labNumber={2}
+  mode="editable"
   placeholder="Improve this vague prompt: 'Write about healthy eating'
 
 Add details like:
@@ -217,7 +217,7 @@ Constraints help the AI give you exactly what you need!
 
 <PromptEditor
   exerciseId="lab2-ex2"
-  labNumber={2}
+  mode="editable"
   placeholder="Ask the AI to explain the water cycle with these constraints:
 - For a 10-year-old
 - In exactly 5 steps
@@ -240,14 +240,14 @@ Context helps the AI understand **why** you're asking and **how** to tailor the 
 
 **Without context:**
 <StaticPromptDemo
-  prompt="Explain solar panels."
-  output="Solar panels are devices that convert sunlight into electricity using photovoltaic cells. They are made of semiconductor materials, typically silicon, that absorb photons and release electrons, creating an electric current. Solar panels are used in residential, commercial, and industrial applications as a renewable energy source."
+  initialValue="Explain solar panels."
+  demoOutput="Solar panels are devices that convert sunlight into electricity using photovoltaic cells. They are made of semiconductor materials, typically silicon, that absorb photons and release electrons, creating an electric current. Solar panels are used in residential, commercial, and industrial applications as a renewable energy source."
 />
 
 **With context:**
 <StaticPromptDemo
-  prompt="I'm a middle school student working on a science fair project about renewable energy. Explain how solar panels work in a way I can explain to my classmates, using a simple analogy."
-  output="Imagine solar panels as millions of tiny electricity factories that run on sunlight!
+  initialValue="I'm a middle school student working on a science fair project about renewable energy. Explain how solar panels work in a way I can explain to my classmates, using a simple analogy."
+  demoOutput="Imagine solar panels as millions of tiny electricity factories that run on sunlight!
 
 Here's how it works:
 
@@ -269,7 +269,7 @@ The amazing part? As long as the sun is shining, these panels keep making electr
 
 <PromptEditor
   exerciseId="lab2-ex3"
-  labNumber={2}
+  mode="editable"
   placeholder="Base prompt: 'Explain climate change'
 
 Add context such as:
@@ -291,7 +291,7 @@ Ready for an advanced technique? Make the AI return structured data!
 
 <PromptEditor
   exerciseId="lab2-challenge"
-  labNumber={2}
+  mode="editable"
   placeholder="Write a prompt to get book information in JSON format for 'The Hobbit' by J.R.R. Tolkien
 
 Your JSON should include:

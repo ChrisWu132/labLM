@@ -65,7 +65,7 @@ Let's see the AI generate responses! Run this same prompt **3 times** and compar
 
 <PromptEditor
   exerciseId="lab3-demo1"
-  labNumber={3}
+  mode="editable"
   placeholder="Write a creative opening sentence for a mystery story about a missing cat.
 
 Run this 3 times and notice how each opening is different!"
@@ -113,14 +113,14 @@ Let's see how adding context improves responses:
 **First, try with NO context:**
 <PromptEditor
   exerciseId="lab3-demo2a"
-  labNumber={3}
+  mode="editable"
   placeholder="Explain quantum mechanics."
 />
 
 **Now, try with RICH context:**
 <PromptEditor
   exerciseId="lab3-demo2b"
-  labNumber={3}
+  mode="editable"
   placeholder="I'm a 13-year-old who loves video games. Explain quantum mechanics using a video game analogy that makes it exciting and easy to understand."
 />
 
@@ -196,7 +196,7 @@ Let's make the AI explain a complex topic as if it's a patient, encouraging teac
 
 <PromptEditor
   exerciseId="lab3-ex1"
-  labNumber={3}
+  mode="editable"
   placeholder="You are a friendly and patient middle school science teacher who loves using analogies.
 
 Explain how the internet works to a student who has never thought about it before. Use a simple analogy and keep it under 100 words."
@@ -216,7 +216,7 @@ Now let's give the AI a creative persona:
 
 <PromptEditor
   exerciseId="lab3-ex2"
-  labNumber={3}
+  mode="editable"
   placeholder="You are a romantic poet who loves nature and uses vivid imagery.
 
 Write a 4-line poem about autumn leaves falling from trees."
@@ -224,8 +224,8 @@ Write a 4-line poem about autumn leaves falling from trees."
 
 **Compare this to a non-role version:**
 <StaticPromptDemo
-  prompt="Write a 4-line poem about autumn leaves."
-  output="Leaves are falling down,
+  initialValue="Write a 4-line poem about autumn leaves."
+  demoOutput="Leaves are falling down,
 From the trees so high,
 Orange, red, and brown,
 Dancing in the sky."
@@ -249,21 +249,21 @@ Let's see how the SAME task changes with different roles!
 **Role 1 - Doctor:**
 <PromptEditor
   exerciseId="lab3-ex3a"
-  labNumber={3}
+  mode="editable"
   placeholder="You are a medical doctor. Explain in 3 sentences why exercise is important for health."
 />
 
 **Role 2 - Sports Coach:**
 <PromptEditor
   exerciseId="lab3-ex3b"
-  labNumber={3}
+  mode="editable"
   placeholder="You are an energetic sports coach. Explain in 3 sentences why exercise is important, using motivational language."
 />
 
 **Role 3 - Scientist:**
 <PromptEditor
   exerciseId="lab3-ex3c"
-  labNumber={3}
+  mode="editable"
   placeholder="You are a research scientist. Explain in 3 sentences why exercise is important, focusing on biological mechanisms."
 />
 
@@ -307,7 +307,7 @@ Create your own AI assistant with a unique personality!
 
 <PromptEditor
   exerciseId="lab3-challenge"
-  labNumber={3}
+  mode="editable"
   placeholder="You are [describe your custom AI assistant's role and personality here]
 
 [Then ask it a homework-related question to see how it responds]

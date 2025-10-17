@@ -1,6 +1,6 @@
 # Lab 1: Meet Your AI Friend
 
-## 📖 Learning Objectives
+<ObjectivesCard duration="~20 minutes">
 
 By the end of this lab, you will:
 - Understand what LLMs are and how they work
@@ -8,7 +8,7 @@ By the end of this lab, you will:
 - Write your first prompts and see how they affect AI responses
 - Discover why clear communication matters when talking to AI
 
-**Duration**: ~20 minutes
+</ObjectivesCard>
 
 ---
 
@@ -28,11 +28,32 @@ By the end of this lab, you will:
 
 Let's understand the difference:
 
-| Tool | What it does | Example |
-|------|-------------|---------|
-| **Calculator** | Follows exact rules, always same answer | 2 + 2 = 4 (always) |
-| **Search Engine** | Finds existing web pages | Shows links to cat information |
-| **LLM** | Generates new text based on patterns | Creates a unique explanation about cats |
+<TableCard title="Tool Comparison">
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it does</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Calculator</strong></td>
+<td>Follows exact rules, always same answer</td>
+<td>2 + 2 = 4 (always)</td>
+</tr>
+<tr>
+<td><strong>Search Engine</strong></td>
+<td>Finds existing web pages</td>
+<td>Shows links to cat information</td>
+</tr>
+<tr>
+<td><strong>LLM</strong></td>
+<td>Generates new text based on patterns</td>
+<td>Creates a unique explanation about cats</td>
+</tr>
+</tbody>
+</TableCard>
 
 **Key insight**: An LLM doesn't search the internet or calculate. It **predicts** what words should come next based on patterns it learned during training.
 
@@ -58,28 +79,30 @@ When you write: "The sky is..."
 
 ---
 
-### 🔬 Interactive Experiment 1: See the AI in Action
+<ExperimentBlock title="Interactive Experiment 1: See the AI in Action">
 
 Let's observe how an LLM responds to a simple question.
 
 <StaticPromptDemo
-  prompt="What is a cat?"
-  output="A cat is a small carnivorous mammal that has been domesticated for thousands of years. Cats are known for their independence, agility, and hunting skills. They are popular pets worldwide and come in many breeds with different appearances and personalities. Cats communicate through meowing, purring, and body language."
+  initialValue="What is a cat?"
+  demoOutput="A cat is a small carnivorous mammal that has been domesticated for thousands of years. Cats are known for their independence, agility, and hunting skills. They are popular pets worldwide and come in many breeds with different appearances and personalities. Cats communicate through meowing, purring, and body language."
 />
 
 **Try this multiple times** - Click "Run Prompt" below and run it again. Notice something interesting?
 
 <PromptEditor
   exerciseId="lab1-demo"
-  labNumber={1}
+  mode="editable"
   placeholder="What is a cat?"
 />
 
 **What did you notice?** The answer is slightly different each time! This is because LLMs have some randomness built in - they don't always pick the *most* likely next word, but sometimes choose from the top few options.
 
+</ExperimentBlock>
+
 ---
 
-### 🎯 Key Concept: AI is a Tool, Not a Person
+### Key Concept: AI is a Tool, Not a Person
 
 **Remember**:
 - ✅ LLMs are incredibly useful tools
@@ -104,35 +127,22 @@ The better your prompt, the better the response!
 
 ---
 
-### ✏️ Exercise 1: Improving Your Questions
+<ExerciseBlock title="Improving Your Questions" number={1}>
 
 Let's see how clarity affects AI responses.
 
-**Bad Prompt** (vague):
-<StaticPromptDemo
-  prompt="Tell me about dogs."
-  output="Dogs are domesticated mammals that belong to the Canidae family. They come in various breeds, sizes, and temperaments. Dogs are known as loyal companions and have been living with humans for thousands of years."
-/>
-
-**Good Prompt** (specific):
-<StaticPromptDemo
-  prompt="Explain to a 10-year-old why dogs are good pets. Include 3 specific reasons."
-  output="Dogs make great pets for three main reasons:
-
-1. **Loyal Companions**: Dogs love their families and will always be happy to see you when you come home. They're like having a best friend who never gets tired of playing with you!
-
-2. **Teach Responsibility**: Taking care of a dog teaches you important skills like feeding on schedule, cleaning up after them, and making sure they get exercise. These are life skills you'll use forever.
-
-3. **Keep You Active**: Dogs need walks and playtime, which means you'll spend more time outside running, playing fetch, and exploring. This is great for your health and helps you make new friends at the park!
-
-Dogs aren't just pets - they become part of your family and make every day more fun."
+<PromptComparison
+  badPrompt="Tell me about dogs."
+  badOutput="Dogs are domesticated mammals that belong to the Canidae family. They come in various breeds, sizes, and temperaments."
+  goodPrompt="Explain to a 10-year-old why dogs are good pets. Include 3 specific reasons."
+  goodOutput="Dogs make great pets for three main reasons: 1) Loyal Companions - they're like best friends who never get tired of playing! 2) Teach Responsibility - caring for them builds life skills. 3) Keep You Active - walks and playtime mean more outdoor fun!"
 />
 
 **Now you try!** Improve this vague prompt:
 
 <PromptEditor
   exerciseId="lab1-ex1"
-  labNumber={1}
+  mode="editable"
   placeholder="Write a better version of: 'Tell me about cats'
 
 Hint: Be specific about:
@@ -146,17 +156,17 @@ Hint: Be specific about:
 - It includes context (who it's for, what aspects, etc.)
 - The AI response is focused and detailed
 
+</ExerciseBlock>
+
 ---
 
-### ✏️ Exercise 2: Let AI Write a Story
+<ExerciseBlock title="Let AI Write a Story" number={2}>
 
 Now let's have fun! Ask the AI to write a creative story.
 
-**Try this**:
-
 <PromptEditor
   exerciseId="lab1-ex2"
-  labNumber={1}
+  mode="editable"
   placeholder="Write a short adventure story about a brave cat. Include:
 - Where the adventure takes place
 - What challenge the cat faces
@@ -169,11 +179,11 @@ Keep it under 150 words."
 - Each time you run it, you'll get a slightly different story
 - The AI follows your instructions (length, elements to include)
 
+</ExerciseBlock>
+
 ---
 
-## 💡 Key Discoveries
-
-### What You Learned Today
+<DiscoveriesCard>
 
 1. **LLMs are prediction machines** - They generate text by predicting what words should come next, based on patterns from their training data.
 
@@ -183,20 +193,22 @@ Keep it under 150 words."
 
 4. **AI is a tool** - LLMs are powerful assistants, but they're not thinking beings. They're tools that help us work faster and learn better.
 
----
-
-## 🎯 Quick Quiz
-
-Before moving on, make sure you understand:
-
-- [ ] What does LLM stand for? (Large Language Model)
-- [ ] How is an LLM different from a search engine?
-- [ ] What is a "prompt"?
-- [ ] Why do you get slightly different answers each time you run the same prompt?
+</DiscoveriesCard>
 
 ---
 
-## 🚀 Next Steps
+<QuizCard>
+
+<QuizItem>What does LLM stand for? (Large Language Model)</QuizItem>
+<QuizItem>How is an LLM different from a search engine?</QuizItem>
+<QuizItem>What is a "prompt"?</QuizItem>
+<QuizItem>Why do you get slightly different answers each time you run the same prompt?</QuizItem>
+
+</QuizCard>
+
+---
+
+<NextSteps href="/dashboard/vibecoding/labs/lab2">
 
 Great job! You've taken your first steps into the world of AI.
 
@@ -205,8 +217,6 @@ Great job! You've taken your first steps into the world of AI.
 - Advanced techniques for writing clear, effective prompts
 - Why being specific makes AI much more useful
 
-Ready to continue? [Start Lab 2 →](/dashboard/vibecoding/labs/lab2)
-
----
-
 **Remember**: The best way to learn is by experimenting! Try changing your prompts and seeing how the AI responds differently. There's no wrong way to explore.
+
+</NextSteps>
