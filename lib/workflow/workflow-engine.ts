@@ -61,15 +61,15 @@ export class WorkflowEngine {
         }
 
         // Execute AI step
-        if (node.type === 'aiStep') {
-          await this.executeAIStep(stepId, node, log)
+        if (this.isAgentNode(node.type)) {
+          await this.executeAgentNode(stepId, node, log)
         }
       }
 
       // 4. Get final output
       const outputStepId = this.findPrimaryOutputNode()
       const finalOutput = outputStepId
-        ? this.results.get(this.getInputSourceForStep(outputStepId) || '')
+        ? this.collectWorkflowOutput(outputStepId)
         : undefined
 
       const totalDurationMs = Date.now() - startTime
@@ -91,7 +91,7 @@ export class WorkflowEngine {
   /**
    * Execute a single AI step
    */
-  private async executeAIStep(
+  private async executeAgentNode(
     stepId: string,
     node: WorkflowNode,
     log: ExecutionLog[]
@@ -105,11 +105,8 @@ export class WorkflowEngine {
       // 1. Get input data from previous steps
       const inputs = this.getInputsForStep(stepId)
 
-      // 2. Resolve prompt variables
-      const resolvedPrompt = this.resolvePromptVariables(
-        node.data.prompt || '',
-        inputs
-      )
+      // 2. Build prompt using node template + inputs
+      const resolvedPrompt = this.buildPrompt(node, inputs)
 
       // 3. Call LLM
       const output = await this.callLLM(resolvedPrompt)
@@ -286,5 +283,104 @@ export class WorkflowEngine {
   private getInputSourceForStep(stepId: string): string | undefined {
     const incomingEdge = this.edges.find(e => e.target === stepId)
     return incomingEdge?.source
+  }
+
+  /**
+   * Collect final output by tracing upstream from the output node
+   */
+  private collectWorkflowOutput(outputNodeId: string): string | undefined {
+    const intoOutputEdge = this.edges.find(e => e.target === outputNodeId)
+    if (!intoOutputEdge) return undefined
+
+    const upstreamId = intoOutputEdge.source
+
+    // Prefer stored result on upstream node
+    const upstreamResult = this.results.get(upstreamId)
+    if (upstreamResult) {
+      return upstreamResult
+    }
+
+    // Fall back to stored result on the output node itself
+    return this.results.get(outputNodeId)
+  }
+
+  /**
+   * Determine if node type should be executed as an AI/agent step
+   */
+  private isAgentNode(type: string): boolean {
+    return [
+      'aiStep',
+      'llmAgent',
+      'summarizer',
+      'translator',
+      'extractor',
+      'classifier'
+    ].includes(type)
+  }
+
+  /**
+   * Build final prompt string for an agent node
+   */
+  private buildPrompt(
+    node: WorkflowNode,
+    inputs: Map<string, string>
+  ): string {
+    const template = this.getPromptTemplate(node)
+    let resolved = this.resolvePromptVariables(template, inputs)
+
+    const inputText = Array.from(inputs.values())
+      .filter(Boolean)
+      .join('\n\n')
+
+    if (!resolved.trim()) {
+      if (inputText.trim()) {
+        resolved = `${template || 'Process the following input and respond helpfully:'}\n\n${inputText}`
+      } else {
+        resolved = template || 'Provide a helpful response for the given task.'
+      }
+    } else if (inputText.trim()) {
+      resolved = `${resolved.trim()}\n\nInput:\n${inputText}`
+    }
+
+    return resolved
+  }
+
+  /**
+   * Get prompt template for node based on type
+   */
+  private getPromptTemplate(node: WorkflowNode): string {
+    switch (node.type) {
+      case 'llmAgent':
+        return node.data.systemPrompt || node.data.prompt || ''
+      case 'summarizer':
+        return (
+          node.data.systemPrompt ||
+          `Summarize the provided content into a ${node.data.summaryLength ?? 'medium'} summary using ${
+            node.data.summaryStyle ?? 'paragraph'
+          } style.`
+        )
+      case 'translator':
+        return (
+          node.data.systemPrompt ||
+          `Translate the text from ${node.data.sourceLanguage ?? 'source language'} to ${
+            node.data.targetLanguage ?? 'target language'
+          }. Preserve formatting: ${node.data.preserveFormatting ? 'yes' : 'no'}.`
+        )
+      case 'extractor':
+        return (
+          node.data.systemPrompt ||
+          `Extract the following structured fields: ${Object.keys(node.data.outputSchema || {}).join(', ')}.`
+        )
+      case 'classifier':
+        return (
+          node.data.systemPrompt ||
+          `Classify the input into one of the following categories: ${
+            (node.data.categories || []).map((cat: any) => cat.name).join(', ') || 'the given options'
+          }.`
+        )
+      case 'aiStep':
+      default:
+        return node.data.prompt || ''
+    }
   }
 }
