@@ -356,9 +356,9 @@ export const COPY = {
   },
   hero: {
     badge: "Turn-Key AI Literacy Curriculum",
-    headline: "Prepare Students for an AI-Powered Future",
+    headline: "Prepare Students for an AI-Powered Future with labLM",
     description:
-      "A comprehensive, standards-aligned curriculum teaching grades 5-9 students to understand, question, and responsibly use AI through hands-on experiments. Explore hallucinations, biases, ethics, and critical thinking.",
+      "6 hands-on labs where students actively experiment with AI, discover its strengths and limitations, and build critical thinking skills through practical exploration—not lectures.",
   },
   cta: {
     primary: "Request Demo",
@@ -373,9 +373,9 @@ export const COPY = {
         "AI is transforming every industry and aspect of life. Students need to understand how it works, where it fails, and how to use it responsibly. Our curriculum builds critical thinking skills for the AI age.",
     },
     curriculum: {
-      title: "6-Lab Experimental Curriculum",
+      title: "Learn by Doing: 6 Interactive Labs",
       description:
-        "Students discover how LLMs work through interactive experiments—exploring prompts, hallucinations, biases, reasoning, and ethics. Each lab builds on the last for comprehensive understanding.",
+        "Each lab is a hands-on experiment where students actively test AI, explore its behaviors, and discover concepts through direct practice—not passive watching. Build understanding through real experimentation.",
     },
     educators: {
       title: "Built for Educators, By Educators",
@@ -405,10 +405,10 @@ export const COPY = {
   orientation: {
     welcome: {
       title: "Welcome to labLM!",
-      description: "Your journey to understanding AI starts here",
+      description: "Start your hands-on AI learning journey",
       ctaText: "Let's Begin",
       infoText:
-        "You'll learn what AI is, how it works, when to trust it, and how to use it responsibly. Through 6 hands-on labs, you'll become an AI-literate learner ready for the future!",
+        "Through 6 interactive labs, you'll experiment with AI directly, discover how it works, when to trust it, and how to use it responsibly. No lectures—just hands-on practice!",
     },
     checklist: {
       title: "Quick Setup",
