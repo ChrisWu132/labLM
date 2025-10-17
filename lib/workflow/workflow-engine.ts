@@ -39,9 +39,12 @@ export class WorkflowEngine {
     const log: ExecutionLog[] = []
     const startTime = Date.now()
 
+    console.log('[WorkflowEngine] Starting execution with input:', initialInput)
+
     try {
       // 1. Topological sort to get execution order
       const executionOrder = this.topologicalSort()
+      console.log('[WorkflowEngine] Execution order:', executionOrder)
 
       // 2. Set initial input
       const inputStepId = this.findPrimaryInputNode()
@@ -49,28 +52,44 @@ export class WorkflowEngine {
         throw new Error('Workflow must have an input/start node')
       }
       this.results.set(inputStepId, initialInput)
+      console.log('[WorkflowEngine] Set input node:', inputStepId, 'with value:', initialInput)
 
       // 3. Execute each step in order
       for (const stepId of executionOrder) {
         const node = this.nodes.get(stepId)
-        if (!node) continue
+        if (!node) {
+          console.log('[WorkflowEngine] Node not found:', stepId)
+          continue
+        }
+
+        console.log('[WorkflowEngine] Processing node:', stepId, 'type:', node.type)
 
         // Skip input (already set) and output (processed at end)
         if (node.type === 'input' || node.type === 'output') {
+          console.log('[WorkflowEngine] Skipping', node.type, 'node')
           continue
         }
 
         // Execute AI step
         if (this.isAgentNode(node.type)) {
+          console.log('[WorkflowEngine] Executing agent node:', stepId)
           await this.executeAgentNode(stepId, node, log)
+          console.log('[WorkflowEngine] Completed agent node:', stepId, 'result:', this.results.get(stepId)?.substring(0, 100) + '...')
+        } else {
+          console.log('[WorkflowEngine] Node type not recognized as agent:', node.type)
         }
       }
 
       // 4. Get final output
       const outputStepId = this.findPrimaryOutputNode()
+      console.log('[WorkflowEngine] Output node ID:', outputStepId)
+
       const finalOutput = outputStepId
         ? this.collectWorkflowOutput(outputStepId)
         : undefined
+
+      console.log('[WorkflowEngine] Final output collected:', finalOutput?.substring(0, 150) + '...')
+      console.log('[WorkflowEngine] All results:', Array.from(this.results.entries()).map(([k, v]) => `${k}: ${v.substring(0, 50)}...`))
 
       const totalDurationMs = Date.now() - startTime
 
@@ -80,6 +99,7 @@ export class WorkflowEngine {
         log
       }
     } catch (error) {
+      console.error('[WorkflowEngine] Execution error:', error)
       return {
         success: false,
         error: error instanceof Error ? error.message : 'Unknown error',
@@ -104,12 +124,15 @@ export class WorkflowEngine {
 
       // 1. Get input data from previous steps
       const inputs = this.getInputsForStep(stepId)
+      console.log(`[WorkflowEngine] Node ${stepId} inputs:`, Object.fromEntries(inputs))
 
       // 2. Build prompt using node template + inputs
       const resolvedPrompt = this.buildPrompt(node, inputs)
+      console.log(`[WorkflowEngine] Node ${stepId} resolved prompt:`, resolvedPrompt.substring(0, 200) + '...')
 
       // 3. Call LLM
       const output = await this.callLLM(resolvedPrompt)
+      console.log(`[WorkflowEngine] Node ${stepId} LLM output:`, output.substring(0, 150) + '...')
 
       // 4. Save result
       this.results.set(stepId, output)
@@ -129,6 +152,7 @@ export class WorkflowEngine {
       this.onStepComplete?.(stepId, output)
     } catch (error) {
       const errorMsg = error instanceof Error ? error.message : 'Execution failed'
+      console.error(`[WorkflowEngine] Node ${stepId} error:`, errorMsg)
 
       log.push({
         stepId,

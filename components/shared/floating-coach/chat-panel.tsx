@@ -10,7 +10,6 @@ import { useFloatingCoach } from "@/lib/contexts/floating-coach-context"
 import { Message } from "./message"
 import { ContextBadge } from "./context-badge"
 import { askCoach } from "@/lib/actions/coach"
-import { useToast } from "@/hooks/use-toast"
 
 interface ChatPanelProps {
   open: boolean
@@ -22,7 +21,6 @@ interface ChatPanelProps {
 
 export function ChatPanel({ open, onOpenChange, currentModule, currentLab, currentLabTitle }: ChatPanelProps) {
   const { messages, addMessage, coachState, setCoachState } = useFloatingCoach()
-  const { toast } = useToast()
   const [input, setInput] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -54,23 +52,11 @@ export function ChatPanel({ open, onOpenChange, currentModule, currentLab, curre
 
       if (result.success && result.message) {
         addMessage(result.message, "coach")
-        toast({
-          title: "Coach responded",
-          description: `Response time: ${result.latencyMs}ms`,
-        })
       } else {
-        toast({
-          title: "Error",
-          description: result.error || "Failed to get coach response",
-          variant: "destructive",
-        })
+        addMessage(result.error || "The coach is temporarily unavailable. Please try again.", "coach")
       }
     } catch (error) {
-      toast({
-        title: "Error",
-        description: "An unexpected error occurred",
-        variant: "destructive",
-      })
+      addMessage("Oops, something went wrong. Please try again in a moment.", "coach")
     } finally {
       setIsSubmitting(false)
       setCoachState("idle")

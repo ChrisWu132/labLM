@@ -11,31 +11,22 @@ export function Message({ message }: MessageProps) {
 
   return (
     <div className={`flex gap-2 ${isCoach ? "flex-row" : "flex-row-reverse"}`}>
-      {/* Avatar */}
       {isCoach && (
-        <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 bg-white">
-          <Image
-            src="/owlgpt.png"
-            alt="Coach"
-            width={32}
-            height={32}
-            className="object-cover"
-          />
+        <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 bg-white shadow-sm border border-border">
+          <Image src="/owlgpt.png" alt="Coach" width={32} height={32} className="object-cover" />
         </div>
       )}
 
-      {/* Message Bubble */}
-      <div className="flex flex-col flex-1 max-w-[80%]">
+      <div className="flex flex-col flex-1 max-w-full">
         <div
-          className={`rounded-lg px-3 py-2 ${
-            isCoach
-              ? "bg-muted text-foreground"
-              : "bg-primary text-primary-foreground"
+          className={`rounded-2xl px-4 py-3 shadow-sm border ${
+            isCoach ? "bg-white text-foreground" : "bg-primary text-primary-foreground"
           }`}
         >
-          <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
+          <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{message.content}</p>
         </div>
-        <span className="text-xs text-muted-foreground mt-1 px-1">
+
+        <span className={`text-[11px] mt-1 ${isCoach ? "text-muted-foreground" : "text-primary/80"}`}>
           {formatDistanceToNow(message.timestamp, { addSuffix: true })}
         </span>
       </div>

@@ -1,14 +1,14 @@
 # LLM Learning Lab
 
-**Hands-on experiments to understand how AI really works** — Designed for elementary and middle school students (grades 5-9).
+**AI literacy curriculum for K-12 education** — Empowering students in grades 5-9 to understand, question, and responsibly use AI.
 
-Discover LLM behaviors through interactive experiments: prompts, hallucinations, biases, reasoning, and ethics. No coding required!
+Discover how LLMs work through 6 progressive labs: explore prompts, hallucinations, biases, reasoning, ethics, and build AI workflows. No coding required!
 
 ---
 
 ## 🎯 What is LLM Learning Lab?
 
-An educational platform where students explore how Large Language Models (LLMs) work through **5 hands-on experimental labs**. Instead of just learning to *use* AI, students discover *how AI thinks*, including its limitations, mistakes, and ethical concerns.
+An educational platform where students explore how Large Language Models (LLMs) work through **6 progressive, hands-on labs**. Instead of just learning to *use* AI, students discover *how AI thinks*, including its limitations, mistakes, and ethical concerns—culminating in building their own AI workflows.
 
 ### Key Learning Goals
 
@@ -17,20 +17,22 @@ An educational platform where students explore how Large Language Models (LLMs) 
 - ⚖️ **Explore bias & ethics** - Understand fairness and responsibility
 - 🧠 **Understand reasoning** - See how AI thinks step-by-step
 - ✅ **Critical thinking** - Learn to question and verify AI outputs
+- 🛠️ **Build AI workflows** - Chain AI steps to solve complex problems
 
 ---
 
-## 📚 The 5 Experimental Labs
+## 📚 The 6 Progressive Labs
 
 | Lab | Title | Duration | What You'll Discover |
 |-----|-------|----------|---------------------|
-| **1** | **AI Basics** | 15 min | How prompts and responses work, what makes a good instruction |
-| **2** | **AI Hallucinations** | 20 min | When AI makes things up, how to spot fake information |
-| **3** | **Role & Personality** | 20 min | How roles change AI's behavior and response style |
-| **4** | **AI Reasoning** | 25 min | Step-by-step thinking, how AI solves complex problems |
-| **5** | **Bias & Ethics** | 30 min | AI biases, fairness, what AI should and shouldn't do |
+| **1** | **Meet Your AI Friend** | 20 min | What LLMs are, how they work, first conversation |
+| **2** | **How AI Gets Smart** | 25 min | Training process, knowledge boundaries, clear communication |
+| **3** | **AI's Thinking Process** | 25 min | Token generation, context role, role-playing techniques |
+| **4** | **AI's Capabilities & Limits** | 30 min | Strengths & weaknesses, hallucinations, step-by-step reasoning |
+| **5** | **Responsible AI Use & Mastery** | 30 min | Ethics, academic integrity, comprehensive application |
+| **6** | **AI Workflow Builder** ⭐ | 60 min | Build complex workflows, problem decomposition, systems thinking (Advanced Capstone) |
 
-**Total Time**: ~2 hours | **Target**: Grades 5-9 | **Prerequisites**: None!
+**Total Time**: ~3.2 hours | **Target**: Grades 5-9 | **Prerequisites**: None!
 
 ---
 
@@ -49,18 +51,27 @@ An educational platform where students explore how Large Language Models (LLMs) 
 ### 📊 Progress Tracking
 - Save your work and continue anytime
 - Track completed experiments
-- Achievement badges (coming soon)
+- Module and lab completion tracking
 
 ### 🤖 AI Coach Assistant
 - Get help when you're stuck
 - Ask questions about AI concepts
-- Hints and guidance throughout
+- Context-aware guidance throughout your learning journey
+- Accessible via sidebar drawer
+
+### 🛠️ AI Workflow Builder (Lab 6)
+- Visual node-based workflow designer
+- Drag-and-drop interface for building AI workflows
+- Pre-built templates to get started quickly
+- Execute workflows in real-time
+- Save and share your workflows
 
 ### 🎓 Educational Focus
 - Age-appropriate content (grades 5-9)
 - Teaches critical thinking about AI
 - Focus on understanding, not just skills
 - Emphasizes responsible AI use
+- Culminates in practical workflow building
 
 ---
 
@@ -71,7 +82,8 @@ An educational platform where students explore how Large Language Models (LLMs) 
 - **Language**: TypeScript 5
 - **Styling**: Tailwind CSS v4
 - **UI Components**: shadcn/ui (Radix UI primitives)
-- **Content**: MDX for article-based labs with embedded React components
+- **Workflow Builder**: React Flow v11+ (visual node-based interface)
+- **State Management**: Zustand (for workflow builder)
 - **Icons**: Lucide React
 
 ### Backend
@@ -79,6 +91,7 @@ An educational platform where students explore how Large Language Models (LLMs) 
 - **Authentication**: Supabase Auth
 - **AI Provider**: GPT-4o (OpenAI API)
 - **Server Actions**: Next.js 15 native server actions
+- **Workflow Engine**: Custom execution engine with topological sorting
 
 ### Deployment
 - **Platform**: Vercel (optimized for Next.js)
@@ -196,14 +209,17 @@ Navigate to [http://localhost:3000](http://localhost:3000)
 
 | Table | Purpose |
 |-------|---------|
-| `prompt_lab_progress` | Track user progress through 5 labs, exercise completion, attempts |
-| `lab_submissions` | Store student prompts, AI responses, success status per exercise |
-| `module_progress` | Overall course progress (reused from base architecture) |
+| `prompt_lab_progress` | Track user progress through labs, exercise completion, attempts |
+| `module_progress` | Overall course/module progress tracking |
+| `ai_usage_log` | Rate limiting and AI usage analytics |
 | `coach_transcripts` | AI coach conversation history for help/guidance |
+| `workflows` | User-created and template workflows (Lab 6) |
+| `workflow_executions` | Execution history and results for workflows |
 
 ### Security
 - **Row Level Security (RLS)** enabled on all tables
 - Users can only access their own data
+- Public templates available for all authenticated users
 - Cascade delete on user removal
 
 ---
@@ -326,59 +342,62 @@ export async function checkSuccess(request: {
 
 ## 💰 Cost Estimates
 
-Using **GPT-4o** (as specified in PRD):
+Using **GPT-4o** for all LLM operations:
 
-### Per Student
-- 5 labs × 6 exercises avg = 30 API calls
+### Per Student (All 6 Labs)
+- Labs 1-5: ~35 API calls (exercises + experiments)
+- Lab 6 (Workflow Builder): ~37 API calls (observe, edit, create)
+- Total: ~72 API calls per student
 - ~200 tokens input + 400 tokens output per call
-- Input cost: 30 × 200 × $2.50/1M = $0.015
-- Output cost: 30 × 400 × $10.00/1M = $0.12
-- **Total: ~$0.14 per student**
+- Input cost: 72 × 200 × $2.50/1M = $0.036
+- Output cost: 72 × 400 × $10.00/1M = $0.288
+- **Total: ~$0.33 per student (complete 6-lab course)**
 
 ### Scale
-- 100 students: ~$14/month
-- 500 students: ~$70/month
-- 1000 students: ~$140/month
+- 100 students: ~$33/month
+- 500 students: ~$165/month
+- 1000 students: ~$330/month
 
-**Note**: Using rule-based success checking (free) instead of LLM validation saves additional costs.
+### Cost Optimization
+- Rule-based success checking (free) instead of LLM validation
+- Rate limiting: 30 prompts per hour per student
+- Estimated actual cost: ~$0.26/student (based on 80% Labs 1-5 completion, 60% Lab 6 completion)
 
 ---
 
-## 🎯 Development Roadmap
+## 🎯 Development Status
 
-### Phase 1: Core Components (Week 1-2)
-- [x] Landing page updated
-- [ ] PromptEditor component
-- [ ] LLMOutputDisplay component
-- [ ] runPrompt server action
-- [ ] Database migration
-- **Milestone**: One complete exercise flow works
+### ✅ Completed Features
+- [x] Landing page with ToB positioning
+- [x] Authentication system (Supabase Auth)
+- [x] Database schema and migrations
+- [x] PromptEditor component
+- [x] LLMOutputDisplay component
+- [x] runPrompt server action with rate limiting
+- [x] Success criteria auto-checking (rule-based)
+- [x] AI Coach integration (drawer-based)
+- [x] Progress tracking system
+- [x] Module and lab progress UI
+- [x] Lab 6: AI Workflow Builder
+  - [x] Visual workflow canvas (React Flow)
+  - [x] Drag-and-drop node library
+  - [x] Workflow execution engine
+  - [x] Save/load workflows
+  - [x] Template system
+- [x] Orientation module
 
-### Phase 2: Lab Content (Week 2-3)
-- [ ] Lab 1-3 content (articles + exercises)
-- [ ] MDX integration
-- [ ] Progress tracking UI
-- **Milestone**: First 3 labs playable
+### 🚧 In Progress
+- [ ] Lab 1-5 content development (article-based with MDX)
+- [ ] Floating AI Coach avatar (to replace sidebar drawer)
+- [ ] Teacher dashboard with student reports
+- [ ] Advanced analytics and insights
 
-### Phase 3: Advanced Labs (Week 3-4)
-- [ ] Lab 4-5 content
-- [ ] Success criteria auto-check
-- [ ] AI coach integration
-- **Milestone**: All 5 labs complete
-
-### Phase 4: Testing & Polish (Week 4-5)
-- [ ] Beta testing with 10-20 students
-- [ ] Content adjustments based on feedback
-- [ ] Performance optimization
-- [ ] Error handling
-- **Milestone**: Ready for launch
-
-### Phase 5: Launch (Week 5-6)
-- [ ] Landing page finalized
-- [ ] Teacher/parent resources
-- [ ] Production deployment
-- [ ] Monitoring & analytics
-- **Milestone**: Public release
+### 📋 Planned Features
+- [ ] Achievement badges and gamification
+- [ ] Peer sharing of workflows
+- [ ] Mobile app optimization
+- [ ] Multi-language support
+- [ ] LMS integration (Canvas, Google Classroom)
 
 ---
 
@@ -464,16 +483,22 @@ All rights reserved. © 2025 LLM Learning Lab
 
 ## 🎉 Recent Updates
 
+### 2025-10-17
+- 🛠️ **Lab 6 Workflow Builder**: Visual AI workflow builder with React Flow
+- 📊 **Database enhancements**: Added workflow tables and execution tracking
+- 🎨 **UI refinements**: Dashboard improvements and layout optimizations
+- 🤖 **AI Coach improvements**: Context-aware coaching with better UX
+
 ### 2025-10-16
 - 🔄 **Major pivot**: From startup course to LLM Learning Lab
 - 🎯 **New focus**: Elementary & middle school students (grades 5-9)
-- 🔬 **5 experimental labs**: AI Basics, Hallucinations, Roles, Reasoning, Bias & Ethics
-- 🎨 **Landing page redesigned**: Emphasizes hands-on experiments and understanding AI
-- 📚 **MDX-based curriculum**: Articles with embedded interactive components
+- 🔬 **6 progressive labs**: AI fundamentals through workflow building
+- 🎨 **Landing page redesigned**: ToB positioning for educators
+- 📚 **Educational platform**: AI literacy curriculum for K-12
 - 🤖 **GPT-4o integration**: Real-time AI responses for experiments
 
 ---
 
-**Built with Next.js 15, Supabase, GPT-4o, and shadcn/ui** 🚀
-**Designed for curious minds ages 10-15** 🧠
-**Science education for the AI age** 🔬
+**Built with Next.js 15, Supabase, GPT-4o, React Flow, and shadcn/ui** 🚀
+**Designed for students grades 5-9** 🧠
+**AI literacy education for the next generation** 🔬
