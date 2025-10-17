@@ -350,7 +350,7 @@ export default function LandingPage() {
                     </Badge>
                   )}
                   {i === 1 ? (
-                    <CardTitle className="text-2xl">{tier.name}</CardTitle>
+                    <CardTitle className="text-4xl font-bold">{tier.name}</CardTitle>
                   ) : (
                     <div className="h-6" />
                   )}
