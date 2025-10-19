@@ -1,33 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run build)",
-      "Bash(npx tsc:*)",
-      "Bash(npx:*)",
-      "Bash(where supabase)",
-      "Bash(if not exist \"docs\\qa\\gates\" mkdir \"docs\\qa\\gates\")",
-      "Bash(mkdir:*)",
-      "Bash(dir:*)",
-      "Bash(findstr:*)",
-      "Bash(npm install:*)",
-      "Bash(rm:*)",
-      "Bash(find:*)",
-      "mcp__playwright__browser_navigate",
-      "Bash(mv:*)",
-      "Bash(git init:*)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(git remote add:*)",
-      "Bash(git branch:*)",
-      "Bash(git push:*)",
-      "Bash(npm uninstall:*)",
-      "Bash(if not exist \"supabase\\migrations\" mkdir \"supabase\\migrations\")",
-      "Bash(node scripts/test-db.js:*)",
-      "Bash(npm run dev:*)",
-      "Bash(node scripts/run-migration.js:*)",
-      "WebSearch",
-      "Bash(if not exist \"lib\\workflow\" mkdir \"lib\\workflow\")",
-      "Bash(if not exist \"archive\\coach-components\" mkdir \"archive\\coach-components\")"
+      "Bash(node scripts/test-admin-db.js)"
     ],
     "deny": [],
     "ask": []

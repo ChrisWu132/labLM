@@ -1,6 +1,5 @@
 ﻿"use client"
 
-import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import {
@@ -10,7 +9,6 @@ import {
   Shield,
   Rocket,
   ArrowRight,
-  Clock,
   BookOpen,
   Award
 } from "lucide-react"
@@ -23,117 +21,88 @@ interface OrientationWelcomeProps {
 
 export function OrientationWelcome({ userName, onComplete }: OrientationWelcomeProps) {
   const router = useRouter()
-  const [currentPage, setCurrentPage] = useState<1 | 2>(1)
 
   const handleStart = () => {
     onComplete?.()
     router.push("/dashboard/vibecoding/labs/lab1")
   }
 
-  const totalDuration = LABS.reduce((minutes, lab) => minutes + parseInt(lab.duration), 0)
-  const totalHours = Math.floor(totalDuration / 60)
-  const remainingMinutes = totalDuration % 60
-  const totalDurationLabel = remainingMinutes > 0
-    ? `${totalHours} hours ${remainingMinutes} minutes`
-    : `${totalHours} hours`
-
   return (
     <div className="h-full w-full bg-background">
       <div className="flex h-full flex-col">
-        {currentPage === 1 && (
-          <section className="flex-1 overflow-y-auto px-6 py-12 md:px-10 lg:px-16 animate-in fade-in duration-500">
-            <div className="mx-auto max-w-3xl space-y-10 pb-16">
-              <div className="text-center space-y-5">
-                <div className="flex justify-center">
-                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
-                    <Sparkles className="h-10 w-10 text-primary" />
-                  </div>
-                </div>
-                <h1 className="text-balance text-4xl font-bold md:text-5xl">Welcome, {userName}!</h1>
-                <p className="text-lg text-muted-foreground md:text-xl">
-                  Embark on a journey to understand AI and become a responsible AI explorer.
-                </p>
-              </div>
-
-              <div className="space-y-6">
-                <h2 className="text-center text-2xl font-bold">What You&apos;ll Gain</h2>
-                <div className="grid gap-6 md:grid-cols-2">
-                  <div className="flex gap-4 rounded-xl border bg-card p-4 shadow-sm transition-colors hover:border-primary/40">
-                    <Brain className="h-6 w-6 shrink-0 text-primary" />
-                    <div>
-                      <h3 className="font-semibold">Understand How AI Works</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Learn how large language models are trained, why they make mistakes, and how to guide them.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex gap-4 rounded-xl border bg-card p-4 shadow-sm transition-colors hover:border-primary/40">
-                    <Target className="h-6 w-6 shrink-0 text-primary" />
-                    <div>
-                      <h3 className="font-semibold">Master Practical Skills</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Practice writing effective prompts, role playing, and step-by-step reasoning with AI.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex gap-4 rounded-xl border bg-card p-4 shadow-sm transition-colors hover:border-primary/40">
-                    <Shield className="h-6 w-6 shrink-0 text-primary" />
-                    <div>
-                      <h3 className="font-semibold">Think Critically</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Learn to question AI outputs, verify facts, and spot hallucinations before they spread.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex gap-4 rounded-xl border bg-card p-4 shadow-sm transition-colors hover:border-primary/40">
-                    <Rocket className="h-6 w-6 shrink-0 text-primary" />
-                    <div>
-                      <h3 className="font-semibold">Use AI Responsibly</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Explore ethics, privacy, and how to partner with AI for creativity—not shortcuts.
-                      </p>
-                    </div>
-                  </div>
+        <section className="flex-1 overflow-y-auto px-6 py-12 md:px-10 lg:px-16">
+          <div className="mx-auto max-w-3xl space-y-10 pb-16">
+            <div className="text-center space-y-5">
+              <div className="flex justify-center">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
+                  <Sparkles className="h-10 w-10 text-primary" />
                 </div>
               </div>
+              <h1 className="text-balance text-4xl font-bold md:text-5xl">Welcome, {userName}!</h1>
+              <p className="text-lg text-muted-foreground md:text-xl">
+                Embark on a journey to understand AI and become a responsible AI explorer.
+              </p>
+            </div>
 
-              <div className="rounded-xl border border-primary/20 bg-primary/5 p-6 shadow-sm">
-                <div className="flex items-start gap-4">
-                  <BookOpen className="h-8 w-8 shrink-0 text-primary" />
-                  <div className="space-y-2">
-                    <h3 className="text-lg font-semibold">Hands-On Learning Labs</h3>
+            <div className="space-y-6">
+              <h2 className="text-center text-2xl font-bold">What You&apos;ll Gain</h2>
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="flex gap-4 rounded-xl border bg-card p-4 shadow-sm transition-colors hover:border-primary/40">
+                  <Brain className="h-6 w-6 shrink-0 text-primary" />
+                  <div>
+                    <h3 className="font-semibold">Understand How AI Works</h3>
                     <p className="text-sm text-muted-foreground">
-                      Learn by doing. Each lab delivers a guided experiment where you build, test, and reflect on how AI behaves—all in your browser, no installs required.
+                      Learn how large language models are trained, why they make mistakes, and how to guide them.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-4 rounded-xl border bg-card p-4 shadow-sm transition-colors hover:border-primary/40">
+                  <Target className="h-6 w-6 shrink-0 text-primary" />
+                  <div>
+                    <h3 className="font-semibold">Master Practical Skills</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Practice writing effective prompts, role playing, and step-by-step reasoning with AI.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-4 rounded-xl border bg-card p-4 shadow-sm transition-colors hover:border-primary/40">
+                  <Shield className="h-6 w-6 shrink-0 text-primary" />
+                  <div>
+                    <h3 className="font-semibold">Think Critically</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Learn to question AI outputs, verify facts, and spot hallucinations before they spread.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-4 rounded-xl border bg-card p-4 shadow-sm transition-colors hover:border-primary/40">
+                  <Rocket className="h-6 w-6 shrink-0 text-primary" />
+                  <div>
+                    <h3 className="font-semibold">Use AI Responsibly</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Explore ethics, privacy, and how to partner with AI for creativity—not shortcuts.
                     </p>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div className="flex justify-center pt-4">
-                <Button size="lg" className="gap-2 px-8 py-6 text-lg" onClick={() => setCurrentPage(2)}>
-                  See Course Schedule
-                  <ArrowRight className="h-5 w-5" />
-                </Button>
-              </div>
-
-              <div className="flex justify-center gap-3 pt-2">
-                <span className="h-3 w-3 rounded-full bg-primary" />
-                <span className="h-3 w-3 rounded-full bg-muted" />
+            <div className="rounded-xl border border-primary/20 bg-primary/5 p-6 shadow-sm">
+              <div className="flex items-start gap-4">
+                <BookOpen className="h-8 w-8 shrink-0 text-primary" />
+                <div className="space-y-2">
+                  <h3 className="text-lg font-semibold">Hands-On Learning Labs</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Learn by doing. Each lab delivers a guided experiment where you build, test, and reflect on how AI behaves—all in your browser, no installs required.
+                  </p>
+                </div>
               </div>
             </div>
-          </section>
-        )}
 
-        {currentPage === 2 && (
-          <section className="flex-1 overflow-y-auto px-6 py-12 md:px-10 lg:px-16 animate-in fade-in duration-500">
-            <div className="mx-auto max-w-3xl space-y-10 pb-16">
+            <div className="space-y-6">
               <div className="text-center space-y-4">
-                <div className="flex items-center justify-center gap-2">
-                  <Clock className="h-8 w-8 text-primary" />
-                  <h1 className="text-4xl font-bold">Your Learning Path</h1>
-                </div>
+                <h2 className="text-4xl font-bold">Your Learning Path</h2>
                 <p className="text-lg text-muted-foreground md:text-xl">
-                  Complete all {LABS.length} labs in about {totalDurationLabel}.
+                  Complete all {LABS.length} labs to master AI literacy.
                 </p>
               </div>
 
@@ -145,13 +114,7 @@ export function OrientationWelcome({ userName, onComplete }: OrientationWelcomeP
                         {lab.number}
                       </div>
                       <div className="flex-1 space-y-2">
-                        <div className="flex flex-wrap items-start justify-between gap-3">
-                          <h3 className="text-lg font-semibold">{lab.title}</h3>
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <Clock className="h-4 w-4" />
-                            <span>{lab.duration}</span>
-                          </div>
-                        </div>
+                        <h3 className="text-lg font-semibold">{lab.title}</h3>
                         <p className="text-sm text-muted-foreground">{lab.description}</p>
                         <div className="flex flex-wrap gap-2">
                           {lab.concepts.map((concept) => (
@@ -174,24 +137,16 @@ export function OrientationWelcome({ userName, onComplete }: OrientationWelcomeP
                   </p>
                 </div>
 
-                <div className="flex items-center justify-center gap-4">
-                  <Button variant="outline" size="lg" className="px-8 py-6 text-lg" onClick={() => setCurrentPage(1)}>
-                    Back
-                  </Button>
+                <div className="flex items-center justify-center">
                   <Button size="lg" className="gap-2 px-8 py-6 text-lg" onClick={handleStart}>
                     Start Lab 1
                     <ArrowRight className="h-5 w-5" />
                   </Button>
                 </div>
-
-                <div className="flex justify-center gap-3 pt-2">
-                  <span className="h-3 w-3 rounded-full bg-muted" />
-                  <span className="h-3 w-3 rounded-full bg-primary" />
-                </div>
               </div>
             </div>
-          </section>
-        )}
+          </div>
+        </section>
       </div>
     </div>
   )
