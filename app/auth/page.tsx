@@ -17,6 +17,7 @@ export default function AuthPage() {
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [isSignUp, setIsSignUp] = useState(false)
+  const [userType, setUserType] = useState<"student" | "teacher">("student")
 
   const handleEmailPasswordAuth = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -44,13 +45,21 @@ export default function AuthPage() {
     try {
       const supabase = createClient()
 
+      // Determine redirect URL based on user type
+      const redirectUrl = userType === "teacher"
+        ? "/dashboard/teacher"
+        : "/dashboard/orientation"
+
       if (isSignUp) {
         // Sign up new user
         const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/dashboard/orientation`,
+            emailRedirectTo: `${window.location.origin}${redirectUrl}`,
+            data: {
+              user_type: userType, // Store user type in metadata
+            }
           },
         })
 
@@ -69,12 +78,12 @@ export default function AuthPage() {
 
         toast({
           title: "Account created!",
-          description: "Redirecting to dashboard...",
+          description: `Welcome, ${userType}! Redirecting...`,
         })
 
         // Redirect immediately (most Supabase configs don't require email confirmation)
         setTimeout(() => {
-          router.push("/dashboard/orientation")
+          router.push(redirectUrl)
           router.refresh()
         }, 1000)
       } else {
@@ -91,8 +100,8 @@ export default function AuthPage() {
           description: "Redirecting to dashboard...",
         })
 
-        // Redirect to orientation
-        router.push("/dashboard/orientation")
+        // Redirect based on user type
+        router.push(redirectUrl)
         router.refresh()
       }
     } catch (error: any) {
@@ -116,11 +125,44 @@ export default function AuthPage() {
           </div>
           <CardTitle className="text-2xl">{isSignUp ? "Create Account" : "Welcome Back"}</CardTitle>
           <CardDescription>
-            {isSignUp ? "Start your AI startup journey" : "Sign in to continue your AI startup journey"}
+            {isSignUp
+              ? "Join VibeCode Study and start learning with AI"
+              : "Sign in to continue your learning journey"}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <form onSubmit={handleEmailPasswordAuth} className="space-y-4">
+            {/* User Type Selection */}
+            <div className="space-y-2">
+              <Label>I am a...</Label>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => setUserType("student")}
+                  className={`p-3 rounded-lg border-2 transition-all ${
+                    userType === "student"
+                      ? "border-primary bg-primary/10 font-medium"
+                      : "border-border hover:border-primary/50"
+                  }`}
+                  disabled={isLoading}
+                >
+                  🎓 Student
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setUserType("teacher")}
+                  className={`p-3 rounded-lg border-2 transition-all ${
+                    userType === "teacher"
+                      ? "border-primary bg-primary/10 font-medium"
+                      : "border-border hover:border-primary/50"
+                  }`}
+                  disabled={isLoading}
+                >
+                  👨‍🏫 Teacher
+                </button>
+              </div>
+            </div>
+
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
