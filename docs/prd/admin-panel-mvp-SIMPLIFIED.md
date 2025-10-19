@@ -1,17 +1,40 @@
 # Admin Panel MVP - SIMPLIFIED Product Requirements
 
-**Product**: VibeCode Study Admin Panel
-**Version**: 1.0 (MVP - Simplified)
+**Product**: VibeCode Study Teacher Panel
+**Version**: 2.0 (MVP - Lab Monitoring Focused)
 **Target**: School Teachers
-**Status**: Planning - SIMPLIFIED
+**Status**: Implemented
 **Date**: 2025-10-18
+**Last Updated**: 2025-10-18
 
 ---
 
-## 🎯 Core Philosophy: Keep It Simple
+## 🎯 Core Philosophy: Lab Progress Monitoring First
 
-**What we're doing**: Giving teachers visibility into student progress
-**What we're NOT doing**: Building a full LMS or complex user management system
+**What we're doing**: Giving teachers detailed visibility into student lab and exercise-level progress
+**What we're NOT doing**: Building a full LMS or complex class management system
+
+**Key Principle**: The teacher panel is primarily a **monitoring dashboard**, not a class management tool
+
+---
+
+## 🆕 What Changed in v2.0 (Lab Monitoring Focus)
+
+### Before (v1.0 - Class Management Focus)
+- ❌ Main page showed class cards
+- ❌ Prominent "Create Class" button
+- ❌ Only showed total labs completed (X/6)
+- ❌ Had to click through to see student details
+
+### After (v2.0 - Lab Monitoring Focus)
+- ✅ Main page = **Student × Lab progress matrix table**
+- ✅ "Create Class" moved to settings menu (de-emphasized)
+- ✅ Shows status for each individual lab (✓ ⚠️ ❌ ○ 🔒)
+- ✅ **Exercise-level tracking** for each student
+- ✅ Automatic **at-risk student detection** (>7 days inactive or stuck)
+- ✅ Click student row → View detailed exercise progress
+- ✅ Click lab column → View class-wide lab statistics
+- ✅ Class switcher dropdown at top
 
 ---
 
@@ -439,29 +462,202 @@ CREATE POLICY "Students can enroll themselves"
 
 ---
 
+## 🆕 New Features in v2.0
+
+### 4. Detailed Lab Progress Monitoring ✅
+
+**Implementation**:
+```typescript
+// New server action
+export async function getClassProgressDetailed(classId: string): Promise<{
+  data?: ClassProgressDetailed
+  error?: string
+}> {
+  // Returns:
+  // - students: StudentProgressDetailed[] (with lab-level and exercise-level data)
+  // - lab_statistics: LabStatistics[] (class-wide metrics per lab)
+  // - at_risk_students: number (auto-detected)
+}
+```
+
+**Lab Status Logic**:
+- `completed`: All exercises passed
+- `in_progress`: Some exercises started, none stuck
+- `stuck`: Any exercise with ≥5 failed attempts
+- `not_started`: No exercises attempted
+- `locked`: Previous lab not complete
+
+**At-Risk Detection**:
+- Last activity > 7 days ago, OR
+- Any exercise with ≥5 failed attempts
+
+**UI**:
+```
+Teacher Dashboard (Main Page):
+┌────────────────────────────────────────────────────────────┐
+│ Teacher Panel         [Class: Period 3 ▼]  [Settings ⚙️]  │
+│                                                            │
+│ [28 Students] [24 Active] [85% Avg] [4 At Risk]            │
+│                                                            │
+│ Student Lab Progress                    [Export CSV]       │
+│ ┌────────────────────────────────────────────────────────┐ │
+│ │Student │Lab1│Lab2│Lab3│Lab4│Lab5│Lab6│Total│Last Active│ │
+│ │────────┼────┼────┼────┼────┼────┼────┼─────┼──────────│ │
+│ │alice@..│ ✓  │ ✓  │ ⚠️  │ ○  │ ○  │ 🔒 │ 2/6 │ 2h ago   │ │
+│ │bob@... │ ✓  │ ✓  │ ✓  │ ✓  │ ⚠️  │ ○  │ 4/6 │ 5h ago   │ │
+│ │carol@..│ ✓  │ ❌  │ ○  │ ○  │ ○  │ 🔒 │ 1/6 │ 3d ago ⚠️│ │
+│ └────────────────────────────────────────────────────────┘ │
+│ Legend: ✓ Completed | ⚠️ In Progress | ❌ Stuck | ○ Not Started | 🔒 Locked
+└────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### 5. Student Detail View (Exercise-Level) ✅
+
+**Route**: `/dashboard/teacher/students/[studentId]?class=[classId]`
+
+**Implementation**:
+```typescript
+export async function getStudentProgress(classId: string, studentId: string): Promise<{
+  data?: StudentProgressDetailed
+}> {
+  // Returns detailed lab and exercise progress for single student
+}
+```
+
+**Shows**:
+- Overall progress bar
+- Each lab with status badge
+- Exercise-level breakdown:
+  - ✓/❌ status
+  - Number of attempts
+  - Student's submitted prompt
+  - LLM response
+  - Warning if stuck (≥5 attempts)
+
+**UI**:
+```
+Student Detail (alice@school.edu):
+┌──────────────────────────────────────────────────────────┐
+│ ← Back to Class          alice@school.edu      [At Risk]│
+│ Last active: 2 hours ago                                 │
+│ Overall Progress: ████████░░ 33% (2/6 labs)             │
+│                                                          │
+│ ┌─────────────────────────────────────────────────────┐  │
+│ │ Lab 1: 什么是 Prompt                  [✓ Completed] │  │
+│ │ ──────────────────────────────────────────────────  │  │
+│ │ • Exercise 1.1: First Prompt    ✓ (1 attempt, 2m)  │  │
+│ │ • Exercise 1.2: Instructions     ✓ (2 attempts, 5m) │  │
+│ │ • Exercise 1.3: Be Specific      ✓ (1 attempt, 3m)  │  │
+│ │ Completed: Oct 15, 2025 at 3:24 PM                  │  │
+│ └─────────────────────────────────────────────────────┘  │
+│                                                          │
+│ ┌─────────────────────────────────────────────────────┐  │
+│ │ Lab 3: 角色扮演技巧                   [⚠️ In Progress]│  │
+│ │ ──────────────────────────────────────────────────  │  │
+│ │ • Exercise 3.1: Role Assignment  ✓ (1 attempt)      │  │
+│ │ • Exercise 3.2: Expert Persona   ❌ (5 attempts)     │  │
+│ │   [View submission ▼]                                │  │
+│ │   ⚠️ Student is stuck (5 failed attempts)            │  │
+│ │ • Exercise 3.3: Personality      ○ Not started       │  │
+│ └─────────────────────────────────────────────────────┘  │
+└──────────────────────────────────────────────────────────┘
+```
+
+---
+
+### 6. Lab Statistics View (Class-Wide) ✅
+
+**Route**: `/dashboard/teacher/labs/[labNumber]?class=[classId]`
+
+**Shows**:
+- Class-wide completion rate for this lab
+- Breakdown by status (completed/in_progress/stuck/not_started)
+- Exercise-level statistics:
+  - Completion rate per exercise
+  - Average attempts per exercise
+  - Identifies problematic exercises
+- List of stuck students with specific exercises
+
+**UI**:
+```
+Lab 2 Statistics:
+┌──────────────────────────────────────────────────────────┐
+│ ← Back to Class          Lab 2: 如何给清晰指令           │
+│                                                          │
+│ [18 Completed] [5 In Progress] [3 Stuck] [2 Not Started]│
+│                                        [75% Completion]  │
+│                                                          │
+│ Exercise Breakdown:                                      │
+│ ┌──────────────────────────────────────────────────────┐ │
+│ │Exercise │Completion│Avg Attempts│Progress Bar      │  │
+│ │─────────┼──────────┼────────────┼─────────────────│  │
+│ │Ex 2.1   │  85%     │   2.3      │████████████░░░░ │  │
+│ │Ex 2.2   │  78%     │   1.8      │███████████░░░░░ │  │
+│ │Ex 2.3   │  64%     │   3.1      │█████████░░░░░░░ │ ⚠️│
+│ └──────────────────────────────────────────────────────┘ │
+│                                                          │
+│ ⚠️ Students Stuck on This Lab (3):                       │
+│ ┌──────────────────────────────────────────────────────┐ │
+│ │ carol@school.edu - Failed Ex 2.1 (4 attempts)        │ │
+│ │ emma@school.edu  - Failed Ex 2.3 (6 attempts)        │ │
+│ │ frank@school.edu - Failed Ex 2.2 (3 attempts)        │ │
+│ └──────────────────────────────────────────────────────┘ │
+└──────────────────────────────────────────────────────────┘
+```
+
+---
+
 ## What This Gives Us
 
-✅ **Faster Development**: 4 weeks instead of 6
-✅ **Lower Risk**: No complex auth workarounds
-✅ **Easier Testing**: Fewer moving parts
-✅ **Maintainable**: 2 tables vs 8+ tables
-✅ **Standard Patterns**: All Supabase best practices
-✅ **Room to Grow**: Can add features based on real feedback
+✅ **Teacher-Focused**: Dashboard designed for monitoring, not management
+✅ **Detailed Insights**: Exercise-level tracking, not just lab-level
+✅ **Proactive**: Automatic at-risk student detection
+✅ **Actionable**: Click through to see exactly where students are stuck
+✅ **Class Management De-emphasized**: Create class button in settings menu
+✅ **Maintainable**: Uses existing `prompt_lab_progress` table
+
+---
+
+## Implementation Summary
+
+### Database
+- **No new tables needed** - uses existing `prompt_lab_progress`
+- Still uses `classes` and `class_enrollments` for organization
+
+### New Server Actions
+1. `getClassProgressDetailed(classId)` - Returns full class progress with exercise data
+2. `getStudentProgress(classId, studentId)` - Returns single student detailed progress
+
+### New Routes
+1. `/dashboard/teacher` - Main dashboard with lab progress matrix
+2. `/dashboard/teacher/students/[studentId]` - Student detail view
+3. `/dashboard/teacher/labs/[labNumber]` - Lab statistics view
+
+### Files Created/Modified
+- **Modified**:
+  - `types/admin.ts` - Added detailed progress types
+  - `lib/actions/admin.ts` - Added detailed progress functions
+  - `app/dashboard/teacher/page.tsx` - Updated to fetch detailed data
+  - `app/dashboard/teacher/teacher-dashboard-client.tsx` - Complete redesign
+- **Created**:
+  - `app/dashboard/teacher/students/[studentId]/page.tsx`
+  - `app/dashboard/teacher/students/[studentId]/student-detail-client.tsx`
+  - `app/dashboard/teacher/labs/[labNumber]/page.tsx`
+  - `app/dashboard/teacher/labs/[labNumber]/lab-statistics-client.tsx`
 
 ---
 
 ## Next Steps
 
-1. **Review** this simplified approach
-2. **Approve** to proceed
-3. **Implement** Phase 1 (teacher creates class)
-4. **Test** with real teachers
-5. **Iterate** based on feedback
+1. **Test** with real teacher accounts
+2. **Verify** at-risk detection logic accuracy
+3. **Collect feedback** on usefulness of exercise-level tracking
+4. **Iterate** on UI based on teacher needs
 
 ---
 
-**Document Status**: ✅ Simplified - Ready for Review
-**Architect**: Winston
-**Recommendation**: Start here. Add complexity only when proven necessary.
-
-**Last Updated**: 2025-10-18 (Simplified from over-engineered PRD)
+**Document Status**: ✅ v2.0 Implemented - Lab Monitoring Focused
+**Last Updated**: 2025-10-18
+**Key Change**: Shifted focus from class management to lab progress monitoring

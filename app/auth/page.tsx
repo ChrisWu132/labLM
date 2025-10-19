@@ -139,26 +139,38 @@ export default function AuthPage() {
                 <button
                   type="button"
                   onClick={() => setUserType("student")}
-                  className={`p-3 rounded-lg border-2 transition-all ${
+                  className={`p-4 rounded-lg border-2 transition-all relative ${
                     userType === "student"
-                      ? "border-primary bg-primary/10 font-medium"
-                      : "border-border hover:border-primary/50"
+                      ? "border-primary bg-primary text-primary-foreground font-semibold shadow-md scale-105"
+                      : "border-muted-foreground/20 hover:border-primary/50 hover:bg-accent"
                   }`}
                   disabled={isLoading}
                 >
-                  🎓 Student
+                  {userType === "student" && (
+                    <div className="absolute top-1 right-1 w-5 h-5 bg-white rounded-full flex items-center justify-center">
+                      <span className="text-primary text-xs">✓</span>
+                    </div>
+                  )}
+                  <div className="text-2xl mb-1">🎓</div>
+                  <div className="text-sm">Student</div>
                 </button>
                 <button
                   type="button"
                   onClick={() => setUserType("teacher")}
-                  className={`p-3 rounded-lg border-2 transition-all ${
+                  className={`p-4 rounded-lg border-2 transition-all relative ${
                     userType === "teacher"
-                      ? "border-primary bg-primary/10 font-medium"
-                      : "border-border hover:border-primary/50"
+                      ? "border-primary bg-primary text-primary-foreground font-semibold shadow-md scale-105"
+                      : "border-muted-foreground/20 hover:border-primary/50 hover:bg-accent"
                   }`}
                   disabled={isLoading}
                 >
-                  👨‍🏫 Teacher
+                  {userType === "teacher" && (
+                    <div className="absolute top-1 right-1 w-5 h-5 bg-white rounded-full flex items-center justify-center">
+                      <span className="text-primary text-xs">✓</span>
+                    </div>
+                  )}
+                  <div className="text-2xl mb-1">👨‍🏫</div>
+                  <div className="text-sm">Teacher</div>
                 </button>
               </div>
             </div>
