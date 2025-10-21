@@ -135,6 +135,53 @@ export interface LabContent {
 }
 
 // ============================================================================
+// Lab Sections (Micro-Sections)
+// ============================================================================
+
+/**
+ * Tab type within a section
+ */
+export type TabType = 'content' | 'interactive' | 'quiz'
+
+/**
+ * Individual tab within a lab section
+ */
+export interface SectionTab {
+  id: string // 'learn' | 'tryIt' | 'quiz'
+  type: TabType
+  label: string // Display label with emoji (e.g., '📖 Learn', '🎯 Try It')
+}
+
+/**
+ * Lab section configuration (micro-section)
+ */
+export interface LabSection {
+  id: string // Format: "1.1", "1.2", "2.1", etc.
+  labNumber: number // 1-6
+  order: number // 1, 2, 3, ...
+  title: string // e.g., "What is AI?"
+  estimatedMinutes: number // Estimated time to complete
+  tabs: SectionTab[]
+}
+
+/**
+ * User progress for a specific section
+ * Maps to section_progress database table
+ */
+export interface SectionProgress {
+  id: string
+  user_id: string
+  section_id: string // Format: "1.1", "1.2", etc.
+  status: 'locked' | 'in_progress' | 'completed'
+  learn_tab_visited: boolean
+  try_it_tab_visited: boolean
+  started_at: string | null
+  completed_at: string | null
+  created_at: string
+  updated_at: string
+}
+
+// ============================================================================
 // UI Component Props
 // ============================================================================
 

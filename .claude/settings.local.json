@@ -1,7 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node scripts/test-admin-db.js)"
+      "Bash(node scripts/test-admin-db.js)",
+      "Bash(npx supabase status)",
+      "Bash(npm run dev:*)",
+      "Bash(dir:*)",
+      "Bash(findstr:*)",
+      "Bash(npm run build:*)",
+      "Bash(timeout:*)",
+      "Bash(psql \"postgresql://postgres.bhugrkmtekghbarfnqcw:NahidaIsCute3344!@aws-0-us-east-1.pooler.supabase.com:6543/postgres\" -c \"\\dt section_progress\")"
     ],
     "deny": [],
     "ask": []

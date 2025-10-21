@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable} ${GeistMono.variable} antialiased`}>
+      <body className={`font-sans ${inter.variable} ${GeistMono.variable} antialiased`} suppressHydrationWarning>
         <Suspense fallback={null}>{children}</Suspense>
         <Toaster />
         <Analytics />

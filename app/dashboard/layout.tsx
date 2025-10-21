@@ -21,7 +21,20 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const { displayName, user } = useUser()
 
   // Check if current page needs full screen layout (no scroll)
-  const isFullScreenLayout = pathname.startsWith("/dashboard/vibecoding") || pathname === "/dashboard/orientation"
+  // Lab sections pages need scrolling but full width
+  const isLabSectionPage = pathname.includes("/sections/")
+  const isLabOverviewPage = pathname.match(/\/labs\/lab\d+$/)
+  const isFullScreenNoScroll = !isLabSectionPage && !isLabOverviewPage && (pathname.startsWith("/dashboard/vibecoding") || pathname === "/dashboard/orientation")
+
+  // Determine main content className
+  let mainClassName = "flex-1"
+  if (isFullScreenNoScroll) {
+    mainClassName += " overflow-hidden"
+  } else if (isLabSectionPage || isLabOverviewPage) {
+    mainClassName += " overflow-y-auto"
+  } else {
+    mainClassName += " overflow-y-auto"
+  }
 
   return (
     <FloatingCoachProvider>
@@ -34,8 +47,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             currentModule={currentModule}
           />
 
-          <main className={isFullScreenLayout ? "flex-1 overflow-hidden" : "flex-1 overflow-y-auto"}>
-            {isFullScreenLayout ? (
+          <main className={mainClassName}>
+            {isFullScreenNoScroll ? (
+              children
+            ) : isLabSectionPage || isLabOverviewPage ? (
               children
             ) : (
               <div className="container mx-auto max-w-5xl px-4 py-8">{children}</div>

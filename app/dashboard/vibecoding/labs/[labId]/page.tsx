@@ -2,6 +2,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import { getLabContent } from '@/lib/lab-content'
 import { notFound } from 'next/navigation'
 import { LabContainer } from './_components/LabContainer'
+import { LabOverview } from './_components/LabOverview'
 import { Lab1Interactive } from './_components/Lab1Interactive'
 import { Lab2Interactive } from './_components/Lab2Interactive'
 import { Lab3Interactive } from './_components/Lab3Interactive'
@@ -147,17 +148,9 @@ export default async function LabPage({
     notFound()
   }
 
-  // 如果是lab1或lab2，使用完全交互式的组件
+  // Lab 1 uses new micro-sections structure
   if (labId === 'lab1') {
-    return (
-      <div className="flex flex-col h-full overflow-hidden bg-[#F8F9FE]">
-        <div className="flex-1 overflow-auto">
-          <div className="container mx-auto px-6 md:px-8 py-12 md:py-20 max-w-6xl">
-            <Lab1Interactive />
-          </div>
-        </div>
-      </div>
-    )
+    return <LabOverview labNumber={1} />
   }
 
   if (labId === 'lab2') {

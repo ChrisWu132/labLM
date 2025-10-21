@@ -71,6 +71,9 @@ export default function VibeCodingLayout({ children }: { children: React.ReactNo
     ? parseInt(pathname.match(/\/labs\/lab(\d+)/)![1])
     : null
 
+  // Check if we're on a lab section or overview page (needs scrolling)
+  const isLabSectionOrOverview = pathname.includes("/sections/") || pathname.match(/\/labs\/lab\d+$/)
+
   // Load completed labs on mount
   useEffect(() => {
     async function loadCompletedLabs() {
@@ -244,7 +247,7 @@ export default function VibeCodingLayout({ children }: { children: React.ReactNo
       </div>
 
       {/* Right: Main Content Area (children) */}
-      <div className="flex-1 overflow-hidden">
+      <div className={`flex-1 ${isLabSectionOrOverview ? 'overflow-y-auto' : 'overflow-hidden'}`}>
         {children}
       </div>
 
