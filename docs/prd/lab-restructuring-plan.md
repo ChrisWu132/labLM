@@ -175,6 +175,81 @@ Lab Complete!
 Next Lab Unlocked
 ```
 
+### Sidebar Navigation Design
+
+The sidebar should reflect the section structure with progressive disclosure:
+
+**Collapsed State (Default)**:
+```
+[☰]
+ 1  (Lab 1 icon)
+ 2  (Lab 2 icon)
+ 3  (Lab 3 icon)
+ ...
+```
+
+**Expanded State - Lab with Sections**:
+```
+📚 Learning Labs
+
+▼ Lab 1: Meet Your AI Friend  ●●●○○ 3/5
+    ✓ 1.1 What is AI? (5m)
+    ✓ 1.2 Your First Prompt (5m)
+    ⏵ 1.3 Why Different Answers? (5m) ← current
+    🔒 1.4 Experiment Time (7m)
+    🔒 1.5 Review & Quiz (5m)
+
+▶ Lab 2: How AI Gets Smart  ○○○○○ 0/5
+
+▶ Lab 3: AI's Thinking Process 🔒
+```
+
+**Key Features**:
+- **Progressive Disclosure**: Labs are collapsible, current lab auto-expands
+- **Visual Status Indicators**:
+  - ✓ Completed sections (green)
+  - ⏵ Current section (blue, pulsing)
+  - 🔒 Locked sections (gray)
+  - ○ Not started sections (gray outline in progress dots)
+- **Progress Dots**: Visual representation of completion (e.g., ●●●○○ = 3/5 complete)
+- **Time Estimates**: Show remaining time per section and total
+- **Click Behavior**:
+  - Click lab header → Toggle expand/collapse
+  - Click section → Navigate to that section (if unlocked)
+  - Click on collapsed lab → Expand it
+
+**Design Specifications**:
+```tsx
+// Sidebar Lab Item
+<SidebarLabItem>
+  <LabHeader onClick={toggleExpand}>
+    <ExpandIcon />                           // ▼ or ▶
+    <LabTitle>Lab 1: Meet Your AI Friend</LabTitle>
+    <ProgressDots completed={3} total={5} /> // ●●●○○
+    <TimeRemaining>~12m left</TimeRemaining>
+  </LabHeader>
+
+  {isExpanded && (
+    <SectionList>
+      <SectionItem status="completed">
+        <StatusIcon>✓</StatusIcon>
+        <SectionNumber>1.1</SectionNumber>
+        <SectionTitle>What is AI?</SectionTitle>
+        <TimeEstimate>5m</TimeEstimate>
+      </SectionItem>
+      // ... more sections
+    </SectionList>
+  )}
+</SidebarLabItem>
+```
+
+**Interaction Behaviors**:
+1. Auto-expand current lab on page load
+2. Collapse other labs when expanding a new one
+3. Smooth 200ms ease-out animation for expand/collapse
+4. Highlight current section with blue accent
+5. Disable click on locked sections (show tooltip "Complete previous section first")
+
 ---
 
 ## Lab-by-Lab Breakdown

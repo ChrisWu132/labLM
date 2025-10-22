@@ -3,11 +3,13 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { ChevronDown, ChevronRight, ChevronLeft } from "lucide-react"
+import { ChevronDown, ChevronRight, ChevronLeft, Lock, Check, Play } from "lucide-react"
 import { usePathname, useRouter } from "next/navigation"
 import { markLabComplete, getLabSubmissions } from "./actions"
 import { useToast } from "@/hooks/use-toast"
 import { FloatingCoach } from "@/components/shared/floating-coach"
+import { getLabSections, calculateLabProgress } from "@/lib/constants/lab-sections"
+import { getAllSectionProgress } from "@/lib/actions/section-progress"
 
 interface Lab {
   number: number
@@ -65,30 +67,56 @@ export default function VibeCodingLayout({ children }: { children: React.ReactNo
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true)
   const [isLoading, setIsLoading] = useState(true)
   const [expandedLab, setExpandedLab] = useState<number | null>(null)
+  const [sectionProgress, setSectionProgress] = useState<Record<string, { status: string, completed: boolean }>>({})
 
-  // Determine current lab from pathname
+  // Determine current lab and section from pathname
   const currentLab = pathname.match(/\/labs\/lab(\d+)/)
     ? parseInt(pathname.match(/\/labs\/lab(\d+)/)![1])
+    : null
+
+  const currentSection = pathname.match(/\/sections\/([\d.]+)/)
+    ? pathname.match(/\/sections\/([\d.]+)/)![1]
     : null
 
   // Check if we're on a lab section or overview page (needs scrolling)
   const isLabSectionOrOverview = pathname.includes("/sections/") || pathname.match(/\/labs\/lab\d+$/)
 
-  // Load completed labs on mount
+  // Load completed labs and section progress on mount
   useEffect(() => {
-    async function loadCompletedLabs() {
+    async function loadProgress() {
       try {
-        const result = await getLabSubmissions()
-        const completed = result.data?.filter((sub) => sub.completed).map((sub) => sub.lab_number) || []
+        const [labResult, sectionResult] = await Promise.all([
+          getLabSubmissions(),
+          getAllSectionProgress()
+        ])
+
+        const completed = labResult.data?.filter((sub) => sub.completed).map((sub) => sub.lab_number) || []
         setCompletedLabs(completed)
+
+        // Convert section progress array to object for easy lookup
+        const progressMap: Record<string, { status: string, completed: boolean }> = {}
+        if (sectionResult.success && sectionResult.data) {
+          sectionResult.data.forEach((sp: any) => {
+            progressMap[sp.section_id] = {
+              status: sp.status,
+              completed: sp.status === 'completed'
+            }
+          })
+        }
+        setSectionProgress(progressMap)
+
+        // Auto-expand current lab
+        if (currentLab) {
+          setExpandedLab(currentLab)
+        }
       } catch (error) {
-        console.error("Failed to load completed labs:", error)
+        console.error("Failed to load progress:", error)
       } finally {
         setIsLoading(false)
       }
     }
-    loadCompletedLabs()
-  }, [])
+    loadProgress()
+  }, [currentLab])
 
   const handleStartLab = (labNumber: number) => {
     // If sidebar is collapsed, expand it first instead of navigating
@@ -185,7 +213,7 @@ export default function VibeCodingLayout({ children }: { children: React.ReactNo
                     </div>
                   </Button>
                 ) : (
-                  // Expanded view
+                  // Expanded view with sections
                   <Collapsible
                     open={expandedLab === lab.number}
                     onOpenChange={(isOpen) => setExpandedLab(isOpen ? lab.number : null)}
@@ -205,7 +233,35 @@ export default function VibeCodingLayout({ children }: { children: React.ReactNo
                             }`}>
                               {completedLabs.includes(lab.number) ? '✓' : lab.number}
                             </div>
-                            <h3 className="font-medium text-xs truncate">{lab.title}</h3>
+                            <div className="flex-1 min-w-0">
+                              <h3 className="font-medium text-xs truncate">{lab.title}</h3>
+                              {(() => {
+                                const sections = getLabSections(lab.number)
+                                const completedSectionIds = sections
+                                  .filter(s => sectionProgress[s.id]?.completed)
+                                  .map(s => s.id)
+                                const progress = calculateLabProgress(lab.number, completedSectionIds)
+                                return (
+                                  <div className="flex items-center gap-1 mt-0.5">
+                                    <div className="flex gap-0.5">
+                                      {Array.from({ length: progress.totalSections }).map((_, i) => (
+                                        <div
+                                          key={i}
+                                          className={`w-1.5 h-1.5 rounded-full ${
+                                            i < progress.completedSections
+                                              ? 'bg-green-500'
+                                              : 'bg-muted-foreground/30'
+                                          }`}
+                                        />
+                                      ))}
+                                    </div>
+                                    <span className="text-[10px] text-muted-foreground">
+                                      {progress.completedSections}/{progress.totalSections}
+                                    </span>
+                                  </div>
+                                )
+                              })()}
+                            </div>
                           </div>
                           <ChevronDown className={`w-3 h-3 text-muted-foreground shrink-0 transition-transform ${
                             expandedLab === lab.number ? 'rotate-180' : ''
@@ -213,27 +269,87 @@ export default function VibeCodingLayout({ children }: { children: React.ReactNo
                         </div>
                       </CollapsibleTrigger>
                       <CollapsibleContent>
-                        <div className="px-2 pb-2 space-y-2 border-t pt-2">
-                          <div className="flex gap-2">
-                            <Button
-                              size="sm"
-                              onClick={() => handleStartLab(lab.number)}
-                              className="flex-1 h-7 text-xs"
-                              variant={currentLab === lab.number ? "default" : "outline"}
-                            >
-                              {currentLab === lab.number ? 'Working' : 'Start'}
-                            </Button>
-                            {!completedLabs.includes(lab.number) && (
+                        <div className="border-t">
+                          {/* Section List */}
+                          <div className="py-1">
+                            {getLabSections(lab.number).map((section) => {
+                              const progress = sectionProgress[section.id]
+                              const isCompleted = progress?.completed
+                              const isCurrent = currentSection === section.id
+                              const isLocked = !isCompleted && !isCurrent &&
+                                section.order > 1 &&
+                                !sectionProgress[`${lab.number}.${section.order - 1}`]?.completed
+
+                              return (
+                                <button
+                                  key={section.id}
+                                  onClick={() => {
+                                    if (!isLocked) {
+                                      router.push(`/dashboard/vibecoding/labs/lab${lab.number}/sections/${section.id}`)
+                                    }
+                                  }}
+                                  disabled={isLocked}
+                                  className={`w-full flex items-center gap-2 px-3 py-1.5 text-xs transition-colors ${
+                                    isCurrent
+                                      ? 'bg-primary/10 text-primary'
+                                      : isLocked
+                                      ? 'text-muted-foreground/50 cursor-not-allowed'
+                                      : 'hover:bg-muted/50'
+                                  }`}
+                                  title={isLocked ? 'Complete previous section first' : ''}
+                                >
+                                  {/* Status Icon */}
+                                  <div className="shrink-0">
+                                    {isCompleted ? (
+                                      <Check className="w-3 h-3 text-green-500" />
+                                    ) : isCurrent ? (
+                                      <Play className="w-3 h-3 text-primary animate-pulse" />
+                                    ) : isLocked ? (
+                                      <Lock className="w-3 h-3" />
+                                    ) : (
+                                      <div className="w-3 h-3 rounded-full border border-current" />
+                                    )}
+                                  </div>
+
+                                  {/* Section Info */}
+                                  <div className="flex-1 min-w-0 text-left">
+                                    <div className="truncate">
+                                      <span className="font-medium">{section.id}</span> {section.title}
+                                    </div>
+                                  </div>
+
+                                  {/* Time Estimate */}
+                                  <div className="shrink-0 text-[10px] text-muted-foreground">
+                                    {section.estimatedMinutes}m
+                                  </div>
+                                </button>
+                              )
+                            })}
+                          </div>
+
+                          {/* Lab Actions */}
+                          <div className="px-2 pb-2 pt-1 border-t">
+                            <div className="flex gap-2">
                               <Button
                                 size="sm"
-                                variant="ghost"
-                                onClick={() => handleMarkComplete(lab.number)}
-                                disabled={isMarkingComplete}
-                                className="h-7 text-xs"
+                                onClick={() => handleStartLab(lab.number)}
+                                className="flex-1 h-7 text-xs"
+                                variant="outline"
                               >
-                                Done
+                                Overview
                               </Button>
-                            )}
+                              {!completedLabs.includes(lab.number) && (
+                                <Button
+                                  size="sm"
+                                  variant="ghost"
+                                  onClick={() => handleMarkComplete(lab.number)}
+                                  disabled={isMarkingComplete}
+                                  className="h-7 text-xs"
+                                >
+                                  Done
+                                </Button>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </CollapsibleContent>

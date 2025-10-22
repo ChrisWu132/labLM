@@ -250,6 +250,37 @@ export async function markTabVisited(
 }
 
 /**
+ * Get progress for all sections across all labs (for sidebar)
+ */
+export async function getAllSectionProgress(): Promise<{
+  success: boolean
+  data?: any[]
+  error?: string
+}> {
+  const supabase = await createServerSupabaseClient()
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    return { success: false, error: 'Not authenticated' }
+  }
+
+  const { data, error } = await supabase
+    .from('section_progress')
+    .select('*')
+    .eq('user_id', user.id)
+
+  if (error) {
+    console.error('Error fetching all section progress:', error)
+    return { success: false, error: error.message }
+  }
+
+  return { success: true, data: data || [] }
+}
+
+/**
  * Reset all progress for a lab (for testing/debugging)
  */
 export async function resetLabProgress(labNumber: number): Promise<void> {
