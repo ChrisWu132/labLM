@@ -198,9 +198,9 @@ export default function VibeCodingLayout({ children }: { children: React.ReactNo
                   variant={pathname === "/dashboard/vibecoding" ? "default" : "ghost"}
                   onClick={() => router.push("/dashboard/vibecoding")}
                   className="w-full h-12 p-0"
-                  title="Getting Started"
+                  title="Course Overview"
                 >
-                  <div className="text-lg">🏠</div>
+                  <div className="text-lg">≡</div>
                 </Button>
               ) : (
                 // Expanded view
@@ -210,8 +210,7 @@ export default function VibeCodingLayout({ children }: { children: React.ReactNo
                   onClick={() => router.push("/dashboard/vibecoding")}
                   className="w-full justify-start gap-2 h-10"
                 >
-                  <span className="text-base">🏠</span>
-                  <span className="font-medium text-xs">Getting Started</span>
+                  <span className="font-medium text-xs">Course Overview</span>
                 </Button>
               )}
             </div>
