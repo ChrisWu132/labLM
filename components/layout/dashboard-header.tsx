@@ -42,9 +42,6 @@ export function DashboardHeader({
             </div>
             <span className="font-semibold text-foreground hidden sm:inline">lab LM</span>
           </Link>
-          <span className="text-xs text-muted-foreground hidden md:inline border-l pl-3">
-            ✨ Check Lab 6 for the AI Workflow Builder!
-          </span>
         </div>
 
         {/* Right: Settings + Help + User menu */}

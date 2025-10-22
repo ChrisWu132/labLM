@@ -110,16 +110,13 @@ export function SectionNav({
                 </div>
               </div>
 
-              <div className="text-right">
-                <p className="text-sm text-gray-600">
-                  {section.estimatedMinutes} min
-                </p>
-                {isCurrent && (
+              {isCurrent && (
+                <div className="text-right">
                   <p className="text-xs font-medium text-[#3b999c]">
                     ← You are here
                   </p>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           )
 

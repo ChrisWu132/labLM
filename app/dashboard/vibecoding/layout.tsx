@@ -189,6 +189,33 @@ export default function VibeCodingLayout({ children }: { children: React.ReactNo
             <h2 className="text-xs font-semibold mb-2 text-muted-foreground uppercase tracking-wide px-2">Learning Labs</h2>
           )}
           <div className="space-y-2">
+            {/* Getting Started / Overview */}
+            <div>
+              {sidebarCollapsed ? (
+                // Collapsed view - icon only
+                <Button
+                  size="sm"
+                  variant={pathname === "/dashboard/vibecoding" ? "default" : "ghost"}
+                  onClick={() => router.push("/dashboard/vibecoding")}
+                  className="w-full h-12 p-0"
+                  title="Getting Started"
+                >
+                  <div className="text-lg">🏠</div>
+                </Button>
+              ) : (
+                // Expanded view
+                <Button
+                  size="sm"
+                  variant={pathname === "/dashboard/vibecoding" ? "default" : "ghost"}
+                  onClick={() => router.push("/dashboard/vibecoding")}
+                  className="w-full justify-start gap-2 h-10"
+                >
+                  <span className="text-base">🏠</span>
+                  <span className="font-medium text-xs">Getting Started</span>
+                </Button>
+              )}
+            </div>
+
             {labs.map((lab) => (
               <div key={lab.number}>
                 {sidebarCollapsed ? (
@@ -316,11 +343,6 @@ export default function VibeCodingLayout({ children }: { children: React.ReactNo
                                     <div className="truncate">
                                       <span className="font-medium">{section.id}</span> {section.title}
                                     </div>
-                                  </div>
-
-                                  {/* Time Estimate */}
-                                  <div className="shrink-0 text-[10px] text-muted-foreground">
-                                    {section.estimatedMinutes}m
                                   </div>
                                 </button>
                               )

@@ -7,7 +7,6 @@ export interface LabContent {
   metadata: {
     title: string
     description: string
-    estimatedMinutes: number
   }
 }
 
@@ -37,8 +36,7 @@ export async function getLabContent(labId: string): Promise<LabContent | null> {
       mdx: source,
       metadata: {
         title,
-        description,
-        estimatedMinutes: 15 // Default, can be enhanced later
+        description
       }
     }
   } catch (error) {

@@ -149,7 +149,7 @@ export type TabType = 'content' | 'interactive' | 'quiz'
 export interface SectionTab {
   id: string // 'learn' | 'tryIt' | 'quiz'
   type: TabType
-  label: string // Display label with emoji (e.g., '📖 Learn', '🎯 Try It')
+  label: string // Display label (e.g., 'Learn', 'Try It')
 }
 
 /**
@@ -160,7 +160,6 @@ export interface LabSection {
   labNumber: number // 1-6
   order: number // 1, 2, 3, ...
   title: string // e.g., "What is AI?"
-  estimatedMinutes: number // Estimated time to complete
   tabs: SectionTab[]
 }
 

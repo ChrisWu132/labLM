@@ -77,14 +77,11 @@ export function SectionLayout({
               {section.title}
             </h1>
           </div>
-          <div className="text-right">
-            <p className="text-sm text-gray-600">
-              {section.estimatedMinutes} min
-            </p>
-            {isCompleted && (
+          {isCompleted && (
+            <div className="text-right">
               <p className="text-sm font-medium text-green-600">✓ Completed</p>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
 

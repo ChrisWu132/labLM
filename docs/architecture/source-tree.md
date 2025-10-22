@@ -43,7 +43,15 @@ vibecodestudy/
 │
 ├── components/                   # Reusable components
 │   ├── features/                 # Feature-specific components
-│   │   ├── prompt-lab/           # ✨ NEW: Prompt Lab components
+│   │   ├── lab-sections/         # ✨ NEW: Section components (Phase 4)
+│   │   │   ├── LearnContent.tsx      # Wrapper for educational content
+│   │   │   ├── TryItContent.tsx      # Interactive exercise container
+│   │   │   ├── SectionLayout.tsx     # Section page layout with tabs
+│   │   │   ├── SectionNav.tsx        # Section list with progress
+│   │   │   ├── SectionProgress.tsx   # Progress bar component
+│   │   │   └── index.ts              # Barrel exports
+│   │   │
+│   │   ├── prompt-lab/           # Prompt Lab components
 │   │   │   ├── PromptEditor.tsx
 │   │   │   ├── LLMOutputDisplay.tsx
 │   │   │   ├── ExerciseCard.tsx
@@ -70,20 +78,39 @@ vibecodestudy/
 │       ├── Footer.tsx
 │       └── Sidebar.tsx
 │
-├── content/                      # ✨ NEW: MDX content files
-│   └── labs/                     # Lab articles
-│       ├── lab1.mdx              # Lab 1: 什么是 Prompt
-│       ├── lab2.mdx              # Lab 2: 如何给清晰指令
-│       ├── lab3.mdx              # Lab 3: 角色扮演技巧
-│       ├── lab4.mdx              # Lab 4: 引导思考
-│       └── lab5.mdx              # Lab 5: 综合应用挑战
+├── content/                      # ✨ Lab content (micro-sections)
+│   └── labs/                     # Lab sections (Learn/Try It/Quiz)
+│       ├── lab1/                 # Lab 1: Meet Your AI Friend (5 sections)
+│       │   ├── section-1-1/      # What is AI?
+│       │   │   ├── learn.tsx
+│       │   │   └── try-it.tsx
+│       │   ├── section-1-2/      # Your First Prompt
+│       │   ├── section-1-3/      # Why Different Answers?
+│       │   ├── section-1-4/      # Experiment Time
+│       │   └── section-1-5/      # Review & Quiz
+│       │       ├── learn.tsx
+│       │       └── quiz.tsx
+│       ├── lab2/                 # Lab 2: How AI Gets Smart (5 sections) ✅
+│       ├── lab3/                 # Lab 3: AI's Thinking Process (5 sections) ✅
+│       ├── lab4/                 # Lab 4: AI Capabilities & Limits (6 sections) ✅
+│       ├── lab5/                 # Lab 5: Responsible AI Use (6 sections) ✅
+│       └── lab6/                 # Lab 6: AI Workflow Builder (8 sections)
+│
+│   # Legacy monolithic files (backup only)
+│   ├── lab1.mdx (deprecated)
+│   ├── lab2.mdx (deprecated)
+│   └── lab3-5.mdx (deprecated)
 │
 ├── lib/                          # Utility libraries
 │   ├── actions/                  # Server Actions
-│   │   ├── prompt-lab.ts         # ✨ NEW: runPrompt(), checkSuccess()
-│   │   ├── coach.ts              # askCoach() (复用)
-│   │   ├── progress.ts           # updateModuleProgress() (复用)
-│   │   └── auth.ts               # Authentication helpers (复用)
+│   │   ├── section-progress.ts   # ✨ NEW (Phase 4): Section progress tracking
+│   │   ├── prompt-lab.ts         # runPrompt(), checkSuccess()
+│   │   ├── coach.ts              # askCoach() (reused)
+│   │   ├── progress.ts           # updateModuleProgress() (reused)
+│   │   └── auth.ts               # Authentication helpers (reused)
+│   │
+│   ├── constants/                # ✨ NEW: Configuration constants
+│   │   └── lab-sections.ts       # Lab section definitions (35 sections)
 │   │
 │   ├── prompt-lab/               # ✨ NEW: Prompt Lab utilities
 │   │   ├── success-checker.ts    # 成功标准检查
@@ -243,5 +270,31 @@ import type { PromptLabProgress } from '@/types/prompt-lab'
 
 ---
 
-**Last Updated**: 2025-10-16
-**Status**: Active (Post-refactor)
+---
+
+## Recent Updates (Phase 4 - January 2025)
+
+### Micro-Sections Architecture
+
+**What Changed:**
+- Refactored Labs 2-5 into 22 micro-sections (5-7 min each)
+- Created 44 new TypeScript files (learn.tsx, try-it.tsx, quiz.tsx)
+- New `section_progress` table for granular tracking
+- New components in `lab-sections/` directory
+- New configuration system in `lib/constants/lab-sections.ts`
+- New server actions in `lib/actions/section-progress.ts`
+
+**Benefits:**
+- Better attention span alignment (middle school students)
+- Clear Learn/Practice separation
+- Progressive unlocking
+- Easier to pause and resume
+- More granular progress tracking
+
+**Status:** ✅ Phase 4 Complete - Build successful, production ready
+
+---
+
+**Last Updated**: 2025-01-22 (Phase 4 completion)
+**Status**: Active - Reflects current production architecture
+**Next Update**: After Lab 6 refactoring

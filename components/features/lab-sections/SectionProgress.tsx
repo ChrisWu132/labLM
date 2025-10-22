@@ -2,7 +2,7 @@
  * SectionProgress Component
  *
  * Displays progress bar and statistics for a lab's sections.
- * Shows completion percentage and remaining time estimate.
+ * Shows completion percentage.
  */
 
 import type { LabSection, SectionProgress as SectionProgressType } from '@/types/prompt-lab'
@@ -27,14 +27,7 @@ export function SectionProgress({
   const percentComplete =
     totalSections > 0 ? Math.round((completedSections / totalSections) * 100) : 0
 
-  // Calculate remaining time
-  const remainingSections = sections.filter(
-    (s) => sectionProgress[s.id]?.status !== 'completed'
-  )
-  const remainingMinutes = remainingSections.reduce(
-    (total, s) => total + s.estimatedMinutes,
-    0
-  )
+  const isLabComplete = completedSections === totalSections
 
   return (
     <div className="w-full rounded-lg border-2 border-gray-200 bg-white p-4 shadow-sm">
@@ -60,12 +53,7 @@ export function SectionProgress({
         <span className="font-medium text-[#3b999c]">
           {percentComplete}% complete
         </span>
-        {remainingMinutes > 0 && (
-          <span className="text-gray-600">
-            ~{remainingMinutes} min remaining
-          </span>
-        )}
-        {remainingMinutes === 0 && (
+        {isLabComplete && (
           <span className="font-medium text-green-600">✓ Lab Complete!</span>
         )}
       </div>
