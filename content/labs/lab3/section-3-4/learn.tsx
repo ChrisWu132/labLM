@@ -51,7 +51,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          💡 Key Insight
+          Key Insight
         </p>
         <p className="text-gray-700">
           The more specific you are, the more tailored the response! Advanced personas combine multiple traits for maximum control.
@@ -115,19 +115,19 @@ export default function Learn() {
 
         <div className="space-y-2 text-sm">
           <p className="text-gray-700">
-            <strong className="text-green-700">✓ Core Role:</strong> Physics teacher
+            <strong className="text-green-700"> Core Role:</strong> Physics teacher
           </p>
           <p className="text-gray-700">
-            <strong className="text-green-700">✓ Personality:</strong> Enthusiastic, encouraging
+            <strong className="text-green-700"> Personality:</strong> Enthusiastic, encouraging
           </p>
           <p className="text-gray-700">
-            <strong className="text-green-700">✓ Style:</strong> Uses superhero analogies, adds fun facts
+            <strong className="text-green-700"> Style:</strong> Uses superhero analogies, adds fun facts
           </p>
           <p className="text-gray-700">
-            <strong className="text-green-700">✓ Unique Trait:</strong> Encourages "what if" questions
+            <strong className="text-green-700"> Unique Trait:</strong> Encourages "what if" questions
           </p>
           <p className="text-gray-700">
-            <strong className="text-green-700">✓ Philosophy:</strong> Physics should be exciting, not intimidating
+            <strong className="text-green-700"> Philosophy:</strong> Physics should be exciting, not intimidating
           </p>
         </div>
       </div>
@@ -162,7 +162,7 @@ export default function Learn() {
 
       <div className="grid md:grid-cols-2 gap-4 mb-8">
         <div className="bg-green-50 border-2 border-green-400 rounded-lg p-4">
-          <h4 className="font-bold text-green-700 mb-3">✅ Do This:</h4>
+          <h4 className="font-bold text-green-700 mb-3"> Do This:</h4>
           <ul className="list-disc pl-5 space-y-2 text-sm text-gray-700">
             <li>Be specific and detailed</li>
             <li>Combine multiple personality traits</li>
@@ -173,7 +173,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-red-50 border-2 border-red-400 rounded-lg p-4">
-          <h4 className="font-bold text-red-700 mb-3">❌ Avoid This:</h4>
+          <h4 className="font-bold text-red-700 mb-3"> Avoid This:</h4>
           <ul className="list-disc pl-5 space-y-2 text-sm text-gray-700">
             <li>Being too vague ("helpful person")</li>
             <li>Conflicting traits ("patient but rushed")</li>
@@ -186,7 +186,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-6">
         <h4 className="font-bold text-blue-800 mb-3">
-          🎯 Ready to Create Your Custom AI Assistant!
+          Ready to Create Your Custom AI Assistant!
         </h4>
         <p className="text-gray-700">
           Now it's your turn to design a detailed persona tailored to your needs. Head to the Try It tab to build your custom AI assistant!

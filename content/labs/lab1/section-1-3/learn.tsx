@@ -71,7 +71,7 @@ export default function Learn() {
 
       <div className="space-y-4 mb-8">
         <div className="bg-white border-l-4 border-[#3b999c] p-5 rounded-r-lg shadow-sm">
-          <h4 className="font-bold text-[#164055] mb-2">✅ More Natural</h4>
+          <h4 className="font-bold text-[#164055] mb-2"> More Natural</h4>
           <p className="text-gray-700">Responses feel more human-like, not robotic</p>
           <p className="text-sm text-gray-500 mt-1 italic">
             Example: A human wouldn't say "blue" every single time!
@@ -79,7 +79,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-white border-l-4 border-[#3b999c] p-5 rounded-r-lg shadow-sm">
-          <h4 className="font-bold text-[#164055] mb-2">✅ More Creative</h4>
+          <h4 className="font-bold text-[#164055] mb-2"> More Creative</h4>
           <p className="text-gray-700">Good for stories, poems, and brainstorming</p>
           <p className="text-sm text-gray-500 mt-1 italic">
             Example: Get 5 different story ideas from the same prompt
@@ -87,7 +87,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-white border-l-4 border-[#3b999c] p-5 rounded-r-lg shadow-sm">
-          <h4 className="font-bold text-[#164055] mb-2">✅ More Flexible</h4>
+          <h4 className="font-bold text-[#164055] mb-2"> More Flexible</h4>
           <p className="text-gray-700">Can explore multiple ways to phrase an answer</p>
           <p className="text-sm text-gray-500 mt-1 italic">
             Example: Different teaching styles for different learners
@@ -97,7 +97,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          💡 Key Insight
+          Key Insight
         </p>
         <p className="text-gray-700">
           This is why you should run important prompts multiple times! You might get an even better answer the second or third try.
@@ -121,7 +121,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
         <p className="text-sm font-semibold text-blue-700 mb-2">
-          ⚙️ Technical Note
+          Technical Note
         </p>
         <p className="text-gray-700">
           In AI settings, you can control the "temperature" (amount of randomness). Higher temperature = more creative and varied. Lower temperature = more focused and consistent. Most tools use a balanced default.

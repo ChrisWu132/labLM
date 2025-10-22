@@ -59,7 +59,7 @@ export default function TryIt() {
         {/* Examples */}
         <div className="bg-red-50 border-l-4 border-red-400 p-6 rounded-lg mb-8">
           <p className="text-sm font-semibold text-red-700 mb-2">
-            ❌ Bad Example - Too Vague
+            Bad Example - Too Vague
           </p>
           <p className="text-lg text-gray-800 font-mono">
             "Tell me about cats."
@@ -71,7 +71,7 @@ export default function TryIt() {
 
         <div className="bg-green-50 border-l-4 border-green-400 p-6 rounded-lg mb-8">
           <p className="text-sm font-semibold text-green-700 mb-2">
-            ✅ Good Example - Clear & Specific
+            Good Example - Clear & Specific
           </p>
           <p className="text-lg text-gray-800 font-mono mb-3">
             "Explain to a 10-year-old why cats make good pets. Include 3 specific reasons and keep it under 100 words."
@@ -113,7 +113,7 @@ export default function TryIt() {
 
           {attemptCount > 0 && (
             <p className="mt-4 text-sm text-[#3b999c]">
-              Attempts: {attemptCount} {attemptCount >= 2 && '✓'}
+              Attempts: {attemptCount} {attemptCount >= 2 && ''}
             </p>
           )}
         </div>
@@ -138,7 +138,7 @@ export default function TryIt() {
         {attemptCount >= 1 && (
           <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6">
             <h4 className="font-bold text-blue-900 mb-3">
-              🤔 Compare your results
+              Compare your results
             </h4>
             <div className="text-blue-800 space-y-2">
               <p><strong>Think about:</strong></p>
@@ -150,7 +150,7 @@ export default function TryIt() {
               </ul>
               {attemptCount >= 2 && (
                 <p className="mt-4 font-semibold text-green-700">
-                  ✅ Great! Try experimenting with different approaches below!
+                  Great! Try experimenting with different approaches below!
                 </p>
               )}
             </div>
@@ -160,7 +160,7 @@ export default function TryIt() {
         {/* Example Improved Prompts */}
         <div className="bg-[rgba(59,153,156,0.05)] border-2 border-[#3b999c] rounded-xl p-6">
           <h4 className="text-lg font-bold text-[#3b999c] mb-3">
-            📝 Example Improved Prompts
+            Example Improved Prompts
           </h4>
           <p className="text-gray-700 mb-4">
             Here are some examples of how you could improve the prompt:

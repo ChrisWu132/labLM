@@ -40,7 +40,7 @@ export default function Learn() {
 
         <div className="space-y-4">
           <div>
-            <p className="font-semibold text-red-700 mb-2">❌ Single Large Prompt (Overwhelming):</p>
+            <p className="font-semibold text-red-700 mb-2"> Single Large Prompt (Overwhelming):</p>
             <div className="bg-red-50 border border-red-300 rounded p-4 text-sm text-gray-700">
               "Write a complete short story with characters, plot, setting, conflict, and resolution. Make it 500 words."
             </div>
@@ -48,7 +48,7 @@ export default function Learn() {
           </div>
 
           <div>
-            <p className="font-semibold text-green-700 mb-2">✅ Multi-Step Workflow (Manageable):</p>
+            <p className="font-semibold text-green-700 mb-2"> Multi-Step Workflow (Manageable):</p>
             <div className="space-y-2">
               <div className="bg-green-50 border border-green-300 rounded p-3 text-sm">
                 <p className="font-semibold text-green-800 mb-1">Step 1: Brainstorm</p>
@@ -177,7 +177,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
         <p className="text-sm font-semibold text-blue-700 mb-2">
-          💡 Pro Tip
+          Pro Tip
         </p>
         <p className="text-gray-700">
           Think of prompt chaining like building with LEGO bricks. Each prompt is a building block. You can combine them in different ways to create something complex and amazing!

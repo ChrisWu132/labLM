@@ -161,10 +161,10 @@ export default function Quiz() {
                   />
                   <span className="text-gray-700">{option.text}</span>
                   {showResults && option.id === q.correct && (
-                    <span className="ml-auto text-green-700 font-semibold">✓ Correct</span>
+                    <span className="ml-auto text-green-700 font-semibold"> Correct</span>
                   )}
                   {showResults && answers[q.id] === option.id && option.id !== q.correct && (
-                    <span className="ml-auto text-red-700 font-semibold">✗ Incorrect</span>
+                    <span className="ml-auto text-red-700 font-semibold"> Incorrect</span>
                   )}
                 </label>
               ))}
@@ -197,7 +197,7 @@ export default function Quiz() {
 
           {score === 8 && (
             <div>
-              <p className="text-green-800 font-semibold mb-2">🎉 Perfect Score!</p>
+              <p className="text-green-800 font-semibold mb-2"> Perfect Score!</p>
               <p className="text-green-700">
                 Outstanding! You've mastered all concepts from Lab 3. You're ready to move on to Lab 4 where you'll learn about AI's capabilities and limitations!
               </p>
@@ -206,7 +206,7 @@ export default function Quiz() {
 
           {score === 7 && (
             <div>
-              <p className="text-green-800 font-semibold mb-2">✅ Excellent Work!</p>
+              <p className="text-green-800 font-semibold mb-2"> Excellent Work!</p>
               <p className="text-green-700">
                 You have a strong understanding of Lab 3 concepts. Review the question you missed, then proceed to Lab 4!
               </p>
@@ -215,7 +215,7 @@ export default function Quiz() {
 
           {score >= 5 && score < 7 && (
             <div>
-              <p className="text-yellow-800 font-semibold mb-2">👍 Good Effort!</p>
+              <p className="text-yellow-800 font-semibold mb-2"> Good Effort!</p>
               <p className="text-yellow-700">
                 You understand most concepts. Review the sections where you missed questions before moving to Lab 4 to ensure you have a solid foundation.
               </p>
@@ -224,7 +224,7 @@ export default function Quiz() {
 
           {score < 5 && (
             <div>
-              <p className="text-red-800 font-semibold mb-2">📚 Review Recommended</p>
+              <p className="text-red-800 font-semibold mb-2"> Review Recommended</p>
               <p className="text-red-700">
                 Consider reviewing Lab 3 sections before moving forward. Make sure you understand tokens, context, and role-playing!
               </p>

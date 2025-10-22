@@ -114,7 +114,7 @@ export default function TryIt() {
         {step1Output && !step2Output && (
           <div className="rounded-lg border-2 border-yellow-400 bg-yellow-50 p-6">
             <h4 className="text-lg font-semibold text-yellow-700 mb-3">
-              😩 Now comes the tedious part...
+              Now comes the tedious part...
             </h4>
             <ol className="list-decimal pl-6 space-y-2 text-gray-700">
               <li>Read the first idea from above</li>
@@ -122,7 +122,7 @@ export default function TryIt() {
               <li>Submit Step 2</li>
             </ol>
             <p className="mt-3 text-sm text-yellow-600">
-              Imagine doing this 10 times for a complex workflow! 😫
+              Imagine doing this 10 times for a complex workflow!
             </p>
           </div>
         )}
@@ -180,7 +180,7 @@ export default function TryIt() {
         {step2Output && (
           <div className="rounded-lg border-2 border-green-500 bg-green-50 p-6">
             <h4 className="text-lg font-semibold text-green-700 mb-3">
-              ✅ You've Completed the Manual Process!
+              You've Completed the Manual Process!
             </h4>
             <p className="text-gray-700 mb-3">
               You just experienced what it's like to manually chain two AI prompts together. Notice how you had to:
@@ -192,7 +192,7 @@ export default function TryIt() {
               <li>Submit Step 2 manually</li>
             </ul>
             <p className="font-semibold text-green-700">
-              💡 With workflows, all of this happens automatically! Let's learn how in the next sections.
+              With workflows, all of this happens automatically! Let's learn how in the next sections.
             </p>
           </div>
         )}

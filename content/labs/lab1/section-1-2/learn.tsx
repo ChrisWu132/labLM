@@ -33,7 +33,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          💡 Key Insight
+          Key Insight
         </p>
         <p className="text-gray-700">
           The better your prompt, the better the response! Clear communication = better results.
@@ -61,12 +61,12 @@ export default function Learn() {
             <tr className="border-t border-gray-200">
               <td className="px-6 py-4 font-semibold text-[#164055]">Vague</td>
               <td className="px-6 py-4 text-gray-700">"Tell me about dogs"</td>
-              <td className="px-6 py-4 text-gray-700">❌ Generic, unfocused</td>
+              <td className="px-6 py-4 text-gray-700"> Generic, unfocused</td>
             </tr>
             <tr className="border-t border-gray-200 bg-green-50">
               <td className="px-6 py-4 font-semibold text-[#164055]">Specific</td>
               <td className="px-6 py-4 text-gray-700">"Explain to a 10-year-old why dogs are good pets. Include 3 reasons."</td>
-              <td className="px-6 py-4 text-gray-700">✅ Focused, helpful</td>
+              <td className="px-6 py-4 text-gray-700"> Focused, helpful</td>
             </tr>
           </tbody>
         </table>
@@ -108,7 +108,7 @@ export default function Learn() {
 
       <div className="bg-[rgba(59,153,156,0.05)] border-2 border-[#3b999c] rounded-xl p-6">
         <h4 className="text-lg font-bold text-[#3b999c] mb-3">
-          🎯 Ready to Practice!
+          Ready to Practice!
         </h4>
         <p className="text-gray-700">
           Now that you know what makes a good prompt, let's try writing some! Head to the Try It tab to practice.

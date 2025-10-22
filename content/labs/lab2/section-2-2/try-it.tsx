@@ -93,7 +93,7 @@ export default function TryIt() {
 
           {attemptCount > 0 && (
             <p className="mt-4 text-sm text-[#3b999c]">
-              Topics tested: {attemptCount} {attemptCount >= 3 && '✓'}
+              Topics tested: {attemptCount} {attemptCount >= 3 && ''}
             </p>
           )}
         </div>
@@ -118,7 +118,7 @@ export default function TryIt() {
         {attemptCount >= 2 && (
           <div className="rounded-lg border-2 border-yellow-400 bg-yellow-50 p-6">
             <h4 className="mb-3 text-lg font-semibold text-yellow-700">
-              🤔 What differences did you notice?
+              What differences did you notice?
             </h4>
 
             <ul className="list-disc space-y-2 pl-6 text-gray-700">
@@ -130,7 +130,7 @@ export default function TryIt() {
 
             {attemptCount >= 3 && (
               <p className="mt-4 font-semibold text-green-700">
-                ✓ Great observations! One more test will complete your analysis!
+                Great observations! One more test will complete your analysis!
               </p>
             )}
           </div>
@@ -140,7 +140,7 @@ export default function TryIt() {
         {attemptCount >= 3 && (
           <div className="rounded-lg border-2 border-green-500 bg-green-50 p-6">
             <h4 className="mb-3 text-lg font-semibold text-green-700">
-              💡 What You Learned
+              What You Learned
             </h4>
 
             <p className="mb-3 text-gray-700">
@@ -152,9 +152,9 @@ export default function TryIt() {
                 Practical Application:
               </p>
               <ul className="text-sm text-gray-600 space-y-1">
-                <li>✓ For popular topics → Trust AI's detailed explanations</li>
+                <li> For popular topics → Trust AI's detailed explanations</li>
                 <li>~ For specialized topics → Check a second source</li>
-                <li>✗ For very obscure topics → Verify with expert sources</li>
+                <li> For very obscure topics → Verify with expert sources</li>
               </ul>
             </div>
 

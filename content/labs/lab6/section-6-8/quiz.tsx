@@ -112,11 +112,11 @@ export default function Quiz() {
   const percentage = Math.round((score / questions.length) * 100)
 
   const getScoreMessage = () => {
-    if (percentage === 100) return "🎉 Perfect! You're a workflow master!"
-    if (percentage >= 85) return "🌟 Excellent! You've mastered workflows!"
-    if (percentage >= 70) return "✨ Great job! You understand workflows well!"
-    if (percentage >= 50) return "👍 Good start! Review a few concepts and try again."
-    return "📚 Keep learning! Review the materials and retake the quiz."
+    if (percentage === 100) return " Perfect! You're a workflow master!"
+    if (percentage >= 85) return " Excellent! You've mastered workflows!"
+    if (percentage >= 70) return " Great job! You understand workflows well!"
+    if (percentage >= 50) return " Good start! Review a few concepts and try again."
+    return " Keep learning! Review the materials and retake the quiz."
   }
 
   return (
@@ -165,10 +165,10 @@ export default function Quiz() {
                   />
                   <span className="text-gray-700">{option.text}</span>
                   {showResults && option.id === q.correct && (
-                    <span className="ml-auto text-green-700 font-semibold">✓ Correct</span>
+                    <span className="ml-auto text-green-700 font-semibold"> Correct</span>
                   )}
                   {showResults && answers[q.id] === option.id && option.id !== q.correct && (
-                    <span className="ml-auto text-red-700 font-semibold">✗ Incorrect</span>
+                    <span className="ml-auto text-red-700 font-semibold"> Incorrect</span>
                   )}
                 </label>
               ))}
@@ -229,7 +229,7 @@ export default function Quiz() {
           {percentage === 100 && (
             <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-400 rounded-xl p-6">
               <h3 className="text-xl font-bold text-[#164055] mb-3">
-                🏆 Congratulations on Completing Lab 6!
+                Congratulations on Completing Lab 6!
               </h3>
               <p className="text-gray-700 mb-3">
                 You've successfully mastered AI workflows - a powerful skill that will serve you in countless tasks. You can now:

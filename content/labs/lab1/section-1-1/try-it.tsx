@@ -68,7 +68,7 @@ export default function TryIt() {
 
           {attemptCount > 0 && (
             <p className="mt-4 text-sm text-[#3b999c]">
-              Attempts: {attemptCount} {attemptCount >= 3 && '✓'}
+              Attempts: {attemptCount} {attemptCount >= 3 && ''}
             </p>
           )}
         </div>
@@ -93,7 +93,7 @@ export default function TryIt() {
         {attemptCount >= 2 && (
           <div className="rounded-lg border-2 border-yellow-400 bg-yellow-50 p-6">
             <h4 className="mb-3 text-lg font-semibold text-yellow-700">
-              🤔 What did you notice?
+              What did you notice?
             </h4>
 
             <ul className="list-disc space-y-2 pl-6 text-gray-700">
@@ -104,7 +104,7 @@ export default function TryIt() {
 
             {attemptCount >= 3 && (
               <p className="mt-4 font-semibold text-green-700">
-                ✓ Try running it one more time to see the pattern!
+                Try running it one more time to see the pattern!
               </p>
             )}
           </div>
@@ -114,7 +114,7 @@ export default function TryIt() {
         {attemptCount >= 3 && (
           <div className="rounded-lg border-2 border-green-500 bg-green-50 p-6">
             <h4 className="mb-3 text-lg font-semibold text-green-700">
-              💡 What You Learned
+              What You Learned
             </h4>
 
             <p className="mb-3 text-gray-700">

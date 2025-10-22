@@ -74,7 +74,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-blue-700 mb-2">
-          ⚠️ Important
+          Important
         </p>
         <p className="text-gray-700">
           The AI doesn't memorize the text word-for-word. It learns <strong>patterns</strong> and <strong>relationships</strong> between concepts.
@@ -88,34 +88,34 @@ export default function Learn() {
       <div className="grid md:grid-cols-2 gap-6 mb-8">
         <div className="bg-green-50 border-2 border-green-500 rounded-xl p-6">
           <h4 className="text-lg font-bold text-green-700 mb-4">
-            ✅ LLMs Have Knowledge From:
+            LLMs Have Knowledge From:
           </h4>
           <ul className="space-y-2 text-gray-700">
-            <li>✅ General knowledge (history, science, culture)</li>
-            <li>✅ Common sense and everyday facts</li>
-            <li>✅ Programming languages and code patterns</li>
-            <li>✅ Multiple languages (English, Spanish, Chinese, etc.)</li>
-            <li>✅ Math concepts and problem-solving methods</li>
-            <li>✅ Writing styles and formats</li>
+            <li> General knowledge (history, science, culture)</li>
+            <li> Common sense and everyday facts</li>
+            <li> Programming languages and code patterns</li>
+            <li> Multiple languages (English, Spanish, Chinese, etc.)</li>
+            <li> Math concepts and problem-solving methods</li>
+            <li> Writing styles and formats</li>
           </ul>
         </div>
 
         <div className="bg-red-50 border-2 border-red-500 rounded-xl p-6">
           <h4 className="text-lg font-bold text-red-700 mb-4">
-            ❌ But They DON'T Have:
+            But They DON'T Have:
           </h4>
           <ul className="space-y-2 text-gray-700">
-            <li>❌ Real-time internet access (most can't browse the web)</li>
-            <li>❌ Your personal information (unless you tell them)</li>
-            <li>❌ Events after their "knowledge cutoff date"</li>
-            <li>❌ Information about private/unpublished content</li>
+            <li> Real-time internet access (most can't browse the web)</li>
+            <li> Your personal information (unless you tell them)</li>
+            <li> Events after their "knowledge cutoff date"</li>
+            <li> Information about private/unpublished content</li>
           </ul>
         </div>
       </div>
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          💡 Key Insight
+          Key Insight
         </p>
         <p className="text-gray-700">
           An LLM's knowledge is like a snapshot in time - it knows everything up to its training cutoff date, but nothing after that. Think of it as an extremely well-read friend who stopped reading the news a few months ago.

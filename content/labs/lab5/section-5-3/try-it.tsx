@@ -115,12 +115,12 @@ For each scenario:
         {output && (
           <div className="rounded-lg border-2 border-purple-500 bg-purple-50 p-6">
             <h4 className="mb-3 text-lg font-semibold text-purple-700">
-              🔒 Privacy Analysis Answer Key
+              Privacy Analysis Answer Key
             </h4>
 
             <div className="space-y-4">
               <div className="bg-white border border-red-300 rounded-lg p-4">
-                <p className="font-semibold text-red-700 mb-2">❌ UNSAFE: Emma (Scenario 1)</p>
+                <p className="font-semibold text-red-700 mb-2"> UNSAFE: Emma (Scenario 1)</p>
                 <p className="text-sm text-gray-700 mb-2">
                   <strong>Problems:</strong> Full name, complete address, specific age
                 </p>
@@ -130,14 +130,14 @@ For each scenario:
               </div>
 
               <div className="bg-white border border-green-300 rounded-lg p-4">
-                <p className="font-semibold text-green-700 mb-2">✅ SAFE: Jake (Scenario 2)</p>
+                <p className="font-semibold text-green-700 mb-2"> SAFE: Jake (Scenario 2)</p>
                 <p className="text-sm text-gray-700">
                   <strong>Why it's safe:</strong> Only shares general grade level and subject, no personal identifying information
                 </p>
               </div>
 
               <div className="bg-white border border-red-300 rounded-lg p-4">
-                <p className="font-semibold text-red-700 mb-2">❌ UNSAFE: Sofia (Scenario 3)</p>
+                <p className="font-semibold text-red-700 mb-2"> UNSAFE: Sofia (Scenario 3)</p>
                 <p className="text-sm text-gray-700 mb-2">
                   <strong>Problems:</strong> School name, teacher info, and PASSWORD (never share!)
                 </p>
@@ -147,14 +147,14 @@ For each scenario:
               </div>
 
               <div className="bg-white border border-green-300 rounded-lg p-4">
-                <p className="font-semibold text-green-700 mb-2">✅ SAFE: Marcus (Scenario 4)</p>
+                <p className="font-semibold text-green-700 mb-2"> SAFE: Marcus (Scenario 4)</p>
                 <p className="text-sm text-gray-700">
                   <strong>Why it's safe:</strong> Only shares skill level and learning goal, no personal information
                 </p>
               </div>
 
               <div className="bg-white border border-red-300 rounded-lg p-4">
-                <p className="font-semibold text-red-700 mb-2">❌ UNSAFE: Lily (Scenario 5)</p>
+                <p className="font-semibold text-red-700 mb-2"> UNSAFE: Lily (Scenario 5)</p>
                 <p className="text-sm text-gray-700 mb-2">
                   <strong>Problems:</strong> Specific location information and time when home alone (safety risk!)
                 </p>
@@ -169,7 +169,7 @@ For each scenario:
         {/* Privacy Checklist */}
         <div className="rounded-lg border-2 border-yellow-400 bg-yellow-50 p-6">
           <h4 className="mb-3 text-lg font-semibold text-yellow-700">
-            ✓ Privacy Protection Checklist
+            Privacy Protection Checklist
           </h4>
 
           <p className="text-gray-700 mb-3">
@@ -209,7 +209,7 @@ For each scenario:
         {/* Privacy Tips */}
         <div className="rounded-lg border-2 border-blue-400 bg-blue-50 p-6">
           <h4 className="mb-3 text-lg font-semibold text-blue-700">
-            💡 Quick Privacy Tips
+            Quick Privacy Tips
           </h4>
 
           <div className="space-y-2 text-gray-700">

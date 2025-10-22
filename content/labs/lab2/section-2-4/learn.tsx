@@ -71,7 +71,7 @@ export default function Learn() {
       <div className="grid md:grid-cols-2 gap-6 mb-8">
         <div className="bg-red-50 border-2 border-red-300 rounded-xl p-6">
           <h4 className="text-lg font-bold text-red-700 mb-3">
-            ❌ Vague Prompt
+            Vague Prompt
           </h4>
           <p className="text-sm text-gray-700 font-mono bg-white p-3 rounded border border-red-200 mb-3">
             "Tell me about programming."
@@ -83,7 +83,7 @@ export default function Learn() {
 
         <div className="bg-green-50 border-2 border-green-300 rounded-xl p-6">
           <h4 className="text-lg font-bold text-green-700 mb-3">
-            ✅ Specific Prompt
+            Specific Prompt
           </h4>
           <p className="text-sm text-gray-700 font-mono bg-white p-3 rounded border border-green-200 mb-3">
             "Explain to a 12-year-old beginner what programming is and why it's useful. Include 2 simple examples of things they could build."
@@ -137,7 +137,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          💡 The Power of Specificity
+          The Power of Specificity
         </p>
         <p className="text-gray-700">
           Based on what we learned about training patterns, the AI responds best to <strong>specific, detailed prompts</strong>. Why? Because specific prompts match clearer patterns in the training data, leading to more accurate and useful responses.
@@ -146,7 +146,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-6">
         <h4 className="font-bold text-blue-800 mb-3">
-          📝 Quick Formula for Better Prompts
+          Quick Formula for Better Prompts
         </h4>
 
         <div className="bg-white p-4 rounded border border-blue-200 font-mono text-sm">

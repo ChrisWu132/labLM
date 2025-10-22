@@ -88,7 +88,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mt-8 mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          💡 What's Happening?
+          What's Happening?
         </p>
         <p className="text-gray-700">
           When you connect nodes, the second node can automatically access the first node's output. No copying and pasting needed! The workflow builder handles the data flow for you.
@@ -97,7 +97,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
         <p className="text-sm font-semibold text-blue-700 mb-2">
-          🎯 Ready to Build?
+          Ready to Build?
         </p>
         <p className="text-gray-700">
           Head to the Try It tab and follow these steps to create your first working workflow! Take your time and experiment - you can't break anything.

@@ -70,7 +70,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          💡 Key Insight
+          Key Insight
         </p>
         <p className="text-gray-700">
           An LLM doesn't search the internet or calculate. It <strong>predicts</strong> what words should come next based on patterns it learned during training.
@@ -110,7 +110,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
         <p className="text-sm font-semibold text-blue-700 mb-2">
-          ⚠️ Important
+          Important
         </p>
         <p className="text-gray-700">
           The AI isn't thinking or conscious. It's using statistical patterns to generate helpful text.

@@ -54,7 +54,7 @@ export default function TryIt() {
 
         <div className="bg-red-50 border-l-4 border-red-400 p-6 rounded-lg mb-8">
           <p className="text-sm font-semibold text-red-700 mb-2">
-            ⚠️ Purpose of This Exercise
+            Purpose of This Exercise
           </p>
           <p className="text-gray-700 text-sm">
             This exercise helps you recognize when AI might give unreliable answers. Always verify important information!
@@ -72,7 +72,7 @@ export default function TryIt() {
 
           <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-lg mb-6">
             <p className="text-sm font-semibold text-blue-700 mb-2">
-              💡 Try These:
+              Try These:
             </p>
             <ul className="text-sm text-gray-700 list-disc pl-5 space-y-1">
               <li><strong>Math:</strong> "If I buy 3 items at $12.47 each with 8% tax, what's the total?"</li>
@@ -92,7 +92,7 @@ export default function TryIt() {
 
           {attemptCount > 0 && (
             <p className="mt-4 text-sm text-[#3b999c]">
-              Attempts: {attemptCount} {attemptCount >= 2 && '✓'}
+              Attempts: {attemptCount} {attemptCount >= 2 && ''}
             </p>
           )}
         </div>
@@ -114,7 +114,7 @@ export default function TryIt() {
         {attemptCount >= 1 && (
           <div className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-6">
             <h4 className="font-bold text-yellow-900 mb-3">
-              🤔 Evaluate the Response
+              Evaluate the Response
             </h4>
             <ul className="list-disc pl-6 space-y-2 text-gray-700">
               <li>Did AI show uncertainty about current information?</li>
@@ -128,7 +128,7 @@ export default function TryIt() {
         {attemptCount >= 2 && (
           <div className="bg-green-50 border-2 border-green-500 rounded-xl p-6">
             <h4 className="text-lg font-bold text-green-700 mb-3">
-              🎯 Key Lessons
+              Key Lessons
             </h4>
             <ul className="list-disc pl-6 space-y-2 text-gray-700">
               <li><strong>Always verify</strong> important facts and calculations</li>

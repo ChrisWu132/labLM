@@ -161,10 +161,10 @@ export default function Quiz() {
                   />
                   <span className="text-gray-700">{option.text}</span>
                   {showResults && option.id === q.correct && (
-                    <span className="ml-auto text-green-700 font-semibold">✓ Correct</span>
+                    <span className="ml-auto text-green-700 font-semibold"> Correct</span>
                   )}
                   {showResults && answers[q.id] === option.id && option.id !== q.correct && (
-                    <span className="ml-auto text-red-700 font-semibold">✗ Incorrect</span>
+                    <span className="ml-auto text-red-700 font-semibold"> Incorrect</span>
                   )}
                 </label>
               ))}
@@ -209,31 +209,31 @@ export default function Quiz() {
 
           {score === 8 && (
             <div>
-              <p className="text-green-800 font-semibold mb-2">🎉 Perfect Score!</p>
+              <p className="text-green-800 font-semibold mb-2"> Perfect Score!</p>
               <p className="text-green-700 mb-4">
                 Outstanding! You have mastered all the key concepts of responsible AI use. You understand ethics, privacy, critical thinking, and best practices. You're ready to use AI confidently and responsibly!
               </p>
               <p className="text-green-800 font-semibold">
-                🌟 You've completed the entire LLM Learning Lab course! You're now an AI-literate learner ready to tackle Lab 6 (coming soon) or apply these skills in real-world situations.
+                You've completed the entire LLM Learning Lab course! You're now an AI-literate learner ready to tackle Lab 6 (coming soon) or apply these skills in real-world situations.
               </p>
             </div>
           )}
 
           {score === 7 && (
             <div>
-              <p className="text-green-800 font-semibold mb-2">✅ Excellent Work!</p>
+              <p className="text-green-800 font-semibold mb-2"> Excellent Work!</p>
               <p className="text-green-700 mb-4">
                 You have a strong understanding of responsible AI use! Review the question you missed to solidify your knowledge, but you're well-prepared to use AI ethically and effectively.
               </p>
               <p className="text-green-800">
-                You've successfully completed the LLM Learning Lab course! 🎓
+                You've successfully completed the LLM Learning Lab course!
               </p>
             </div>
           )}
 
           {score === 6 && (
             <div>
-              <p className="text-green-800 font-semibold mb-2">👍 Good Job!</p>
+              <p className="text-green-800 font-semibold mb-2"> Good Job!</p>
               <p className="text-green-700">
                 You understand most of the key concepts about responsible AI use. Review the sections where you missed questions to strengthen your understanding of ethics, privacy, or critical thinking.
               </p>
@@ -242,7 +242,7 @@ export default function Quiz() {
 
           {score === 5 && (
             <div>
-              <p className="text-yellow-800 font-semibold mb-2">📚 Solid Foundation</p>
+              <p className="text-yellow-800 font-semibold mb-2"> Solid Foundation</p>
               <p className="text-yellow-700">
                 You have a basic understanding but should review several key concepts. Focus on the areas where you missed questions—ethics, privacy protection, or critical thinking frameworks.
               </p>
@@ -251,7 +251,7 @@ export default function Quiz() {
 
           {score < 5 && (
             <div>
-              <p className="text-red-800 font-semibold mb-2">📖 Review Needed</p>
+              <p className="text-red-800 font-semibold mb-2"> Review Needed</p>
               <p className="text-red-700 mb-4">
                 It looks like you need to review Lab 5 more carefully. The concepts of ethics, privacy, and critical thinking are crucial for responsible AI use. Take time to go through each section again!
               </p>
@@ -262,7 +262,7 @@ export default function Quiz() {
           )}
 
           <div className="mt-6 p-4 bg-white rounded-lg border border-gray-300">
-            <p className="font-semibold text-gray-800 mb-2">📝 Key Takeaways to Remember:</p>
+            <p className="font-semibold text-gray-800 mb-2"> Key Takeaways to Remember:</p>
             <ul className="text-sm text-gray-700 space-y-1 list-disc pl-5">
               <li>Use AI to help you LEARN, not to AVOID learning</li>
               <li>Never share personal information, passwords, or location with AI</li>
@@ -288,43 +288,43 @@ export default function Quiz() {
       {showResults && score >= 6 && (
         <div className="mt-8 bg-[#164055] text-white rounded-xl p-8 text-center">
           <h3 className="text-2xl font-bold mb-4">
-            🎓 Congratulations on Completing the LLM Learning Lab!
+            Congratulations on Completing the LLM Learning Lab!
           </h3>
           <p className="text-lg mb-4">
             You've mastered all 5 labs and learned how to use AI effectively, ethically, and responsibly.
           </p>
           <div className="max-w-2xl mx-auto text-left space-y-2 mb-6">
             <p className="flex items-center gap-3">
-              <span className="text-2xl">✓</span>
+              <span className="text-2xl"></span>
               <span>Understanding AI and how LLMs work</span>
             </p>
             <p className="flex items-center gap-3">
-              <span className="text-2xl">✓</span>
+              <span className="text-2xl"></span>
               <span>Writing clear, effective prompts</span>
             </p>
             <p className="flex items-center gap-3">
-              <span className="text-2xl">✓</span>
+              <span className="text-2xl"></span>
               <span>Using context, constraints, and role-playing</span>
             </p>
             <p className="flex items-center gap-3">
-              <span className="text-2xl">✓</span>
+              <span className="text-2xl"></span>
               <span>Applying Chain-of-Thought reasoning</span>
             </p>
             <p className="flex items-center gap-3">
-              <span className="text-2xl">✓</span>
+              <span className="text-2xl"></span>
               <span>Using AI ethically and protecting your privacy</span>
             </p>
             <p className="flex items-center gap-3">
-              <span className="text-2xl">✓</span>
+              <span className="text-2xl"></span>
               <span>Thinking critically about AI outputs</span>
             </p>
             <p className="flex items-center gap-3">
-              <span className="text-2xl">✓</span>
+              <span className="text-2xl"></span>
               <span>Creating multi-step workflows</span>
             </p>
           </div>
           <p className="text-xl font-semibold text-[#f7aa37]">
-            You're now an AI-literate learner! 🌟
+            You're now an AI-literate learner!
           </p>
           <p className="mt-4 text-gray-200">
             Keep practicing these skills and stay tuned for Lab 6: AI Workflow Builder (coming soon)!

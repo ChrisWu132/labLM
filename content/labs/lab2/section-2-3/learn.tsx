@@ -31,8 +31,8 @@ export default function Learn() {
             If an LLM's cutoff is <strong>April 2024</strong>, it knows:
           </p>
           <ul className="list-disc pl-6 mt-2 space-y-1 text-sm text-gray-700">
-            <li>✅ Events before April 2024</li>
-            <li>❌ Events after April 2024</li>
+            <li> Events before April 2024</li>
+            <li> Events after April 2024</li>
           </ul>
         </div>
       </div>
@@ -44,7 +44,7 @@ export default function Learn() {
       <div className="space-y-4 mb-8">
         <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
           <h4 className="font-bold text-red-700 mb-2">
-            ❌ Don't Rely on AI For:
+            Don't Rely on AI For:
           </h4>
           <ul className="space-y-2 text-gray-700 text-sm">
             <li>• <strong>Real-time news</strong> or current events</li>
@@ -57,7 +57,7 @@ export default function Learn() {
 
         <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg">
           <h4 className="font-bold text-green-700 mb-2">
-            ✅ AI is Great For:
+            AI is Great For:
           </h4>
           <ul className="space-y-2 text-gray-700 text-sm">
             <li>• <strong>Historical events</strong> and established facts</li>
@@ -104,7 +104,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          💡 Pro Tip
+          Pro Tip
         </p>
         <p className="text-gray-700">
           Always check <strong>when</strong> information might matter. For a history essay about World War II? AI is perfect! For today's weather forecast? Use a weather app instead!
@@ -113,7 +113,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-6">
         <h4 className="font-bold text-blue-800 mb-3">
-          🎯 The Right Tool for the Right Job
+          The Right Tool for the Right Job
         </h4>
 
         <div className="space-y-3 text-sm">

@@ -77,7 +77,7 @@ export default function TryIt() {
                       : 'bg-gray-200 text-gray-500'
                   }`}
                 >
-                  {s < step ? '✓' : s}
+                  {s < step ? '' : s}
                 </div>
                 {s < 4 && (
                   <div
@@ -362,7 +362,7 @@ Keep it practical and actionable!`}
         {step === 4 && outputs[4] && (
           <div className="rounded-lg border-2 border-green-500 bg-green-50 p-6">
             <h4 className="mb-3 text-lg font-semibold text-green-700">
-              🎉 Workflow Complete!
+              Workflow Complete!
             </h4>
 
             <p className="text-gray-700 mb-4">
@@ -387,7 +387,7 @@ Keep it practical and actionable!`}
             </div>
 
             <p className="text-sm text-green-600 mt-4 font-semibold">
-              💡 This manual chaining gave you control at each step. In Lab 6, you'll learn how to automate workflows like this!
+              This manual chaining gave you control at each step. In Lab 6, you'll learn how to automate workflows like this!
             </p>
           </div>
         )}
@@ -395,7 +395,7 @@ Keep it practical and actionable!`}
         {/* Workflow Benefits */}
         <div className="rounded-lg border-2 border-blue-400 bg-blue-50 p-6">
           <h4 className="mb-3 text-lg font-semibold text-blue-700">
-            🎯 Why Multi-Step Workflows Work Better
+            Why Multi-Step Workflows Work Better
           </h4>
 
           <div className="space-y-3 text-gray-700">

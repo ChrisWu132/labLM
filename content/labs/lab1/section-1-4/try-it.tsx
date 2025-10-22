@@ -90,7 +90,7 @@ export default function TryIt() {
           </div>
 
           <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded mt-6">
-            <p className="text-sm font-semibold text-yellow-700 mb-1">💡 Checklist</p>
+            <p className="text-sm font-semibold text-yellow-700 mb-1"> Checklist</p>
             <p className="text-sm text-gray-700 mb-2">Make sure your prompt includes:</p>
             <ul className="list-disc pl-6 space-y-1 text-sm text-gray-700">
               <li><strong>Clear task:</strong> What should the AI do?</li>
@@ -104,7 +104,7 @@ export default function TryIt() {
         {/* Interactive Prompt Editor */}
         <div className="bg-white border-2 border-[#3b999c] rounded-xl p-6 mb-8">
           <h3 className="text-xl font-bold text-[#3b999c] mb-4">
-            🎨 Your Experiment Space
+            Your Experiment Space
           </h3>
 
           <p className="text-gray-700 mb-4">
@@ -121,7 +121,7 @@ export default function TryIt() {
 
           {attemptCount > 0 && (
             <p className="mt-4 text-sm text-[#3b999c]">
-              Experiments: {attemptCount} {attemptCount >= 3 && '✓'}
+              Experiments: {attemptCount} {attemptCount >= 3 && ''}
             </p>
           )}
         </div>
@@ -146,7 +146,7 @@ export default function TryIt() {
         {attemptCount === 1 && (
           <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6">
             <h4 className="font-bold text-blue-900 mb-3">
-              🎉 Great First Attempt!
+              Great First Attempt!
             </h4>
 
             <div className="text-blue-800 space-y-2 text-sm">
@@ -164,7 +164,7 @@ export default function TryIt() {
         {attemptCount === 2 && (
           <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6">
             <h4 className="font-bold text-blue-900 mb-3">
-              🎯 Nice Refinement!
+              Nice Refinement!
             </h4>
 
             <div className="text-blue-800 space-y-2 text-sm">
@@ -182,11 +182,11 @@ export default function TryIt() {
         {attemptCount >= 3 && (
           <div className="bg-green-50 border-2 border-green-500 rounded-xl p-6">
             <h4 className="font-bold text-green-900 mb-3">
-              ⭐ Excellent Practice!
+              Excellent Practice!
             </h4>
 
             <div className="text-green-800 space-y-2 text-sm">
-              <p className="font-semibold">🌟 You're mastering prompt writing!</p>
+              <p className="font-semibold"> You're mastering prompt writing!</p>
               <p>Key things you've learned:</p>
               <ul className="list-disc pl-6 space-y-1">
                 <li>Specific prompts get better results</li>
@@ -195,7 +195,7 @@ export default function TryIt() {
                 <li>Experimentation is how you learn!</li>
               </ul>
               <p className="mt-4 font-semibold">
-                ✅ Fantastic! You're ready to move on to the final review section.
+                Fantastic! You're ready to move on to the final review section.
               </p>
             </div>
           </div>
@@ -203,7 +203,7 @@ export default function TryIt() {
 
         {/* Bonus Challenge */}
         <div className="bg-gray-50 border-2 border-gray-300 rounded-xl p-6">
-          <h4 className="font-bold text-gray-800 mb-3">🔍 Bonus Challenge (Optional)</h4>
+          <h4 className="font-bold text-gray-800 mb-3"> Bonus Challenge (Optional)</h4>
           <p className="text-gray-700 mb-3">
             Try the SAME task with both a vague prompt and a specific prompt. Compare the results! This helps you see firsthand why specificity matters.
           </p>

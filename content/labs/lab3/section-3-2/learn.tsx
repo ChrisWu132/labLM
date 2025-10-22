@@ -65,7 +65,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          💡 Key Insight
+          Key Insight
         </p>
         <p className="text-gray-700">
           Same structure ("said I need..."), but <strong>context changes everything!</strong> The AI uses all previous words to predict what makes sense next.
@@ -143,17 +143,17 @@ export default function Learn() {
 
       <div className="bg-green-50 border-2 border-green-400 rounded-xl p-6 mb-8">
         <h4 className="font-bold text-green-800 mb-3">
-          ✅ Example: Adding Rich Context
+          Example: Adding Rich Context
         </h4>
 
         <div className="space-y-4">
           <div className="bg-red-100 border-l-4 border-red-400 p-4 rounded">
-            <p className="text-sm font-semibold text-red-700 mb-2">❌ Minimal Context</p>
+            <p className="text-sm font-semibold text-red-700 mb-2"> Minimal Context</p>
             <p className="font-mono text-sm text-gray-800">"Explain photosynthesis."</p>
           </div>
 
           <div className="bg-green-100 border-l-4 border-green-500 p-4 rounded">
-            <p className="text-sm font-semibold text-green-700 mb-2">✅ Rich Context</p>
+            <p className="text-sm font-semibold text-green-700 mb-2"> Rich Context</p>
             <p className="font-mono text-sm text-gray-800">
               "I'm a 13-year-old student studying for a biology test. Explain photosynthesis using a simple analogy I can remember. Focus on the main inputs and outputs, and keep it under 100 words."
             </p>
@@ -167,7 +167,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-6">
         <h4 className="font-bold text-blue-800 mb-3">
-          🎯 Ready to Practice!
+          Ready to Practice!
         </h4>
         <p className="text-gray-700">
           Now that you understand how context works, let's practice adding rich context to your prompts. Head to the Try It tab!

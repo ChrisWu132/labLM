@@ -18,7 +18,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          ⚠️ Remember
+          Remember
         </p>
         <p className="text-gray-700 text-lg">
           AI can make mistakes, have biases, and even make up information (hallucinations). Your job is to think critically about what it tells you!
@@ -163,27 +163,27 @@ export default function Learn() {
             <tr className="border-t border-gray-200">
               <td className="px-6 py-4 font-semibold text-[#164055]">Historical Facts</td>
               <td className="px-6 py-4 text-gray-700">Check textbooks, encyclopedias, educational websites</td>
-              <td className="px-6 py-4 text-green-600">✓ Usually reliable</td>
+              <td className="px-6 py-4 text-green-600"> Usually reliable</td>
             </tr>
             <tr className="border-t border-gray-200">
               <td className="px-6 py-4 font-semibold text-[#164055]">Scientific Concepts</td>
               <td className="px-6 py-4 text-gray-700">Verify with science textbooks, .edu sites</td>
-              <td className="px-6 py-4 text-green-600">✓ Usually reliable</td>
+              <td className="px-6 py-4 text-green-600"> Usually reliable</td>
             </tr>
             <tr className="border-t border-gray-200">
               <td className="px-6 py-4 font-semibold text-[#164055]">Current Events</td>
               <td className="px-6 py-4 text-gray-700">Check recent news sources (AI data may be outdated)</td>
-              <td className="px-6 py-4 text-yellow-600">⚠ Verify carefully</td>
+              <td className="px-6 py-4 text-yellow-600"> Verify carefully</td>
             </tr>
             <tr className="border-t border-gray-200">
               <td className="px-6 py-4 font-semibold text-[#164055]">Math Calculations</td>
               <td className="px-6 py-4 text-gray-700">Use a calculator! AI can make arithmetic errors</td>
-              <td className="px-6 py-4 text-red-600">⚠ Don't trust blindly</td>
+              <td className="px-6 py-4 text-red-600"> Don't trust blindly</td>
             </tr>
             <tr className="border-t border-gray-200">
               <td className="px-6 py-4 font-semibold text-[#164055]">Specific Citations</td>
               <td className="px-6 py-4 text-gray-700">Look up the actual source (books, articles, websites)</td>
-              <td className="px-6 py-4 text-red-600">⚠ Often hallucinated</td>
+              <td className="px-6 py-4 text-red-600"> Often hallucinated</td>
             </tr>
           </tbody>
         </table>
@@ -191,7 +191,7 @@ export default function Learn() {
 
       <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-green-700 mb-2">
-          ✅ Good Practice
+          Good Practice
         </p>
         <p className="text-gray-700 mb-3">
           For homework or important decisions, use the "Three Source Rule":
@@ -205,7 +205,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
         <p className="text-sm font-semibold text-blue-700 mb-2">
-          💡 Remember
+          Remember
         </p>
         <p className="text-gray-700">
           <strong>AI is a tool, not an oracle.</strong> Your critical thinking is what makes AI truly useful. Question, verify, and think for yourself!

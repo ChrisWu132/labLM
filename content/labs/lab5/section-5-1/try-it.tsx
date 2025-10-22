@@ -105,7 +105,7 @@ For each scenario, explain:
         {output && (
           <div className="rounded-lg border-2 border-green-500 bg-green-50 p-6">
             <h4 className="mb-3 text-lg font-semibold text-green-700">
-              💡 Key Ethical Questions to Ask
+              Key Ethical Questions to Ask
             </h4>
 
             <ul className="list-disc space-y-2 pl-6 text-gray-700">
@@ -117,12 +117,12 @@ For each scenario, explain:
             </ul>
 
             <div className="mt-4 p-4 bg-white rounded-lg border border-green-300">
-              <p className="font-semibold text-green-800 mb-2">✅ Ethical Scenarios: Sarah, Maya, Jordan</p>
+              <p className="font-semibold text-green-800 mb-2"> Ethical Scenarios: Sarah, Maya, Jordan</p>
               <p className="text-sm text-gray-700 mb-3">
                 These students use AI to understand concepts, brainstorm ideas, or check their work—all while doing the learning themselves.
               </p>
 
-              <p className="font-semibold text-red-800 mb-2">❌ Unethical Scenarios: Tom, Alex</p>
+              <p className="font-semibold text-red-800 mb-2"> Unethical Scenarios: Tom, Alex</p>
               <p className="text-sm text-gray-700">
                 These students use AI to avoid work entirely or to cheat on assessments, learning nothing in the process.
               </p>
@@ -133,7 +133,7 @@ For each scenario, explain:
         {/* Reflection Exercise */}
         <div className="rounded-lg border-2 border-purple-400 bg-purple-50 p-6">
           <h4 className="mb-3 text-lg font-semibold text-purple-700">
-            🤔 Personal Reflection
+            Personal Reflection
           </h4>
 
           <p className="text-gray-700 mb-4">

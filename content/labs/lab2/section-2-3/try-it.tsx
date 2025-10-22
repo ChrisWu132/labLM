@@ -93,7 +93,7 @@ export default function TryIt() {
 
           {attemptCount > 0 && (
             <p className="mt-4 text-sm text-[#3b999c]">
-              Time periods tested: {attemptCount} {attemptCount >= 3 && '✓'}
+              Time periods tested: {attemptCount} {attemptCount >= 3 && ''}
             </p>
           )}
         </div>
@@ -118,7 +118,7 @@ export default function TryIt() {
         {attemptCount >= 2 && (
           <div className="rounded-lg border-2 border-yellow-400 bg-yellow-50 p-6">
             <h4 className="mb-3 text-lg font-semibold text-yellow-700">
-              🤔 What patterns did you notice?
+              What patterns did you notice?
             </h4>
 
             <ul className="list-disc space-y-2 pl-6 text-gray-700">
@@ -130,7 +130,7 @@ export default function TryIt() {
 
             {attemptCount >= 3 && (
               <p className="mt-4 font-semibold text-green-700">
-                ✓ Great detective work! Try one more to confirm your findings!
+                Great detective work! Try one more to confirm your findings!
               </p>
             )}
           </div>
@@ -140,7 +140,7 @@ export default function TryIt() {
         {attemptCount >= 3 && (
           <div className="rounded-lg border-2 border-green-500 bg-green-50 p-6">
             <h4 className="mb-3 text-lg font-semibold text-green-700">
-              💡 What You Learned
+              What You Learned
             </h4>
 
             <p className="mb-3 text-gray-700">
@@ -154,7 +154,7 @@ export default function TryIt() {
 
               <div className="space-y-2 text-sm text-gray-600">
                 <div className="flex items-start gap-2">
-                  <span className="text-green-600 font-bold">✓</span>
+                  <span className="text-green-600 font-bold"></span>
                   <p><strong>Old events (2+ years ago):</strong> Trust AI's knowledge</p>
                 </div>
                 <div className="flex items-start gap-2">
@@ -162,7 +162,7 @@ export default function TryIt() {
                   <p><strong>Recent events (1-2 years):</strong> AI may be accurate but verify</p>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="text-red-600 font-bold">✗</span>
+                  <span className="text-red-600 font-bold"></span>
                   <p><strong>Current events (weeks/months):</strong> Use news sites, not AI</p>
                 </div>
               </div>

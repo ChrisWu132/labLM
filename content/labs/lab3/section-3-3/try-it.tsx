@@ -80,7 +80,7 @@ Explain how the internet works to a student who has never thought about it befor
 
           {attemptCounts['3.3-ex1'] > 0 && (
             <p className="mt-4 text-sm text-[#3b999c]">
-              ✓ Completed
+              Completed
             </p>
           )}
         </div>
@@ -123,7 +123,7 @@ Write a 4-line poem about autumn leaves falling from trees."
 
           {attemptCounts['3.3-ex2'] > 0 && (
             <p className="mt-4 text-sm text-[#3b999c]">
-              ✓ Completed
+              Completed
             </p>
           )}
         </div>
@@ -156,7 +156,7 @@ Write a 4-line poem about autumn leaves falling from trees."
 
           <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-lg mb-4">
             <p className="text-sm font-semibold text-blue-700 mb-2">
-              💡 Ideas for Roles:
+              Ideas for Roles:
             </p>
             <ul className="text-sm text-gray-700 list-disc pl-5 space-y-1">
               <li><strong>Sports Coach:</strong> Motivational, energetic, performance-focused</li>
@@ -179,7 +179,7 @@ Write a 4-line poem about autumn leaves falling from trees."
 
           {attemptCounts['3.3-ex3'] > 0 && (
             <p className="mt-4 text-sm text-[#3b999c]">
-              ✓ Completed
+              Completed
             </p>
           )}
         </div>
@@ -204,7 +204,7 @@ Write a 4-line poem about autumn leaves falling from trees."
         {totalAttempts >= 2 && (
           <div className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-6">
             <h4 className="font-bold text-yellow-900 mb-3">
-              🤔 Compare the Responses
+              Compare the Responses
             </h4>
 
             <p className="text-gray-700 mb-3">
@@ -222,7 +222,7 @@ Write a 4-line poem about autumn leaves falling from trees."
             {totalAttempts >= 3 && (
               <div className="mt-4 p-4 bg-white rounded border border-yellow-300">
                 <p className="font-semibold text-green-700">
-                  ✅ Excellent! You can see how roles dramatically change the AI's "personality" and output!
+                  Excellent! You can see how roles dramatically change the AI's "personality" and output!
                 </p>
               </div>
             )}
@@ -233,7 +233,7 @@ Write a 4-line poem about autumn leaves falling from trees."
         {totalAttempts >= 3 && (
           <div className="bg-green-50 border-2 border-green-500 rounded-xl p-6">
             <h4 className="text-lg font-bold text-green-700 mb-3">
-              🎉 What You Learned
+              What You Learned
             </h4>
 
             <div className="space-y-3">
@@ -265,7 +265,7 @@ Write a 4-line poem about autumn leaves falling from trees."
         {totalAttempts >= 3 && (
           <div className="bg-[rgba(59,153,156,0.05)] border-2 border-[#3b999c] rounded-xl p-6">
             <h4 className="text-lg font-bold text-[#3b999c] mb-3">
-              🚀 Coming Up Next
+              Coming Up Next
             </h4>
             <p className="text-gray-700 mb-3">
               In the next section, you'll learn to create <strong>advanced custom personas</strong> with multiple personality traits and specific expertise!

@@ -93,7 +93,7 @@ export default function TryIt() {
         {/* Template */}
         <div className="bg-gray-50 border-2 border-gray-300 rounded-xl p-6 mb-8">
           <h3 className="text-lg font-bold text-gray-800 mb-3">
-            📝 Template to Get Started:
+            Template to Get Started:
           </h3>
 
           <div className="bg-white p-4 rounded-lg font-mono text-sm text-gray-700 leading-relaxed">
@@ -106,7 +106,7 @@ export default function TryIt() {
         {/* Example for Inspiration */}
         <div className="bg-green-50 border-l-4 border-green-400 p-6 rounded-lg mb-8">
           <p className="text-sm font-semibold text-green-700 mb-2">
-            ✅ Example: Custom Homework Helper
+            Example: Custom Homework Helper
           </p>
           <p className="text-sm text-gray-800 font-mono leading-relaxed">
             "You are Professor Maple, a patient and encouraging homework coach who specializes in making difficult subjects feel manageable. You break complex problems into smaller steps and celebrate progress along the way. You always ask guiding questions instead of giving direct answers, and you believe that struggling productively is part of learning. You use everyday analogies to explain abstract concepts.
@@ -127,7 +127,7 @@ export default function TryIt() {
 
           <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg mb-6">
             <p className="text-sm font-semibold text-yellow-700 mb-2">
-              💡 Ideas for Assistance:
+              Ideas for Assistance:
             </p>
             <ul className="text-sm text-gray-700 list-disc pl-5 space-y-1">
               <li><strong>Study helper:</strong> For a specific subject you're learning</li>
@@ -151,7 +151,7 @@ export default function TryIt() {
 
           {attemptCount > 0 && (
             <p className="mt-4 text-sm text-[#3b999c]">
-              Attempts: {attemptCount} ✓
+              Attempts: {attemptCount}
             </p>
           )}
         </div>
@@ -176,7 +176,7 @@ export default function TryIt() {
         {attemptCount >= 1 && (
           <div className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-6">
             <h4 className="font-bold text-yellow-900 mb-3">
-              🤔 Evaluate Your Persona
+              Evaluate Your Persona
             </h4>
 
             <p className="text-gray-700 mb-3">
@@ -224,7 +224,7 @@ export default function TryIt() {
         {attemptCount >= 1 && (
           <div className="bg-green-50 border-2 border-green-500 rounded-xl p-6">
             <h4 className="text-lg font-bold text-green-700 mb-3">
-              🎉 Congratulations!
+              Congratulations!
             </h4>
 
             <p className="text-gray-700 mb-4">
@@ -241,7 +241,7 @@ export default function TryIt() {
 
             <div className="mt-4 p-4 bg-white rounded border border-green-300">
               <p className="font-semibold text-green-700 mb-2">
-                💡 Pro Tip:
+                Pro Tip:
               </p>
               <p className="text-sm text-gray-700">
                 Keep a "persona library" of your favorite AI assistants for different needs. Copy-paste them whenever you need that specific type of help!
@@ -253,7 +253,7 @@ export default function TryIt() {
         {/* More Examples */}
         <div className="bg-[rgba(59,153,156,0.05)] border-2 border-[#3b999c] rounded-xl p-6">
           <h4 className="text-lg font-bold text-[#3b999c] mb-3">
-            📚 More Persona Examples for Inspiration
+            More Persona Examples for Inspiration
           </h4>
 
           <div className="space-y-4 text-sm">

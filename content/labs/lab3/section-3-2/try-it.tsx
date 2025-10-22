@@ -59,7 +59,7 @@ export default function TryIt() {
         {/* The Challenge */}
         <div className="bg-red-50 border-l-4 border-red-400 p-6 rounded-lg mb-8">
           <p className="text-sm font-semibold text-red-700 mb-2">
-            ❌ Starting Prompt (Too Vague)
+            Starting Prompt (Too Vague)
           </p>
           <p className="text-lg text-gray-800 font-mono">
             "Explain how computers work."
@@ -118,7 +118,7 @@ export default function TryIt() {
 
           {attemptCount > 0 && (
             <p className="mt-4 text-sm text-[#3b999c]">
-              Attempts: {attemptCount} {attemptCount >= 2 && '✓'}
+              Attempts: {attemptCount} {attemptCount >= 2 && ''}
             </p>
           )}
         </div>
@@ -143,7 +143,7 @@ export default function TryIt() {
         {attemptCount >= 1 && (
           <div className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-6">
             <h4 className="font-bold text-yellow-900 mb-3">
-              🤔 Evaluate Your Context
+              Evaluate Your Context
             </h4>
 
             <p className="text-gray-700 mb-3">
@@ -172,7 +172,7 @@ export default function TryIt() {
             {attemptCount >= 2 && (
               <div className="mt-4 p-4 bg-white rounded border border-yellow-300">
                 <p className="font-semibold text-green-700">
-                  ✅ Great job! Compare your response to one without context. Much more helpful, right?
+                  Great job! Compare your response to one without context. Much more helpful, right?
                 </p>
               </div>
             )}
@@ -182,7 +182,7 @@ export default function TryIt() {
         {/* Example Solutions */}
         <div className="bg-[rgba(59,153,156,0.05)] border-2 border-[#3b999c] rounded-xl p-6">
           <h4 className="text-lg font-bold text-[#3b999c] mb-3">
-            📝 Example Context-Rich Prompts
+            Example Context-Rich Prompts
           </h4>
           <p className="text-gray-700 mb-4">
             Here are examples of how to add all four types of context:
@@ -220,7 +220,7 @@ export default function TryIt() {
         {attemptCount >= 2 && (
           <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-6">
             <h4 className="font-bold text-blue-800 mb-3">
-              💡 Pro Tips for Context
+              Pro Tips for Context
             </h4>
 
             <ul className="list-disc pl-6 space-y-2 text-gray-700 text-sm">

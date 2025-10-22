@@ -87,7 +87,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          💡 Important Rules
+          Important Rules
         </p>
         <ul className="list-disc pl-6 space-y-2 text-gray-700">
           <li>
@@ -108,7 +108,7 @@ export default function Learn() {
 
       <div className="grid md:grid-cols-3 gap-4 mb-8">
         <div className="bg-white border-2 border-[#3b999c] rounded-lg p-5">
-          <div className="text-3xl mb-2">🔄</div>
+          <div className="text-3xl mb-2"></div>
           <h4 className="font-bold text-[#164055] mb-2">Automatic Flow</h4>
           <p className="text-sm text-gray-700">
             Data flows automatically from one step to the next without manual intervention
@@ -116,7 +116,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-white border-2 border-[#f7aa37] rounded-lg p-5">
-          <div className="text-3xl mb-2">🎯</div>
+          <div className="text-3xl mb-2"></div>
           <h4 className="font-bold text-[#164055] mb-2">No Copy-Paste</h4>
           <p className="text-sm text-gray-700">
             Never need to manually copy output from one step and paste into another
@@ -124,7 +124,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-white border-2 border-[#e67c6d] rounded-lg p-5">
-          <div className="text-3xl mb-2">🧩</div>
+          <div className="text-3xl mb-2"></div>
           <h4 className="font-bold text-[#164055] mb-2">Build Complex Chains</h4>
           <p className="text-sm text-gray-700">
             Chain together many steps to solve complex multi-stage problems
@@ -134,7 +134,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
         <p className="text-sm font-semibold text-blue-700 mb-2">
-          🎯 Practice Time
+          Practice Time
         </p>
         <p className="text-gray-700">
           In the Try It tab, you'll build a 3-step workflow that uses variables to pass data between steps. Pay close attention to how you reference previous nodes!

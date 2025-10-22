@@ -18,7 +18,7 @@ export default function Learn() {
 
       <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-red-700 mb-2">
-          ⚠️ Critical Rule
+          Critical Rule
         </p>
         <p className="text-gray-700">
           <strong>Never blindly trust AI for important decisions.</strong> Always verify critical information like medical advice, legal matters, financial decisions, or facts you'll use in school or work.
@@ -58,10 +58,10 @@ export default function Learn() {
           <div className="bg-gray-50 p-4 rounded-lg">
             <p className="font-semibold text-gray-700 mb-2">Warning signs:</p>
             <ul className="list-disc pl-6 space-y-1 text-sm text-gray-600">
-              <li>🚩 Exact dates or numbers (especially for recent events)</li>
-              <li>🚩 Direct quotes without attribution</li>
-              <li>🚩 Very specific statistics or percentages</li>
-              <li>🚩 Claims that seem "too perfect" or convenient</li>
+              <li> Exact dates or numbers (especially for recent events)</li>
+              <li> Direct quotes without attribution</li>
+              <li> Very specific statistics or percentages</li>
+              <li> Claims that seem "too perfect" or convenient</li>
             </ul>
           </div>
         </div>
@@ -118,12 +118,12 @@ export default function Learn() {
           <tbody>
             <tr className="border-t border-gray-200">
               <td className="px-6 py-4 text-gray-700">Brainstorming ideas</td>
-              <td className="px-6 py-4"><span className="text-green-600 font-semibold">High ✓</span></td>
+              <td className="px-6 py-4"><span className="text-green-600 font-semibold">High </span></td>
               <td className="px-6 py-4 text-sm text-gray-600">Use directly, ideas don't need verification</td>
             </tr>
             <tr className="border-t border-gray-200 bg-gray-50">
               <td className="px-6 py-4 text-gray-700">Learning concepts</td>
-              <td className="px-6 py-4"><span className="text-green-600 font-semibold">High ✓</span></td>
+              <td className="px-6 py-4"><span className="text-green-600 font-semibold">High </span></td>
               <td className="px-6 py-4 text-sm text-gray-600">Good for understanding, cross-check key facts</td>
             </tr>
             <tr className="border-t border-gray-200">
@@ -138,7 +138,7 @@ export default function Learn() {
             </tr>
             <tr className="border-t border-gray-200">
               <td className="px-6 py-4 text-gray-700">Medical/Legal advice</td>
-              <td className="px-6 py-4"><span className="text-red-600 font-semibold">None ✗</span></td>
+              <td className="px-6 py-4"><span className="text-red-600 font-semibold">None </span></td>
               <td className="px-6 py-4 text-sm text-gray-600">Consult real professionals only</td>
             </tr>
           </tbody>
@@ -147,30 +147,30 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-6">
         <h4 className="font-bold text-blue-800 mb-3">
-          🎯 The Verification Checklist
+          The Verification Checklist
         </h4>
 
         <p className="text-gray-700 mb-3">Before trusting AI output for anything important:</p>
 
         <div className="space-y-2 text-sm text-gray-700">
           <div className="flex items-start gap-2">
-            <span className="font-bold">☐</span>
+            <span className="font-bold"></span>
             <span>Cross-reference with at least 2 other reliable sources</span>
           </div>
           <div className="flex items-start gap-2">
-            <span className="font-bold">☐</span>
+            <span className="font-bold"></span>
             <span>Check if AI indicated any uncertainty</span>
           </div>
           <div className="flex items-start gap-2">
-            <span className="font-bold">☐</span>
+            <span className="font-bold"></span>
             <span>Apply common sense - does it make sense?</span>
           </div>
           <div className="flex items-start gap-2">
-            <span className="font-bold">☐</span>
+            <span className="font-bold"></span>
             <span>Consider the stakes - how important is accuracy?</span>
           </div>
           <div className="flex items-start gap-2">
-            <span className="font-bold">☐</span>
+            <span className="font-bold"></span>
             <span>Ask an expert if available (teacher, parent, professional)</span>
           </div>
         </div>

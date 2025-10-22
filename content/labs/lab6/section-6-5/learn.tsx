@@ -18,7 +18,7 @@ export default function Learn() {
 
       <div className="bg-[rgba(59,153,156,0.05)] border-l-4 border-[#3b999c] p-6 rounded-lg mb-8">
         <h3 className="font-bold text-[#164055] mb-3">
-          🔄 From Manual to Automated
+          From Manual to Automated
         </h3>
         <div className="space-y-3">
           <div>
@@ -30,7 +30,7 @@ export default function Learn() {
           <div className="bg-green-50 p-3 rounded">
             <div className="font-semibold text-green-700 mb-1">After (Workflow):</div>
             <p className="text-sm text-gray-700">
-              1. Build workflow once → 2. Click "Run" → 3. Done! ✨
+              1. Build workflow once → 2. Click "Run" → 3. Done!
             </p>
           </div>
         </div>
@@ -108,7 +108,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          💡 Pro Tip: Templates
+          Pro Tip: Templates
         </p>
         <p className="text-gray-700">
           Once you build a workflow pattern that works well, you can save it as a <strong>template</strong> and reuse it for different topics! Just change the initial input and run it again.
@@ -134,7 +134,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
         <p className="text-sm font-semibold text-blue-700 mb-2">
-          🎯 Learning Goal
+          Learning Goal
         </p>
         <p className="text-gray-700">
           By the end of this section, you'll understand how to transform any manual multi-step process into an automated workflow. This skill is incredibly valuable for schoolwork, projects, and real-world tasks!

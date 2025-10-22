@@ -114,7 +114,7 @@ export default function Learn() {
 
       <div className="mt-8 bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
         <p className="text-sm font-semibold text-blue-700 mb-2">
-          💡 Remember
+          Remember
         </p>
         <p className="text-gray-700">
           Ethical AI use isn't just about following rules—it's about being the kind of learner and person you want to be. Use AI in ways that help you grow, learn, and become more capable, not less.

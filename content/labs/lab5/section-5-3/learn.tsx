@@ -18,7 +18,7 @@ export default function Learn() {
 
       <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-red-700 mb-2">
-          ⚠️ Important Privacy Rule
+          Important Privacy Rule
         </p>
         <p className="text-gray-700 text-lg font-semibold">
           Treat AI like a stranger on the internet—don't share personal information!
@@ -26,7 +26,7 @@ export default function Learn() {
       </div>
 
       <h3 className="text-2xl font-bold text-[#164055] mb-4 mt-8">
-        ❌ NEVER Share With AI
+        NEVER Share With AI
       </h3>
 
       <div className="space-y-4 mb-8">
@@ -100,7 +100,7 @@ export default function Learn() {
       </div>
 
       <h3 className="text-2xl font-bold text-[#164055] mb-4 mt-8">
-        ✅ Safe to Share
+        Safe to Share
       </h3>
 
       <p className="text-lg text-gray-700 mb-6">
@@ -114,19 +114,19 @@ export default function Learn() {
         <ul className="list-disc pl-6 space-y-3 text-gray-700">
           <li>
             <strong>"I'm a middle school student learning about..."</strong>
-            <span className="text-sm text-green-600 ml-2">✓ Vague age group, no personal details</span>
+            <span className="text-sm text-green-600 ml-2"> Vague age group, no personal details</span>
           </li>
           <li>
             <strong>"I'm working on a science project about volcanoes..."</strong>
-            <span className="text-sm text-green-600 ml-2">✓ Educational context, not personal</span>
+            <span className="text-sm text-green-600 ml-2"> Educational context, not personal</span>
           </li>
           <li>
             <strong>"I'm interested in learning programming..."</strong>
-            <span className="text-sm text-green-600 ml-2">✓ General interest, no identifying info</span>
+            <span className="text-sm text-green-600 ml-2"> General interest, no identifying info</span>
           </li>
           <li>
             <strong>"I live in a place where it snows in winter..."</strong>
-            <span className="text-sm text-green-600 ml-2">✓ Very general location, not specific</span>
+            <span className="text-sm text-green-600 ml-2"> Very general location, not specific</span>
           </li>
         </ul>
       </div>
@@ -140,8 +140,8 @@ export default function Learn() {
           <thead style={{ backgroundColor: '#f7aa37' }}>
             <tr>
               <th className="px-6 py-4 font-semibold text-white">Situation</th>
-              <th className="px-6 py-4 font-semibold text-white">❌ Don't Say</th>
-              <th className="px-6 py-4 font-semibold text-white">✅ Better Alternative</th>
+              <th className="px-6 py-4 font-semibold text-white"> Don't Say</th>
+              <th className="px-6 py-4 font-semibold text-white"> Better Alternative</th>
             </tr>
           </thead>
           <tbody>
@@ -171,7 +171,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          🤔 When in Doubt...
+          When in Doubt...
         </p>
         <p className="text-gray-700 mb-3">
           Ask yourself: "Would I be comfortable if this information appeared on a public bulletin board at school?"
@@ -183,7 +183,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
         <p className="text-sm font-semibold text-blue-700 mb-2">
-          💡 Remember
+          Remember
         </p>
         <p className="text-gray-700">
           AI conversations might be reviewed by humans, stored in databases, or used for training. Protect your privacy like you would on any online platform. When in doubt, leave it out!

@@ -34,7 +34,7 @@ export default function Learn() {
 
       <div className="grid md:grid-cols-2 gap-4 mb-8">
         <div className="bg-green-50 border-2 border-green-400 rounded-lg p-4">
-          <p className="font-bold text-green-700 mb-3">✅ Benefits:</p>
+          <p className="font-bold text-green-700 mb-3"> Benefits:</p>
           <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
             <li>Reduces errors in complex problems</li>
             <li>Makes reasoning visible (you can check it!)</li>
@@ -45,7 +45,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-blue-50 border-2 border-blue-400 rounded-lg p-4">
-          <p className="font-bold text-blue-700 mb-3">💡 How it helps:</p>
+          <p className="font-bold text-blue-700 mb-3"> How it helps:</p>
           <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
             <li>Breaks complex problems into smaller steps</li>
             <li>Each step builds on the previous</li>
@@ -74,7 +74,7 @@ export default function Learn() {
 
       <div className="space-y-6 mb-8">
         <div className="bg-red-50 border-2 border-red-400 rounded-xl p-6">
-          <p className="font-bold text-red-800 mb-3">❌ Without Chain-of-Thought:</p>
+          <p className="font-bold text-red-800 mb-3"> Without Chain-of-Thought:</p>
           <div className="bg-white p-4 rounded-lg mb-3">
             <p className="font-mono text-sm text-gray-800 mb-2">
               <strong>Prompt:</strong> "If I buy 3 items at $12.47 each with 8% tax, what's the total?"
@@ -89,7 +89,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-green-50 border-2 border-green-500 rounded-xl p-6">
-          <p className="font-bold text-green-800 mb-3">✅ With Chain-of-Thought:</p>
+          <p className="font-bold text-green-800 mb-3"> With Chain-of-Thought:</p>
           <div className="bg-white p-4 rounded-lg mb-3">
             <p className="font-mono text-sm text-gray-800 mb-2">
               <strong>Prompt:</strong> "If I buy 3 items at $12.47 each with 8% tax, what's the total? Let's think step by step."
@@ -147,7 +147,7 @@ export default function Learn() {
 
       <div className="grid md:grid-cols-2 gap-4 mb-8">
         <div className="bg-green-50 border-2 border-green-400 rounded-lg p-4">
-          <p className="font-bold text-green-700 mb-3">✅ Use CoT for:</p>
+          <p className="font-bold text-green-700 mb-3"> Use CoT for:</p>
           <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
             <li>Math problems and calculations</li>
             <li>Multi-step reasoning tasks</li>
@@ -159,7 +159,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-gray-50 border-2 border-gray-300 rounded-lg p-4">
-          <p className="font-bold text-gray-700 mb-3">⚪ Skip CoT for:</p>
+          <p className="font-bold text-gray-700 mb-3"> Skip CoT for:</p>
           <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
             <li>Simple creative writing</li>
             <li>Straightforward facts</li>
@@ -172,7 +172,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-6">
         <h4 className="font-bold text-blue-800 mb-3">
-          🎯 Ready to Practice Chain-of-Thought!
+          Ready to Practice Chain-of-Thought!
         </h4>
         <p className="text-gray-700">
           Head to the Try It tab to see how dramatically "Let's think step by step" improves AI reasoning!

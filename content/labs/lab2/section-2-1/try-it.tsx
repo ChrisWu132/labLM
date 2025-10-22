@@ -81,7 +81,7 @@ export default function TryIt() {
 
           {attemptCount > 0 && (
             <p className="mt-4 text-sm text-[#3b999c]">
-              Questions asked: {attemptCount} {attemptCount >= 3 && '✓'}
+              Questions asked: {attemptCount} {attemptCount >= 3 && ''}
             </p>
           )}
         </div>
@@ -106,7 +106,7 @@ export default function TryIt() {
         {attemptCount >= 2 && (
           <div className="rounded-lg border-2 border-yellow-400 bg-yellow-50 p-6">
             <h4 className="mb-3 text-lg font-semibold text-yellow-700">
-              🤔 What did you discover?
+              What did you discover?
             </h4>
 
             <ul className="list-disc space-y-2 pl-6 text-gray-700">
@@ -118,7 +118,7 @@ export default function TryIt() {
 
             {attemptCount >= 3 && (
               <p className="mt-4 font-semibold text-green-700">
-                ✓ Great exploration! Try one more to solidify your understanding!
+                Great exploration! Try one more to solidify your understanding!
               </p>
             )}
           </div>
@@ -128,7 +128,7 @@ export default function TryIt() {
         {attemptCount >= 3 && (
           <div className="rounded-lg border-2 border-green-500 bg-green-50 p-6">
             <h4 className="mb-3 text-lg font-semibold text-green-700">
-              💡 What You Learned
+              What You Learned
             </h4>
 
             <p className="mb-3 text-gray-700">

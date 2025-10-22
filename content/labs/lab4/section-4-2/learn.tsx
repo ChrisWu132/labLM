@@ -104,7 +104,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          ⚠️ Important Takeaway
+          Important Takeaway
         </p>
         <p className="text-gray-700">
           AI isn't "smart" in the traditional sense - it's a pattern matcher. It excels at language tasks but struggles with precision, calculations, and real-time information.
@@ -117,7 +117,7 @@ export default function Learn() {
 
       <div className="grid md:grid-cols-2 gap-4 mb-8">
         <div className="bg-green-50 border-2 border-green-400 rounded-lg p-4">
-          <p className="font-bold text-green-700 mb-3">✅ For Math:</p>
+          <p className="font-bold text-green-700 mb-3"> For Math:</p>
           <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
             <li>Use a calculator for important calculations</li>
             <li>Ask AI to show steps, then verify them</li>
@@ -126,7 +126,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-blue-50 border-2 border-blue-400 rounded-lg p-4">
-          <p className="font-bold text-blue-700 mb-3">✅ For Current Info:</p>
+          <p className="font-bold text-blue-700 mb-3"> For Current Info:</p>
           <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
             <li>Check recent events with search engines</li>
             <li>Don't rely on AI for today's news</li>
@@ -135,7 +135,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-purple-50 border-2 border-purple-400 rounded-lg p-4">
-          <p className="font-bold text-purple-700 mb-3">✅ For Exact Facts:</p>
+          <p className="font-bold text-purple-700 mb-3"> For Exact Facts:</p>
           <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
             <li>Cross-reference important information</li>
             <li>Use authoritative sources for verification</li>
@@ -144,7 +144,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-4">
-          <p className="font-bold text-yellow-700 mb-3">✅ For Reasoning:</p>
+          <p className="font-bold text-yellow-700 mb-3"> For Reasoning:</p>
           <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
             <li>Use "Let's think step by step"</li>
             <li>Break complex problems into parts</li>
@@ -155,7 +155,7 @@ export default function Learn() {
 
       <div className="bg-[rgba(59,153,156,0.05)] border-2 border-[#3b999c] rounded-xl p-6">
         <h4 className="text-lg font-bold text-[#3b999c] mb-3">
-          🎯 Ready to Test AI's Limits!
+          Ready to Test AI's Limits!
         </h4>
         <p className="text-gray-700">
           Now let's see these limitations in action and learn to recognize when AI might struggle. Head to the Try It tab!

@@ -22,7 +22,7 @@ export default function Learn() {
 
       <div className="space-y-4 mb-8">
         <div className="bg-white border-l-4 border-green-500 p-5 rounded-r-lg shadow-sm">
-          <h4 className="font-bold text-green-700 mb-2">✅ Be Specific</h4>
+          <h4 className="font-bold text-green-700 mb-2"> Be Specific</h4>
           <p className="text-gray-700 mb-2">
             Instead of "Tell me about dogs" → "Explain why Golden Retrievers are good family pets in 100 words"
           </p>
@@ -32,7 +32,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-white border-l-4 border-blue-500 p-5 rounded-r-lg shadow-sm">
-          <h4 className="font-bold text-blue-700 mb-2">✅ Give Context</h4>
+          <h4 className="font-bold text-blue-700 mb-2"> Give Context</h4>
           <p className="text-gray-700 mb-2">
             Add "for a 5th grader" or "for a science presentation" to tailor the response
           </p>
@@ -42,7 +42,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-white border-l-4 border-purple-500 p-5 rounded-r-lg shadow-sm">
-          <h4 className="font-bold text-purple-700 mb-2">✅ Set Format</h4>
+          <h4 className="font-bold text-purple-700 mb-2"> Set Format</h4>
           <p className="text-gray-700 mb-2">
             Request "as a bulleted list" or "in 3 paragraphs" for structured output
           </p>
@@ -52,7 +52,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-white border-l-4 border-orange-500 p-5 rounded-r-lg shadow-sm">
-          <h4 className="font-bold text-orange-700 mb-2">✅ Ask Follow-ups</h4>
+          <h4 className="font-bold text-orange-700 mb-2"> Ask Follow-ups</h4>
           <p className="text-gray-700 mb-2">
             If the first answer isn't quite right, ask the AI to clarify, expand, or simplify
           </p>
@@ -68,7 +68,7 @@ export default function Learn() {
 
       <div className="grid md:grid-cols-2 gap-6 mb-8">
         <div className="bg-red-50 border-2 border-red-300 rounded-xl p-5">
-          <p className="font-bold text-red-700 mb-3">❌ Vague Prompts</p>
+          <p className="font-bold text-red-700 mb-3"> Vague Prompts</p>
           <ul className="space-y-2 text-sm text-gray-700">
             <li>"Write something about space"</li>
             <li>"Tell me about history"</li>
@@ -81,7 +81,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-green-50 border-2 border-green-300 rounded-xl p-5">
-          <p className="font-bold text-green-700 mb-3">✅ Specific Prompts</p>
+          <p className="font-bold text-green-700 mb-3"> Specific Prompts</p>
           <ul className="space-y-2 text-sm text-gray-700">
             <li>"Explain black holes to a 12-year-old in 3 simple points"</li>
             <li>"Summarize the American Revolution in 5 key events"</li>
@@ -96,7 +96,7 @@ export default function Learn() {
 
       <div className="bg-[rgba(59,153,156,0.05)] border-2 border-[#3b999c] rounded-xl p-6 mb-8">
         <h4 className="text-lg font-bold text-[#3b999c] mb-3">
-          🎯 Ready to Experiment!
+          Ready to Experiment!
         </h4>
         <p className="text-gray-700 mb-4">
           Head to the Try It tab to test different prompting strategies and see which approaches work best for different tasks!
@@ -108,7 +108,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          💡 Pro Tip
+          Pro Tip
         </p>
         <p className="text-gray-700">
           Save prompts that work well! You can reuse and adapt them for similar tasks later.

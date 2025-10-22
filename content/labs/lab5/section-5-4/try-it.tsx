@@ -127,7 +127,7 @@ export default function TryIt() {
         {output && (
           <div className="rounded-lg border-2 border-purple-500 bg-purple-50 p-6">
             <h4 className="mb-3 text-lg font-semibold text-purple-700">
-              🤔 Now Apply Critical Thinking to the Response
+              Now Apply Critical Thinking to the Response
             </h4>
 
             <p className="text-gray-700 mb-4">
@@ -162,7 +162,7 @@ export default function TryIt() {
             </div>
 
             <div className="mt-4 p-4 bg-purple-100 border border-purple-300 rounded">
-              <p className="font-semibold text-purple-800 mb-2">✓ Action Items:</p>
+              <p className="font-semibold text-purple-800 mb-2"> Action Items:</p>
               <ul className="text-sm text-gray-700 space-y-1">
                 <li>• Write down 2-3 key facts to verify with other sources</li>
                 <li>• Note any claims that seem surprising or uncertain</li>
@@ -176,7 +176,7 @@ export default function TryIt() {
         {/* Skills Mastery Check */}
         <div className="rounded-lg border-2 border-green-500 bg-green-50 p-6">
           <h4 className="mb-3 text-lg font-semibold text-green-700">
-            ✅ Skills Mastery Checklist
+            Skills Mastery Checklist
           </h4>
 
           <p className="text-gray-700 mb-4">
@@ -216,7 +216,7 @@ export default function TryIt() {
           </div>
 
           <p className="mt-4 text-sm text-green-700 font-semibold">
-            If you checked all boxes, congratulations! You're using AI like a pro! 🎉
+            If you checked all boxes, congratulations! You're using AI like a pro!
           </p>
         </div>
       </div>

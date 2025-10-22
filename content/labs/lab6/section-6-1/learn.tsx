@@ -29,7 +29,7 @@ export default function Learn() {
 
       <div className="bg-red-50 border-l-4 border-red-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-red-700 mb-2">
-          😩 The Problem
+          The Problem
         </p>
         <p className="text-gray-700">
           All that copying and pasting is <strong>tedious</strong>, <strong>error-prone</strong>, and <strong>slow</strong>. You're basically acting as a messenger between AI steps!
@@ -46,13 +46,13 @@ export default function Learn() {
 
       <div className="bg-[rgba(59,153,156,0.05)] border-l-4 border-[#3b999c] p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-[#3b999c] mb-2">
-          🚀 With Workflows
+          With Workflows
         </p>
         <ol className="list-decimal pl-6 space-y-2 text-gray-700">
           <li><strong>Step 1:</strong> Generate topics about space exploration</li>
           <li><strong>Step 2:</strong> Automatically take first topic → explain in detail</li>
           <li><strong>Step 3:</strong> Automatically take explanation → simplify language</li>
-          <li>✨ <strong>Done!</strong> Get your final result in one click</li>
+          <li> <strong>Done!</strong> Get your final result in one click</li>
         </ol>
       </div>
 
@@ -62,21 +62,21 @@ export default function Learn() {
 
       <div className="grid gap-4 mb-8">
         <div className="bg-white border-2 border-[#f7aa37] rounded-lg p-5">
-          <h4 className="text-lg font-bold text-[#164055] mb-2">📝 Essay Writing</h4>
+          <h4 className="text-lg font-bold text-[#164055] mb-2"> Essay Writing</h4>
           <p className="text-gray-700 text-sm">
             <strong>Step 1:</strong> Brainstorm ideas → <strong>Step 2:</strong> Create outline → <strong>Step 3:</strong> Write introduction → <strong>Step 4:</strong> Expand each point
           </p>
         </div>
 
         <div className="bg-white border-2 border-[#3b999c] rounded-lg p-5">
-          <h4 className="text-lg font-bold text-[#164055] mb-2">🔬 Research Assistant</h4>
+          <h4 className="text-lg font-bold text-[#164055] mb-2"> Research Assistant</h4>
           <p className="text-gray-700 text-sm">
             <strong>Step 1:</strong> Gather facts → <strong>Step 2:</strong> Summarize → <strong>Step 3:</strong> Check accuracy → <strong>Step 4:</strong> Format as report
           </p>
         </div>
 
         <div className="bg-white border-2 border-[#e67c6d] rounded-lg p-5">
-          <h4 className="text-lg font-bold text-[#164055] mb-2">📚 Study Guide Creator</h4>
+          <h4 className="text-lg font-bold text-[#164055] mb-2"> Study Guide Creator</h4>
           <p className="text-gray-700 text-sm">
             <strong>Step 1:</strong> Extract key concepts → <strong>Step 2:</strong> Generate questions → <strong>Step 3:</strong> Create answers → <strong>Step 4:</strong> Format as flashcards
           </p>
@@ -85,7 +85,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
         <p className="text-sm font-semibold text-blue-700 mb-2">
-          💡 Key Insight
+          Key Insight
         </p>
         <p className="text-gray-700">
           Workflows let you break down <strong>complex tasks</strong> into <strong>simple steps</strong>, then chain them together automatically. This is called <strong>computational thinking</strong> - a superpower for solving big problems!

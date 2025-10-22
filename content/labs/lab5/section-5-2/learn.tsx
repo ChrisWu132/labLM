@@ -18,7 +18,7 @@ export default function Learn() {
 
       <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg mb-8">
         <h3 className="text-xl font-bold text-green-700 mb-3">
-          ✅ GOOD: AI-Assisted Learning
+          GOOD: AI-Assisted Learning
         </h3>
         <p className="text-gray-700 mb-4">
           These uses help you LEARN and develop your own understanding:
@@ -32,11 +32,11 @@ export default function Learn() {
           </h4>
           <div className="space-y-3">
             <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded">
-              <p className="text-sm font-semibold text-red-700 mb-1">❌ BAD</p>
+              <p className="text-sm font-semibold text-red-700 mb-1"> BAD</p>
               <p className="text-gray-700">"What's the answer to question 5 on my worksheet?"</p>
             </div>
             <div className="bg-green-50 border-l-4 border-green-400 p-4 rounded">
-              <p className="text-sm font-semibold text-green-700 mb-1">✅ GOOD</p>
+              <p className="text-sm font-semibold text-green-700 mb-1"> GOOD</p>
               <p className="text-gray-700">"I don't understand photosynthesis. Can you explain it using a simple analogy?"</p>
             </div>
           </div>
@@ -48,11 +48,11 @@ export default function Learn() {
           </h4>
           <div className="space-y-3">
             <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded">
-              <p className="text-sm font-semibold text-red-700 mb-1">❌ BAD</p>
+              <p className="text-sm font-semibold text-red-700 mb-1"> BAD</p>
               <p className="text-gray-700">"Write my essay about Romeo and Juliet."</p>
             </div>
             <div className="bg-green-50 border-l-4 border-green-400 p-4 rounded">
-              <p className="text-sm font-semibold text-green-700 mb-1">✅ GOOD</p>
+              <p className="text-sm font-semibold text-green-700 mb-1"> GOOD</p>
               <p className="text-gray-700">"I'm writing about themes in Romeo and Juliet. Can you help me brainstorm 3 possible themes to explore?"</p>
             </div>
           </div>
@@ -64,11 +64,11 @@ export default function Learn() {
           </h4>
           <div className="space-y-3">
             <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded">
-              <p className="text-sm font-semibold text-red-700 mb-1">❌ BAD</p>
+              <p className="text-sm font-semibold text-red-700 mb-1"> BAD</p>
               <p className="text-gray-700">"Solve this math problem for me."</p>
             </div>
             <div className="bg-green-50 border-l-4 border-green-400 p-4 rounded">
-              <p className="text-sm font-semibold text-green-700 mb-1">✅ GOOD</p>
+              <p className="text-sm font-semibold text-green-700 mb-1"> GOOD</p>
               <p className="text-gray-700">"I solved this problem and got X. Can you check my steps and tell me if I made a mistake?"</p>
             </div>
           </div>
@@ -80,11 +80,11 @@ export default function Learn() {
           </h4>
           <div className="space-y-3">
             <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded">
-              <p className="text-sm font-semibold text-red-700 mb-1">❌ BAD</p>
+              <p className="text-sm font-semibold text-red-700 mb-1"> BAD</p>
               <p className="text-gray-700">"Write my code for me."</p>
             </div>
             <div className="bg-green-50 border-l-4 border-green-400 p-4 rounded">
-              <p className="text-sm font-semibold text-green-700 mb-1">✅ GOOD</p>
+              <p className="text-sm font-semibold text-green-700 mb-1"> GOOD</p>
               <p className="text-gray-700">"I'm trying to create a loop in Python but I'm stuck. Can you explain how loops work with an example?"</p>
             </div>
           </div>
@@ -93,7 +93,7 @@ export default function Learn() {
 
       <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg mb-8">
         <h3 className="text-xl font-bold text-red-700 mb-3">
-          ❌ BAD: Plagiarism & Cheating
+          BAD: Plagiarism & Cheating
         </h3>
         <p className="text-gray-700 mb-4">
           These uses hurt your learning and are academically dishonest:
@@ -140,9 +140,9 @@ export default function Learn() {
           The 3 Key Questions
         </h3>
         <div className="space-y-3 text-left max-w-2xl mx-auto">
-          <p className="text-lg">💭 "Am I learning from this, or just getting an answer?"</p>
-          <p className="text-lg">💭 "Could I explain this to someone else after using AI?"</p>
-          <p className="text-lg">💭 "Am I using AI to understand better, or to skip the work?"</p>
+          <p className="text-lg"> "Am I learning from this, or just getting an answer?"</p>
+          <p className="text-lg"> "Could I explain this to someone else after using AI?"</p>
+          <p className="text-lg"> "Am I using AI to understand better, or to skip the work?"</p>
         </div>
         <p className="text-xl font-semibold mt-6">
           If you're not learning, you're using it wrong!
@@ -151,7 +151,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
         <p className="text-sm font-semibold text-blue-700 mb-2">
-          💡 Pro Tip
+          Pro Tip
         </p>
         <p className="text-gray-700">
           When in doubt, ask your teacher! Many teachers appreciate when students are upfront about using AI as a learning tool. They can help you understand the boundaries and expectations for your specific assignments.

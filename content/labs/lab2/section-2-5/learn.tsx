@@ -19,7 +19,7 @@ export default function Learn() {
       <div className="space-y-6 mb-8">
         <div className="bg-white border-2 border-[#3b999c] rounded-xl p-6">
           <h3 className="text-xl font-bold text-[#3b999c] mb-4">
-            📚 Section 2.1: How LLMs Learn
+            Section 2.1: How LLMs Learn
           </h3>
           <ul className="space-y-2 text-gray-700">
             <li className="flex items-start gap-3">
@@ -39,7 +39,7 @@ export default function Learn() {
 
         <div className="bg-white border-2 border-[#3b999c] rounded-xl p-6">
           <h3 className="text-xl font-bold text-[#3b999c] mb-4">
-            🎯 Section 2.2: Knowledge Sources
+            Section 2.2: Knowledge Sources
           </h3>
           <ul className="space-y-2 text-gray-700">
             <li className="flex items-start gap-3">
@@ -59,7 +59,7 @@ export default function Learn() {
 
         <div className="bg-white border-2 border-[#3b999c] rounded-xl p-6">
           <h3 className="text-xl font-bold text-[#3b999c] mb-4">
-            📅 Section 2.3: Knowledge Cutoff
+            Section 2.3: Knowledge Cutoff
           </h3>
           <ul className="space-y-2 text-gray-700">
             <li className="flex items-start gap-3">
@@ -79,7 +79,7 @@ export default function Learn() {
 
         <div className="bg-white border-2 border-[#3b999c] rounded-xl p-6">
           <h3 className="text-xl font-bold text-[#3b999c] mb-4">
-            💬 Section 2.4: Clear Communication
+            Section 2.4: Clear Communication
           </h3>
           <ul className="space-y-2 text-gray-700">
             <li className="flex items-start gap-3">
@@ -100,7 +100,7 @@ export default function Learn() {
 
       <div className="bg-gradient-to-r from-[#3b999c] to-[#2d7a7d] rounded-xl p-8 text-white mb-8">
         <h3 className="text-2xl font-bold mb-4">
-          🎉 Key Discoveries from Lab 2
+          Key Discoveries from Lab 2
         </h3>
 
         <div className="space-y-4 text-lg">
@@ -118,7 +118,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-6">
         <h3 className="text-xl font-bold text-blue-800 mb-4">
-          🚀 Ready for the Quiz?
+          Ready for the Quiz?
         </h3>
         <p className="text-gray-700 mb-4">
           Test your understanding of Lab 2 concepts with a quick 5-question quiz. This will help reinforce what you've learned!

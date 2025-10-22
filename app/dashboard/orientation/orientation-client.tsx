@@ -168,7 +168,7 @@ export function OrientationClient({ initialChecklistItems }: OrientationClientPr
                     <a href="https://codesandbox.io" className="underline text-primary" target="_blank" rel="noopener">
                       codesandbox.io
                     </a>{" "}
-                    and sign up with your GitHub account. It's free and takes less than a minute.
+                    and sign up with your GitHub account. It's free.
                   </p>
                 </div>
 

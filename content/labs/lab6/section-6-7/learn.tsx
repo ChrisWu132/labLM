@@ -18,7 +18,7 @@ export default function Learn() {
 
       <div className="bg-gradient-to-r from-[#3b999c]/10 to-[#f7aa37]/10 border-2 border-[#3b999c] rounded-xl p-6 mb-8">
         <h3 className="text-xl font-bold text-[#164055] mb-4">
-          🎯 Your Challenge
+          Your Challenge
         </h3>
         <p className="text-gray-700">
           Think of a multi-step task you do regularly for school, hobbies, or life. Break it down into steps and automate it with a workflow!
@@ -35,26 +35,26 @@ export default function Learn() {
 
       <div className="grid md:grid-cols-2 gap-4 mb-8">
         <div className="bg-white border-2 border-green-400 rounded-lg p-5">
-          <div className="text-2xl mb-2">✅</div>
+          <div className="text-2xl mb-2"></div>
           <h4 className="font-bold text-green-700 mb-2">Good Candidates</h4>
           <ul className="text-sm text-gray-700 space-y-1">
-            <li>✓ Have 3+ distinct steps</li>
-            <li>✓ Involve text processing</li>
-            <li>✓ You do repeatedly</li>
-            <li>✓ Take significant time manually</li>
-            <li>✓ Follow a consistent pattern</li>
+            <li> Have 3+ distinct steps</li>
+            <li> Involve text processing</li>
+            <li> You do repeatedly</li>
+            <li> Take significant time manually</li>
+            <li> Follow a consistent pattern</li>
           </ul>
         </div>
 
         <div className="bg-white border-2 border-red-400 rounded-lg p-5">
-          <div className="text-2xl mb-2">❌</div>
+          <div className="text-2xl mb-2"></div>
           <h4 className="font-bold text-red-700 mb-2">Avoid</h4>
           <ul className="text-sm text-gray-700 space-y-1">
-            <li>✗ Single-step tasks</li>
-            <li>✗ Tasks requiring real-time data</li>
-            <li>✗ Tasks needing external tools</li>
-            <li>✗ Math-heavy calculations</li>
-            <li>✗ Image or video processing</li>
+            <li> Single-step tasks</li>
+            <li> Tasks requiring real-time data</li>
+            <li> Tasks needing external tools</li>
+            <li> Math-heavy calculations</li>
+            <li> Image or video processing</li>
           </ul>
         </div>
       </div>
@@ -97,7 +97,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-3">
-          💡 Example: Homework Helper
+          Example: Homework Helper
         </p>
         <div className="space-y-2 text-sm text-gray-700">
           <p><strong>Task:</strong> Convert class notes into study materials</p>
@@ -118,34 +118,34 @@ export default function Learn() {
 
       <div className="grid md:grid-cols-2 gap-3 mb-8">
         <div className="bg-white border border-[#3b999c] rounded p-4">
-          <div className="font-bold text-[#164055] mb-1">📧 Email Composer</div>
+          <div className="font-bold text-[#164055] mb-1"> Email Composer</div>
           <p className="text-xs text-gray-600">Draft → Formalize → Proofread → Add context</p>
         </div>
         <div className="bg-white border border-[#3b999c] rounded p-4">
-          <div className="font-bold text-[#164055] mb-1">🗣️ Speech Writer</div>
+          <div className="font-bold text-[#164055] mb-1"> Speech Writer</div>
           <p className="text-xs text-gray-600">Topic → Outline → Add examples → Add transitions</p>
         </div>
         <div className="bg-white border border-[#3b999c] rounded p-4">
-          <div className="font-bold text-[#164055] mb-1">📖 Book Summarizer</div>
+          <div className="font-bold text-[#164055] mb-1"> Book Summarizer</div>
           <p className="text-xs text-gray-600">Extract themes → Character analysis → Plot summary → Key quotes</p>
         </div>
         <div className="bg-white border border-[#3b999c] rounded p-4">
-          <div className="font-bold text-[#164055] mb-1">🎯 Project Planner</div>
+          <div className="font-bold text-[#164055] mb-1"> Project Planner</div>
           <p className="text-xs text-gray-600">Goal → Break into milestones → Create tasks → Estimate time</p>
         </div>
         <div className="bg-white border border-[#3b999c] rounded p-4">
-          <div className="font-bold text-[#164055] mb-1">🔍 Fact Checker</div>
+          <div className="font-bold text-[#164055] mb-1"> Fact Checker</div>
           <p className="text-xs text-gray-600">Claim → Find sources → Verify → Explain confidence level</p>
         </div>
         <div className="bg-white border border-[#3b999c] rounded p-4">
-          <div className="font-bold text-[#164055] mb-1">💭 Debate Prep</div>
+          <div className="font-bold text-[#164055] mb-1"> Debate Prep</div>
           <p className="text-xs text-gray-600">Topic → Pro arguments → Con arguments → Rebuttals</p>
         </div>
       </div>
 
       <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-blue-700 mb-2">
-          🎯 Success Criteria
+          Success Criteria
         </p>
         <ul className="list-disc pl-6 space-y-1 text-sm text-gray-700">
           <li>At least 3 steps (aim for 4-6)</li>
@@ -158,7 +158,7 @@ export default function Learn() {
 
       <div className="bg-green-50 border-2 border-green-500 rounded-lg p-6">
         <h4 className="text-lg font-semibold text-green-700 mb-3">
-          🚀 Ready to Build?
+          Ready to Build?
         </h4>
         <p className="text-gray-700 mb-3">
           Head to the Try It tab with your workflow idea in mind. Take your time designing it - great workflows come from thoughtful planning!

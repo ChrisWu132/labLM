@@ -19,7 +19,7 @@ export default function Learn() {
       <div className="space-y-6 mb-8">
         <div className="bg-white border-2 border-[#3b999c] rounded-xl p-6">
           <h3 className="text-xl font-bold text-[#3b999c] mb-4">
-            💪 Section 4.1: AI Superpowers
+            Section 4.1: AI Superpowers
           </h3>
           <ul className="space-y-2 text-gray-700">
             <li className="flex items-start gap-3">
@@ -39,7 +39,7 @@ export default function Learn() {
 
         <div className="bg-white border-2 border-[#3b999c] rounded-xl p-6">
           <h3 className="text-xl font-bold text-[#3b999c] mb-4">
-            ⚠️ Section 4.2: AI Weaknesses
+            Section 4.2: AI Weaknesses
           </h3>
           <ul className="space-y-2 text-gray-700">
             <li className="flex items-start gap-3">
@@ -59,7 +59,7 @@ export default function Learn() {
 
         <div className="bg-white border-2 border-[#3b999c] rounded-xl p-6">
           <h3 className="text-xl font-bold text-[#3b999c] mb-4">
-            🎭 Section 4.3: Hallucinations
+            Section 4.3: Hallucinations
           </h3>
           <ul className="space-y-2 text-gray-700">
             <li className="flex items-start gap-3">
@@ -79,7 +79,7 @@ export default function Learn() {
 
         <div className="bg-white border-2 border-[#3b999c] rounded-xl p-6">
           <h3 className="text-xl font-bold text-[#3b999c] mb-4">
-            ✅ Section 4.4: Verification
+            Section 4.4: Verification
           </h3>
           <ul className="space-y-2 text-gray-700">
             <li className="flex items-start gap-3">
@@ -99,7 +99,7 @@ export default function Learn() {
 
         <div className="bg-white border-2 border-[#3b999c] rounded-xl p-6">
           <h3 className="text-xl font-bold text-[#3b999c] mb-4">
-            🧠 Section 4.5: Chain-of-Thought
+            Section 4.5: Chain-of-Thought
           </h3>
           <ul className="space-y-2 text-gray-700">
             <li className="flex items-start gap-3">
@@ -120,7 +120,7 @@ export default function Learn() {
 
       <div className="bg-gradient-to-r from-[#3b999c] to-[#2d7a7d] rounded-xl p-8 text-white mb-8">
         <h3 className="text-2xl font-bold mb-4">
-          🎉 Key Discoveries from Lab 4
+          Key Discoveries from Lab 4
         </h3>
 
         <div className="space-y-4 text-lg">
@@ -141,7 +141,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-6">
         <h3 className="text-xl font-bold text-blue-800 mb-4">
-          🚀 Ready for the Quiz?
+          Ready for the Quiz?
         </h3>
         <p className="text-gray-700 mb-4">
           Test your understanding of Lab 4 concepts with a 6-question quiz covering AI capabilities, limitations, and verification strategies.

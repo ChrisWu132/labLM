@@ -97,7 +97,7 @@ export default function Learn() {
 
       <div className="grid md:grid-cols-2 gap-4 mb-8">
         <div className="bg-green-50 border-2 border-green-400 rounded-lg p-4">
-          <p className="font-bold text-green-700 mb-3">✅ Do This:</p>
+          <p className="font-bold text-green-700 mb-3"> Do This:</p>
           <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
             <li>Verify important information independently</li>
             <li>Check facts with authoritative sources</li>
@@ -108,7 +108,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-red-50 border-2 border-red-400 rounded-lg p-4">
-          <p className="font-bold text-red-700 mb-3">❌ Don't:</p>
+          <p className="font-bold text-red-700 mb-3"> Don't:</p>
           <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
             <li>Blindly trust all AI output</li>
             <li>Use AI as sole source for critical decisions</li>
@@ -121,7 +121,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          💡 Golden Rule
+          Golden Rule
         </p>
         <p className="text-gray-700">
           <strong>If it matters, verify it!</strong> Don't let AI's confident tone fool you - always fact-check important information.
@@ -130,7 +130,7 @@ export default function Learn() {
 
       <div className="bg-[rgba(59,153,156,0.05)] border-2 border-[#3b999c] rounded-xl p-6">
         <h4 className="text-lg font-bold text-[#3b999c] mb-3">
-          🎯 Ready to Spot Hallucinations!
+          Ready to Spot Hallucinations!
         </h4>
         <p className="text-gray-700">
           Head to the Try It tab to practice recognizing when AI might be making things up!

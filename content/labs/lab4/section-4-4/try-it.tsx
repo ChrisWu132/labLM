@@ -59,7 +59,7 @@ export default function TryIt() {
           </p>
 
           <div className="mb-4 bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
-            <p className="font-semibold text-yellow-800 mb-2">🔍 Your Challenge:</p>
+            <p className="font-semibold text-yellow-800 mb-2"> Your Challenge:</p>
             <p className="text-sm text-gray-700 mb-3">
               Ask AI a question that might produce specific facts or statistics, then evaluate how you would verify the answer.
             </p>
@@ -86,7 +86,7 @@ export default function TryIt() {
 
           {attemptCount > 0 && (
             <p className="mt-4 text-sm text-[#3b999c]">
-              Questions asked: {attemptCount} {attemptCount >= 2 && '✓'}
+              Questions asked: {attemptCount} {attemptCount >= 2 && ''}
             </p>
           )}
         </div>
@@ -111,7 +111,7 @@ export default function TryIt() {
         {attemptCount >= 1 && output && (
           <div className="rounded-lg border-2 border-purple-400 bg-purple-50 p-6">
             <h4 className="mb-3 text-lg font-semibold text-purple-700">
-              🤔 Now Apply the Verification Checklist
+              Now Apply the Verification Checklist
             </h4>
 
             <div className="space-y-3">
@@ -151,7 +151,7 @@ export default function TryIt() {
 
             {attemptCount >= 2 && (
               <p className="mt-4 font-semibold text-green-700">
-                ✓ Great practice! You're thinking like a critical consumer of AI information!
+                Great practice! You're thinking like a critical consumer of AI information!
               </p>
             )}
           </div>
@@ -161,7 +161,7 @@ export default function TryIt() {
         {attemptCount >= 2 && (
           <div className="rounded-lg border-2 border-green-500 bg-green-50 p-6">
             <h4 className="mb-3 text-lg font-semibold text-green-700">
-              💡 What You Learned
+              What You Learned
             </h4>
 
             <p className="mb-3 text-gray-700">
@@ -177,7 +177,7 @@ export default function TryIt() {
 
             <div className="mt-4 p-4 bg-white rounded border border-green-300">
               <p className="font-semibold text-gray-700 mb-2">
-                🎯 The Golden Rule:
+                The Golden Rule:
               </p>
               <p className="text-sm text-gray-700">
                 <strong>Trust, but verify.</strong> AI is an amazing tool for learning and exploration, but it's not infallible. Always cross-check important facts with authoritative sources.

@@ -51,7 +51,7 @@ export default function Learn() {
           </h4>
           <div className="space-y-3">
             <div>
-              <p className="font-semibold text-blue-800 mb-2">✅ Good Uses (Learning):</p>
+              <p className="font-semibold text-blue-800 mb-2"> Good Uses (Learning):</p>
               <ul className="list-disc pl-6 space-y-1 text-sm text-gray-700">
                 <li>Understanding difficult concepts with explanations</li>
                 <li>Getting unstuck when brainstorming ideas</li>
@@ -60,7 +60,7 @@ export default function Learn() {
               </ul>
             </div>
             <div>
-              <p className="font-semibold text-red-800 mb-2">❌ Bad Uses (Cheating):</p>
+              <p className="font-semibold text-red-800 mb-2"> Bad Uses (Cheating):</p>
               <ul className="list-disc pl-6 space-y-1 text-sm text-gray-700">
                 <li>Having AI write your essays or do your homework</li>
                 <li>Copying answers without understanding</li>
@@ -76,7 +76,7 @@ export default function Learn() {
           </h4>
           <div className="space-y-3">
             <div>
-              <p className="font-semibold text-red-800 mb-2">❌ NEVER Share:</p>
+              <p className="font-semibold text-red-800 mb-2"> NEVER Share:</p>
               <ul className="list-disc pl-6 space-y-1 text-sm text-gray-700">
                 <li>Personal information (name, address, phone, age details)</li>
                 <li>Passwords or security information</li>
@@ -85,7 +85,7 @@ export default function Learn() {
               </ul>
             </div>
             <div>
-              <p className="font-semibold text-green-800 mb-2">✅ Safe to Share:</p>
+              <p className="font-semibold text-green-800 mb-2"> Safe to Share:</p>
               <ul className="list-disc pl-6 space-y-1 text-sm text-gray-700">
                 <li>General information (e.g., "I'm a middle school student")</li>
                 <li>Educational context without identifying details</li>
@@ -189,45 +189,45 @@ export default function Learn() {
         <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
           <div className="space-y-2">
             <p className="flex items-start gap-2">
-              <span className="text-green-400">✓</span>
+              <span className="text-green-400"></span>
               <span>Explain how an LLM generates responses</span>
             </p>
             <p className="flex items-start gap-2">
-              <span className="text-green-400">✓</span>
+              <span className="text-green-400"></span>
               <span>Write clear prompts with context</span>
             </p>
             <p className="flex items-start gap-2">
-              <span className="text-green-400">✓</span>
+              <span className="text-green-400"></span>
               <span>Use role-playing to control AI</span>
             </p>
             <p className="flex items-start gap-2">
-              <span className="text-green-400">✓</span>
+              <span className="text-green-400"></span>
               <span>Apply Chain-of-Thought reasoning</span>
             </p>
             <p className="flex items-start gap-2">
-              <span className="text-green-400">✓</span>
+              <span className="text-green-400"></span>
               <span>Recognize AI hallucinations</span>
             </p>
           </div>
           <div className="space-y-2">
             <p className="flex items-start gap-2">
-              <span className="text-green-400">✓</span>
+              <span className="text-green-400"></span>
               <span>Use AI ethically for learning</span>
             </p>
             <p className="flex items-start gap-2">
-              <span className="text-green-400">✓</span>
+              <span className="text-green-400"></span>
               <span>Protect your privacy with AI</span>
             </p>
             <p className="flex items-start gap-2">
-              <span className="text-green-400">✓</span>
+              <span className="text-green-400"></span>
               <span>Combine multiple techniques</span>
             </p>
             <p className="flex items-start gap-2">
-              <span className="text-green-400">✓</span>
+              <span className="text-green-400"></span>
               <span>Think critically about outputs</span>
             </p>
             <p className="flex items-start gap-2">
-              <span className="text-green-400">✓</span>
+              <span className="text-green-400"></span>
               <span>Chain prompts for complex tasks</span>
             </p>
           </div>
@@ -236,7 +236,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          🎯 Before the Quiz
+          Before the Quiz
         </p>
         <p className="text-gray-700">
           Review the key concepts above and make sure you understand the ethical principles, privacy rules, and critical thinking frameworks. The quiz will test your comprehensive understanding of responsible AI use!
@@ -245,7 +245,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
         <p className="text-sm font-semibold text-blue-700 mb-2">
-          🎓 You Are Now an AI-Literate Learner!
+          You Are Now an AI-Literate Learner!
         </p>
         <p className="text-gray-700">
           You don't just know how to USE AI—you understand what it is, how it works, when to trust it, when to question it, and how to use it responsibly. This knowledge will serve you for years to come as AI becomes more integrated into education, work, and daily life.

@@ -43,7 +43,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          💡 Key Insight
+          Key Insight
         </p>
         <p className="text-gray-700">
           The AI doesn't "know" the full answer upfront. It generates it <strong>one piece at a time</strong>, with each word influencing what comes next!
@@ -165,10 +165,10 @@ export default function Learn() {
         </h4>
 
         <div className="space-y-2 text-gray-700">
-          <p>✅ <strong>Creative responses</strong> - Not always the same</p>
-          <p>✅ <strong>Natural-sounding language</strong> - Variety feels human</p>
-          <p>✅ <strong>Interesting variations</strong> - Multiple valid approaches</p>
-          <p>⚠️ <strong>Trade-off:</strong> Slightly different each time, occasionally unexpected</p>
+          <p> <strong>Creative responses</strong> - Not always the same</p>
+          <p> <strong>Natural-sounding language</strong> - Variety feels human</p>
+          <p> <strong>Interesting variations</strong> - Multiple valid approaches</p>
+          <p> <strong>Trade-off:</strong> Slightly different each time, occasionally unexpected</p>
         </div>
       </div>
     </LearnContent>

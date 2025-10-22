@@ -96,7 +96,7 @@ export default function TryIt() {
 
           {attemptCount > 0 && (
             <p className="mt-4 text-sm text-[#3b999c]">
-              Attempt {attemptCount} of 3 {attemptCount >= 3 && '✓'}
+              Attempt {attemptCount} of 3 {attemptCount >= 3 && ''}
             </p>
           )}
         </div>
@@ -144,7 +144,7 @@ export default function TryIt() {
         {attemptCount >= 3 && (
           <div className="bg-green-50 border-2 border-green-500 rounded-xl p-6">
             <h4 className="font-bold text-green-900 mb-3">
-              🎉 Excellent! You've experienced randomness!
+              Excellent! You've experienced randomness!
             </h4>
             <div className="text-green-800 space-y-3">
               <p>
@@ -157,7 +157,7 @@ export default function TryIt() {
                 <li>You can pick your favorite or run it again for more options!</li>
               </ul>
               <p className="mt-4 font-semibold">
-                💡 This is why randomness is useful—it gives you choices and sparks creativity!
+                This is why randomness is useful—it gives you choices and sparks creativity!
               </p>
             </div>
           </div>
@@ -192,7 +192,7 @@ export default function TryIt() {
         {attemptCount >= 3 && (
           <div className="bg-[rgba(59,153,156,0.05)] border-2 border-[#3b999c] rounded-xl p-6">
             <h4 className="text-lg font-bold text-[#3b999c] mb-3">
-              💡 What You Learned
+              What You Learned
             </h4>
             <p className="mb-3 text-gray-700">
               The answer is <strong>slightly different each time</strong>! This is because LLMs have some <strong>randomness</strong> built in - they don't always pick the <em>most</em> likely next word, but sometimes choose from the top few options.
@@ -205,7 +205,7 @@ export default function TryIt() {
 
         {/* Pro Tip */}
         <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
-          <p className="text-sm font-semibold text-yellow-700 mb-1">💡 Pro Tip</p>
+          <p className="text-sm font-semibold text-yellow-700 mb-1"> Pro Tip</p>
           <p className="text-sm text-gray-700">
             For creative tasks (stories, poems, brainstorming), try running the same prompt 3-5 times to get the best result!
           </p>

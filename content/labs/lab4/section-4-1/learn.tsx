@@ -109,7 +109,7 @@ export default function Learn() {
 
       <div className="grid md:grid-cols-2 gap-4 mb-8">
         <div className="bg-green-50 border-2 border-green-400 rounded-lg p-4">
-          <p className="font-bold text-green-700 mb-3">✅ Use AI when:</p>
+          <p className="font-bold text-green-700 mb-3"> Use AI when:</p>
           <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
             <li>You need multiple draft versions</li>
             <li>You're stuck and need ideas</li>
@@ -120,7 +120,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-blue-50 border-2 border-blue-400 rounded-lg p-4">
-          <p className="font-bold text-blue-700 mb-3">💡 Pro tips:</p>
+          <p className="font-bold text-blue-700 mb-3"> Pro tips:</p>
           <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
             <li>Be specific about style and tone</li>
             <li>Ask for multiple options to choose from</li>
@@ -133,7 +133,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          💡 Key Insight
+          Key Insight
         </p>
         <p className="text-gray-700">
           AI is best at tasks involving <strong>language patterns and creativity</strong>. Use it for generating, explaining, and transforming text!
@@ -142,7 +142,7 @@ export default function Learn() {
 
       <div className="bg-[rgba(59,153,156,0.05)] border-2 border-[#3b999c] rounded-xl p-6">
         <h4 className="text-lg font-bold text-[#3b999c] mb-3">
-          🎯 Ready to Test AI's Strengths!
+          Ready to Test AI's Strengths!
         </h4>
         <p className="text-gray-700">
           Now let's see these superpowers in action. Head to the Try It tab to experiment with tasks that AI excels at!

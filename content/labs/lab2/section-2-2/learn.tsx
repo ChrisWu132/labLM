@@ -33,12 +33,12 @@ export default function Learn() {
             <tr className="border-t border-gray-200">
               <td className="px-6 py-4 font-semibold text-[#164055]">Popular Topics</td>
               <td className="px-6 py-4 text-gray-700">Massive amounts</td>
-              <td className="px-6 py-4 text-green-600 font-semibold">Excellent ✓</td>
+              <td className="px-6 py-4 text-green-600 font-semibold">Excellent </td>
             </tr>
             <tr className="border-t border-gray-200 bg-gray-50">
               <td className="px-6 py-4 font-semibold text-[#164055]">Common Knowledge</td>
               <td className="px-6 py-4 text-gray-700">Large amounts</td>
-              <td className="px-6 py-4 text-green-600 font-semibold">Very Good ✓</td>
+              <td className="px-6 py-4 text-green-600 font-semibold">Very Good </td>
             </tr>
             <tr className="border-t border-gray-200">
               <td className="px-6 py-4 font-semibold text-[#164055]">Specialized Topics</td>
@@ -53,7 +53,7 @@ export default function Learn() {
             <tr className="border-t border-gray-200">
               <td className="px-6 py-4 font-semibold text-[#164055]">Very Rare Topics</td>
               <td className="px-6 py-4 text-gray-700">Minimal data</td>
-              <td className="px-6 py-4 text-red-600 font-semibold">Vague ✗</td>
+              <td className="px-6 py-4 text-red-600 font-semibold">Vague </td>
             </tr>
           </tbody>
         </table>
@@ -67,7 +67,7 @@ export default function Learn() {
         <div className="space-y-4">
           <div>
             <p className="font-semibold text-green-700 mb-2">
-              ✅ Popular Topics (Excellent Answers):
+              Popular Topics (Excellent Answers):
             </p>
             <ul className="list-disc pl-6 space-y-1 text-gray-700 text-sm">
               <li>Photosynthesis, Python programming, Harry Potter</li>
@@ -89,7 +89,7 @@ export default function Learn() {
 
           <div>
             <p className="font-semibold text-red-700 mb-2">
-              ✗ Obscure Topics (May Be Vague):
+              Obscure Topics (May Be Vague):
             </p>
             <ul className="list-disc pl-6 space-y-1 text-gray-700 text-sm">
               <li>Very specific local history</li>
@@ -130,15 +130,15 @@ export default function Learn() {
             3. Task Type
           </h4>
           <p className="text-gray-700 text-sm">
-            Explanation/Writing/Creative tasks → AI's strength ✓<br/>
-            Real-time facts/Complex calculations → AI's weakness ✗
+            Explanation/Writing/Creative tasks → AI's strength <br/>
+            Real-time facts/Complex calculations → AI's weakness
           </p>
         </div>
       </div>
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          💡 Key Insight
+          Key Insight
         </p>
         <p className="text-gray-700">
           The AI's knowledge is <strong>not</strong> uniform. It's like an expert who has read everything about certain topics but only skimmed others. Understanding this helps you know when to trust AI answers and when to verify them yourself.

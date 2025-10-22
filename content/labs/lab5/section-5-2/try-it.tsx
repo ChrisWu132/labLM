@@ -62,7 +62,7 @@ export default function TryIt() {
           </div>
 
           <div className="mb-4">
-            <p className="font-semibold text-red-700 mb-2">❌ Bad Example (Plagiarism):</p>
+            <p className="font-semibold text-red-700 mb-2"> Bad Example (Plagiarism):</p>
             <div className="bg-red-50 border border-red-300 p-3 rounded text-sm">
               <code className="text-gray-700">"Write a 2-paragraph explanation of the water cycle for my science class."</code>
             </div>
@@ -70,7 +70,7 @@ export default function TryIt() {
           </div>
 
           <div className="mb-4">
-            <p className="font-semibold text-green-700 mb-2">✅ Good Example (Learning):</p>
+            <p className="font-semibold text-green-700 mb-2"> Good Example (Learning):</p>
             <div className="bg-green-50 border border-green-300 p-3 rounded text-sm">
               <code className="text-gray-700">"I'm writing about the water cycle. Can you explain the main steps (evaporation, condensation, precipitation, collection) and why each is important? I want to understand it well enough to write my own explanation."</code>
             </div>
@@ -118,7 +118,7 @@ I want to learn this so I can write my own explanation in my own words.`}
         {output && (
           <div className="rounded-lg border-2 border-blue-500 bg-blue-50 p-6">
             <h4 className="mb-3 text-lg font-semibold text-blue-700">
-              📝 Next Steps: Put Your Learning Into Practice
+              Next Steps: Put Your Learning Into Practice
             </h4>
 
             <ol className="list-decimal space-y-3 pl-6 text-gray-700">
@@ -137,7 +137,7 @@ I want to learn this so I can write my own explanation in my own words.`}
             </ol>
 
             <div className="mt-4 p-4 bg-white rounded-lg border border-blue-300">
-              <p className="font-semibold text-blue-800 mb-2">✅ You're learning when:</p>
+              <p className="font-semibold text-blue-800 mb-2"> You're learning when:</p>
               <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
                 <li>You understand the concept better than before</li>
                 <li>You can explain it in your own words</li>
@@ -151,7 +151,7 @@ I want to learn this so I can write my own explanation in my own words.`}
         {/* Create Your Principles */}
         <div className="rounded-lg border-2 border-purple-400 bg-purple-50 p-6">
           <h4 className="mb-3 text-lg font-semibold text-purple-700">
-            📜 Create Your Personal AI Usage Principles
+            Create Your Personal AI Usage Principles
           </h4>
 
           <p className="text-gray-700 mb-4">
@@ -170,7 +170,7 @@ I want to learn this so I can write my own explanation in my own words.`}
           </div>
 
           <p className="text-sm text-purple-600 mt-4">
-            💡 Tip: Write these down somewhere you'll see them when you're tempted to use AI as a shortcut instead of a learning tool!
+            Tip: Write these down somewhere you'll see them when you're tempted to use AI as a shortcut instead of a learning tool!
           </p>
         </div>
       </div>

@@ -63,7 +63,7 @@ export default function TryIt() {
 
           <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-lg mb-6">
             <p className="text-sm font-semibold text-blue-700 mb-2">
-              💡 Example Problems to Try:
+              Example Problems to Try:
             </p>
             <ul className="text-sm text-gray-700 list-disc pl-5 space-y-1">
               <li><strong>Math:</strong> "I have a rectangular garden 12 feet long and 8 feet wide. Fencing costs $15 per foot. What's the total cost? Let's think step by step."</li>
@@ -85,7 +85,7 @@ Let's think step by step."
 
           {attemptCount > 0 && (
             <p className="mt-4 text-sm text-[#3b999c]">
-              Attempts: {attemptCount} {attemptCount >= 2 && '✓'}
+              Attempts: {attemptCount} {attemptCount >= 2 && ''}
             </p>
           )}
         </div>
@@ -107,7 +107,7 @@ Let's think step by step."
         {attemptCount >= 1 && (
           <div className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-6">
             <h4 className="font-bold text-yellow-900 mb-3">
-              🤔 Evaluate the Response
+              Evaluate the Response
             </h4>
             <ul className="list-disc pl-6 space-y-2 text-gray-700">
               <li>Did AI break the problem into clear steps?</li>
@@ -120,7 +120,7 @@ Let's think step by step."
             {attemptCount >= 2 && (
               <div className="mt-4 p-4 bg-white rounded border border-yellow-300">
                 <p className="font-semibold text-green-700 mb-2">
-                  ✅ Compare Without CoT:
+                  Compare Without CoT:
                 </p>
                 <p className="text-sm text-gray-700">
                   Try the same problem WITHOUT "Let's think step by step" to see the difference. The Chain-of-Thought version should be much clearer and more verifiable!
@@ -133,7 +133,7 @@ Let's think step by step."
         {attemptCount >= 2 && (
           <div className="bg-green-50 border-2 border-green-500 rounded-xl p-6">
             <h4 className="text-lg font-bold text-green-700 mb-3">
-              🎉 You've Mastered Chain-of-Thought!
+              You've Mastered Chain-of-Thought!
             </h4>
             <div className="space-y-3 text-gray-700">
               <p><strong>What you learned:</strong></p>
@@ -146,7 +146,7 @@ Let's think step by step."
 
               <div className="mt-4 p-4 bg-white rounded border border-green-300">
                 <p className="font-semibold text-green-700 mb-2">
-                  💡 Pro Tip:
+                  Pro Tip:
                 </p>
                 <p className="text-sm text-gray-700">
                   Combine CoT with role-playing: "You are a patient math tutor. Solve this step-by-step, explaining each step clearly for a student."
@@ -158,7 +158,7 @@ Let's think step by step."
 
         <div className="bg-[rgba(59,153,156,0.05)] border-2 border-[#3b999c] rounded-xl p-6">
           <h4 className="text-lg font-bold text-[#3b999c] mb-3">
-            🚀 Advanced Techniques
+            Advanced Techniques
           </h4>
           <div className="space-y-2 text-sm text-gray-700">
             <p><strong>Try these variations:</strong></p>

@@ -17,7 +17,7 @@ export default function TryIt() {
       <div className="space-y-4">
         <div className="bg-[rgba(59,153,156,0.05)] border-l-4 border-[#3b999c] p-6 rounded-lg">
           <h3 className="font-bold text-[#164055] mb-3">
-            ✅ Your Task: Build a 2-Step Story Generator
+            Your Task: Build a 2-Step Story Generator
           </h3>
           <ol className="list-decimal pl-6 space-y-2 text-gray-700">
             <li>
@@ -37,7 +37,7 @@ export default function TryIt() {
 
         <div className="bg-yellow-50 border-l-4 border-yellow-400 p-5 rounded-lg">
           <p className="text-sm font-semibold text-yellow-700 mb-2">
-            💡 Troubleshooting Tips
+            Troubleshooting Tips
           </p>
           <ul className="list-disc pl-6 space-y-1 text-sm text-gray-700">
             <li>If nodes won't connect, make sure they're close enough together</li>
@@ -59,7 +59,7 @@ export default function TryIt() {
 
         <div className="bg-green-50 border-2 border-green-500 rounded-lg p-6">
           <h4 className="text-lg font-semibold text-green-700 mb-3">
-            🎉 Challenge: Try Different Topics!
+            Challenge: Try Different Topics!
           </h4>
           <p className="text-gray-700 mb-3">
             Once you've successfully run your workflow with "space exploration", try changing the topic in the first node's prompt:

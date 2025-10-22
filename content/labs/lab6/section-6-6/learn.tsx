@@ -18,17 +18,17 @@ export default function Learn() {
 
       <div className="bg-[rgba(59,153,156,0.05)] border-l-4 border-[#3b999c] p-6 rounded-lg mb-8">
         <h3 className="font-bold text-[#164055] mb-3">
-          🎯 Why Use Templates?
+          Why Use Templates?
         </h3>
         <div className="space-y-2 text-gray-700">
           <p>
-            ✅ <strong>Save Time:</strong> Don't reinvent the wheel for common tasks
+            <strong>Save Time:</strong> Don't reinvent the wheel for common tasks
           </p>
           <p>
-            ✅ <strong>Learn Best Practices:</strong> See how experienced users structure workflows
+            <strong>Learn Best Practices:</strong> See how experienced users structure workflows
           </p>
           <p>
-            ✅ <strong>Starting Point:</strong> Modify templates to fit your exact needs
+            <strong>Starting Point:</strong> Modify templates to fit your exact needs
           </p>
         </div>
       </div>
@@ -39,7 +39,7 @@ export default function Learn() {
 
       <div className="grid md:grid-cols-2 gap-4 mb-8">
         <div className="bg-white border-2 border-blue-400 rounded-lg p-5">
-          <div className="text-3xl mb-2">📝</div>
+          <div className="text-3xl mb-2"></div>
           <h4 className="font-bold text-[#164055] mb-2">Writing Assistant</h4>
           <p className="text-sm text-gray-700 mb-3">
             Brainstorm → Outline → Draft → Revise
@@ -50,7 +50,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-white border-2 border-purple-400 rounded-lg p-5">
-          <div className="text-3xl mb-2">🔬</div>
+          <div className="text-3xl mb-2"></div>
           <h4 className="font-bold text-[#164055] mb-2">Research Pipeline</h4>
           <p className="text-sm text-gray-700 mb-3">
             Gather → Organize → Analyze → Summarize
@@ -61,7 +61,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-white border-2 border-green-400 rounded-lg p-5">
-          <div className="text-3xl mb-2">📚</div>
+          <div className="text-3xl mb-2"></div>
           <h4 className="font-bold text-[#164055] mb-2">Study Guide Maker</h4>
           <p className="text-sm text-gray-700 mb-3">
             Extract concepts → Create questions → Generate answers → Format
@@ -72,7 +72,7 @@ export default function Learn() {
         </div>
 
         <div className="bg-white border-2 border-orange-400 rounded-lg p-5">
-          <div className="text-3xl mb-2">💡</div>
+          <div className="text-3xl mb-2"></div>
           <h4 className="font-bold text-[#164055] mb-2">Idea Generator</h4>
           <p className="text-sm text-gray-700 mb-3">
             Generate ideas → Evaluate → Expand best → Refine
@@ -127,7 +127,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          💡 Customization Example
+          Customization Example
         </p>
         <div className="space-y-2 text-sm text-gray-700">
           <p>
@@ -144,7 +144,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
         <p className="text-sm font-semibold text-blue-700 mb-2">
-          🎯 Your Task
+          Your Task
         </p>
         <p className="text-gray-700">
           In the Try It tab, you'll start with a template and customize it for your own specific needs. Think about how you can adapt it to match your writing style, subject, or goals!

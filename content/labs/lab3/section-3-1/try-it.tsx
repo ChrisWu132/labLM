@@ -88,7 +88,7 @@ export default function TryIt() {
 
           <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-lg mb-6">
             <p className="text-sm font-semibold text-blue-700 mb-2">
-              🔬 Experiment Instructions
+              Experiment Instructions
             </p>
             <p className="text-gray-700 text-sm">
               Each time you run the prompt below, notice how the AI generates a different creative opening. This happens because at each step, the AI randomly selects from multiple good options!
@@ -105,7 +105,7 @@ export default function TryIt() {
 
           {attemptCount1 > 0 && (
             <p className="mt-4 text-sm text-[#3b999c]">
-              Runs: {attemptCount1} {attemptCount1 >= 3 && '✓'}
+              Runs: {attemptCount1} {attemptCount1 >= 3 && ''}
             </p>
           )}
         </div>
@@ -130,7 +130,7 @@ export default function TryIt() {
         {attemptCount1 >= 2 && (
           <div className="bg-yellow-50 border-2 border-yellow-400 rounded-xl p-6">
             <h4 className="font-bold text-yellow-900 mb-3">
-              🤔 What Did You Observe?
+              What Did You Observe?
             </h4>
             <ul className="list-disc pl-6 space-y-2 text-gray-700">
               <li>Each response is slightly different</li>
@@ -142,7 +142,7 @@ export default function TryIt() {
             {attemptCount1 >= 3 && (
               <div className="mt-4 p-4 bg-white rounded border border-yellow-300">
                 <p className="font-semibold text-gray-700 mb-2">
-                  💡 Why Does This Happen?
+                  Why Does This Happen?
                 </p>
                 <p className="text-sm text-gray-600">
                   At each step, the AI has multiple good options. It uses <strong>probabilistic selection</strong> - randomly picking from the top options instead of always choosing the most likely one. This creates variety and makes responses feel more natural and creative!
@@ -166,7 +166,7 @@ export default function TryIt() {
 
               <div className="bg-green-50 border-l-4 border-green-400 p-4 rounded-lg mb-6">
                 <p className="text-sm font-semibold text-green-700 mb-2">
-                  ✅ Rich Context Example
+                  Rich Context Example
                 </p>
                 <p className="text-gray-700 text-sm">
                   Notice how specifying WHO you are (13-year-old gamer) and HOW to explain (video game analogy) completely changes the AI's approach!
@@ -183,7 +183,7 @@ export default function TryIt() {
 
               {attemptCount2 > 0 && (
                 <p className="mt-4 text-sm text-[#3b999c]">
-                  Attempts: {attemptCount2} ✓
+                  Attempts: {attemptCount2}
                 </p>
               )}
             </div>
@@ -210,7 +210,7 @@ export default function TryIt() {
         {attemptCount1 >= 3 && attemptCount2 >= 1 && (
           <div className="bg-green-50 border-2 border-green-500 rounded-xl p-6">
             <h4 className="text-lg font-bold text-green-700 mb-3">
-              🎉 Key Discoveries
+              Key Discoveries
             </h4>
 
             <div className="space-y-3 text-gray-700">
@@ -242,7 +242,7 @@ export default function TryIt() {
         {attemptCount2 >= 1 && (
           <div className="bg-[rgba(59,153,156,0.05)] border-2 border-[#3b999c] rounded-xl p-6">
             <h4 className="text-lg font-bold text-[#3b999c] mb-3">
-              🚀 Try More Experiments!
+              Try More Experiments!
             </h4>
             <p className="text-gray-700 mb-3">
               Want to explore more? Try these variations:

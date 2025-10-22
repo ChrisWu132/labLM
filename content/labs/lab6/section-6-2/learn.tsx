@@ -18,7 +18,7 @@ export default function Learn() {
 
       <div className="bg-white border-2 border-[#3b999c] rounded-xl p-6 mb-8">
         <h3 className="text-xl font-bold text-[#164055] mb-4">
-          🎨 Main Components
+          Main Components
         </h3>
 
         <div className="space-y-4">
@@ -73,7 +73,7 @@ export default function Learn() {
       </div>
 
       <h3 className="text-2xl font-bold text-[#164055] mb-4 mt-8">
-        🔗 How Workflows Work
+        How Workflows Work
       </h3>
 
       <div className="bg-gradient-to-r from-[#3b999c]/10 to-[#f7aa37]/10 border-2 border-[#3b999c] rounded-xl p-6 mb-8">
@@ -143,7 +143,7 @@ export default function Learn() {
 
       <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg mb-8">
         <p className="text-sm font-semibold text-yellow-700 mb-2">
-          💡 Pro Tip
+          Pro Tip
         </p>
         <p className="text-gray-700">
           Start simple! Build a 2-step workflow first, test it, then add more steps gradually. This makes debugging easier.
@@ -152,7 +152,7 @@ export default function Learn() {
 
       <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
         <p className="text-sm font-semibold text-blue-700 mb-2">
-          🎯 In the Try It Tab
+          In the Try It Tab
         </p>
         <p className="text-gray-700">
           You'll explore a pre-built workflow and see how each component works in action. Take your time clicking around and experimenting!
