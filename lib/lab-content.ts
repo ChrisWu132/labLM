@@ -13,6 +13,10 @@ export interface LabContent {
 /**
  * Get Lab content from MDX file
  *
+ * @deprecated This function is no longer used for Labs 1-6.
+ * All labs now use the micro-sections structure with Learn/Try It tabs.
+ * This is kept for backwards compatibility or future non-section labs.
+ *
  * @param labId - Lab identifier (e.g., 'lab1', 'lab2')
  * @returns Lab content with metadata
  */
@@ -47,6 +51,10 @@ export async function getLabContent(labId: string): Promise<LabContent | null> {
 
 /**
  * Get list of all available labs
+ *
+ * @deprecated This function is no longer used for Labs 1-6.
+ * All labs now use the micro-sections structure.
+ * This is kept for backwards compatibility or future non-section labs.
  */
 export async function getAllLabs(): Promise<string[]> {
   const labsDir = path.join(process.cwd(), 'content', 'labs')
